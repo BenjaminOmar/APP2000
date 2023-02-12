@@ -9,6 +9,7 @@ https://www.youtube.com/watch?v=CdE6rVfPJ9I&ab_channel=SameerSaini
 
 til frontend:
 
+https://www.youtube.com/watch?v=bMknfKXIFA8&t=1620s&ab_channel=freeCodeCamp.org
 https://www.youtube.com/watch?v=UUga4-z7b6s&ab_channel=WebDevSimplified
 https://www.youtube.com/watch?v=b9eMGE7QtTk&ab_channel=JavaScriptMastery
 
