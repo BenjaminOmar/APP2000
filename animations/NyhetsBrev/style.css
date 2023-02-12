@@ -1,84 +1,73 @@
-#sidebar 
-{    
-    border-radius: 5px 5px 0px 0px;
-    width: 160px;
-    height:50px;
-    right: 0px;
-    cursor: pointer; 
-    position: fixed;
-    right: 0;
-    top: 50%;
-    padding: 10px;
-    padding-top: 5px;
-    background:#1D75BD;
-    text-align: center;
-    cursor: pointer;
-    transform: rotate(-90deg);
-    transform-origin: bottom right;
-    transition: all 10s ease-out;
+#sidebar {
+	border-radius: 5px 5px 0px 0px;
+	width: 160px;
+	height: 50px;
+	right: 0px;
+	cursor: pointer;
+	position: fixed;
+	right: 0;
+	top: 50%;
+	padding: 10px;
+	padding-top: 5px;
+	background: #1d75bd;
+	text-align: center;
+	cursor: pointer;
+	transform: rotate(-90deg);
+	transform-origin: bottom right;
+	transition: all 10s ease-out;
 }
 
-
-#sidebar p 
-{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 17px;
-    letter-spacing: 1.5px;
-    color:#fff;
-    display:inline-block;
-    line-height:40px;
+#sidebar p {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 17px;
+	letter-spacing: 1.5px;
+	color: #fff;
+	display: inline-block;
+	line-height: 40px;
 }
 
-
-
-#popup
-{
-    overflow: hidden;
-    border: solid #1D75BD;
-    padding: 10px;
-    position: absolute;
-    top: 67%;
-    right: -400px;
-    transform: translateY(-50%);
-    width: 315px;
-    height: 160px;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px #333;
-    text-align: left;  
-    font-family:Verdana, Geneva, Tahoma, sans-serif;  
-    transition: all 10s ease-out;
-} 
-
-#popup.show
-{
-    right: 0;
+#popup {
+	overflow: hidden;
+	border: solid #1d75bd;
+	padding: 10px;
+	position: absolute;
+	top: 67%;
+	right: -400px;
+	transform: translateY(-50%);
+	width: 315px;
+	height: 160px;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px #333;
+	text-align: left;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	transition: all 10s ease-out;
 }
 
+#popup.show {
+	right: 0;
+}
 
 #closeBtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: white;
-    background: #1D75BD;
-    font-size: 20px;
-    padding: 5px;
-    cursor: pointer;
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: white;
+	background: #1d75bd;
+	font-size: 20px;
+	padding: 5px;
+	cursor: pointer;
 }
 
-#email
-{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    padding: 5px;
+#email {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	padding: 5px;
 }
 
-
-#subscribeBtn
-{
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: white;
-    padding: 5px;
-    background: #1D75BD;
-    border: none;
-    
+#subscribeBtn {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	color: white;
+	padding: 5px;
+	background: #1d75bd;
+	border: none;
+	cursor: pointer;
 }
