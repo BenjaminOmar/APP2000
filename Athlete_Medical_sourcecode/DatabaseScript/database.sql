@@ -50,8 +50,8 @@ CREATE TABLE IF NOT EXISTS `app2000`.`bruker` (
   `passord` VARCHAR(45) NULL,
   `registrertDato` DATETIME NOT NULL,
   PRIMARY KEY (`brukerNr`),
-  INDEX `fk_bruker_poststed_idx` (`postNr` ASC) VISIBLE,
-  INDEX `fk_bruker_rolle1_idx` (`rolleId` ASC) VISIBLE,
+  INDEX `fk_bruker_poststed_idx` (`postNr` ASC) ,
+  INDEX `fk_bruker_rolle1_idx` (`rolleId` ASC) ,
   CONSTRAINT `fk_bruker_poststed`
     FOREIGN KEY (`postNr`)
     REFERENCES `app2000`.`poststed` (`postNr`)
@@ -87,9 +87,9 @@ CREATE TABLE IF NOT EXISTS `app2000`.`avtale` (
   `pasientNr` INT NOT NULL,
   `behandlerNr` INT NOT NULL,
   PRIMARY KEY (`avtaleNr`),
-  INDEX `fk_avtale_rom1_idx` (`romNr` ASC) VISIBLE,
-  INDEX `fk_avtale_bruker1_idx` (`pasientNr` ASC) VISIBLE,
-  INDEX `fk_avtale_bruker2_idx` (`behandlerNr` ASC) VISIBLE,
+  INDEX `fk_avtale_rom1_idx` (`romNr` ASC) ,
+  INDEX `fk_avtale_bruker1_idx` (`pasientNr` ASC) ,
+  INDEX `fk_avtale_bruker2_idx` (`behandlerNr` ASC) ,
   CONSTRAINT `fk_avtale_rom1`
     FOREIGN KEY (`romNr`)
     REFERENCES `app2000`.`rom` (`romNr`)
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `app2000`.`journal` (
   `journalNr` INT NOT NULL AUTO_INCREMENT,
   `pasientNr` INT NOT NULL,
   PRIMARY KEY (`journalNr`),
-  INDEX `fk_Journal_bruker1_idx` (`pasientNr` ASC) VISIBLE,
+  INDEX `fk_Journal_bruker1_idx` (`pasientNr` ASC) ,
   CONSTRAINT `fk_Journal_bruker1`
     FOREIGN KEY (`pasientNr`)
     REFERENCES `app2000`.`bruker` (`brukerNr`)
@@ -136,8 +136,8 @@ CREATE TABLE IF NOT EXISTS `app2000`.`journalnotat` (
   `journalnotat` VARCHAR(3000) NULL,
   `overskrift` VARCHAR(150) NULL,
   PRIMARY KEY (`JournalnotatNr`),
-  INDEX `fk_journalnotat_Journal1_idx` (`journalNr` ASC) VISIBLE,
-  INDEX `fk_journalnotat_bruker1_idx` (`behandlerNr` ASC) VISIBLE,
+  INDEX `fk_journalnotat_Journal1_idx` (`journalNr` ASC) ,
+  INDEX `fk_journalnotat_bruker1_idx` (`behandlerNr` ASC) ,
   CONSTRAINT `fk_journalnotat_Journal1`
     FOREIGN KEY (`journalNr`)
     REFERENCES `app2000`.`journal` (`journalNr`)
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `app2000`.`faktura` (
   `betaltDato` VARCHAR(45) NULL,
   `bruker_brukerNr` INT NOT NULL,
   PRIMARY KEY (`fakturaNr`),
-  INDEX `fk_faktura_bruker1_idx` (`bruker_brukerNr` ASC) VISIBLE,
+  INDEX `fk_faktura_bruker1_idx` (`bruker_brukerNr` ASC) ,
   CONSTRAINT `fk_faktura_bruker1`
     FOREIGN KEY (`bruker_brukerNr`)
     REFERENCES `app2000`.`bruker` (`brukerNr`)
