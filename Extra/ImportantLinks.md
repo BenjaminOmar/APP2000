@@ -16,3 +16,6 @@ https://www.youtube.com/watch?v=b9eMGE7QtTk&ab_channel=JavaScriptMastery
 generelt:
 
 https://www.youtube.com/watch?v=vmJ5rJaIJFA&ab_channel=SmartMammalStuff
+
+github branches:
+https://www.youtube.com/watch?v=QV0kVNvkMxc&ab_channel=TheNetNinja
