@@ -15,94 +15,94 @@ CREATE SCHEMA IF NOT EXISTS `app2000` DEFAULT CHARACTER SET utf8 ;
 USE `app2000` ;
 
 -- -----------------------------------------------------
--- Table `app2000`.`poststed`
+-- Table `app2000`.`city`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `app2000`.`poststed` (
-  `postNr` INT NOT NULL,
-  `postSted` VARCHAR(45) NULL,
-  PRIMARY KEY (`postNr`))
+CREATE TABLE IF NOT EXISTS `app2000`.`city` (
+  `zipCode` INT NOT NULL,
+  `cityName` VARCHAR(45) NULL,
+  PRIMARY KEY (`zipCode`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `app2000`.`rolle`
+-- Table `app2000`.`role`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `app2000`.`rolle` (
-  `rolleId` INT NOT NULL,
-  `rolleNavn` VARCHAR(45) NULL,
-  PRIMARY KEY (`rolleId`))
+CREATE TABLE IF NOT EXISTS `app2000`.`role` (
+  `roleId` INT NOT NULL,
+  `roleName` VARCHAR(45) NULL,
+  PRIMARY KEY (`roleId`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `app2000`.`bruker`
+-- Table `app2000`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `app2000`.`bruker` (
-  `brukerNr` INT NOT NULL AUTO_INCREMENT,
-  `fornavn` VARCHAR(45) NOT NULL,
-  `mellomNavn` VARCHAR(45) NULL,
-  `etternavn` VARCHAR(70) NOT NULL,
-  `tlfNr` INT NULL,
-  `fødselNr` INT(11) NOT NULL,
-  `adresse` VARCHAR(45) NULL,
-  `postNr` INT NOT NULL,
-  `rolleId` INT NOT NULL,
-  `passord` VARCHAR(45) NULL,
-  `registrertDato` DATETIME NOT NULL,
-  PRIMARY KEY (`brukerNr`),
-  INDEX `fk_bruker_poststed_idx` (`postNr` ASC) ,
-  INDEX `fk_bruker_rolle1_idx` (`rolleId` ASC) ,
+CREATE TABLE IF NOT EXISTS `app2000`.`user` (
+  `userId` INT NOT NULL AUTO_INCREMENT,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `middleName` VARCHAR(45) NULL,
+  `lastName` VARCHAR(70) NOT NULL,
+  `phoneNumber` INT NULL,
+  `socialSecurityNum` INT(11) NOT NULL,
+  `adress` VARCHAR(45) NULL,
+  `zipCode` INT NOT NULL,
+  `roleId` INT NOT NULL,
+  `password` VARCHAR(45) NULL,
+  `regDate` DATETIME NOT NULL,
+  PRIMARY KEY (`userId`),
+  INDEX `fk_bruker_poststed_idx` (`zipCode` ASC) ,
+  INDEX `fk_bruker_rolle1_idx` (`roleId` ASC) ,
   CONSTRAINT `fk_bruker_poststed`
-    FOREIGN KEY (`postNr`)
-    REFERENCES `app2000`.`poststed` (`postNr`)
+    FOREIGN KEY (`zipCode`)
+    REFERENCES `app2000`.`city` (`zipCode`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_bruker_rolle1`
-    FOREIGN KEY (`rolleId`)
-    REFERENCES `app2000`.`rolle` (`rolleId`)
+    FOREIGN KEY (`roleId`)
+    REFERENCES `app2000`.`role` (`roleId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `app2000`.`rom`
+-- Table `app2000`.`room`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `app2000`.`rom` (
-  `romNr` INT NOT NULL,
-  `romNavn` VARCHAR(45) NULL,
-  `sittePlasser` INT NULL,
-  PRIMARY KEY (`romNr`))
+CREATE TABLE IF NOT EXISTS `app2000`.`room` (
+  `roomId` INT NOT NULL,
+  `roomName` VARCHAR(45) NULL,
+  `seats` INT NULL,
+  PRIMARY KEY (`roomId`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `app2000`.`avtale`
+-- Table `app2000`.`appointment`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `app2000`.`avtale` (
-  `avtaleNr` INT NOT NULL AUTO_INCREMENT,
-  `tidStart` DATETIME NULL,
-  `tidSlutt` DATETIME NULL,
-  `romNr` INT NULL,
-  `pasientNr` INT NOT NULL,
-  `behandlerNr` INT NOT NULL,
-  PRIMARY KEY (`avtaleNr`),
-  INDEX `fk_avtale_rom1_idx` (`romNr` ASC) ,
-  INDEX `fk_avtale_bruker1_idx` (`pasientNr` ASC) ,
-  INDEX `fk_avtale_bruker2_idx` (`behandlerNr` ASC) ,
+CREATE TABLE IF NOT EXISTS `app2000`.`appointment` (
+  `appointmentId` INT NOT NULL AUTO_INCREMENT,
+  `startTime` DATETIME NULL,
+  `endTime` DATETIME NULL,
+  `roomId` INT NULL,
+  `patientId` INT NOT NULL,
+  `specialistId` INT NOT NULL,
+  PRIMARY KEY (`appointmentId`),
+  INDEX `fk_avtale_rom1_idx` (`roomId` ASC) ,
+  INDEX `fk_avtale_bruker1_idx` (`patientId` ASC) ,
+  INDEX `fk_avtale_bruker2_idx` (`specialistId` ASC) ,
   CONSTRAINT `fk_avtale_rom1`
-    FOREIGN KEY (`romNr`)
-    REFERENCES `app2000`.`rom` (`romNr`)
+    FOREIGN KEY (`roomId`)
+    REFERENCES `app2000`.`room` (`roomId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_avtale_bruker1`
-    FOREIGN KEY (`pasientNr`)
-    REFERENCES `app2000`.`bruker` (`brukerNr`)
+    FOREIGN KEY (`patientId`)
+    REFERENCES `app2000`.`user` (`userId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_avtale_bruker2`
-    FOREIGN KEY (`behandlerNr`)
-    REFERENCES `app2000`.`bruker` (`brukerNr`)
+    FOREIGN KEY (`specialistId`)
+    REFERENCES `app2000`.`user` (`userId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -112,60 +112,60 @@ ENGINE = InnoDB;
 -- Table `app2000`.`journal`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `app2000`.`journal` (
-  `journalNr` INT NOT NULL AUTO_INCREMENT,
-  `pasientNr` INT NOT NULL,
-  PRIMARY KEY (`journalNr`),
-  INDEX `fk_Journal_bruker1_idx` (`pasientNr` ASC) ,
+  `journalId` INT NOT NULL AUTO_INCREMENT,
+  `patientId` INT NOT NULL,
+  PRIMARY KEY (`journalId`),
+  INDEX `fk_Journal_bruker1_idx` (`patientId` ASC) ,
   CONSTRAINT `fk_Journal_bruker1`
-    FOREIGN KEY (`pasientNr`)
-    REFERENCES `app2000`.`bruker` (`brukerNr`)
+    FOREIGN KEY (`patientId`)
+    REFERENCES `app2000`.`user` (`userId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `app2000`.`journalnotat`
+-- Table `app2000`.`journalnote`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `app2000`.`journalnotat` (
-  `JournalnotatNr` INT NOT NULL AUTO_INCREMENT,
-  `Dato` DATE NOT NULL,
-  `Tid` TIME NOT NULL,
-  `journalNr` INT NOT NULL,
-  `behandlerNr` INT NOT NULL,
-  `journalnotat` VARCHAR(3000) NULL,
-  `overskrift` VARCHAR(150) NULL,
-  PRIMARY KEY (`JournalnotatNr`),
-  INDEX `fk_journalnotat_Journal1_idx` (`journalNr` ASC) ,
-  INDEX `fk_journalnotat_bruker1_idx` (`behandlerNr` ASC) ,
+CREATE TABLE IF NOT EXISTS `app2000`.`journalnote` (
+  `journalnoteId` INT NOT NULL AUTO_INCREMENT,
+  `date` DATE NOT NULL,
+  `time` TIME NOT NULL,
+  `journalId` INT NOT NULL,
+  `specialistId` INT NOT NULL,
+  `journalnote` VARCHAR(3000) NULL,
+  `heading` VARCHAR(150) NULL,
+  PRIMARY KEY (`journalnoteId`),
+  INDEX `fk_journalnotat_Journal1_idx` (`journalId` ASC) ,
+  INDEX `fk_journalnotat_bruker1_idx` (`specialistId` ASC) ,
   CONSTRAINT `fk_journalnotat_Journal1`
-    FOREIGN KEY (`journalNr`)
-    REFERENCES `app2000`.`journal` (`journalNr`)
+    FOREIGN KEY (`journalId`)
+    REFERENCES `app2000`.`journal` (`journalId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_journalnotat_bruker1`
-    FOREIGN KEY (`behandlerNr`)
-    REFERENCES `app2000`.`bruker` (`brukerNr`)
+    FOREIGN KEY (`specialistId`)
+    REFERENCES `app2000`.`user` (`userId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `app2000`.`faktura`
+-- Table `app2000`.`invoice`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `app2000`.`faktura` (
-  `fakturaNr` INT NOT NULL,
-  `avtaleDato` DATE NULL,
+CREATE TABLE IF NOT EXISTS `app2000`.`invoice` (
+  `invoiceId` INT NOT NULL,
+  `agreementDate` DATE NULL,
   `sum` INT NULL,
-  `sendtDato` DATE NULL,
-  `betaltDato` VARCHAR(45) NULL,
-  `bruker_brukerNr` INT NOT NULL,
-  PRIMARY KEY (`fakturaNr`),
-  INDEX `fk_faktura_bruker1_idx` (`bruker_brukerNr` ASC) ,
+  `sendtDate` DATE NULL,
+  `paidDate` VARCHAR(45) NULL,
+  `userId` INT NOT NULL,
+  PRIMARY KEY (`invoiceId`),
+  INDEX `fk_faktura_bruker1_idx` (`userId` ASC) ,
   CONSTRAINT `fk_faktura_bruker1`
-    FOREIGN KEY (`bruker_brukerNr`)
-    REFERENCES `app2000`.`bruker` (`brukerNr`)
+    FOREIGN KEY (`userId`)
+    REFERENCES `app2000`.`user` (`userId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
