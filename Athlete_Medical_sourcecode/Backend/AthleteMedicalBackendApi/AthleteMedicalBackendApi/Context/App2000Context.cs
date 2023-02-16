@@ -15,277 +15,280 @@ public partial class App2000Context : DbContext
     {
     }
 
-    public virtual DbSet<Avtale> Avtales { get; set; }
+    public virtual DbSet<Appointment> Appointments { get; set; }
 
-    public virtual DbSet<Bruker> Brukers { get; set; }
+    public virtual DbSet<City> Cities { get; set; }
 
-    public virtual DbSet<Faktura> Fakturas { get; set; }
+    public virtual DbSet<Invoice> Invoices { get; set; }
 
     public virtual DbSet<Journal> Journals { get; set; }
 
-    public virtual DbSet<Journalnotat> Journalnotats { get; set; }
+    public virtual DbSet<Journalnote> Journalnotes { get; set; }
 
-    public virtual DbSet<Poststed> Poststeds { get; set; }
+    public virtual DbSet<Role> Roles { get; set; }
 
-    public virtual DbSet<Rolle> Rolles { get; set; }
+    public virtual DbSet<Room> Rooms { get; set; }
 
-    public virtual DbSet<Rom> Roms { get; set; }
-
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Avtale>(entity =>
+        modelBuilder.Entity<Appointment>(entity =>
         {
-            entity.HasKey(e => e.AvtaleNr).HasName("PRIMARY");
+            entity.HasKey(e => e.AppointmentId).HasName("PRIMARY");
 
-            entity.ToTable("avtale");
+            entity.ToTable("appointment");
 
-            entity.HasIndex(e => e.PasientNr, "fk_avtale_bruker1_idx");
+            entity.HasIndex(e => e.PatientId, "fk_avtale_bruker1_idx");
 
-            entity.HasIndex(e => e.BehandlerNr, "fk_avtale_bruker2_idx");
+            entity.HasIndex(e => e.SpecialistId, "fk_avtale_bruker2_idx");
 
-            entity.HasIndex(e => e.RomNr, "fk_avtale_rom1_idx");
+            entity.HasIndex(e => e.RoomId, "fk_avtale_rom1_idx");
 
-            entity.Property(e => e.AvtaleNr)
+            entity.Property(e => e.AppointmentId)
                 .HasColumnType("int(11)")
-                .HasColumnName("avtaleNr");
-            entity.Property(e => e.BehandlerNr)
-                .HasColumnType("int(11)")
-                .HasColumnName("behandlerNr");
-            entity.Property(e => e.PasientNr)
-                .HasColumnType("int(11)")
-                .HasColumnName("pasientNr");
-            entity.Property(e => e.RomNr)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnType("int(11)")
-                .HasColumnName("romNr");
-            entity.Property(e => e.TidSlutt)
+                .HasColumnName("appointmentId");
+            entity.Property(e => e.EndTime)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("datetime")
-                .HasColumnName("tidSlutt");
-            entity.Property(e => e.TidStart)
+                .HasColumnName("endTime");
+            entity.Property(e => e.PatientId)
+                .HasColumnType("int(11)")
+                .HasColumnName("patientId");
+            entity.Property(e => e.RoomId)
+                .HasDefaultValueSql("'NULL'")
+                .HasColumnType("int(11)")
+                .HasColumnName("roomId");
+            entity.Property(e => e.SpecialistId)
+                .HasColumnType("int(11)")
+                .HasColumnName("specialistId");
+            entity.Property(e => e.StartTime)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("datetime")
-                .HasColumnName("tidStart");
+                .HasColumnName("startTime");
 
-            entity.HasOne(d => d.BehandlerNrNavigation).WithMany(p => p.AvtaleBehandlerNrNavigations)
-                .HasForeignKey(d => d.BehandlerNr)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_avtale_bruker2");
-
-            entity.HasOne(d => d.PasientNrNavigation).WithMany(p => p.AvtalePasientNrNavigations)
-                .HasForeignKey(d => d.PasientNr)
+            entity.HasOne(d => d.Patient).WithMany(p => p.AppointmentPatients)
+                .HasForeignKey(d => d.PatientId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_avtale_bruker1");
 
-            entity.HasOne(d => d.RomNrNavigation).WithMany(p => p.Avtales)
-                .HasForeignKey(d => d.RomNr)
+            entity.HasOne(d => d.Room).WithMany(p => p.Appointments)
+                .HasForeignKey(d => d.RoomId)
                 .HasConstraintName("fk_avtale_rom1");
+
+            entity.HasOne(d => d.Specialist).WithMany(p => p.AppointmentSpecialists)
+                .HasForeignKey(d => d.SpecialistId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_avtale_bruker2");
         });
 
-        modelBuilder.Entity<Bruker>(entity =>
+        modelBuilder.Entity<City>(entity =>
         {
-            entity.HasKey(e => e.BrukerNr).HasName("PRIMARY");
+            entity.HasKey(e => e.ZipCode).HasName("PRIMARY");
 
-            entity.ToTable("bruker");
+            entity.ToTable("city");
 
-            entity.HasIndex(e => e.PostNr, "fk_bruker_poststed_idx");
-
-            entity.HasIndex(e => e.RolleId, "fk_bruker_rolle1_idx");
-
-            entity.Property(e => e.BrukerNr)
+            entity.Property(e => e.ZipCode)
                 .HasColumnType("int(11)")
-                .HasColumnName("brukerNr");
-            entity.Property(e => e.Adresse)
+                .HasColumnName("zipCode");
+            entity.Property(e => e.CityName)
                 .HasMaxLength(45)
                 .HasDefaultValueSql("'NULL'")
-                .HasColumnName("adresse");
-            entity.Property(e => e.Etternavn)
-                .HasMaxLength(70)
-                .HasColumnName("etternavn");
-            entity.Property(e => e.Fornavn)
-                .HasMaxLength(45)
-                .HasColumnName("fornavn");
-            entity.Property(e => e.FødselNr)
-                .HasColumnType("int(11)")
-                .HasColumnName("fødselNr");
-            entity.Property(e => e.MellomNavn)
-                .HasMaxLength(45)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnName("mellomNavn");
-            entity.Property(e => e.Passord)
-                .HasMaxLength(45)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnName("passord");
-            entity.Property(e => e.PostNr)
-                .HasColumnType("int(11)")
-                .HasColumnName("postNr");
-            entity.Property(e => e.RegistrertDato)
-                .HasColumnType("datetime")
-                .HasColumnName("registrertDato");
-            entity.Property(e => e.RolleId)
-                .HasColumnType("int(11)")
-                .HasColumnName("rolleId");
-            entity.Property(e => e.TlfNr)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnType("int(11)")
-                .HasColumnName("tlfNr");
-
-            entity.HasOne(d => d.PostNrNavigation).WithMany(p => p.Brukers)
-                .HasForeignKey(d => d.PostNr)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_bruker_poststed");
-
-            entity.HasOne(d => d.Rolle).WithMany(p => p.Brukers)
-                .HasForeignKey(d => d.RolleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_bruker_rolle1");
+                .HasColumnName("cityName");
         });
 
-        modelBuilder.Entity<Faktura>(entity =>
+        modelBuilder.Entity<Invoice>(entity =>
         {
-            entity.HasKey(e => e.FakturaNr).HasName("PRIMARY");
+            entity.HasKey(e => e.InvoiceId).HasName("PRIMARY");
 
-            entity.ToTable("faktura");
+            entity.ToTable("invoice");
 
-            entity.HasIndex(e => e.BrukerBrukerNr, "fk_faktura_bruker1_idx");
+            entity.HasIndex(e => e.UserId, "fk_faktura_bruker1_idx");
 
-            entity.Property(e => e.FakturaNr)
+            entity.Property(e => e.InvoiceId)
                 .HasColumnType("int(11)")
-                .HasColumnName("fakturaNr");
-            entity.Property(e => e.AvtaleDato)
+                .HasColumnName("invoiceId");
+            entity.Property(e => e.AgreementDate)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("date")
-                .HasColumnName("avtaleDato");
-            entity.Property(e => e.BetaltDato)
+                .HasColumnName("agreementDate");
+            entity.Property(e => e.PaidDate)
                 .HasMaxLength(45)
                 .HasDefaultValueSql("'NULL'")
-                .HasColumnName("betaltDato");
-            entity.Property(e => e.BrukerBrukerNr)
-                .HasColumnType("int(11)")
-                .HasColumnName("bruker_brukerNr");
-            entity.Property(e => e.SendtDato)
+                .HasColumnName("paidDate");
+            entity.Property(e => e.SendtDate)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("date")
-                .HasColumnName("sendtDato");
+                .HasColumnName("sendtDate");
             entity.Property(e => e.Sum)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("int(11)")
                 .HasColumnName("sum");
+            entity.Property(e => e.UserId)
+                .HasColumnType("int(11)")
+                .HasColumnName("userId");
 
-            entity.HasOne(d => d.BrukerBrukerNrNavigation).WithMany(p => p.Fakturas)
-                .HasForeignKey(d => d.BrukerBrukerNr)
+            entity.HasOne(d => d.User).WithMany(p => p.Invoices)
+                .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_faktura_bruker1");
         });
 
         modelBuilder.Entity<Journal>(entity =>
         {
-            entity.HasKey(e => e.JournalNr).HasName("PRIMARY");
+            entity.HasKey(e => e.JournalId).HasName("PRIMARY");
 
             entity.ToTable("journal");
 
-            entity.HasIndex(e => e.PasientNr, "fk_Journal_bruker1_idx");
+            entity.HasIndex(e => e.PatientId, "fk_Journal_bruker1_idx");
 
-            entity.Property(e => e.JournalNr)
+            entity.Property(e => e.JournalId)
                 .HasColumnType("int(11)")
-                .HasColumnName("journalNr");
-            entity.Property(e => e.PasientNr)
+                .HasColumnName("journalId");
+            entity.Property(e => e.PatientId)
                 .HasColumnType("int(11)")
-                .HasColumnName("pasientNr");
+                .HasColumnName("patientId");
 
-            entity.HasOne(d => d.PasientNrNavigation).WithMany(p => p.Journals)
-                .HasForeignKey(d => d.PasientNr)
+            entity.HasOne(d => d.Patient).WithMany(p => p.Journals)
+                .HasForeignKey(d => d.PatientId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_Journal_bruker1");
         });
 
-        modelBuilder.Entity<Journalnotat>(entity =>
+        modelBuilder.Entity<Journalnote>(entity =>
         {
-            entity.HasKey(e => e.JournalnotatNr).HasName("PRIMARY");
+            entity.HasKey(e => e.JournalnoteId).HasName("PRIMARY");
 
-            entity.ToTable("journalnotat");
+            entity.ToTable("journalnote");
 
-            entity.HasIndex(e => e.JournalNr, "fk_journalnotat_Journal1_idx");
+            entity.HasIndex(e => e.JournalId, "fk_journalnotat_Journal1_idx");
 
-            entity.HasIndex(e => e.BehandlerNr, "fk_journalnotat_bruker1_idx");
+            entity.HasIndex(e => e.SpecialistId, "fk_journalnotat_bruker1_idx");
 
-            entity.Property(e => e.JournalnotatNr).HasColumnType("int(11)");
-            entity.Property(e => e.BehandlerNr)
+            entity.Property(e => e.JournalnoteId)
                 .HasColumnType("int(11)")
-                .HasColumnName("behandlerNr");
-            entity.Property(e => e.Dato).HasColumnType("date");
-            entity.Property(e => e.JournalNr)
-                .HasColumnType("int(11)")
-                .HasColumnName("journalNr");
-            entity.Property(e => e.Journalnotat1)
-                .HasMaxLength(3000)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnName("journalnotat");
-            entity.Property(e => e.Overskrift)
+                .HasColumnName("journalnoteId");
+            entity.Property(e => e.Date)
+                .HasColumnType("date")
+                .HasColumnName("date");
+            entity.Property(e => e.Heading)
                 .HasMaxLength(150)
                 .HasDefaultValueSql("'NULL'")
-                .HasColumnName("overskrift");
-            entity.Property(e => e.Tid).HasColumnType("time");
+                .HasColumnName("heading");
+            entity.Property(e => e.JournalId)
+                .HasColumnType("int(11)")
+                .HasColumnName("journalId");
+            entity.Property(e => e.Journalnote1)
+                .HasMaxLength(3000)
+                .HasDefaultValueSql("'NULL'")
+                .HasColumnName("journalnote");
+            entity.Property(e => e.SpecialistId)
+                .HasColumnType("int(11)")
+                .HasColumnName("specialistId");
+            entity.Property(e => e.Time)
+                .HasColumnType("time")
+                .HasColumnName("time");
 
-            entity.HasOne(d => d.BehandlerNrNavigation).WithMany(p => p.Journalnotats)
-                .HasForeignKey(d => d.BehandlerNr)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_journalnotat_bruker1");
-
-            entity.HasOne(d => d.JournalNrNavigation).WithMany(p => p.Journalnotats)
-                .HasForeignKey(d => d.JournalNr)
+            entity.HasOne(d => d.Journal).WithMany(p => p.Journalnotes)
+                .HasForeignKey(d => d.JournalId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_journalnotat_Journal1");
+
+            entity.HasOne(d => d.Specialist).WithMany(p => p.Journalnotes)
+                .HasForeignKey(d => d.SpecialistId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_journalnotat_bruker1");
         });
 
-        modelBuilder.Entity<Poststed>(entity =>
+        modelBuilder.Entity<Role>(entity =>
         {
-            entity.HasKey(e => e.PostNr).HasName("PRIMARY");
+            entity.HasKey(e => e.RoleId).HasName("PRIMARY");
 
-            entity.ToTable("poststed");
+            entity.ToTable("role");
 
-            entity.Property(e => e.PostNr)
+            entity.Property(e => e.RoleId)
                 .HasColumnType("int(11)")
-                .HasColumnName("postNr");
-            entity.Property(e => e.PostSted1)
+                .HasColumnName("roleId");
+            entity.Property(e => e.RoleName)
                 .HasMaxLength(45)
                 .HasDefaultValueSql("'NULL'")
-                .HasColumnName("postSted");
+                .HasColumnName("roleName");
         });
 
-        modelBuilder.Entity<Rolle>(entity =>
+        modelBuilder.Entity<Room>(entity =>
         {
-            entity.HasKey(e => e.RolleId).HasName("PRIMARY");
+            entity.HasKey(e => e.RoomId).HasName("PRIMARY");
 
-            entity.ToTable("rolle");
+            entity.ToTable("room");
 
-            entity.Property(e => e.RolleId)
+            entity.Property(e => e.RoomId)
                 .HasColumnType("int(11)")
-                .HasColumnName("rolleId");
-            entity.Property(e => e.RolleNavn)
+                .HasColumnName("roomId");
+            entity.Property(e => e.RoomName)
                 .HasMaxLength(45)
                 .HasDefaultValueSql("'NULL'")
-                .HasColumnName("rolleNavn");
+                .HasColumnName("roomName");
+            entity.Property(e => e.Seats)
+                .HasDefaultValueSql("'NULL'")
+                .HasColumnType("int(11)")
+                .HasColumnName("seats");
         });
 
-        modelBuilder.Entity<Rom>(entity =>
+        modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.RomNr).HasName("PRIMARY");
+            entity.HasKey(e => e.UserId).HasName("PRIMARY");
 
-            entity.ToTable("rom");
+            entity.ToTable("user");
 
-            entity.Property(e => e.RomNr)
+            entity.HasIndex(e => e.ZipCode, "fk_bruker_poststed_idx");
+
+            entity.HasIndex(e => e.RoleId, "fk_bruker_rolle1_idx");
+
+            entity.Property(e => e.UserId)
                 .HasColumnType("int(11)")
-                .HasColumnName("romNr");
-            entity.Property(e => e.RomNavn)
+                .HasColumnName("userId");
+            entity.Property(e => e.Adress)
                 .HasMaxLength(45)
                 .HasDefaultValueSql("'NULL'")
-                .HasColumnName("romNavn");
-            entity.Property(e => e.SittePlasser)
+                .HasColumnName("adress");
+            entity.Property(e => e.FirstName).HasMaxLength(45);
+            entity.Property(e => e.LastName)
+                .HasMaxLength(70)
+                .HasColumnName("lastName");
+            entity.Property(e => e.MiddleName)
+                .HasMaxLength(45)
+                .HasDefaultValueSql("'NULL'")
+                .HasColumnName("middleName");
+            entity.Property(e => e.Password)
+                .HasMaxLength(45)
+                .HasDefaultValueSql("'NULL'")
+                .HasColumnName("password");
+            entity.Property(e => e.PhoneNumber)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("int(11)")
-                .HasColumnName("sittePlasser");
+                .HasColumnName("phoneNumber");
+            entity.Property(e => e.RegDate)
+                .HasColumnType("datetime")
+                .HasColumnName("regDate");
+            entity.Property(e => e.RoleId)
+                .HasColumnType("int(11)")
+                .HasColumnName("roleId");
+            entity.Property(e => e.SocialSecurityNum)
+                .HasColumnType("int(11)")
+                .HasColumnName("socialSecurityNum");
+            entity.Property(e => e.ZipCode)
+                .HasColumnType("int(11)")
+                .HasColumnName("zipCode");
+
+            entity.HasOne(d => d.Role).WithMany(p => p.Users)
+                .HasForeignKey(d => d.RoleId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_bruker_rolle1");
+
+            entity.HasOne(d => d.ZipCodeNavigation).WithMany(p => p.Users)
+                .HasForeignKey(d => d.ZipCode)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_bruker_poststed");
         });
 
         OnModelCreatingPartial(modelBuilder);

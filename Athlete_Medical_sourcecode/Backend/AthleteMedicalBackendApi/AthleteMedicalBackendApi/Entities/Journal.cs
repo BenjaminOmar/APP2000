@@ -5,11 +5,11 @@ namespace AthleteMedicalBackendApi.Entities;
 
 public partial class Journal
 {
-    public int JournalNr { get; set; }
+    public int JournalId { get; set; }
 
-    public int PasientNr { get; set; }
+    public int PatientId { get; set; }
 
-    public virtual ICollection<Journalnotat> Journalnotats { get; } = new List<Journalnotat>();
+    public virtual ICollection<Journalnote> Journalnotes { get; } = new List<Journalnote>();
 
-    public virtual Bruker PasientNrNavigation { get; set; } = null!;
+    public virtual User Patient { get; set; } = null!;
 }
