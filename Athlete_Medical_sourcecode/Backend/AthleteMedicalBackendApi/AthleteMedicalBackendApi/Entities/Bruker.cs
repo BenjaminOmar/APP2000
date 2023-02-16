@@ -17,7 +17,7 @@ public partial class Bruker
 
     public int FødselNr { get; set; }
 
-    public string? Adresse { get; set; }
+    public string? Adresse { get; set; } 
 
     public int PostNr { get; set; }
 
