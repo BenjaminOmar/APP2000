@@ -5,7 +5,7 @@ function App() {
     <div className="App">
       
       <Footer/>
-      Dette er en test
+      
     </div>
   );
 }

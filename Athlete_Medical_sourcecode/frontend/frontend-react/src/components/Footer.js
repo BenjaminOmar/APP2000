@@ -4,8 +4,42 @@ import './Footer.css';
 const Footer = () => {
     return(
         <footer className='footer'>
+            {/*Separator line above footerColumns */ }
+            <hr className="separator1"/>
+
+            {/*Footer columns*/ }
+            <div className='footerColumns'>
+                <div className='footerColumn'>
+                    <h4>Kolonne 1</h4>
+                    <ul>
+                        <li href="/column1Link1">Kolonne 1 Link 1</li>
+                        <li href="/column1Link2">Kolonne 1 Link 2</li>
+                        <li href="/column1Link3">Kolonne 1 Link 3</li>
+                    </ul>
+                </div>
+                <div className="footerColumn">
+                    <h4>Kolonne 2</h4>
+                    <ul>
+                        <li href="/column2Link1">Kolonne 2 Link 1</li>
+                        <li href="/column2Link2">Kolonne 2 Link 2</li>
+                        <li href="/column2Link3">Kolonne 2 Link 3</li>
+                    </ul>                    
+                </div>
+                <div className="footerColumn">
+                    <h4>Kolonne 3</h4>
+                    <ul>
+                        <li href="/column3Link1">Kolonne 3 Link 1</li>
+                        <li href="/column3Link2">Kolonne 3 Link 2</li>
+                        <li href="/column3Link3">Kolonne 3 Link 3</li>
+                    </ul>
+                </div>
+            </div>
+            {/*Separator line below footerColumns */ }
+            <hr className="separator2"/>
+                      
             {/*Footer image */ }
-            <img src={ProcessingInstruction.env.PUBLIC-URL + '/footerImage.png'} alt='Footer' className='footerImage'/>
+            <img src={process.env.PUBLIC_URL + '/footerImage.png'} alt='Footer' className='footerImage'/>
+
             
             {/*Footer links */ }
             <div className= "footerLinks">
@@ -14,30 +48,7 @@ const Footer = () => {
                 <a href="/Cookies">Informasjonskapsler</a>
             </div>
 
-            {/*Separator line */ }
-            <hr/>
-
-            {/*Footer columns*/ }
-            <div className='footerColumns'>
-                <div className='footerColumn'>
-                    <h4>Kolonne 1</h4>
-                    <a href="/column1Link1">Kolonne 1 Link 1</a>
-                    <a href="/column1Link2">Kolonne 1 Link 2</a>
-                </div>
-                <div className="footerColumn">
-                    <h4>Column 2</h4>
-                    <a href="/column2Link1">Kolonne 2 Link 1</a>
-                    <a href="/column2Link2">Kolonne 2 Link 2</a>
-                </div>
-                <div className="footerColumn">
-                    <h4>Column 3</h4>
-                    <a href="/column3-link1">Kolonne 3 Link 1</a>
-                    <a href="/column3-link2">Kolonne 3 Link 2</a>
-                </div>
-            </div>
-
-            {/* Separator line */}
-            <hr />
+           
         </footer>
     );
 }
