@@ -36,13 +36,18 @@
 .separator2{
   position: absolute;
   bottom: 110px; /* Adjust this value to change the distance between separator2 and footerLinks */
+  width: 100%;
   left: 0;
   right: 0;
 
 }
 
 .footerColumn h4 {
+
   margin-bottom: 10px; /* Adds margin to the bottom of each column heading */
+}
+ul{
+  list-style-type: none;
 }
 
 
