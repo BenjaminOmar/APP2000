@@ -27,7 +27,7 @@
   transform: translateX(-50%); /* Moves the footer columns back 50% of their width to center them */
   display: flex; /* Uses a flexbox display for the columns */
   justify-content: space-between; /* Spaces out the columns evenly */
-  width: 50%; /* Sets the width of the columns to be 100% of their container */
+  width: 50%; /* Sets the width of the columns to be 50% of their container */
   margin-top: 30px;
   z-index: 0; 
   flex-direction: row; /* Aligns the links horizontally */
@@ -35,7 +35,7 @@
 
 .separator2{
   position: absolute;
-  bottom: 110px; /* Adjust this value to change the distance between separator2 and footerLinks */
+  bottom: 110px; 
   width: 100%;
   left: 0;
   right: 0;
@@ -46,11 +46,10 @@
 
   margin-bottom: 10px; /* Adds margin to the bottom of each column heading */
 }
+
 ul{
-  list-style-type: none;
+  list-style-type: none; /* Removes default bullet points*/
 }
-
-
 
 /* Set the position of the footer image */
 .footerImage {
@@ -62,8 +61,8 @@ ul{
 /* Set the position and style of the footer links */
 .footerLinks {
   position: absolute; /* Sets the position of the footer links to be absolute */
-  bottom: 50px; /* Positions the links 1cm from the bottom of the page */
-  right: 100px; /* Positions the links 2cm from the right of the page */
+  bottom: 50px; /* Positions the links 50px from the bottom of the page */
+  right: 100px; /* Positions the links 100px from the right of the page */
   display: flex; /* Uses a flexbox display for the links */
   flex-direction: row; /* Aligns the links horizontally */
   align-items: center; /* Centers the links horizontally */
