@@ -1,0 +1,61 @@
+/* Define the styles for the footer container */
+.footer {
+    display: flex; /* use flexbox to lay out the elements */
+    flex-direction: column; /* align the elements in a column */
+    align-items: center; /* center the elements horizontally */
+    margin-top: 50px; /* add space between the footer and the rest of the content */
+    border-top: 1px solid black; /* add a top border to the footer */
+    padding: 20px; /* add padding to the footer to create space around the content */
+  }
+  
+  /* Define the styles for the footer image */
+  .footerImage {
+    width: 100px; /* set the width of the image to 100 pixels */
+    height: auto; /* maintain the aspect ratio of the image */
+    margin: 0 0 10px 0; /* add margin to the bottom of the image to create space between the image and the text */
+  }
+  
+  /* Define the styles for the footer links */
+  .footerLinks {
+    display: flex; /* use flexbox to lay out the links */
+    justify-content: center; /* center the links horizontally */
+  }
+  
+  /* Define the styles for the individual footer link */
+  .footerLink {
+    margin: 0 10px; /* add margin to the left and right of the link to create space between the links */
+    color: black; /* set the text color of the link to black */
+    text-decoration: none; /* remove the underline from the link */
+  }
+  
+  /* Define the styles for the footer columns */
+  .footerColumns {
+    display: flex; /* use flexbox to lay out the columns */
+    justify-content: center; /* center the columns horizontally */
+    margin-top: 20px; /* add space between the links and the columns */
+  }
+  
+  /* Define the styles for the individual footer column */
+  .footerColumn {
+    margin: 0 20px; /* add margin to the left and right of the column to create space between the columns */
+    text-align: center; /* center the text in the column */
+  }
+  
+  /* Define the styles for the footer column title */
+  .footerColumnTitle {
+    font-weight: bold; /* set the font weight of the title to bold */
+    margin-bottom: 10px; /* add margin to the bottom of the title to create space between the title and the content */
+  }
+  
+  /* Define the styles for the footer column links */
+  .footerColumnLinks {
+    display: block; /* display the links as a block */
+    margin-bottom: 10px; /* add margin to the bottom of the links to create space between the links and the content */
+  }
+  
+  /* Define the styles for the footer bottom border */
+  .footerBorder {
+    border-top: 1px solid black; /* add a top border to the footer to separate it from the content below */
+    margin-top: 20px; /* add space between the footer and the content below */
+  }
+  
