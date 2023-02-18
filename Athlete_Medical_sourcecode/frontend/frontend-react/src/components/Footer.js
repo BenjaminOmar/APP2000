@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
 import './Footer.css';
+import { Link } from 'react-router-dom';
 
-const Footer = () => {
+
+
+
+export function Footer()  {
     return(
         <footer className='footer'>
             {/*Separator line above footerColumns */ }
@@ -12,25 +15,25 @@ const Footer = () => {
                 <div className='footerColumn'>
                     <h4>Kolonne 1</h4>
                     <ul>
-                        <li> <a href="/column1Link1">Kolonne 1 Link 1</a></li>
-                        <li><a href="/column1Link2">Kolonne 1 Link 2</a></li>
-                        <li><a href="/column1Link3">Kolonne 1 Link 3</a></li>
+                        <li> <Link to="/column1Link1">Kolonne 1 Link 1</Link></li>
+                        <li><Link to="/column1Link2">Kolonne 1 Link 2</Link></li>
+                        <li><Link to="/column1Link3">Kolonne 1 Link 3</Link></li>
                     </ul>
                 </div>
                 <div className="footerColumn">
                     <h4>Kolonne 2</h4>
                     <ul>
-                        <li><a href="/column2Link1">Kolonne 2 Link 1</a></li>
-                        <li><a href="/column2Link2">Kolonne 2 Link 2</a></li>
-                        <li><a href="/column2Link3">Kolonne 2 Link 3</a></li>
+                        <li><Link to="/column2Link1">Kolonne 2 Link 1</Link></li>
+                        <li><Link to="/column2Link2">Kolonne 2 Link 2</Link></li>
+                        <li><Link to="/column2Link3">Kolonne 2 Link 3</Link></li>
                     </ul>                    
                 </div>
                 <div className="footerColumn">
                     <h4>Kolonne 3</h4>
                     <ul>
-                    <li><a href="/column3Link1">Kolonne 3 Link 1</a></li>
-                    <li><a href="/column3Link2">Kolonne 3 Link 2</a></li>
-                    <li><a href="/column3Link3">Kolonne 3 Link 3</a></li>
+                    <li><Link to="/column3Link1">Kolonne 3 Link 1</Link></li>
+                    <li><Link to="/column3Link2">Kolonne 3 Link 2</Link></li>
+                    <li><Link to="/column3Link3">Kolonne 3 Link 3</Link></li>
                     </ul>
                 </div>
             </div>
@@ -38,14 +41,17 @@ const Footer = () => {
             <hr className="separator2"/>
                       
             {/*Footer image */ }
-            <img src={process.env.PUBLIC_URL + '/images/footerImage.png'} alt='Footer' className='footerImage'/>
+            <Link to="/">
+                <img src={process.env.PUBLIC_URL + '/images/footerImage.png'} alt='Footer' className='footerImage'/>
+            </Link>
+            
 
            
             {/*Footer links */ }
             <div className= "footerLinks">
-                <a href="/terms">Vilkår</a>
-                <a href="/privacy">Personvern</a>
-                <a href="/Cookies">Informasjonskapsler</a>
+                <Link to="/terms">Vilkår</Link>
+                <Link to="/privacy">Personvern</Link>
+                <Link to="/Cookies">Informasjonskapsler</Link>
             </div>
 
            
