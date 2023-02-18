@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<App2000Context>(
-    o => o.UseMySQL(builder.Configuration.GetConnectionString("MySql")));
+    o => o.UseMySQL(builder.Configuration.GetConnectionString("athleteMedical")));
 
 var app = builder.Build();
 
