@@ -1,16 +1,18 @@
 import React from 'react';
-import {Routes,Route } from 'react-router-dom';
+import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import {Home} from './pages/Home';
+import {Login} from './pages/Login';
 
 function App() {
   return( 
-  <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
 
-    <Home/>
-    {/* <Routes>
-      <Route path='/' element= {<Home/>} /> {/*path to different pages in the website            
-    </Routes> */}
-  </>  
-  )}
-
+      </Routes>
+    </BrowserRouter>
+  );
+}
 export default App;
+
