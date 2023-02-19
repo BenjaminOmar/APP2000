@@ -27,6 +27,8 @@ public partial class User
 
     public DateTime RegDate { get; set; }
 
+    public string Username { get; set; } = null!;
+
     public virtual ICollection<Appointment> AppointmentPatients { get; } = new List<Appointment>();
 
     public virtual ICollection<Appointment> AppointmentSpecialists { get; } = new List<Appointment>();

@@ -31,6 +31,7 @@ public partial class App2000Context : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+ 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Appointment>(entity =>
@@ -244,6 +245,8 @@ public partial class App2000Context : DbContext
 
             entity.HasIndex(e => e.RoleId, "fk_bruker_rolle1_idx");
 
+            entity.HasIndex(e => e.Username, "username_UNIQUE").IsUnique();
+
             entity.Property(e => e.UserId)
                 .HasColumnType("int(11)")
                 .HasColumnName("userId");
@@ -276,6 +279,9 @@ public partial class App2000Context : DbContext
             entity.Property(e => e.SocialSecurityNum)
                 .HasColumnType("int(11)")
                 .HasColumnName("socialSecurityNum");
+            entity.Property(e => e.Username)
+                .HasMaxLength(100)
+                .HasColumnName("username");
             entity.Property(e => e.ZipCode)
                 .HasColumnType("int(11)")
                 .HasColumnName("zipCode");
