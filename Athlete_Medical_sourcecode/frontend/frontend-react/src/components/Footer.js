@@ -1,8 +1,6 @@
 import './Footer.css';
 import { Link } from 'react-router-dom';
-
-
-
+import footerImage from '../images/footerImage.png' 
 
 export function Footer()  {
     return(
@@ -42,7 +40,7 @@ export function Footer()  {
                       
             {/*Footer image */ }
             <Link to="/">
-                <img src={process.env.PUBLIC_URL + '/images/footerImage.png'} alt='Footer' className='footerImage'/>
+                <img src={process.env.PUBLIC_URL + footerImage} alt='Footer' className='footerImage'/>
             </Link>
             
 
