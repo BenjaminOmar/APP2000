@@ -49,9 +49,11 @@ CREATE TABLE IF NOT EXISTS `app2000`.`user` (
   `roleId` INT NOT NULL,
   `password` VARCHAR(45) NULL,
   `regDate` DATETIME NOT NULL,
+  `username` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`userId`),
   INDEX `fk_bruker_poststed_idx` (`zipCode` ASC) ,
   INDEX `fk_bruker_rolle1_idx` (`roleId` ASC) ,
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
   CONSTRAINT `fk_bruker_poststed`
     FOREIGN KEY (`zipCode`)
     REFERENCES `app2000`.`city` (`zipCode`)
