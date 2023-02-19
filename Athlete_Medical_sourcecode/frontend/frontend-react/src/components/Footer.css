@@ -45,13 +45,11 @@ a:hover{
     padding-left: 40px;
   }
 
-  .separator1 {
-    display: none; /* Hide separator1 for larger screens */
-  }
+  
 
   .separator2 {
     position: absolute;
-    bottom: 110px;
+    bottom: 80px;
     width: 100%;
     left: 0;
     right: 0;
