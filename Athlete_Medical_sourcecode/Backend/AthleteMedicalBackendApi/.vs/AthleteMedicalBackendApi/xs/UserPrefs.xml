@@ -1,6 +1,12 @@
 ﻿<Properties StartupConfiguration="{BEA6208D-AD0B-4D33-BFBB-CD4D922F1B4E}|https">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Controllers/roomController.cs">
+    <Files>
+      <File FileName="../../../../../../../../../Users/warsame/.microsoft/usersecrets/441bbebc-91eb-41a6-85a6-31cf76d086a7/secrets.json" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/userController.cs" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/rolesController.cs" Line="3" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Room.cs" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/roomController.cs" Line="22" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
@@ -11,10 +17,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Safari.app" />
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
