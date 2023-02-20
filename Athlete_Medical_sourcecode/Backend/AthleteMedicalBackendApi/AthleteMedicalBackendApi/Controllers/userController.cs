@@ -19,6 +19,12 @@ namespace AthleteMedicalBackendApi.Controllers
             _context = app2000Context;
         }
 
+        [HttpGet("showall")]
+        public async Task<IEnumerable<User>> Get()
+        {
+            return await _context.Users.ToListAsync();
+        }
+
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] User userObj)
         {

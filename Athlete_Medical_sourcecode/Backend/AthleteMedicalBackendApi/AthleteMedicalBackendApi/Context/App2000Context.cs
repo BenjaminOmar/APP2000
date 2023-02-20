@@ -286,15 +286,16 @@ public partial class App2000Context : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("zipCode");
 
-            entity.HasOne(d => d.Role).WithMany(p => p.Users)
-                .HasForeignKey(d => d.RoleId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_bruker_rolle1");
 
-            entity.HasOne(d => d.ZipCodeNavigation).WithMany(p => p.Users)
-                .HasForeignKey(d => d.ZipCode)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_bruker_poststed");
+            //entity.HasOne(d => d.Role).WithMany(p => p.Users)
+            //    .HasForeignKey(d => d.RoleId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("fk_bruker_rolle1");
+
+            //entity.HasOne(d => d.ZipCodeNavigation).WithMany(p => p.Users)
+            //    .HasForeignKey(d => d.ZipCode)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("fk_bruker_poststed");
         });
 
         OnModelCreatingPartial(modelBuilder);
