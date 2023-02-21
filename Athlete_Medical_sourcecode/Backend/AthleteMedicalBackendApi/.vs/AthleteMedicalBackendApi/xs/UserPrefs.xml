@@ -1,20 +1,40 @@
 ﻿<Properties StartupConfiguration="{BEA6208D-AD0B-4D33-BFBB-CD4D922F1B4E}|https">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Entities/User.cs">
+    <Files>
+      <File FileName="AthleteMedicalBackendApi/Context/App2000Context.cs" Line="293" Column="45" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/rolesController.cs" />
+      <File FileName="AthleteMedicalBackendApi/Program.cs" />
+      <File FileName="../../../../../../../../../../Users/benjamin/.microsoft/usersecrets/441bbebc-91eb-41a6-85a6-31cf76d086a7/secrets.json" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/userController.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Room.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Journalnote.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Journal.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Invoice.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Appointment.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/City.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/User.cs" Line="39" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/appsettings.json" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Role.cs" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="AthleteMedicalBackendApi" expanded="True">
-            <Node name="AthleteMedicalBackendApi" expanded="True" />
+            <Node name="AthleteMedicalBackendApi" expanded="True">
+              <Node name="Context" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Entities" expanded="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
 </Properties>
