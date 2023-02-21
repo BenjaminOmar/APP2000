@@ -19,8 +19,7 @@ export function Home() {
             </Link>             
         </Button>
        
-      <Footer />
-      
+         
      </div>
   );
 }

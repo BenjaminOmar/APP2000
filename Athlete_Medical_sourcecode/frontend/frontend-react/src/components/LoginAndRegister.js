@@ -52,7 +52,7 @@ function LoginAndRegister() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-start vh-100" style={{paddingTop: '50px', position:'relative'}}>
+    <div className="d-flex justify-content-center align-items-start min-vh-100" style={{paddingTop: '50px', position:'relative'}}>
       <Card style={{ width: "400px",marginBottom: "50px" }}>
         <Card.Header className="text-center">
           {showLogin ? "Logg Inn" : "Registrer Her"}
@@ -120,8 +120,7 @@ function LoginAndRegister() {
                 <Form.Label>Etternavn *</Form.Label>
                 <Form.Control 
                     type="text" 
-                    placeholder="Skriv inn etternavn" 
-                    value={lastName}
+                     value={lastName}
                     onChange={(event) => setLastName(event.target.value)} />
               </Form.Group>
               <Form.Group>
