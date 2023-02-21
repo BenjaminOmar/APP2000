@@ -1,18 +1,19 @@
 import React from "react";
 import Footer from "../components/Footer";
-import HomeImage from "../components/HomeImage";
-import { Link } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
+import HeaderImage from "../components/HomeImage";
 import HeaderNormal from "../components/HeaderNormal";
+import LoginAndRegister from "../components/LoginAndRegister";
 
-export function Login(){
-    return(
-        <>
-            <HeaderNormal/>
-            
-            
-            <Footer/>
-    
-        </>
-       );  
-}
+export function Login() {
+    return (
+      <>
+        <HeaderNormal />
+        <HeaderImage />
+        <div style={{ minHeight: "calc(100vh - 190px)" }}>
+          <LoginAndRegister />
+        </div>
+        <Footer />
+      </>
+    );
+  }
+  

@@ -1,31 +1,69 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import React, { Component } from 'react';
+import {Button} from "./LogInButton"
+import { Link} from 'react-router-dom';
+import './Header.css';
+import Logo from '../images/footerImage.png'
 
+class HeaderNormal extends Component {
+  state = { clicked: false}
 
-function HeaderNormal() {
-  return (
-    <nav>
-      <ul>
-        <li>
-        <Button style={{backgroundColor:'#0050B1'}}> {/*Button component is used to define the style of the button*/}
-            <Link to="/" style={{color: '#fff', textDecoration: 'none'}}> {/*Define the link to the Booking Page, set color of the text*/}
-                Hjem
-            </Link>             
-        </Button>
-          
-        </li>
-        <li>
-        <Button style={{backgroundColor:'#0050B1'}}> 
-            <Link to="/login " style={{color: '#fff', textDecoration: 'none'}}> {/*Define the link to the Booking Page, set color of the text*/}
-                Login
-            </Link>             
-        </Button>
-          
-        </li>
-      </ul>
-    </nav>
-  );
+  handleClick = () => {
+    this.setState({ clicked: !this.state.clicked})
+  }
+
+  render() {
+    return(
+      <nav className="NavbarItems">
+        <img src={Logo} alt='Logo' className='navbar-logo' />
+    
+        <div className="menu-icon" onClick={this.handleClick}>
+        <i className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
+        </div>
+
+        <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
+          {MenuItems.map((item, index) => {
+            return (
+                <li key={index}>
+                  <a className={item.cName} href={item.url}>
+                  {item.title}
+                  </a>
+                </li>
+            )
+          })}         
+        </ul>
+        <Button>Logg inn</Button>
+      </nav>
+    )
+  }
 }
+
+const MenuItems = [
+  {
+      title: 'Hjem', 
+      url: '#',
+      cName: 'nav-links'
+  }, 
+  {
+      title: 'Våre tjenester', 
+      url: '#',
+      cName: 'nav-links'
+  }, 
+  {
+      title: 'Spesialistene', 
+      url: '#',
+      cName: 'nav-links'
+  }, 
+  {
+      title: 'Kontakt oss', 
+      url: '#',
+      cName: 'nav-links'
+  }, 
+  {
+      title: 'Logg inn', 
+      url: '#',
+      cName: 'nav-links-mobile'
+  }, 
+]
+
 
 export default HeaderNormal;
