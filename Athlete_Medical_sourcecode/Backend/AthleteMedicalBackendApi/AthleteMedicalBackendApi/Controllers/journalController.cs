@@ -12,11 +12,11 @@ namespace AthleteMedicalBackendApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class appointmentController : Controller
+    public class journalController : Controller
     {
         private readonly App2000Context _context;
 
-        public appointmentController(App2000Context context) => _context = context;
+        public journalController(App2000Context context) => _context = context;
 
         // GET: api/values
         [HttpGet]
@@ -34,13 +34,13 @@ namespace AthleteMedicalBackendApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody] string value)
         {
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody] string value)
         {
         }
 
