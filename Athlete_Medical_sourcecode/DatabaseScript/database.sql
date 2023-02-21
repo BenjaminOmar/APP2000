@@ -47,13 +47,17 @@ CREATE TABLE IF NOT EXISTS `app2000`.`user` (
   `adress` VARCHAR(45) NULL,
   `zipCode` INT NOT NULL,
   `roleId` INT NOT NULL,
-  `password` VARCHAR(70) NULL,
+  `password` VARCHAR(70) NOT NULL,
   `regDate` DATETIME NOT NULL,
   `username` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`userId`),
   INDEX `fk_bruker_poststed_idx` (`zipCode` ASC) ,
   INDEX `fk_bruker_rolle1_idx` (`roleId` ASC) ,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
+  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) ,
+  UNIQUE INDEX `socialSecurityNum_UNIQUE` (`socialSecurityNum` ASC) ,
+  UNIQUE INDEX `phoneNumber_UNIQUE` (`phoneNumber` ASC) ,
   CONSTRAINT `fk_bruker_poststed`
     FOREIGN KEY (`zipCode`)
     REFERENCES `app2000`.`city` (`zipCode`)

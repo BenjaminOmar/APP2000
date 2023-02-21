@@ -49,7 +49,7 @@ namespace AthleteMedicalBackendApi.Controllers
         }
 
         // Creates a new user
-        [HttpPost("register")] 
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] User userObj)
         {
             if (userObj == null)
@@ -71,7 +71,12 @@ namespace AthleteMedicalBackendApi.Controllers
             {
                 return BadRequest(new { Message = "Phone number already exists" });
             }
-            
+
+            if (await CheckEmailExistAsync(userObj.Email))
+            {
+                return BadRequest(new { Message = "Email already exists" });
+            }
+
 
             userObj.Password = PasswordHasher.HashPassword(userObj.Password!); // method for hashing the password, so it is not visible in the database
             await _context.Users.AddAsync(userObj); // adds the object
@@ -93,6 +98,11 @@ namespace AthleteMedicalBackendApi.Controllers
         private async Task<bool> CheckPhoneNumberExistAsync(int phoneNumber) // method for checking the phone number already exists
         {
             return await _context.Users.AnyAsync(x => x.PhoneNumber == phoneNumber);
+        }
+
+        private async Task<bool> CheckEmailExistAsync(string email) // method for checking the email already exists
+        {
+            return await _context.Users.AnyAsync(x => x.Email == email);
         }
     }
 }

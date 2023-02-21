@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<App2000Context>(
-    o => o.UseMySQL(builder.Configuration.GetConnectionString("athleteMedical")));
+    o => o.UseMySQL(builder.Configuration.GetConnectionString("athleteMedical")!));
 
 builder.Services.AddCors(setup =>
 {

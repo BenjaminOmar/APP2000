@@ -31,7 +31,6 @@ public partial class App2000Context : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
- 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Appointment>(entity =>
@@ -241,9 +240,15 @@ public partial class App2000Context : DbContext
 
             entity.ToTable("user");
 
+            entity.HasIndex(e => e.Email, "Email_UNIQUE").IsUnique();
+
             entity.HasIndex(e => e.ZipCode, "fk_bruker_poststed_idx");
 
             entity.HasIndex(e => e.RoleId, "fk_bruker_rolle1_idx");
+
+            entity.HasIndex(e => e.PhoneNumber, "phoneNumber_UNIQUE").IsUnique();
+
+            entity.HasIndex(e => e.SocialSecurityNum, "socialSecurityNum_UNIQUE").IsUnique();
 
             entity.HasIndex(e => e.Username, "username_UNIQUE").IsUnique();
 
@@ -254,6 +259,9 @@ public partial class App2000Context : DbContext
                 .HasMaxLength(45)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnName("adress");
+            entity.Property(e => e.Email)
+                .HasMaxLength(60)
+                .HasColumnName("email");
             entity.Property(e => e.FirstName).HasMaxLength(45);
             entity.Property(e => e.LastName)
                 .HasMaxLength(70)
@@ -264,7 +272,6 @@ public partial class App2000Context : DbContext
                 .HasColumnName("middleName");
             entity.Property(e => e.Password)
                 .HasMaxLength(70)
-                .HasDefaultValueSql("'NULL'")
                 .HasColumnName("password");
             entity.Property(e => e.PhoneNumber)
                 .HasDefaultValueSql("'NULL'")
@@ -285,17 +292,6 @@ public partial class App2000Context : DbContext
             entity.Property(e => e.ZipCode)
                 .HasColumnType("int(11)")
                 .HasColumnName("zipCode");
-
-
-            //entity.HasOne(d => d.Role).WithMany(p => p.Users)
-            //    .HasForeignKey(d => d.RoleId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("fk_bruker_rolle1");
-
-            //entity.HasOne(d => d.ZipCodeNavigation).WithMany(p => p.Users)
-            //    .HasForeignKey(d => d.ZipCode)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("fk_bruker_poststed");
         });
 
         OnModelCreatingPartial(modelBuilder);
