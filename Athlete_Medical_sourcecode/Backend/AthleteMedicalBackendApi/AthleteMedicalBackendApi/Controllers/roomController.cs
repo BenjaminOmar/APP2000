@@ -11,7 +11,7 @@ namespace AthleteMedicalBackendApi.Controllers
     {
         private readonly App2000Context _context;
 
-        public roomController(App2000Context context) => _context = context;   
+        public roomController(App2000Context context) => _context = context;
 
 
         [HttpGet]

@@ -33,4 +33,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Context\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig" />
+  </ItemGroup>
 </Project>
