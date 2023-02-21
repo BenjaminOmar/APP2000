@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `app2000`.`user` (
   `adress` VARCHAR(45) NULL,
   `zipCode` INT NOT NULL,
   `roleId` INT NOT NULL,
-  `password` VARCHAR(45) NULL,
+  `password` VARCHAR(70) NULL,
   `regDate` DATETIME NOT NULL,
   `username` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`userId`),

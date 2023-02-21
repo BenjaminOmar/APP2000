@@ -263,7 +263,7 @@ public partial class App2000Context : DbContext
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnName("middleName");
             entity.Property(e => e.Password)
-                .HasMaxLength(45)
+                .HasMaxLength(70)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnName("password");
             entity.Property(e => e.PhoneNumber)

@@ -12,6 +12,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<App2000Context>(
     o => o.UseMySQL(builder.Configuration.GetConnectionString("athleteMedical")));
 
+builder.Services.AddCors(setup =>
+{
+    setup.AddDefaultPolicy(policyBuilder =>
+    {
+        policyBuilder.WithOrigins("http://localhost:4200");
+    });
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -22,6 +31,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
