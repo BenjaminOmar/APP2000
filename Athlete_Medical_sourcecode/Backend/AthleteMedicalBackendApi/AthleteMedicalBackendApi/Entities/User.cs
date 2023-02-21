@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace AthleteMedicalBackendApi.Entities;
 
@@ -13,7 +14,7 @@ public partial class User
 
     public string LastName { get; set; } = null!;
 
-    public int? PhoneNumber { get; set; }
+    public int PhoneNumber { get; set; }
 
     public int SocialSecurityNum { get; set; }
 
@@ -23,23 +24,26 @@ public partial class User
 
     public int RoleId { get; set; }
 
-    public string? Password { get; set; }
+    public string Password { get; set; } = null!;
 
     public DateTime RegDate { get; set; }
 
     public string Username { get; set; } = null!;
 
+    public string Email { get; set; } = null!;
+
+    [JsonIgnore]
     public virtual ICollection<Appointment> AppointmentPatients { get; } = new List<Appointment>();
-
+    [JsonIgnore]
     public virtual ICollection<Appointment> AppointmentSpecialists { get; } = new List<Appointment>();
-
+    [JsonIgnore]
     public virtual ICollection<Invoice> Invoices { get; } = new List<Invoice>();
-
+    [JsonIgnore]
     public virtual ICollection<Journalnote> Journalnotes { get; } = new List<Journalnote>();
-
+    [JsonIgnore]
     public virtual ICollection<Journal> Journals { get; } = new List<Journal>();
-
-    public virtual Role Role { get; set; } = null!;
-
-    public virtual City ZipCodeNavigation { get; set; } = null!;
+    [JsonIgnore]
+    public virtual ICollection<Role> Role { get; } = new List<Role>();
+    [JsonIgnore]
+    public virtual ICollection<City> ZipCodeNavigation { get; } = new List<City>();
 }
