@@ -19,12 +19,12 @@ function HeaderNormal () {
             <NavLink to='/' className='list-item' activeClassName='active'>Tjenester</NavLink>
             <NavLink to='/' className='list-item' activeClassName='active'>Våre behandlere</NavLink>
             <NavLink to='/' className='list-item' activeClassName='active'>Kontakt oss</NavLink>
+            </Nav>
             
             <Nav className='ms-auto'>
-                  <Button className='btn btn-success'>Logg inn</Button>
+                <NavLink to='/'> <Button className='btn btn-success'>Logg inn</Button> </NavLink>
                   </Nav>
                  
-          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
