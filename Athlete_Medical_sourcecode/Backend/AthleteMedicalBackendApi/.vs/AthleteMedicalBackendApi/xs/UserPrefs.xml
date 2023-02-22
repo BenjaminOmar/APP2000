@@ -1,25 +1,44 @@
 ﻿<Properties StartupConfiguration="{BEA6208D-AD0B-4D33-BFBB-CD4D922F1B4E}|https">
-  <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Controllers/roomController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Controllers/userController.cs">
     <Files>
-      <File FileName="../../../../../../../../../Users/warsame/.microsoft/usersecrets/441bbebc-91eb-41a6-85a6-31cf76d086a7/secrets.json" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/userController.cs" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/rolesController.cs" Line="3" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Context/App2000Context.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/rolesController.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Program.cs" Line="1" Column="1" />
+      <File FileName="../../../../../../../../../../Users/benjamin/.microsoft/usersecrets/441bbebc-91eb-41a6-85a6-31cf76d086a7/secrets.json" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/userController.cs" Line="103" Column="10" />
       <File FileName="AthleteMedicalBackendApi/Entities/Room.cs" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/roomController.cs" Line="22" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Journalnote.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Journal.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Invoice.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Appointment.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/City.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/User.cs" />
+      <File FileName="AthleteMedicalBackendApi/appsettings.json" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Role.cs" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/journalController.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/appointmentController.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/roomController.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Helpers/PasswordHasher.cs" Line="17" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="AthleteMedicalBackendApi" expanded="True">
-            <Node name="AthleteMedicalBackendApi" expanded="True" />
+            <Node name="AthleteMedicalBackendApi" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" selected="True" />
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Safari.app" />
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

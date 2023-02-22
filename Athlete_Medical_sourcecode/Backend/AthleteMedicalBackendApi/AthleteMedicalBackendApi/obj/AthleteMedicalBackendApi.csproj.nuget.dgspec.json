@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "/Applications/XAMPP/xamppfiles/htdocs/JavaskriptTuts/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj": {}
+    "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj": {}
   },
   "projects": {
-    "/Applications/XAMPP/xamppfiles/htdocs/JavaskriptTuts/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj": {
+    "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Applications/XAMPP/xamppfiles/htdocs/JavaskriptTuts/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj",
+        "projectUniqueName": "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj",
         "projectName": "AthleteMedicalBackendApi",
-        "projectPath": "/Applications/XAMPP/xamppfiles/htdocs/JavaskriptTuts/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj",
-        "packagesPath": "/Users/warsame/.nuget/packages/",
-        "outputPath": "/Applications/XAMPP/xamppfiles/htdocs/JavaskriptTuts/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/obj/",
+        "projectPath": "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj",
+        "packagesPath": "/Users/benjamin/.nuget/packages/",
+        "outputPath": "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/warsame/.nuget/NuGet/NuGet.Config"
+          "/Users/benjamin/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "/usr/local/share/dotnet/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
