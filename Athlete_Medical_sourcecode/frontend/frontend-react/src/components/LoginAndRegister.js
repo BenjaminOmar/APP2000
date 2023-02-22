@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Card } from "react-bootstrap";
+im
 
 function LoginAndRegister() {
     // State for å holde på verdiene til skjemaene
