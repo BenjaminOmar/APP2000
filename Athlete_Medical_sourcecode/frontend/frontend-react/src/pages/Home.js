@@ -5,6 +5,7 @@ import HomeImage from '../components/HomeImage';
 import Popup from '../components/Newsletter';
 import HeaderNormal from '../components/HeaderNormal';
 import { Button } from 'react-bootstrap';
+import OurServices from '../components/OurServices';
 
 export function Home() {
     return (
@@ -13,7 +14,7 @@ export function Home() {
       <HeaderNormal/>
 
       <HomeImage/>
-       
+       <OurServices/>
           
        
       <Footer />
