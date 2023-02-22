@@ -1,30 +1,33 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import { Button, NavLink } from 'react-bootstrap';
+import './Header.css';
 
 
-function HeaderNormal() {
+function HeaderNormal () {
   return (
-    <nav>
-      <ul>
-        <li>
-        <Button style={{backgroundColor:'#0050B1'}}> {/*Button component is used to define the style of the button*/}
-            <Link to="/" style={{color: '#fff', textDecoration: 'none'}}> {/*Define the link to the Booking Page, set color of the text*/}
-                Hjem
-            </Link>             
-        </Button>
-          
-        </li>
-        <li>
-        <Button style={{backgroundColor:'#0050B1'}}> 
-            <Link to="/login " style={{color: '#fff', textDecoration: 'none'}}> {/*Define the link to the Booking Page, set color of the text*/}
-                Login
-            </Link>             
-        </Button>
-          
-        </li>
-      </ul>
-    </nav>
+    <Navbar className="navbar" expand="lg">
+      <Container>
+        <Navbar.Brand href="/" className='brand'> <img src='/images/footerImage.png' alt='Logo'/>
+              </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            
+            <NavLink to='/' className='list-item' activeClassName='active'>Hjem</NavLink>
+            <NavLink to='/' className='list-item' activeClassName='active'>Tjenester</NavLink>
+            <NavLink to='/' className='list-item' activeClassName='active'>Våre behandlere</NavLink>
+            <NavLink to='/' className='list-item' activeClassName='active'>Kontakt oss</NavLink>
+            
+            <Nav className='ms-auto'>
+                  <Button className='btn btn-success'>Logg inn</Button>
+                  </Nav>
+                 
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 
