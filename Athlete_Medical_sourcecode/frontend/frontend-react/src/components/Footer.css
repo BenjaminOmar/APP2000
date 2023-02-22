@@ -1,6 +1,6 @@
 /* Set the position of the footer to be at the bottom of the page */
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;

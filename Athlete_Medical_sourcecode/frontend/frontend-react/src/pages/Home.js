@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import HomeImage from '../components/HomeImage';
 import Popup from '../components/Newsletter';
@@ -19,6 +18,14 @@ export function Home() {
        
       <Footer />
       
+      <HomeImage/> 
+      <Button style={{backgroundColor:'#0050B1'}}> {/*Button component is used to define the style of the button*/}
+            <Link to="/Login " style={{color: '#fff', textDecoration: 'none'}}> {/*Define the link to the Booking Page, set color of the text*/}
+                Logg inn
+            </Link>             
+        </Button>
+       
+         
      </div>
   );
 }
