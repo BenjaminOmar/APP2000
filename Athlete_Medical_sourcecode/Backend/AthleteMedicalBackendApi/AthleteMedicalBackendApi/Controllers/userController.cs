@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AthleteMedicalBackendApi.Entities;
-using AthleteMedicalBackendApi.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -84,8 +83,6 @@ namespace AthleteMedicalBackendApi.Controllers
                 return BadRequest(new { Message = checkPassword });
             }
 
-
-            userObj.Password = PasswordHasher.HashPassword(userObj.Password!); // method for hashing the password, so it is not visible in the database
             await _context.Users.AddAsync(userObj); // adds the object
             await _context.SaveChangesAsync(); // stores it in the database
             return Ok(new { Message = "User registered" });
