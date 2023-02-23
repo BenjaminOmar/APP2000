@@ -8,7 +8,7 @@ function OurServices () {
   return (
 
     <>
-    <Container fluid>
+    <Container fluid style={{paddingTop: '50px'}}>
    <Row className="justify-content-md-center">
     <Card border="dark"style={{ width: '18rem'}}>
         <Card.Header>Våre tjenester</Card.Header>
