@@ -62,7 +62,7 @@ namespace AthleteMedicalBackendApi.Controllers
                 return BadRequest(new { Message = "Username already exists" });
             }
 
-            if (await CheckSecurityNumExistAsync(userObj.SocialSecurityNum)) 
+            if (await CheckSecurityNumExistAsync(userObj.SocialSecurityNum))
             {
                 return BadRequest(new { Message = "Social security number already exists" });
             }
