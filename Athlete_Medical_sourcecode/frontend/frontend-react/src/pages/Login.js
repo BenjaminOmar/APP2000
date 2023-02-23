@@ -7,7 +7,7 @@ export function Login() {
     return (
       <>
         <HeaderNormal/>
-        <HeaderImage/>
+       
         <LoginForm/> 
        </>
     );

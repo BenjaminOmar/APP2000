@@ -1,3 +1,8 @@
+//to do:
+// - endre avstand knapper
+// - lage om error meldingen til en onclick
+// - sjekke coocies
+
 import React, {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {Form, Button, Card} from 'react-bootstrap';
@@ -10,9 +15,12 @@ const LoginForm = () =>{
     const [username, setUsername] = useState(""); 
     const [password, setPassword] = useState(""); 
     const [errorMessage, setErrorMessage] = useState("");
-                    
-        event.preventDefault();
+    
+    // Handle the form submission
+    const handleLoginSubmit = (event) => {
+        event.preventDefault(); //Prevent the default form submit action
     }
+    
 
     //Send a POST request to the ASP.NET Core API with the login credentials
     fetch("/api/login", {
@@ -25,7 +33,7 @@ const LoginForm = () =>{
         .then ((response) => {
             if(!response.ok){
                 //If the response is not ok, set the error message to display to the user
-                throw new Error("Invalid username or password");
+                throw new Error("Ugyldig brukernavn eller passord");
             }
             return response.json();
         })
@@ -39,7 +47,7 @@ const LoginForm = () =>{
             //Handle any errors that occur during the request or response
             setErrorMessage(error.message);
         });
-
+    
 
 
 
@@ -64,6 +72,7 @@ return (
                 placeholder="Enter username"
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
+                required
                 />
             </Form.Group>
   
@@ -76,6 +85,7 @@ return (
                 placeholder="Password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
+                required
                 />
             </Form.Group>
   
@@ -90,5 +100,5 @@ return (
         </Card>
         </div>
   );
-};
+}
   export default LoginForm;
