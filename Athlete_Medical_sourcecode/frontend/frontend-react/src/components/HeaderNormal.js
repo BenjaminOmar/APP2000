@@ -4,13 +4,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Button, NavLink } from 'react-bootstrap';
 import './HeaderNormal.css';
 import { Link } from 'react-router-dom';
+import picture from '../images/footerImage.png'
+
 
 
 function HeaderNormal () {
   return (
     <Navbar className="navbar" expand="lg">
       <Container>
-        <Navbar.Brand href="/" className='brand'> <img src='../images/footerImage.png' alt='Logo'/>
+        <Navbar.Brand href="/" className='brand'> <img src={picture} alt='Logo'/>
               </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
