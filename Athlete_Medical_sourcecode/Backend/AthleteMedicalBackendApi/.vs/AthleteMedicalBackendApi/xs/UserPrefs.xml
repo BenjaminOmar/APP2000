@@ -1,30 +1,29 @@
 ﻿<Properties StartupConfiguration="{BEA6208D-AD0B-4D33-BFBB-CD4D922F1B4E}|https">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Controllers/userController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Program.cs">
     <Files>
       <File FileName="AthleteMedicalBackendApi/Context/App2000Context.cs" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/rolesController.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/rolesController.cs" />
       <File FileName="AthleteMedicalBackendApi/Program.cs" Line="20" Column="26" />
-      <File FileName="../../../../../../../../../../Users/benjamin/.microsoft/usersecrets/441bbebc-91eb-41a6-85a6-31cf76d086a7/secrets.json" Line="1" Column="1" />
+      <File FileName="../../../../../../../../../../Users/benjamin/.microsoft/usersecrets/441bbebc-91eb-41a6-85a6-31cf76d086a7/secrets.json" />
       <File FileName="AthleteMedicalBackendApi/Controllers/userController.cs" Line="109" Column="73" />
       <File FileName="AthleteMedicalBackendApi/Entities/Room.cs" />
-      <File FileName="AthleteMedicalBackendApi/Entities/Journalnote.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Journalnote.cs" />
       <File FileName="AthleteMedicalBackendApi/Entities/Journal.cs" />
-      <File FileName="AthleteMedicalBackendApi/Entities/Invoice.cs" Line="1" Column="1" />
-      <File FileName="AthleteMedicalBackendApi/Entities/Appointment.cs" Line="1" Column="1" />
-      <File FileName="AthleteMedicalBackendApi/Entities/City.cs" Line="1" Column="1" />
-      <File FileName="AthleteMedicalBackendApi/Entities/User.cs" Line="9" Column="22" />
-      <File FileName="AthleteMedicalBackendApi/appsettings.json" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Invoice.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Appointment.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/City.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/User.cs" />
+      <File FileName="AthleteMedicalBackendApi/appsettings.json" />
       <File FileName="AthleteMedicalBackendApi/Entities/Role.cs" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/journalController.cs" Line="1" Column="1" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/appointmentController.cs" Line="1" Column="1" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/roomController.cs" Line="1" Column="1" />
-      <File FileName="AthleteMedicalBackendApi/Properties/launchSettings.json" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/journalController.cs" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/appointmentController.cs" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/roomController.cs" />
+      <File FileName="AthleteMedicalBackendApi/Properties/launchSettings.json" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -35,16 +34,16 @@
                 <Node name="PackageDependencies" expanded="True" />
               </Node>
               <Node name="Context" expanded="True" />
-              <Node name="Controllers" expanded="True">
-                <Node name="userController.cs" selected="True" />
-              </Node>
+              <Node name="Controllers" expanded="True" />
               <Node name="Entities" expanded="True" />
               <Node name="Properties" expanded="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
