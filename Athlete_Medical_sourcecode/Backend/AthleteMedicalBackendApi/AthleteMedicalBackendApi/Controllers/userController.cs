@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AthleteMedicalBackendApi.Entities;
-using AthleteMedicalBackendApi.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -57,12 +57,12 @@ namespace AthleteMedicalBackendApi.Controllers
                 return BadRequest();
             }
 
-            if (await CheckUserNaneExistAsync(userObj.Username)) // returns an error if the username picked is already a used username
+            if (await CheckUserNaneExistAsync(userObj.Username))
             {
                 return BadRequest(new { Message = "Username already exists" });
             }
 
-            if (await CheckSecurityNumExistAsync(userObj.SocialSecurityNum)) // returns error if a user is already registered with the spesific social security number
+            if (await CheckSecurityNumExistAsync(userObj.SocialSecurityNum))
             {
                 return BadRequest(new { Message = "Social security number already exists" });
             }
@@ -77,32 +77,46 @@ namespace AthleteMedicalBackendApi.Controllers
                 return BadRequest(new { Message = "Email already exists" });
             }
 
+            var checkPassword = CheckPasswordStrength(userObj.Password);
+            if (!string.IsNullOrEmpty(checkPassword))
+            {
+                return BadRequest(new { Message = checkPassword });
+            }
 
-            userObj.Password = PasswordHasher.HashPassword(userObj.Password!); // method for hashing the password, so it is not visible in the database
             await _context.Users.AddAsync(userObj); // adds the object
             await _context.SaveChangesAsync(); // stores it in the database
             return Ok(new { Message = "User registered" });
         }
 
         // methods to check if registered unique values already exists
-        private async Task<bool> CheckUserNaneExistAsync(string username) // method for checking the username already exists
+        private async Task<bool> CheckUserNaneExistAsync(string username)
         {
             return await _context.Users.AnyAsync(x => x.Username == username);
         }
 
-        private async Task<bool> CheckSecurityNumExistAsync(int SecurityNum) // method for checking the social security number already exists
+        private async Task<bool> CheckSecurityNumExistAsync(int SecurityNum)
         {
             return await _context.Users.AnyAsync(x => x.SocialSecurityNum == SecurityNum);
         }
 
-        private async Task<bool> CheckPhoneNumberExistAsync(int phoneNumber) // method for checking the phone number already exists
+        private async Task<bool> CheckPhoneNumberExistAsync(int phoneNumber)
         {
             return await _context.Users.AnyAsync(x => x.PhoneNumber == phoneNumber);
         }
 
-        private async Task<bool> CheckEmailExistAsync(string email) // method for checking the email already exists
+        private async Task<bool> CheckEmailExistAsync(string email) 
         {
             return await _context.Users.AnyAsync(x => x.Email == email);
+        }
+
+        private string CheckPasswordStrength(string password)
+        {
+            StringBuilder sb = new StringBuilder();
+            if (password.Length < 8)
+            {
+                sb.Append("Minimum password length should be 8 characters");
+            }
+            return sb.ToString();
         }
     }
 }

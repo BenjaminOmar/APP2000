@@ -5,6 +5,11 @@ VisualStudioVersion = 25.0.1704.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AthleteMedicalBackendApi", "AthleteMedicalBackendApi\AthleteMedicalBackendApi.csproj", "{BEA6208D-AD0B-4D33-BFBB-CD4D922F1B4E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5C6A515B-3BBF-4E70-AE44-4A21D2B2B79E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
