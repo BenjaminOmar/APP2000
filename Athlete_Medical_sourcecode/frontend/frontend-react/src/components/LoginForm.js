@@ -1,6 +1,5 @@
 //to do:
-// endre avstand knapper
-// teste 
+// teste mot database, teste routing mot glemt passord og registrer bruker. 
 
 
 import React, {useState, useEffect} from 'react';
@@ -140,7 +139,7 @@ return (
                 <Form.Group style={{marginTop: '30px'}}>  
                     {/*Link components that takes the user to the forgot password page or register page */}
                     <Link to="/forgotPassword" style={{marginLeft:'50px'}}>Glemt passord?</Link>               
-                    <Link to="/Register" onClick={handleFlipCard} className="flipLink" style={{marginLeft:'50px'}}>Har du ikke bruker? Klikk her! </Link>
+                    <Link to="/register" onClick={handleFlipCard} className="flipLink" style={{marginLeft:'50px'}}>Har du ikke bruker? Klikk her! </Link>
                    
                 </Form.Group>
                 </Form>
