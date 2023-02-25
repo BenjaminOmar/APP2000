@@ -1,9 +1,9 @@
 //to do:
-// - endre avstand knapper
-// - sjekke coocies
+// endre avstand knapper
+// teste 
 
 
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {Form, Button, Card} from 'react-bootstrap';
 import Cookies from 'js-cookie';
@@ -15,8 +15,9 @@ const LoginForm = () =>{
     //Define the state variables for the login forms inputs and error message
     const [username, setUsername] = useState(""); 
     const [password, setPassword] = useState(""); 
-    const [showError, setShowError] = useState(false);
+    const [setShowError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [isFlipped, setIsFlipped] = useState(false);
     
     // Handle the form submission
     const handleLoginSubmit = (event) => {
@@ -86,8 +87,10 @@ const LoginForm = () =>{
             }
         }, [navigate]);
     
-
-
+        const handleFlipCard = () => {
+            setIsFlipped(!isFlipped);
+        }
+    
 
 return (
     <div className="d-flex justify-content-center align-items-start min-vh-100" style={{paddingTop: '200px', position:'relative'}}>
@@ -131,16 +134,14 @@ return (
                 </Form.Group>
   
                 {/* A Button component that submits the form */}
-                <Button variant="primary" type="submit" style={{marginTop: '15px', marginRight:'20px', backgroundColor:'#0050B1'}}>
+                <Button variant="primary" type="submit" style={{paddingLeft: '150px',paddingRight: '150px', marginTop: '30px', marginLeft:'50px', backgroundColor:'#0050B1'}}>
                     Logg Inn
-                </Button>
-                {/*Link components that takes the user to the forgot password page or register page */}
-                <Link to="/forgotPassword" style={{marginRight:'20px'}}>Glemt passord?</Link>
-                <Form.Group>                  
-                    <Form.Text style={{marginLeft:'110px'}}>
-                        Har du ikke bruker?
-                        <Link to="/Register" style={{marginLeft:'10px'}}>Klikk her! </Link>
-                    </Form.Text>
+                </Button>                
+                <Form.Group style={{marginTop: '30px'}}>  
+                    {/*Link components that takes the user to the forgot password page or register page */}
+                    <Link to="/forgotPassword" style={{marginLeft:'50px'}}>Glemt passord?</Link>               
+                    <Link to="/Register" onClick={handleFlipCard} className="flipLink" style={{marginLeft:'50px'}}>Har du ikke bruker? Klikk her! </Link>
+                   
                 </Form.Group>
                 </Form>
             </Card.Body>
