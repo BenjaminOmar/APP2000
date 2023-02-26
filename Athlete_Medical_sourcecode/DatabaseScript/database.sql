@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `app2000`.`user` (
   INDEX `fk_bruker_poststed_idx` (`zipCode` ASC) ,
   INDEX `fk_bruker_rolle1_idx` (`roleId` ASC) ,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
-  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC) ,
+  UNIQUE INDEX `Email_UNIQUE` (`email` ASC) ,
   UNIQUE INDEX `socialSecurityNum_UNIQUE` (`socialSecurityNum` ASC) ,
   UNIQUE INDEX `phoneNumber_UNIQUE` (`phoneNumber` ASC) ,
   CONSTRAINT `fk_bruker_poststed`
@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `app2000`.`appointment` (
   `roomId` INT NULL,
   `patientId` INT NOT NULL,
   `specialistId` INT NOT NULL,
+  `isAvailable` TINYINT NOT NULL,
   PRIMARY KEY (`appointmentId`),
   INDEX `fk_avtale_rom1_idx` (`roomId` ASC) ,
   INDEX `fk_avtale_bruker1_idx` (`patientId` ASC) ,
