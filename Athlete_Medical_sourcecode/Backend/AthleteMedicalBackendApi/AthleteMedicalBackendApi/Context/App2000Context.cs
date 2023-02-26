@@ -66,6 +66,9 @@ public partial class App2000Context : DbContext
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("datetime")
                 .HasColumnName("startTime");
+            entity.Property(e => e.isAvailable)
+                .HasColumnType("tinyint")
+                .HasColumnName("isAvailable");
 
             entity.HasOne(d => d.Patient).WithMany(p => p.AppointmentPatients)
                 .HasForeignKey(d => d.PatientId)
