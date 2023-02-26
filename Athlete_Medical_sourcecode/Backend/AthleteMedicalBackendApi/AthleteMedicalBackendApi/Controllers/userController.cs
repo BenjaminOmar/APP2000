@@ -79,7 +79,7 @@ namespace AthleteMedicalBackendApi.Controllers
                 return BadRequest(new { Message = "Phone number already exists" });
             }
 
-            if (await CheckEmailExistAsync(userObj.Email))
+            if (await CheckEmailExistAsync(userObj.Email!))
             {
                 return BadRequest(new { Message = "Email already exists" });
             }
