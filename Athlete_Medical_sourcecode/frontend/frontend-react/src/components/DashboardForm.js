@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import Cookies from "js-cookie";
+import HeaderNormal from "./HeaderNormal";
+import FutureAppointments from "./FutureAppointments";
 
-const Dashboard = () => {
+const DashboardForm = () => {
   // Define the state variables for the user and role
   const [user, setUser] = useState("");
   const [role, setRole] = useState("");
@@ -12,18 +14,19 @@ const Dashboard = () => {
   const location = useLocation();
 
   // Add a useEffect hook to get the user and role from cookies
-  useEffect(() => {
-    const roleCookie = Cookies.get("role");
-    const usernameCookie = Cookies.get("username");
+  
+  // useEffect(() => {
+  //   const roleCookie = Cookies.get("role");
+  //   const usernameCookie = Cookies.get("username");
 
-    // If there is no cookie with the user's role and username, navigate back to the login page
-    if (!roleCookie || !usernameCookie) {
-      window.location.href = "/login";
-    } else {
-      setRole(roleCookie);
-      setUser(usernameCookie);
-    }
-  }, [location]);
+  //   // If there is no cookie with the user's role and username, navigate back to the login page
+  //   if (!roleCookie || !usernameCookie) {
+  //     window.location.href = "/login";
+  //   } else {
+  //     setRole(roleCookie);
+  //     setUser(usernameCookie);
+  //   }
+  // }, [location]);
 
   // Handle the logout button click event
   const handleLogout = () => {
@@ -31,15 +34,20 @@ const Dashboard = () => {
     Cookies.remove("role");
     Cookies.remove("username");
 
-    // Navigate the user back to the login page
-    window.location.href = "/login";
+    // Navigate the user back to the home page
+    window.location.href = "/";
   };
 
   return (
+   <>
+    <HeaderNormal/>
+   
     <div className="d-flex justify-content-center align-items-center min-vh-100">
+    
       <div>
         <h2>Velkommen, {user}</h2>
         <p>Du har tilgang til følgende funksjoner:</p>
+          <FutureAppointments/>
         {role === "1" && (
           <ul>
             <li>Book time</li>
@@ -64,8 +72,8 @@ const Dashboard = () => {
           Logg ut
         </Button>
       </div>
-    </div>
+    </div></> 
   );
 };
 
-export default Dashboard;
+export default DashboardForm;
