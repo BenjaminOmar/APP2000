@@ -37,9 +37,16 @@ namespace AthleteMedicalBackendApi.Controllers
                 return BadRequest();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username && x.Password == userObj.Password); // finds the first object with the matching val
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username); // finds the first object with the matching val
+
+            bool isValidPassword = BCrypt.Net.BCrypt.Verify(userObj.Password, user!.Password);
 
             if (user == null)
+            {
+                return NotFound(new { Message = "User not found" });
+            }
+
+            if (!isValidPassword)
             {
                 return NotFound(new { Message = "User not found" });
             }
@@ -82,6 +89,8 @@ namespace AthleteMedicalBackendApi.Controllers
             {
                 return BadRequest(new { Message = checkPassword });
             }
+
+            userObj.Password = BCrypt.Net.BCrypt.HashPassword(userObj.Password);
 
             await _context.Users.AddAsync(userObj); // adds the object
             await _context.SaveChangesAsync(); // stores it in the database
