@@ -37,14 +37,23 @@ namespace AthleteMedicalBackendApi.Controllers
                 return BadRequest();
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username && x.Password == userObj.Password); // finds the first object with the matching val
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username); // finds the first object with the matching val
+
+            bool isValidPassword = BCrypt.Net.BCrypt.Verify(userObj.Password, user!.Password);
 
             if (user == null)
             {
                 return NotFound(new { Message = "User not found" });
             }
 
-            return Ok(new { Message = "Login sucsess" }); // if the users username and password are correct, the person will be routed at frontend
+            if (!isValidPassword)
+            {
+                return NotFound(new { Message = "User not found" });
+            }
+
+            var roleId = user.RoleId;
+
+            return Ok(new { Message = "Login sucsess", roleId }); // if the users username and password are correct, the person will be routed at frontend
 
         }
 
@@ -72,7 +81,7 @@ namespace AthleteMedicalBackendApi.Controllers
                 return BadRequest(new { Message = "Phone number already exists" });
             }
 
-            if (await CheckEmailExistAsync(userObj.Email))
+            if (await CheckEmailExistAsync(userObj.Email!))
             {
                 return BadRequest(new { Message = "Email already exists" });
             }
@@ -82,6 +91,8 @@ namespace AthleteMedicalBackendApi.Controllers
             {
                 return BadRequest(new { Message = checkPassword });
             }
+
+            userObj.Password = BCrypt.Net.BCrypt.HashPassword(userObj.Password);
 
             await _context.Users.AddAsync(userObj); // adds the object
             await _context.SaveChangesAsync(); // stores it in the database

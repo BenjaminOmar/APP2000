@@ -142,3 +142,4 @@
 /Applications/XAMPP/xamppfiles/htdocs/JavaskriptTuts/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/obj/Debug/net7.0/AthleteMedicalBackendApi.pdb
 /Applications/XAMPP/xamppfiles/htdocs/JavaskriptTuts/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/obj/Debug/net7.0/AthleteMedicalBackendApi.genruntimeconfig.cache
 /Applications/XAMPP/xamppfiles/htdocs/JavaskriptTuts/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/obj/Debug/net7.0/ref/AthleteMedicalBackendApi.dll
+/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/bin/Debug/net7.0/BCrypt.Net-Next.dll

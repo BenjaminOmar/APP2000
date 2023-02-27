@@ -17,6 +17,8 @@ public partial class Appointment
 
     public int SpecialistId { get; set; }
 
+    public int isAvailable { get; set; }
+
     public virtual User Patient { get; set; } = null!;
 
     public virtual Room? Room { get; set; }
