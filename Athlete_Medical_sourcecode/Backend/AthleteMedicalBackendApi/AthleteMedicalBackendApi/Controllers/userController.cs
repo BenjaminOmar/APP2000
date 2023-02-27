@@ -51,7 +51,9 @@ namespace AthleteMedicalBackendApi.Controllers
                 return NotFound(new { Message = "User not found" });
             }
 
-            return Ok(new { Message = "Login sucsess" }); // if the users username and password are correct, the person will be routed at frontend
+            var roleId = user.RoleId;
+
+            return Ok(new { Message = "Login sucsess", roleId }); // if the users username and password are correct, the person will be routed at frontend
 
         }
 
