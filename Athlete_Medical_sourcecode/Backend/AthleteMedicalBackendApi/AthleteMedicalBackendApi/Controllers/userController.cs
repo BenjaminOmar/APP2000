@@ -22,10 +22,19 @@ namespace AthleteMedicalBackendApi.Controllers
 
 
         // dummy method to check all the users in the database
-        [HttpGet("showall")]
-        public async Task<IEnumerable<User>> Get()
+        [HttpPost("check")]
+        public async Task<IActionResult> UserRegisterCheck([FromBody] User userObj)
         {
-            return await _context.Users.ToListAsync();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username);
+
+            if (user == null)
+            {
+                return Ok(new { Message = "No user Found" });
+            }
+            else
+            {
+                return BadRequest(new { Message = "Username already exists" });
+            }
         }
 
         // authenticates whetever the person logging in is an actual user
