@@ -20,34 +20,120 @@ namespace AthleteMedicalBackendApi.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAllAppointments()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var appointments = await _context.Appointments.ToListAsync();
+
+                return Ok(appointments);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving appointments from database");
+            }
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{AppointmentId}")]
+        public async Task<IActionResult> GetAppointment(int AppointmentId)
         {
-            return "value";
+            try
+            {
+                var appointment = await _context.Appointments.FindAsync(AppointmentId);
+
+                if (appointment == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(appointment);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving appointment record");
+            }
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> CreateAppointment([FromBody] Appointment appointment)
         {
+            try
+            {
+                if (appointment == null)
+                {
+                    return BadRequest();
+                }
+
+                _context.Appointments.Add(appointment);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetAppointment), new { id = appointment.AppointmentId }, appointment);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error creating appointment record");
+            }
         }
 
+
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut("{AppointmentId}")]
+        public async Task<IActionResult> UpdateAppointment(int AppointmentId, [FromBody] Appointment appointment)
         {
+            try
+            {
+                if (appointment == null || appointment.AppointmentId != AppointmentId)
+                {
+                    return BadRequest();
+                }
+
+                var existingAppointment = await _context.Appointments.FindAsync(AppointmentId);
+
+                if (existingAppointment == null)
+                {
+                    return NotFound();
+                }
+
+                existingAppointment.StartTime = appointment.StartTime;
+                existingAppointment.EndTime = appointment.EndTime;
+
+                await _context.SaveChangesAsync();
+
+                return Ok(existingAppointment);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error updating appointment record");
+            }
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("{AppointmentId}")]
+        public async Task<IActionResult> DeleteAppointment(int AppointmentId)
         {
+            try
+            {
+                var appointment = await _context.Appointments.FindAsync(AppointmentId);
+
+                if (appointment == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Appointments.Remove(appointment);
+
+                await _context.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error deleting appointment record");
+            }
         }
     }
 }
