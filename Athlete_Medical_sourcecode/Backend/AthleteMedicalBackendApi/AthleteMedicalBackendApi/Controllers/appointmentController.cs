@@ -34,6 +34,22 @@ namespace AthleteMedicalBackendApi.Controllers
             }
         }
 
+        // availableAppointments
+        [HttpGet("available")]
+        public async Task<IActionResult> GetAvailableAppointments()
+        {
+            try
+            {
+                var availableAppointments = await _context.Appointments.FromSqlInterpolated<Appointment>($"availableAppointments").ToListAsync();
+
+                return Ok(availableAppointments);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving available appointments from database");
+            }
+        }
+
         // GET api/values/5
         [HttpGet("{AppointmentId}")]
         public async Task<IActionResult> GetAppointment(int AppointmentId)

@@ -1,24 +1,36 @@
 ﻿<Properties StartupConfiguration="{BEA6208D-AD0B-4D33-BFBB-CD4D922F1B4E}|https">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Controllers/appointmentController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Controllers/roomController.cs">
     <Files>
-      <File FileName="../../../../../../../../../Users/warsame/.microsoft/usersecrets/441bbebc-91eb-41a6-85a6-31cf76d086a7/secrets.json" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/appointmentController.cs" Line="16" Column="6" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/appointmentController.cs" Line="27" Column="24" />
       <File FileName="AthleteMedicalBackendApi/Entities/Journal.cs" Line="1" Column="1" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/journalController.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/journalController.cs" Line="36" Column="1" />
       <File FileName="AthleteMedicalBackendApi/Controllers/userController.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/CityController.cs" Line="31" Column="14" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Invoice.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Journalnote.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Role.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Room.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/rolesController.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/roomController.cs" Line="22" Column="10" />
+      <File FileName="AthleteMedicalBackendApi/Entities/User.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Appointment.cs" Line="1" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Entities/City.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="AthleteMedicalBackendApi" expanded="True">
             <Node name="AthleteMedicalBackendApi" expanded="True">
-              <Node name="Controllers" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="roomController.cs" selected="True" />
+              </Node>
               <Node name="Entities" expanded="True" />
             </Node>
           </Node>
@@ -26,5 +38,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
