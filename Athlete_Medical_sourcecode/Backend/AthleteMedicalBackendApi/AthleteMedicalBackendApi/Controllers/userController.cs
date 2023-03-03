@@ -114,9 +114,9 @@ namespace AthleteMedicalBackendApi.Controllers
             return await _context.Users.AnyAsync(x => x.Username == username);
         }
 
-        private async Task<bool> CheckSecurityNumExistAsync(int SecurityNum)
+        private async Task<bool> CheckSecurityNumExistAsync(string SecurityNum)
         {
-            return await _context.Users.AnyAsync(x => x.SocialSecurityNum == SecurityNum);
+            return await _context.Users.AnyAsync(x => x.SocialSecurityNum.Equals(SecurityNum));
         }
 
         private async Task<bool> CheckPhoneNumberExistAsync(int phoneNumber)
