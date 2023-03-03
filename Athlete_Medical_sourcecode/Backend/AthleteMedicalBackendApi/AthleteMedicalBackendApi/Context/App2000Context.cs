@@ -65,7 +65,7 @@ public partial class App2000Context : DbContext
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("datetime")
                 .HasColumnName("startTime");
-            entity.Property(e => e.isAvailable)
+            entity.Property(e => e.IsAvailable)
                 .HasColumnType("tinyint")
                 .HasColumnName("isAvailable");
 

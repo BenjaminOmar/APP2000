@@ -43,10 +43,10 @@ namespace AthleteMedicalBackendApi.Controllers
         {
             if (userObj == null) // returns null if the user object does not contain anything
             {
-                return BadRequest();
+                return BadRequest(new { Message = "User not found"});
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username); // finds the first object with the matching val
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username); // finds the first object with the matching val   
 
             bool isValidPassword = BCrypt.Net.BCrypt.Verify(userObj.Password, user!.Password);
 
@@ -80,7 +80,7 @@ namespace AthleteMedicalBackendApi.Controllers
                 return BadRequest(new { Message = "Username already exists" });
             }
 
-            if (await CheckSecurityNumExistAsync(userObj.SocialSecurityNum))
+            if (await CheckSecurityNumExistAsync(userObj.SocialSecurityNum!))
             {
                 return BadRequest(new { Message = "Social security number already exists" });
             }
@@ -116,7 +116,7 @@ namespace AthleteMedicalBackendApi.Controllers
 
         private async Task<bool> CheckSecurityNumExistAsync(string SecurityNum)
         {
-            return await _context.Users.AnyAsync(x => x.SocialSecurityNum.Equals(SecurityNum));
+            return await _context.Users.AnyAsync(x => x.SocialSecurityNum!.Equals(SecurityNum));
         }
 
         private async Task<bool> CheckPhoneNumberExistAsync(int phoneNumber)
