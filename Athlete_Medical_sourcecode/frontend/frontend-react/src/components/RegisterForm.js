@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { Form, Button, Card, Modal, ModalHeader } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,7 +13,6 @@ const RegisterForm = () => {
 	const [ssn, setSsn] = useState("");
 	const [address, setAddress] = useState("");
 	const [zipCode, setZipCode] = useState("");
-	const [city, setCity] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [message, setMessage] = useState("");
@@ -23,35 +20,36 @@ const RegisterForm = () => {
 	const [showModal, setShowModal] = useState(false);
 	const [showFOrgotModal, setShowForgotModal] = useState(false);
 	const navigate = useNavigate();
-	
+
 	const apiUrl = process.env.REACT_APP_API_URL;
 
 	const CHECK_USER_URL = apiUrl + "/User/check";
 	const REGISTER_USER_URL = apiUrl + "/User/register";
 
-	//Handle form submit event		
+	//Handle form submit event
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
 		//Error handling
-		if(username.length < 5){
+		if (username.length < 5) {
 			setMessage("Brukernavnet må inneholde minst 5 karakterer");
 			setShowModal(true);
 			return;
 		}
-		if(!/^\d{11}$/.test(ssn) || !/^\d+$/.test(ssn) ){
+		if (!/^\d{11}$/.test(ssn) || !/^\d+$/.test(ssn)) {
 			setMessage("Personnummer må inneholde 11 tall");
 			setShowModal(true);
 			return;
 		}
-		if(zipCode.length !== 4){
-			setMessage("Postnummer må inneholde 4 tall")
+		if (zipCode.length !== 4) {
+			setMessage("Postnummer må inneholde 4 tall");
 			setShowModal(true);
 			return;
 		}
-		if (!/[a-zA-ZæøåÆØÅ]/.test(password) ||
-			!/[0-9]/.test(password)) {
-			setMessage("Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer");
+		if (!/[a-zA-ZæøåÆØÅ]/.test(password) || !/[0-9]/.test(password)) {
+			setMessage(
+				"Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer"
+			);
 			setShowModal(true);
 			return;
 		}
@@ -61,49 +59,63 @@ const RegisterForm = () => {
 			return;
 		}
 
+		checkZip(zipCode);
+
 		//Send input to server to check if user already exists, id user does not exist send information to database
 		try {
 			const response = await fetch(CHECK_USER_URL, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ username, ssn }),
-			});		
-			if (response.ok){ 
-			const registerResponse = await fetch(REGISTER_USER_URL, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-				username: username.trim(),
-				firstName: firstName.trim(),
-				middleName: middleName.trim(),
-				lastName: lastName.trim(),
-				email: email.trim(),
-				phone: phone.trim(),
-				ssn: ssn.trim(),
-				address: address.trim(),
-				zipCode: zipCode.trim(),
-				city: city.trim(),
-				password: password.trim(),
-				}),
-			});		
-			const data = await registerResponse.json();
-			setMessage(`Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}`);
-			setShowModal(true);
-			navigate.push("/login"); 
-		
-			//back to register
+				body: JSON.stringify({ username, ssn }),
+			});
+			if (response.ok) {
+				const registerResponse = await fetch(REGISTER_USER_URL, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						username: username.trim(),
+						firstName: firstName.trim(),
+						middleName: middleName.trim(),
+						lastName: lastName.trim(),
+						email: email.trim(),
+						phone: phone.trim(),
+						ssn: ssn.trim(),
+						address: address.trim(),
+						zipCode: zipCode.trim(),
+						password: password.trim(),
+					}),
+				});
+				const data = await registerResponse.json();
+				setMessage(
+					`Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}`
+				);
+				setShowModal(true);
+				navigate.push("/login");
+
+				//back to register
 			} else {
-			  const data = await response.json();
-			  setMessage(data.message);
-			  setShowModal(true);
+				const data = await response.json();
+				setMessage(data.message);
+				setShowModal(true);
 			}
-		  } catch (error) {
+		} catch (error) {
 			console.error(error);
 			setMessage("En feil oppstod under registrering av bruker.");
 			setShowModal(true);
-		  }
-		};
+		}
+	};
 
+	const checkZip = async (zipCode) => {
+		const response = await fetch("https://webapi.no/api/v1/zipcode/" + zipCode);
+		const data = await response.json();
+		this.setState({ totalReactPackages: data.total });
+
+		if (data.zipcode !== zipCode) {
+			setMessage("Zipkoden er ikke en gyldig Norsk zip");
+			setShowModal(true);
+			return;
+		}
+	};
 
 	//flipp card function
 	const handleFlipCard = () => {
@@ -115,10 +127,9 @@ const RegisterForm = () => {
 	};
 
 	// handle forgotten user/pswrd modal
-	const handleShowForgotModal = () =>{
+	const handleShowForgotModal = () => {
 		setShowForgotModal(true);
-	}
-
+	};
 
 	return (
 		<div
@@ -128,11 +139,11 @@ const RegisterForm = () => {
 			<Form onSubmit={handleSubmit}>
 				{/*Display error message if there is one*/}
 				{message && (
-  					<Modal show={showModal} onHide={() => setShowModal(false)} size='sm'>						
-						<ModalHeader closeButton onClick={handleClose}/> 
+					<Modal show={showModal} onHide={() => setShowModal(false)} size="sm">
+						<ModalHeader closeButton onClick={handleClose} />
 						<Modal.Body>{message}</Modal.Body>
-					</Modal>					
-				)}					
+					</Modal>
+				)}
 				<Card style={{ width: "500px", marginBottom: "50px" }}>
 					<Card.Header>
 						<h3> Registrer Bruker</h3>
@@ -227,19 +238,13 @@ const RegisterForm = () => {
 								required
 							/>
 						</Form.Group>
-						<Form.Group controlId="city" style={{ marginBottom: "15px" }}>
-							<Form.Label>Poststed:</Form.Label>
-							<Form.Control
-								type="text"
-								placeholder="Poststed"
-								value={city}
-								onChange={(e) => setCity(e.target.value)}
-								required
-							/>
-						</Form.Group>
 						<Form.Group controlId="password" style={{ marginBottom: "15px" }}>
-							<Form.Label style={{ marginBottom: "-5px" }}>Passord:
-								<p style={{ fontSize: '10px' }} > (minimum 8 karakterer, derav minimum en bokstav og ett tall)</p>
+							<Form.Label style={{ marginBottom: "-5px" }}>
+								Passord:
+								<p style={{ fontSize: "10px" }}>
+									{" "}
+									(minimum 8 karakterer, derav minimum en bokstav og ett tall)
+								</p>
 							</Form.Label>
 							<Form.Control
 								type="password"
@@ -271,11 +276,13 @@ const RegisterForm = () => {
 								marginLeft: "35px",
 								backgroundColor: "#0050B1",
 							}}>
-							Register Bruker							
+							Register Bruker
 						</Button>
 						<Form.Group style={{ marginTop: "30px" }}>
 							{/*Link components that takes the user to the forgot password page or login page */}
-							<Link onClick={handleShowForgotModal} style={{ marginLeft: "50px" }}>
+							<Link
+								onClick={handleShowForgotModal}
+								style={{ marginLeft: "50px" }}>
 								Glemt passord eller brukernavn?
 							</Link>
 							<Link
@@ -288,8 +295,7 @@ const RegisterForm = () => {
 						</Form.Group>
 					</Card.Body>
 				</Card>
-			</Form>			
-
+			</Form>
 		</div>
 	);
 };

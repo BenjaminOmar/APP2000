@@ -1,11 +1,7 @@
-
--- available appointments
-    availableAppointments
-
-    BEGIN
-        SELECT * FROM appointment WHERE isAvailable = 1;
-    END
-
-    CALL availableAppointments();
-
---
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `availableAppointments`()
+    READS SQL DATA
+BEGIN
+    SELECT * FROM appointment WHERE isAvailable = 1;
+END$$
+DELIMITER ;

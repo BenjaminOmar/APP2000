@@ -17,7 +17,6 @@ public partial class App2000Context : DbContext
 
     public virtual DbSet<Appointment> Appointments { get; set; }
 
-    public virtual DbSet<City> Cities { get; set; }
 
     public virtual DbSet<Invoice> Invoices { get; set; }
 
@@ -85,20 +84,6 @@ public partial class App2000Context : DbContext
                 .HasConstraintName("fk_avtale_bruker2");
         });
 
-        modelBuilder.Entity<City>(entity =>
-        {
-            entity.HasKey(e => e.ZipCode).HasName("PRIMARY");
-
-            entity.ToTable("city");
-
-            entity.Property(e => e.ZipCode)
-                .HasColumnType("int(11)")
-                .HasColumnName("zipCode");
-            entity.Property(e => e.CityName)
-                .HasMaxLength(45)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnName("cityName");
-        });
 
         modelBuilder.Entity<Invoice>(entity =>
         {
@@ -287,7 +272,8 @@ public partial class App2000Context : DbContext
                 .HasColumnType("int(11)")
                 .HasColumnName("roleId");
             entity.Property(e => e.SocialSecurityNum)
-                .HasColumnType("int(11)")
+                .HasColumnType("varchar(11)")
+                .HasColumnType("")
                 .HasColumnName("socialSecurityNum");
             entity.Property(e => e.Username)
                 .HasMaxLength(100)

@@ -15,16 +15,6 @@ CREATE SCHEMA IF NOT EXISTS `app2000` DEFAULT CHARACTER SET utf8 ;
 USE `app2000` ;
 
 -- -----------------------------------------------------
--- Table `app2000`.`city`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `app2000`.`city` (
-  `zipCode` INT NOT NULL,
-  `cityName` VARCHAR(45) NULL,
-  PRIMARY KEY (`zipCode`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `app2000`.`role`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `app2000`.`role` (
@@ -43,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `app2000`.`user` (
   `middleName` VARCHAR(45) NULL,
   `lastName` VARCHAR(70) NOT NULL,
   `phoneNumber` INT NULL,
-  `socialSecurityNum` INT(11) NOT NULL,
+  `socialSecurityNum` VARCHAR(11) NOT NULL,
   `adress` VARCHAR(45) NULL,
   `zipCode` INT NOT NULL,
   `roleId` INT NOT NULL,
@@ -52,17 +42,11 @@ CREATE TABLE IF NOT EXISTS `app2000`.`user` (
   `username` VARCHAR(100) NOT NULL,
   `email` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`userId`),
-  INDEX `fk_bruker_poststed_idx` (`zipCode` ASC) ,
   INDEX `fk_bruker_rolle1_idx` (`roleId` ASC) ,
   UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
   UNIQUE INDEX `Email_UNIQUE` (`email` ASC) ,
   UNIQUE INDEX `socialSecurityNum_UNIQUE` (`socialSecurityNum` ASC) ,
   UNIQUE INDEX `phoneNumber_UNIQUE` (`phoneNumber` ASC) ,
-  CONSTRAINT `fk_bruker_poststed`
-    FOREIGN KEY (`zipCode`)
-    REFERENCES `app2000`.`city` (`zipCode`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_bruker_rolle1`
     FOREIGN KEY (`roleId`)
     REFERENCES `app2000`.`role` (`roleId`)
@@ -90,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `app2000`.`appointment` (
   `startTime` DATETIME NULL,
   `endTime` DATETIME NULL,
   `roomId` INT NULL,
-  `patientId` INT NOT NULL,
+  `patientId` INT NULL,
   `specialistId` INT NOT NULL,
   `isAvailable` TINYINT NOT NULL,
   PRIMARY KEY (`appointmentId`),
