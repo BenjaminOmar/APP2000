@@ -1,11 +1,8 @@
-//Teste postnummer
-//endre error message til message. 
-//lage variabler for modal header og body
-//
+
 
 import React, { useState } from "react";
 import { Form, Button, Card, Modal, ModalHeader } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
 	// Declare state variables to hold user and messages
@@ -24,13 +21,17 @@ const RegisterForm = () => {
 	const [message, setMessage] = useState("");
 	const [isFlipped, setIsFlipped] = useState(false);
 	const [showModal, setShowModal] = useState(false);
+	const [showFOrgotModal, setShowForgotModal] = useState(false);
+	const navigate = useNavigate();
 	
 	const apiUrl = process.env.REACT_APP_API_URL;
 
-	//Handle form submit event
-	const handleSubmit = (event) => {
+	const CHECK_USER_URL = apiUrl + "/User/check";
+	const REGISTER_USER_URL = apiUrl + "/User/register";
+
+	//Handle form submit event		
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		
 
 		//Error handling
 		if(username.length < 5){
@@ -38,74 +39,72 @@ const RegisterForm = () => {
 			setShowModal(true);
 			return;
 		}
-
 		if(!/^\d{11}$/.test(ssn) || !/^\d+$/.test(ssn) ){
 			setMessage("Personnummer må inneholde 11 tall");
 			setShowModal(true);
 			return;
 		}
-
 		if(zipCode.length !== 4){
 			setMessage("Postnummer må inneholde 4 tall")
 			setShowModal(true);
 			return;
 		}
-
-
 		if (!/[a-zA-ZæøåÆØÅ]/.test(password) ||
 			!/[0-9]/.test(password)) {
 			setMessage("Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer");
 			setShowModal(true);
 			return;
 		}
-
 		if (password !== confirmPassword) {
 			setMessage("Passordene du har skrevet inn er ikke like");
 			setShowModal(true);
 			return;
 		}
 
-		//Send input to server to check if user already exists
-		fetch(apiUrl + "/User/check", {
+		//Send input to server to check if user already exists, id user does not exist send information to database
+		try {
+			const response = await fetch(CHECK_USER_URL, {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ username, ssn }),
-		})
-			.then((response) => {
-				if (response.ok) {
-					//User does not exist, submit registration
-					return fetch(apiUrl + "/User/register", {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							username: username.trim(),
-							firstName: firstName.trim(),
-							middleName: middleName.trim(),
-							lastName: lastName.trim(),
-							email: email.trim(),
-							phone: phone.trim(),
-							ssn: ssn.trim(),
-							address: address.trim(),
-							zipCode: zipCode.trim(),
-							password: password.trim(),
-						}),
-					});
-				} else {
-					//User already exists, show error message
-					setMessage("Brukernavn opptatt");
-					setShowModal(true);
-					return;
-				}
-			})
-			.then((response) => response.json())
-			.then((data) => {
-				setMessage("Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}");
-				setShowModal(true);
-				return;
-				//tilbake til login
-			  })
-			.catch((error) => console.error(error));
-	};
+			});		
+			if (response.ok){ 
+			const registerResponse = await fetch(REGISTER_USER_URL, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+				username: username.trim(),
+				firstName: firstName.trim(),
+				middleName: middleName.trim(),
+				lastName: lastName.trim(),
+				email: email.trim(),
+				phone: phone.trim(),
+				ssn: ssn.trim(),
+				address: address.trim(),
+				zipCode: zipCode.trim(),
+				city: city.trim(),
+				password: password.trim(),
+				}),
+			});		
+			const data = await registerResponse.json();
+			setMessage(`Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}`);
+			setShowModal(true);
+			navigate.push("/login"); 
+		
+			//back to register
+			} else {
+			  const data = await response.json();
+			  setMessage(data.message);
+			  setShowModal(true);
+			}
+		  } catch (error) {
+			console.error(error);
+			setMessage("En feil oppstod under registrering av bruker.");
+			setShowModal(true);
+		  }
+		};
+
+
 	//flipp card function
 	const handleFlipCard = () => {
 		setIsFlipped(!isFlipped);
@@ -114,6 +113,11 @@ const RegisterForm = () => {
 	const handleClose = () => {
 		setMessage("");
 	};
+
+	// handle forgotten user/pswrd modal
+	const handleShowForgotModal = () =>{
+		setShowForgotModal(true);
+	}
 
 
 	return (
@@ -271,7 +275,7 @@ const RegisterForm = () => {
 						</Button>
 						<Form.Group style={{ marginTop: "30px" }}>
 							{/*Link components that takes the user to the forgot password page or login page */}
-							<Link to="/forgotPassword" style={{ marginLeft: "50px" }}>
+							<Link onClick={handleShowForgotModal} style={{ marginLeft: "50px" }}>
 								Glemt passord eller brukernavn?
 							</Link>
 							<Link
