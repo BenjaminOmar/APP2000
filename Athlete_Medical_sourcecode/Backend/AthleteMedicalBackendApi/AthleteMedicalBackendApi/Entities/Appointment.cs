@@ -13,13 +13,13 @@ public partial class Appointment
 
     public int? RoomId { get; set; }
 
-    public int PatientId { get; set; }
+    public int? PatientId { get; set; }
 
     public int SpecialistId { get; set; }
 
-    public int isAvailable { get; set; }
+    public sbyte IsAvailable { get; set; }
 
-    public virtual User Patient { get; set; } = null!;
+    public virtual User? Patient { get; set; }
 
     public virtual Room? Room { get; set; }
 
