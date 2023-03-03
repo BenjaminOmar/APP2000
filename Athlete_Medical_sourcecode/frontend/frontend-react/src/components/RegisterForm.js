@@ -1,5 +1,10 @@
+//Teste postnummer
+//endre error message til message. 
+//lage variabler for modal header og body
+//
+
 import React, { useState } from "react";
-import { Form, Button, Alert, Card, Modal } from "react-bootstrap";
+import { Form, Button, Alert, Card, Modal, CloseButton } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const RegisterForm = () => {
@@ -16,7 +21,7 @@ const RegisterForm = () => {
 	const [city, setCity] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [errorMessage, setErrorMessage] = useState("");
+	const [message, setMessage] = useState("");
 	const [isFlipped, setIsFlipped] = useState(false);
 	const [showModal, setShowModal] = useState(false);
 
@@ -25,24 +30,39 @@ const RegisterForm = () => {
 	//Handle form submit event
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		//Error handling
+		if(username.length < 5){
+			setMessage("Brukernavnet må inneholde minst 5 karakterer");
+			setShowModal(true);
+			return;
+		}
+
+		if(!/^\d{11}$/.test(ssn) || !/^\d+$/.test(ssn) ){
+			setMessage("Personnummer må inneholde 11 tall");
+			setShowModal(true);
+			return;
+		}
+
+		if(zipCode.length !== 4 || !/^\d+$/.test(zipCode) ){
+			setMessage("Postnummer må inneholde 4 tall")
+		}
+
+
 		if (!/[a-zA-ZæøåÆØÅ]/.test(password) ||
 			!/[0-9]/.test(password)) {
-			setErrorMessage(
+			setMessage(
 				"Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer");
 			setShowModal(true);
 			return;
 		}
 
 		if (password !== confirmPassword) {
-			setErrorMessage("Passordene er ikke like");
-			setShowModal(true);
-			return;
+			setMessage("Passordene du har skrevet inn er ikke like");
+			
 		}
 
-
-		//Her må du få inn flere feilmeldinger.... Brukernavn, passord, personnummer, postnummer
-
-		//Send under input to server to check if user already exists
+		//Send input to server to check if user already exists
 		fetch(apiUrl + "/User/check", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -69,15 +89,16 @@ const RegisterForm = () => {
 					});
 				} else {
 					//User already exists, show error message
-					setErrorMessage("Brukernavn opptatt");
-					return Promise.reject("Bruker finnes fra før av");
+					setMessage("Brukernavn opptatt");
+					setShowModal(true);
+					return;
 				}
 			})
 			.then((response) => response.json())
 			.then((data) => {
-				setErrorMessage("");
+				setMessage("Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}");
 				setShowModal(true);
-				// setModalBody(`Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}`);
+				return;
 			  })
 			.catch((error) => console.error(error));
 	};
@@ -87,7 +108,7 @@ const RegisterForm = () => {
 	};
 	// close error message
 	const handleClose = () => {
-		setErrorMessage("");
+		setMessage("");
 	};
 
 	// Function that makes a GET request to the server with the postal code parameter, and updates the postal location in the state
@@ -103,21 +124,23 @@ const RegisterForm = () => {
 		  if (response.ok) {
 			return response.json();
 		  } else {
-			throw new Error("Ugyldig postnummer");
+			setMessage("Ugyldig postnummer");
+			setShowModal(true);
+			return;
 		  }
 		})
 		.then((data) => {
 		  	setCity(data.city);
-		  	setErrorMessage("");
+		  	setMessage("");
 		})
 		.catch((error) => {
 		  	setCity("");
-		  	setErrorMessage("Ugyldig postnummer");
+		  	setMessage("Ugyldig postnummer");
 		  	setShowModal(true);
 		});
 		} else {
 	  		setCity("");
-	  		setErrorMessage("");
+	  		setMessage("");
 		}
   	};
 
@@ -128,18 +151,13 @@ const RegisterForm = () => {
 			{/*A Card component from bootstrap-react that is used to display the Register form.*/}
 			<Form onSubmit={handleSubmit}>
 				{/*Display error message if there is one*/}
-				{errorMessage && (
-  					<Modal show={showModal} onHide={() => setShowModal(false)}>
-    					<Modal.Header style={{backgroundColor: '#ff9d80'}} closeButton>
-      						<Modal.Title>Feil</Modal.Title>
-    					</Modal.Header>
-    					<Modal.Body  >{errorMessage}</Modal.Body>
-    					<Modal.Footer>
-      						<Button style={{backgroundColor: "#0050B1"}} variant="secondary" onClick={handleClose}>
-        						Lukk
-      						</Button>
-    					</Modal.Footer>
-  					</Modal>
+				{message && (
+  					<Modal style={{width: '20'}} show={showModal} onHide={() => setShowModal(false)}>
+    					<Modal.Body  >
+							{message} 
+							<CloseButton onClick={handleClose}/> 
+						</Modal.Body>
+					</Modal>
 				)}					
 				<Card style={{ width: "500px", marginBottom: "50px" }}>
 					<Card.Header>
@@ -206,14 +224,12 @@ const RegisterForm = () => {
 							/>
 						</Form.Group>
 						<Form.Group controlId="ssn" style={{ marginBottom: "15px" }}>
-							<Form.Label>Personnummer, 12 tall:</Form.Label>
+							<Form.Label>Personnummer, 11 tall:</Form.Label>
 							<Form.Control
 								type="text"
 								placeholder="Personnummer"
 								value={ssn}
 								onChange={(e) => setSsn(e.target.value)}
-								maxLength="12"
-								minLength="12"
 								required
 							/>
 						</Form.Group>
@@ -234,7 +250,6 @@ const RegisterForm = () => {
 								placeholder="Postnummer"
 								// value={zipCode}
 								//onChange={handleZipcodeChange}
-								maxLength="4"
 								required
 							/>
 						</Form.Group>
@@ -282,11 +297,11 @@ const RegisterForm = () => {
 								marginLeft: "35px",
 								backgroundColor: "#0050B1",
 							}}>
-							Register Bruker
+							Register Bruker							
 						</Button>
 						<Form.Group style={{ marginTop: "30px" }}>
 							{/*Link components that takes the user to the forgot password page or login page */}
-							<Link to="/forgotPassword" style={{ marginLeft: "50px" }}>
+														<Link to="/forgotPassword" style={{ marginLeft: "50px" }}>
 								Glemt passord?
 							</Link>
 							<Link
