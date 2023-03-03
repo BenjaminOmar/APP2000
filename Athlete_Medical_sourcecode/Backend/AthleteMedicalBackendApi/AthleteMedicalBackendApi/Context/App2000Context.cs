@@ -273,7 +273,7 @@ public partial class App2000Context : DbContext
                 .HasColumnName("roleId");
             entity.Property(e => e.SocialSecurityNum)
                 .HasColumnType("varchar(11)")
-                .HasColumnType("")
+                
                 .HasColumnName("socialSecurityNum");
             entity.Property(e => e.Username)
                 .HasMaxLength(100)
