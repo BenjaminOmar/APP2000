@@ -25,7 +25,7 @@ namespace AthleteMedicalBackendApi.Controllers
         [HttpPost("check")]
         public async Task<IActionResult> UserRegisterCheck([FromBody] User userObj)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username && x.SocialSecurityNum == userObj.SocialSecurityNum);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username || x.SocialSecurityNum == userObj.SocialSecurityNum);
 
             if (user == null)
             {
