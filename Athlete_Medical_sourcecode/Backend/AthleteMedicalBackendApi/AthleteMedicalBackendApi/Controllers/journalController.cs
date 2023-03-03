@@ -20,9 +20,18 @@ namespace AthleteMedicalBackendApi.Controllers
 
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAllJournals()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var journals = await _context.Journals.ToListAsync();
+
+                return Ok(journals);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving journals from database");
+            }
         }
 
         // GET api/values/5

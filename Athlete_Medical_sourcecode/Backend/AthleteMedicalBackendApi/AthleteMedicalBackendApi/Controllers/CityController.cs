@@ -18,7 +18,7 @@ namespace AthleteMedicalBackendApi.Controllers
 
         public CityController(App2000Context context) => _context = context;
 
-        [HttpPost("getcity")]
+        [HttpPost("get")]
         public async Task<IActionResult> GetCityBasedOnZip([FromBody] City city)
         {
             var getCity = await _context.Cities.FirstOrDefaultAsync(x => x.ZipCode == city.ZipCode);
