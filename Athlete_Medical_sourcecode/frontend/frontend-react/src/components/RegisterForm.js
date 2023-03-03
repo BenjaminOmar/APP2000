@@ -4,11 +4,11 @@
 //
 
 import React, { useState } from "react";
-import { Form, Button, Alert, Card, Modal, CloseButton } from "react-bootstrap";
+import { Form, Button, Card, Modal, ModalHeader } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const RegisterForm = () => {
-	// Declare state variables to hold user and error messages
+	// Declare state variables to hold user and messages
 	const [username, setUsername] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [middleName, setMiddleName] = useState("");
@@ -17,19 +17,20 @@ const RegisterForm = () => {
 	const [phone, setPhone] = useState("");
 	const [ssn, setSsn] = useState("");
 	const [address, setAddress] = useState("");
-	const [zipCode, setZipcode] = useState("");
+	const [zipCode, setZipCode] = useState("");
 	const [city, setCity] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [message, setMessage] = useState("");
 	const [isFlipped, setIsFlipped] = useState(false);
 	const [showModal, setShowModal] = useState(false);
-
+	
 	const apiUrl = process.env.REACT_APP_API_URL;
 
 	//Handle form submit event
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		
 
 		//Error handling
 		if(username.length < 5){
@@ -44,22 +45,24 @@ const RegisterForm = () => {
 			return;
 		}
 
-		if(zipCode.length !== 4 || !/^\d+$/.test(zipCode) ){
+		if(zipCode.length !== 4){
 			setMessage("Postnummer må inneholde 4 tall")
+			setShowModal(true);
+			return;
 		}
 
 
 		if (!/[a-zA-ZæøåÆØÅ]/.test(password) ||
 			!/[0-9]/.test(password)) {
-			setMessage(
-				"Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer");
+			setMessage("Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer");
 			setShowModal(true);
 			return;
 		}
 
 		if (password !== confirmPassword) {
 			setMessage("Passordene du har skrevet inn er ikke like");
-			
+			setShowModal(true);
+			return;
 		}
 
 		//Send input to server to check if user already exists
@@ -99,6 +102,7 @@ const RegisterForm = () => {
 				setMessage("Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}");
 				setShowModal(true);
 				return;
+				//tilbake til login
 			  })
 			.catch((error) => console.error(error));
 	};
@@ -111,38 +115,6 @@ const RegisterForm = () => {
 		setMessage("");
 	};
 
-	// Function that makes a GET request to the server with the postal code parameter, and updates the postal location in the state
-	const handleZipcodeChange = (event) => {
-		const zipcode = event.target.value;
-		if (zipcode.length === 4) {
-	  	fetch(apiUrl + "/city/getcity", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ zipcode }),
-	  	})
-		.then((response) => {
-		  if (response.ok) {
-			return response.json();
-		  } else {
-			setMessage("Ugyldig postnummer");
-			setShowModal(true);
-			return;
-		  }
-		})
-		.then((data) => {
-		  	setCity(data.city);
-		  	setMessage("");
-		})
-		.catch((error) => {
-		  	setCity("");
-		  	setMessage("Ugyldig postnummer");
-		  	setShowModal(true);
-		});
-		} else {
-	  		setCity("");
-	  		setMessage("");
-		}
-  	};
 
 	return (
 		<div
@@ -152,12 +124,10 @@ const RegisterForm = () => {
 			<Form onSubmit={handleSubmit}>
 				{/*Display error message if there is one*/}
 				{message && (
-  					<Modal style={{width: '20'}} show={showModal} onHide={() => setShowModal(false)}>
-    					<Modal.Body  >
-							{message} 
-							<CloseButton onClick={handleClose}/> 
-						</Modal.Body>
-					</Modal>
+  					<Modal show={showModal} onHide={() => setShowModal(false)} size='sm'>						
+						<ModalHeader closeButton onClick={handleClose}/> 
+						<Modal.Body>{message}</Modal.Body>
+					</Modal>					
 				)}					
 				<Card style={{ width: "500px", marginBottom: "50px" }}>
 					<Card.Header>
@@ -248,8 +218,8 @@ const RegisterForm = () => {
 							<Form.Control
 								type="text"
 								placeholder="Postnummer"
-								// value={zipCode}
-								//onChange={handleZipcodeChange}
+								value={zipCode}
+								onChange={(e) => setZipCode(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -259,7 +229,7 @@ const RegisterForm = () => {
 								type="text"
 								placeholder="Poststed"
 								value={city}
-								readOnly
+								onChange={(e) => setCity(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -301,8 +271,8 @@ const RegisterForm = () => {
 						</Button>
 						<Form.Group style={{ marginTop: "30px" }}>
 							{/*Link components that takes the user to the forgot password page or login page */}
-														<Link to="/forgotPassword" style={{ marginLeft: "50px" }}>
-								Glemt passord?
+							<Link to="/forgotPassword" style={{ marginLeft: "50px" }}>
+								Glemt passord eller brukernavn?
 							</Link>
 							<Link
 								to="/login"
