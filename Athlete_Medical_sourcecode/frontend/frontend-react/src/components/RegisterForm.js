@@ -18,8 +18,9 @@ const RegisterForm = () => {
 	const [message, setMessage] = useState("");
 	const [isFlipped, setIsFlipped] = useState(false);
 	const [showModal, setShowModal] = useState(false);
-	const [showFOrgotModal, setShowForgotModal] = useState(false);
+	const [showForgotModal, setShowForgotModal] = useState(false);
 	const navigate = useNavigate();
+	const [totalReactPackages, setTotalReactPackages] = useState(0);
 
 	const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -59,35 +60,38 @@ const RegisterForm = () => {
 			return;
 		}
 
-		checkZip(zipCode);
+		checkZip(parseInt(zipCode), setMessage, setShowModal);
 
 		//Send input to server to check if user already exists, id user does not exist send information to database
 		try {
-			const response = await fetch(CHECK_USER_URL, {
+			const response = await fetch("https://localhost:7209/api/User/check", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({ username, ssn }),
 			});
 			if (response.ok) {
-				const registerResponse = await fetch(REGISTER_USER_URL, {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						username: username.trim(),
-						firstName: firstName.trim(),
-						middleName: middleName.trim(),
-						lastName: lastName.trim(),
-						email: email.trim(),
-						phone: phone.trim(),
-						ssn: ssn.trim(),
-						address: address.trim(),
-						zipCode: zipCode.trim(),
-						password: password.trim(),
-					}),
-				});
+				const registerResponse = await fetch(
+					"https://localhost:7209/api/User/register",
+					{
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							username: username.trim(),
+							firstName: firstName.trim(),
+							middleName: middleName.trim(),
+							lastName: lastName.trim(),
+							email: email.trim(),
+							phone: parseInt(phone.trim()),
+							ssn: parseInt(ssn.trim()),
+							address: address.trim(),
+							zipCode: parseInt(zipCode.trim()),
+							password: password.trim(),
+						}),
+					}
+				);
 				const data = await registerResponse.json();
 				setMessage(
-					`Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}`
+					"Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}"
 				);
 				setShowModal(true);
 				navigate.push("/login");
@@ -105,13 +109,15 @@ const RegisterForm = () => {
 		}
 	};
 
-	const checkZip = async (zipCode) => {
+	const checkZip = async (zipCode, setMessage, setShowModal) => {
 		const response = await fetch("https://webapi.no/api/v1/zipcode/" + zipCode);
 		const data = await response.json();
-		this.setState({ totalReactPackages: data.total });
+		setTotalReactPackages(data.total);
 
-		if (data.zipcode !== zipCode) {
-			setMessage("Zipkoden er ikke en gyldig Norsk zip");
+		if (data.data.zipCode !== zipCode) {
+			setMessage(
+				"Postkoden du har tastet inn er ikke en gylidig norsk postkode"
+			);
 			setShowModal(true);
 			return;
 		}

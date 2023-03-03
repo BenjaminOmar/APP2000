@@ -24,7 +24,7 @@ const LoginForm = () => {
 		event.preventDefault(); //Prevent the default form submit action
 		//Send a POST request to the ASP.NET Core API with the login credentials
 
-		fetch(apiUrl + "/api/User/authenticate", {
+		fetch("https://localhost:7209/api/User/authenticate", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -48,7 +48,7 @@ const LoginForm = () => {
 				Cookies.set("role", role);
 				Cookies.set("username", username);
 
-				//Navigate the user to different pages based on their role
+				// Navigate the user to different pages based on their role
 				// if (role === 1) {
 				// 	navigate("/userDashboard");
 				// } else if (role === 2) {

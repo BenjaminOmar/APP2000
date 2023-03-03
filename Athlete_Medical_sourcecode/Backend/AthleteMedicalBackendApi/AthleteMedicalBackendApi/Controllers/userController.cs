@@ -72,7 +72,7 @@ namespace AthleteMedicalBackendApi.Controllers
         {
             if (userObj == null)
             {
-                return BadRequest();
+                return BadRequest(new {Message = "test"});
             }
 
             if (await CheckUserNaneExistAsync(userObj.Username))
