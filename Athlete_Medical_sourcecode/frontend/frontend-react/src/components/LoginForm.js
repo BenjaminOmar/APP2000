@@ -48,14 +48,14 @@ const LoginForm = () => {
 				Cookies.set("role", role);
 				Cookies.set("username", username);
 
-				// Navigate the user to different pages based on their role
-				// if (role === 1) {
-				// 	navigate("/userDashboard");
-				// } else if (role === 2) {
-				// 	navigate("/specialistDashboard");
-				// } else if (role === 3) {
-				// 	navigate("/adminDashboard");
-				// }
+				//Navigate the user to different pages based on their role
+				if (role === 1) {
+					navigate("/dashboard");
+					 } else if (role === 2) {
+				 	navigate("/specialistDashboard");
+					} else if (role === 3) {
+					navigate("/adminDashboard");
+				 }
 			})
 
 			.catch((error) => {

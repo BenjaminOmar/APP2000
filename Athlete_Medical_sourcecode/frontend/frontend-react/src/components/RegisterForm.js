@@ -64,44 +64,32 @@ const RegisterForm = () => {
 
 		//Send input to server to check if user already exists, id user does not exist send information to database
 		try {
-			const response = await fetch("https://localhost:7209/api/User/check", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ username, ssn }),
-			});
-			if (response.ok) {
-				const registerResponse = await fetch(
-					"https://localhost:7209/api/User/register",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							username: username.trim(),
-							firstName: firstName.trim(),
-							middleName: middleName.trim(),
-							lastName: lastName.trim(),
-							email: email.trim(),
-							phone: parseInt(phone.trim()),
-							ssn: parseInt(ssn.trim()),
-							address: address.trim(),
-							zipCode: parseInt(zipCode.trim()),
-							password: password.trim(),
-						}),
-					}
-				);
-				const data = await registerResponse.json();
-				setMessage(
-					"Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}"
-				);
-				setShowModal(true);
-				navigate.push("/login");
-
-				//back to register
-			} else {
-				const data = await response.json();
-				setMessage(data.message);
-				setShowModal(true);
-			}
+			const registerResponse = await fetch(
+				"https://localhost:7209/api/User/register",
+				{
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						username: username.trim(),
+						firstName: firstName.trim(),
+						middleName: middleName.trim(),
+						lastName: lastName.trim(),
+						email: email.trim(),
+						phone: parseInt(phone.trim()),
+						ssn: parseInt(ssn.trim()),
+						address: address.trim(),
+						zipCode: parseInt(zipCode.trim()),
+						password: password.trim(),
+					}),
+				}
+			);
+			const data = await registerResponse.json();
+			setMessage(`Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}`);
+			setShowModal(true);
+			//Shows the user that the registration is successful with information about what har been registered in 5 sec and then navigates to login. 
+			setTimeout(() => {
+					navigate.push("/login");
+			}, 5000);			
 		} catch (error) {
 			console.error(error);
 			setMessage("En feil oppstod under registrering av bruker.");
