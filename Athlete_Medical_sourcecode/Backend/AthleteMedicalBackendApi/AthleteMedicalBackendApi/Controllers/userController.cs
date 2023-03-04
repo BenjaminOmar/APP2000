@@ -66,7 +66,7 @@ namespace AthleteMedicalBackendApi.Controllers
 
         }
 
-        // Creates a new user
+        // Creates a new user on register
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] User userObj)
         {
@@ -120,6 +120,67 @@ namespace AthleteMedicalBackendApi.Controllers
             }
 
 
+            userObj.RoleId = 1;
+
+            userObj.Password = BCrypt.Net.BCrypt.HashPassword(userObj.Password);
+
+            await _context.Users.AddAsync(userObj); // adds the object
+            await _context.SaveChangesAsync(); // stores it in the database
+            return Ok(new { Message = "Bruker registrert" });
+        }
+
+        // Creates a new user on register
+        [HttpPost("registerwithroles")]
+        public async Task<IActionResult> RegisterSpecialsOrAdmin([FromBody] User userObj)
+        {
+            if (userObj == null)
+            {
+                return BadRequest(new { Message = "Registeringen ble ikke sendt" });
+            }
+
+            if (await CheckUserNaneExistAsync(userObj.Username))
+            {
+                return BadRequest(new { Message = "Brukernavn finnes fra før av" });
+            }
+
+            if (await CheckSecurityNumExistAsync(userObj.SocialSecurityNum!))
+            {
+                return BadRequest(new { Message = "Personnummer finnes allerede fra før av" });
+            }
+
+            if (await CheckPhoneNumberExistAsync(userObj.PhoneNumber))
+            {
+                return BadRequest(new { Message = "Telefonnummer finnes allerede fra før av" });
+            }
+
+            if (await CheckEmailExistAsync(userObj.Email!))
+            {
+                return BadRequest(new { Message = "Mail finnes allerede fra før av" });
+            }
+
+            var checkUsername = CheckUsernameStrength(userObj.Username);
+            if (!string.IsNullOrEmpty(checkUsername))
+            {
+                return BadRequest(new { Message = checkUsername });
+            }
+
+            var checkSsn = CheckSsnStrength(userObj.SocialSecurityNum!);
+            if (!string.IsNullOrEmpty(checkSsn))
+            {
+                return BadRequest(new { Message = checkSsn });
+            }
+
+            var checkZip = CheckZipStrength(userObj.ZipCode.ToString());
+            if (!string.IsNullOrEmpty(checkZip))
+            {
+                return BadRequest(new { Message = checkZip });
+            }
+
+            var checkPassword = CheckPasswordStrength(userObj.Password);
+            if (!string.IsNullOrEmpty(checkPassword))
+            {
+                return BadRequest(new { Message = checkPassword });
+            }
 
 
             userObj.Password = BCrypt.Net.BCrypt.HashPassword(userObj.Password);
@@ -128,6 +189,7 @@ namespace AthleteMedicalBackendApi.Controllers
             await _context.SaveChangesAsync(); // stores it in the database
             return Ok(new { Message = "Bruker registrert" });
         }
+
 
         // methods to check if registered unique values already exists
         private async Task<bool> CheckUserNaneExistAsync(string username)

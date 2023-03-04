@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace AthleteMedicalBackendApi.Entities;
 
@@ -19,9 +20,10 @@ public partial class Appointment
 
     public sbyte IsAvailable { get; set; }
 
+    [JsonIgnore]
     public virtual User? Patient { get; set; }
-
+    [JsonIgnore]
     public virtual Room? Room { get; set; }
-
-    public virtual User Specialist { get; set; } = null!;
+    [JsonIgnore]
+    public virtual User? Specialist { get; set; }
 }
