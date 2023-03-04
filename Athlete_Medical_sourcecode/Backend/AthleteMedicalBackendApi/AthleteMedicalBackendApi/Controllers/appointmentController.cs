@@ -18,6 +18,8 @@ namespace AthleteMedicalBackendApi.Controllers
 
         public appointmentController(App2000Context context) => _context = context;
 
+
+
         // GET: api/values
         [HttpGet]
         public async Task<IActionResult> GetAllAppointments()
@@ -34,6 +36,8 @@ namespace AthleteMedicalBackendApi.Controllers
             }
         }
 
+
+
         // availableAppointments
         [HttpGet("available")]
         public async Task<IActionResult> GetAvailableAppointments()
@@ -49,6 +53,40 @@ namespace AthleteMedicalBackendApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving available appointments from database");
             }
         }
+
+
+        // bookAppointments
+        [HttpPut("book")]
+        public async Task<IActionResult> BookAvailableAppointments(int appId, int patId)
+        {
+            try
+            {
+                var appointment = await _context.Appointments.FirstOrDefaultAsync(x => x.AppointmentId == appId);
+
+                    // check if an appointment selected is actually a valid appointment
+                    if (appointment == null)
+                    {
+                        return NotFound(new { Message = "Valgt er ikke en avtale, som er registrert hos oss" });
+                    }
+
+                    // checks if the appointment is already booked
+                    if (appointment.IsAvailable == 0)
+                    {
+                        return BadRequest(new { Message = "Denne avtalen er allerede booket" });
+                    }
+
+                var bookAppointment = await _context.Database.ExecuteSqlInterpolatedAsync($"bookAppointment({patId}, {appId})");
+
+                    return Ok(new {Message = "Avtale registrert"});
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error booking an appointment");
+            }
+
+
+        }
+
 
         // GET api/values/5
         [HttpGet("{AppointmentId}")]
@@ -72,6 +110,8 @@ namespace AthleteMedicalBackendApi.Controllers
             }
         }
 
+
+
         // POST api/values
         [HttpPost]
         public async Task<IActionResult> CreateAppointment([FromBody] Appointment appointment)
@@ -93,6 +133,7 @@ namespace AthleteMedicalBackendApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error creating appointment record");
             }
         }
+
 
 
         // PUT api/values/5
@@ -125,6 +166,8 @@ namespace AthleteMedicalBackendApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error updating appointment record");
             }
         }
+
+
 
         // DELETE api/values/5
         [HttpDelete("{AppointmentId}")]
