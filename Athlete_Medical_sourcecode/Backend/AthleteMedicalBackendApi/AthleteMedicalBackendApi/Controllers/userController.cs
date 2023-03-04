@@ -21,22 +21,6 @@ namespace AthleteMedicalBackendApi.Controllers
         }
 
 
-        // dummy method to check all the users in the database
-        [HttpPost("check")]
-        public async Task<IActionResult> UserRegisterCheck([FromBody] User userObj)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username || x.SocialSecurityNum == userObj.SocialSecurityNum);
-
-            if (user == null)
-            {
-                return Ok(new { Message = "Bruker ikke funnet" });
-            }
-            else
-            {
-                return BadRequest(new { Message = "Brukernavn finnes fra før av" });
-            }
-        }
-
         // authenticates whetever the person logging in is an actual user
         [HttpPost("authenticate")]
         public async Task<IActionResult> Authenticate([FromBody] User userObj)
