@@ -27,7 +27,7 @@ function HeaderNormal () {
             </Nav>
             
             <Nav className='ms-auto'>
-            <Link to='/'> <Button className='btn btn-success'>Registrer</Button> </Link>     
+            <Link to='/register'> <Button className='btn btn-success'>Registrer</Button> </Link>     
             <Link to='/login'> <Button className='btn btn-success'>Logg inn</Button> </Link>
                   </Nav>
             
