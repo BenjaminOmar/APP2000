@@ -1,9 +1,11 @@
+//Hjem lenke virker ikke 
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Button, NavLink } from 'react-bootstrap';
+import { Button} from 'react-bootstrap';
 import './HeaderNormal.css';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import picture from '../images/footerImage.png'
 
 
@@ -18,8 +20,8 @@ function HeaderNormal () {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             
-            <NavLink to='/' className='list-item' activeClassName='active'>Hjem</NavLink>
-            <NavLink to='/' className='list-item' activeClassName='active'>Tjenester</NavLink>
+            <NavLink to='/' className='list-item' activeClassName='active'>Hjem</NavLink> 
+            <NavLink to='/services' className='list-item' activeClassName='active'>Tjenester</NavLink>
             <NavLink to='/' className='list-item' activeClassName='active'>Våre behandlere</NavLink>
             <NavLink to='/' className='list-item' activeClassName='active'>Kontakt oss</NavLink>
             </Nav>

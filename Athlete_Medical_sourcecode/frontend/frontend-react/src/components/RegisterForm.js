@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Card, Modal, ModalHeader } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const RegisterForm = () => {
 	// Declare state variables to hold user and messages
@@ -18,17 +19,23 @@ const RegisterForm = () => {
 	const [message, setMessage] = useState("");
 	const [isFlipped, setIsFlipped] = useState(false);
 	const [showModal, setShowModal] = useState(false);
-	const [showForgotModal, setShowForgotModal] = useState(false);
 	const navigate = useNavigate();
 	const [totalReactPackages, setTotalReactPackages] = useState(0);
 
-	const apiUrl = process.env.REACT_APP_API_URL;
-
-	const CHECK_USER_URL = apiUrl + "/User/check";
-	const REGISTER_USER_URL = apiUrl + "/User/register";
+	const handleUsernameChange = (value) => {setUsername(value);};
+	const handleFirstNameChange = (value) => {setFirstName(value);};
+	const handleMiddleNameChange = (value) => {setMiddleName(value);};
+	const handleLastNameChange = (value) => {setLastName(value);};
+	const handleEmailChange = (value) => {setEmail(value);};
+	const handlePhoneChange = (value) => {setPhone(value);};
+	const handleSsnChange = (value) => {setSsn(value);};
+	const handleAddressChange = (value) => {setAddress(value);};
+	const handleZipCodeChange = (value) => {setZipCode(value);};
+	const handlePasswordChange = (value) => {setPassword(value);};
 
 	//Handle form submit event
 	const handleSubmit = async (event) => {
+		//prevents the page from reloading when the form is submitted
 		event.preventDefault();
 
 		//Error handling
@@ -60,41 +67,72 @@ const RegisterForm = () => {
 			return;
 		}
 
+		//check if zipcode is in online api with zipCodes in Norway
 		checkZip(parseInt(zipCode), setMessage, setShowModal);
 
+		const data ={			
+			firstName: firstName.trim(),
+			middleName: middleName.trim(),
+			lastName: lastName.trim(),
+			phoneNumber: parseInt(phone.trim()),
+			socialSecurityNum: parseInt(ssn.trim()),
+			address: address.trim(),
+			zipCode: parseInt(zipCode.trim()),
+			password: password.trim(),
+			username: username.trim(),
+			email: email.trim(),
+		};
+		const apiUrl = process.env.REACT_APP_API_URL;
+		const REGISTER_USER_URL = apiUrl + "/User/register";
+			axios.post(REGISTER_USER_URL,data).then((result) =>{
+				setMessage(result.data);
+				setShowModal(true);					
+			}).catch((error) =>{
+				setMessage(error);
+				setShowModal(true);
+			})
+		
+	
+
+
+		
+
 		//Send input to server to check if user already exists, id user does not exist send information to database
-		try {
-			const registerResponse = await fetch(
-				"https://localhost:7209/api/User/register",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						username: username.trim(),
-						firstName: firstName.trim(),
-						middleName: middleName.trim(),
-						lastName: lastName.trim(),
-						email: email.trim(),
-						phone: parseInt(phone.trim()),
-						ssn: parseInt(ssn.trim()),
-						address: address.trim(),
-						zipCode: parseInt(zipCode.trim()),
-						password: password.trim(),
-					}),
-				}
-			);
-			const data = await registerResponse.json();
-			setMessage(`Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}`);
-			setShowModal(true);
-			//Shows the user that the registration is successful with information about what har been registered in 5 sec and then navigates to login. 
-			setTimeout(() => {
-					navigate.push("/login");
-			}, 5000);			
-		} catch (error) {
-			console.error(error);
-			setMessage("En feil oppstod under registrering av bruker.");
-			setShowModal(true);
-		}
+		
+		
+		
+		//try {
+		// 	const registerResponse = await fetch(
+		// 		"https://localhost:7209/api/User/register",
+		// 		{
+		// 			method: "POST",
+		// 			headers: { "Content-Type": "application/json" },
+		// 			body: JSON.stringify({
+		// 				firstName: firstName.trim(),
+			// 			middleName: middleName.trim(),
+			// 			lastName: lastName.trim(),
+			// 			phoneNumber: parseInt(phone.trim()),
+			// 			socialSecurityNum: parseInt(ssn.trim()),
+			// 			address: address.trim(),
+			// 			zipCode: parseInt(zipCode.trim()),
+			// 			password: password.trim(),
+			// 			username: username.trim(),
+			// 			email: email.trim(),
+		// 			}),
+		// 		}
+		// 	);
+		// 	const data = await registerResponse.json();
+		// 	setMessage(`Bruker registrert vellykket. Informasjon: ${JSON.stringify(data)}`);
+		// 	setShowModal(true);
+		// 	//Shows the user that the registration is successful with information about what har been registered in 5 sec and then navigates to login. 
+		// 	setTimeout(() => {
+		// 			navigate.push("/login");
+		// 	}, 5000);			
+		// } catch (error) {
+		// 	console.error(error);
+		// 	setMessage("En feil oppstod under registrering av bruker.");
+		// 	setShowModal(true);
+		// }
 	};
 
 	const checkZip = async (zipCode, setMessage, setShowModal) => {
@@ -121,9 +159,9 @@ const RegisterForm = () => {
 	};
 
 	// handle forgotten user/pswrd modal
-	const handleShowForgotModal = () => {
-		setShowForgotModal(true);
-	};
+	// const handleShowForgotModal = () => {
+	// 	setShowForgotModal(true);
+	// };
 
 	return (
 		<div
@@ -149,7 +187,7 @@ const RegisterForm = () => {
 								type="Text"
 								placeholder="Ønsket brukernavn"
 								value={username}
-								onChange={(e) => setUsername(e.target.value)}
+								onChange={(e) => handleUsernameChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -159,7 +197,7 @@ const RegisterForm = () => {
 								type="Text"
 								placeholder="Fornavn"
 								value={firstName}
-								onChange={(e) => setFirstName(e.target.value)}
+								onChange={(e) => handleFirstNameChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -169,7 +207,7 @@ const RegisterForm = () => {
 								type="Text"
 								placeholder="Mellomnavn"
 								value={middleName}
-								onChange={(e) => setMiddleName(e.target.value)}
+								onChange={(e) => handleMiddleNameChange(e.target.value)}
 							/>
 						</Form.Group>
 						<Form.Group controlId="lastName" style={{ marginBottom: "15px" }}>
@@ -178,7 +216,7 @@ const RegisterForm = () => {
 								type="Text"
 								placeholder="Etternavn"
 								value={lastName}
-								onChange={(e) => setLastName(e.target.value)}
+								onChange={(e) => handleLastNameChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -188,7 +226,7 @@ const RegisterForm = () => {
 								type="email"
 								placeholder="Epost"
 								value={email}
-								onChange={(e) => setEmail(e.target.value)}
+								onChange={(e) => handleEmailChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -198,7 +236,7 @@ const RegisterForm = () => {
 								type="tel"
 								placeholder="Telefonnummer"
 								value={phone}
-								onChange={(e) => setPhone(e.target.value)}
+								onChange={(e) => handlePhoneChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -208,7 +246,7 @@ const RegisterForm = () => {
 								type="text"
 								placeholder="Personnummer"
 								value={ssn}
-								onChange={(e) => setSsn(e.target.value)}
+								onChange={(e) => handleSsnChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -218,7 +256,7 @@ const RegisterForm = () => {
 								type="text"
 								placeholder="Adresse"
 								value={address}
-								onChange={(e) => setAddress(e.target.value)}
+								onChange={(e) => handleAddressChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -228,7 +266,7 @@ const RegisterForm = () => {
 								type="text"
 								placeholder="Postnummer"
 								value={zipCode}
-								onChange={(e) => setZipCode(e.target.value)}
+								onChange={(e) => handleZipCodeChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -244,7 +282,7 @@ const RegisterForm = () => {
 								type="password"
 								placeholder="Passord"
 								value={password}
-								onChange={(e) => setPassword(e.target.value)}
+								onChange={(e) => handlePasswordChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -256,7 +294,7 @@ const RegisterForm = () => {
 								type="password"
 								placeholder="Gjenta passord"
 								value={confirmPassword}
-								onChange={(e) => setConfirmPassword(e.target.value)}
+								onChange={(e) =>setConfirmPassword(e.target.value)}
 								required
 							/>
 						</Form.Group>
@@ -269,24 +307,28 @@ const RegisterForm = () => {
 								marginTop: "30px",
 								marginLeft: "35px",
 								backgroundColor: "#0050B1",
+								
 							}}>
 							Register Bruker
 						</Button>
 						<Form.Group style={{ marginTop: "30px" }}>
 							{/*Link components that takes the user to the forgot password page or login page */}
-							<Link
-								onClick={handleShowForgotModal}
+							<Link								
+								to="/forgotpwrduser"
 								style={{ marginLeft: "50px" }}>
 								Glemt passord eller brukernavn?
 							</Link>
+						</Form.Group>
+						<Form.Group style={{ marginTop: "10px" }}></Form.Group>
 							<Link
 								to="/login"
 								onClick={handleFlipCard}
 								className="flipLink"
 								style={{ marginLeft: "50px" }}>
-								Har du bruker? Klikk her!{" "}
+								Til logg inn{" "}
 							</Link>
-						</Form.Group>
+						
+						
 					</Card.Body>
 				</Card>
 			</Form>

@@ -5,8 +5,10 @@ import { Login } from "./pages/Login";
 import Register from "./pages/Register";
 import Footer from "./components/Footer"; // legg til import for Footer-komponenten
 import Dashboard from "./pages/Dashboard";
-import DashboardForm from "./components/DashboardForm";
-import AdminDashboard from "./components/AdminDashboard";
+import ForgotPwrdUser from "./components/ForgotPwrdUser";
+import TermsPrivacyPage from "./pages/TermsPrivacyPage";
+import Services from "./pages/Services";
+
 
 function App() {
 	return (
@@ -17,8 +19,10 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/dashboard" element={<Dashboard />} />
-					<Route path="/dashboardForm" element={<DashboardForm />} />
-					<Route path="/admindashboard" element={<AdminDashboard />} />
+					<Route path="/forgotpwrduser" element={<ForgotPwrdUser />}/>
+					<Route path="/termsprivacy" element={<TermsPrivacyPage />}/>
+					<Route path="/services" element={<Services/>}/>
+					
 				</Routes>
 				<Footer />
 			</BrowserRouter>
