@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import './OurServices.css';
+import { Link } from 'react-router-dom';
 
 function OurServices () {
   return (
@@ -17,7 +18,7 @@ function OurServices () {
         <Card.Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra volutpat mauris sed suscipit. 
         </Card.Text>  
-        <Card.Link href="#">Les mer her..</Card.Link>
+        <Link to="/">Les mer her..</Link>
       </Card.Body>
     </Card>
 
@@ -28,7 +29,7 @@ function OurServices () {
         <Card.Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra volutpat mauris sed suscipit. 
         </Card.Text>  
-        <Card.Link href="#">Les mer her..</Card.Link>
+        <Link to="/">Les mer her..</Link>
       </Card.Body>
     </Card>
 
@@ -39,7 +40,7 @@ function OurServices () {
         <Card.Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra volutpat mauris sed suscipit. 
         </Card.Text>  
-        <Card.Link href="#">Les mer her..</Card.Link>
+        <Link to="/">Les mer her..</Link>
       </Card.Body>
     </Card>
 
@@ -50,7 +51,7 @@ function OurServices () {
         <Card.Text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra volutpat mauris sed suscipit. 
         </Card.Text>  
-        <Card.Link href="#">Les mer her..</Card.Link>
+        <Link to="/">Les mer her..</Link>
       </Card.Body>
     </Card>
  </Row>

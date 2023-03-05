@@ -27,12 +27,10 @@ function HeaderNormal () {
             </Nav>
             
             <Nav className='ms-auto'>
-                <Button style={{backgroundColor:'#0050B1'}}>
-                  <Link to="/login " style={{color: '#fff', textDecoration: 'none'}}>
-                    Logg inn
-                  </Link>
-                </Button> 
+            <Link to='/'> <Button className='btn btn-success'>Registrer</Button> </Link>     
+            <Link to='/login'> <Button className='btn btn-success'>Logg inn</Button> </Link>
                   </Nav>
+            
                  
         </Navbar.Collapse>
       </Container>
