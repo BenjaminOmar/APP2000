@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Button, Card, Modal, ModalHeader } from "react-bootstrap";
 import Cookies from "js-cookie";
 
 //Define the login component
@@ -13,9 +13,10 @@ const LoginForm = () => {
 	//Define the state variables for the login forms inputs and error message
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [setShowError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [isFlipped, setIsFlipped] = useState(false);
+	const [showModal, setShowModal] = useState(false);
+
 
 	const apiUrl = process.env.RAECT_APP_API_URL;
 
@@ -34,13 +35,11 @@ const LoginForm = () => {
 			.then((response) => {
 				if (!response.ok) {
 					//If the response is not ok, set the error message to display to the user
-					setErrorMessage("Ugyldig brukernavn eller passord");
-					throw new Error("Ugyldig brukernavn eller passord");
+					setErrorMessage("Ugyldig brukernavn eller passord!");
+					setShowModal(true);					
 				}
 				return response.json();
-			})
-
-			.then((data) => {
+			}).then((data) => {
 				//If the response is successful, navigate to the user page
 				//Extract the 'role' property from the response data object
 				const role = data.roleId;
@@ -60,10 +59,11 @@ const LoginForm = () => {
 
 			.catch((error) => {
 				//Handle any errors that occur during the request or response
-				setErrorMessage(true);
 				setErrorMessage(error.message);
+				setShowModal(true);
 			});
 	};
+
 
 	//Add a useEffect hook to check for the cookie when the component mounts
 	useEffect(() => {
@@ -86,12 +86,15 @@ const LoginForm = () => {
 		setIsFlipped(!isFlipped);
 	};
 
+	// close error message
+	const handleClose = () => {
+		setErrorMessage("");
+	};
+
 	return (
-		<div
-			className="d-flex justify-content-center align-items-start min-vh-100"
-			style={{ paddingTop: "200px", position: "relative" }}>
+		<div className="d-flex justify-content-center align-items-start" style={{ paddingTop: "200px", position: "relative", marginBottom: "300px" }}>
 			{/*A Card component from bootstrap-react that is used to display the Login form.*/}
-			<Card style={{ width: "500px", marginBottom: "50px" }}>
+			<Card style={{ width: "500px" }}>
 				<Card.Header>
 					<h3>Logg Inn</h3> {/* A heading for the Login form */}
 				</Card.Header>
@@ -100,12 +103,10 @@ const LoginForm = () => {
 					<Form onSubmit={handleLoginSubmit}>
 						{/* Display the error message, if any */}
 						{errorMessage && (
-							<div>
-								{errorMessage}
-								<Button onClick={() => setShowError(false)}>
-									Skjul feilmelding
-								</Button>{" "}
-							</div>
+						<Modal show={showModal} onHide={() => setShowModal(false)} size="sm">
+						<ModalHeader closeButton onClick={handleClose} />
+						<Modal.Body>{errorMessage}</Modal.Body>
+					</Modal>
 						)}
 						{/* A Form.Group component that contains a Label and a Form.Control for the username */}
 						<Form.Group controlId="formBasicEmail">
