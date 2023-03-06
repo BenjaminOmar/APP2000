@@ -23,6 +23,7 @@
 .btn{
     background: #1D75BD !important;
     border: none;
+    margin-right: 10px;
 }
 
 .btn:hover{
