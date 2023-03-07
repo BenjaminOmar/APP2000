@@ -10,14 +10,14 @@ const Services = () => {
     <>
         <HeaderNormal/>
         <div className="treatments">
-        <Container style={{marginBottom: "50px"}}>
+        <Container style={{marginBottom: "50px", marginTop: "50px"}}>
             <Row className="justify-content-center">
                 <Col lg={8}>
-                    <h1 className="text-center mb-5">Våre behandlinger</h1>
+                    <h1 className="text-center mb-5">Våre tjenester</h1>
                 </Col>
             </Row>
-            <Row className="justify-content-center">
-                <Col lg={4} md={6} className="mb-4">
+            <Row>
+                <Col lg={3} className="mb-4">
                     <Card>
                         <Card.Img variant="top"  src={ortoped} alt = 'ortoped'/>
                         <Card.Body>
@@ -29,6 +29,7 @@ const Services = () => {
                                     <li>Røntgenundersøkelse av ledd og bein.</li>
                                     <li>Ultralydundersøkelse av muskler, sener og leddbånd.</li>
                                     <li>MR-undersøkelse for å avdekke skader på ledd, bein og bløtvev.</li>
+                                    
                                 </ul>
                                 <h5>Behandlinger:</h5>
                                 <ul>
@@ -41,13 +42,13 @@ const Services = () => {
                                 <p>
                                     Det er nødvendig å påpeke at det er mange ulike typer skader og plager som kan oppstå i 
                                     muskuloskeletalsystemet, og at utredning og behandling vil variere avhengig av pasientens 
-                                    individuelle tilstand og symptomer.
+                                    individuelle tilstand og symptomer.<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                                 </p>
                             </Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col lg={4} md={6} className="mb-4">
+                <Col lg={3} className="mb-4">
                     <Card>
                         <Card.Img variant="top"  src={fysikalskLege} alt = 'fysikalsk lege'/>
                         <Card.Body>
@@ -80,7 +81,7 @@ const Services = () => {
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col lg={4} md={6} className="mb-4">
+                <Col lg={3}className="mb-4">
                     <Card>
                         <Card.Img variant="top"  src={fysio} alt = 'fysioterapaut'/>
                         <Card.Body>
@@ -108,12 +109,12 @@ const Services = () => {
                                 <p>
                                     Det er essensiellt å merke seg at dette er bare noen få eksempler, og at fysioterapi 
                                     kan tilpasses individuelle pasientbehov.
-                                </p>
+                                </p><br/>
                             </Card.Text>
                         </Card.Body>
                     </Card>
                 </Col>
-                <Col lg={4} md={6} className="mb-4">
+                <Col lg={3} className="mb-4">
                     <Card>
                         <Card.Img variant="top"  src={nurse} alt = 'sykepleier'/>
                         <Card.Body>
@@ -128,7 +129,7 @@ const Services = () => {
                                     <li>Samarbeide med leger, fysioterapeuter og andre helsepersonell for å sikre at pasientene får best mulig behandling og oppfølging</li>
                                     <li>Hjelpe til med dokumentasjon og pasientjournaler, inkludert å registrere vitale tegn, medisiner og behandlinger.</li>
                                     <li>Gi støtte og omsorg til pasientene og deres pårørende, og hjelpe til med å håndtere eventuelle følelsesmessige utfordringer som kan oppstå i forbindelse med behandlingen</li>
-                                </ul>
+                                </ul><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                                 
                             </Card.Text>
                         </Card.Body>
