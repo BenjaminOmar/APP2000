@@ -21,7 +21,7 @@ const Services = () => {
                     <Card>
                         <Card.Img variant="top"  src={ortoped} alt = 'ortoped'/>
                         <Card.Body>
-                            <Card.Title> <h3 style={{marginLeft: "20pxS", marginBottom: '20px'}}>Otoped</h3></Card.Title>
+                            <Card.Title> <h3 style={{marginLeft: "20pxS", marginBottom: '20px'}}>Ortoped</h3></Card.Title>
                             <Card.Text>
                                 <h5>Utredninger:</h5>
                                 <ul>
