@@ -21,7 +21,7 @@ namespace AthleteMedicalBackendApi.Controllers
         public async Task<IEnumerable<Room>> Get()
         {
             return await _context.Rooms.ToListAsync();
-        } 
+        }
 
     }
 }

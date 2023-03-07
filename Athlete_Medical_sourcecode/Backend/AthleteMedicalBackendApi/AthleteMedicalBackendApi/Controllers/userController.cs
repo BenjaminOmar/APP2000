@@ -27,17 +27,18 @@ namespace AthleteMedicalBackendApi.Controllers
         {
             if (userObj == null) // returns null if the user object does not contain anything
             {
-                return BadRequest(new { Message = "Bruker ikke funnet"});
+                return BadRequest(new { Message = "Bruker ikke funnet" });
             }
 
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username); // finds the first object with the matching val   
 
-            bool isValidPassword = BCrypt.Net.BCrypt.Verify(userObj.Password, user!.Password);
 
             if (user == null)
             {
                 return NotFound(new { Message = "Bruker ikke funnet" });
             }
+
+            bool isValidPassword = BCrypt.Net.BCrypt.Verify(userObj.Password, user!.Password);
 
             if (!isValidPassword)
             {
@@ -56,7 +57,7 @@ namespace AthleteMedicalBackendApi.Controllers
         {
             if (userObj == null)
             {
-                return BadRequest(new {Message = "Registeringen ble ikke sendt"});
+                return BadRequest(new { Message = "Registeringen ble ikke sendt" });
             }
 
             if (await CheckUserNaneExistAsync(userObj.Username))
@@ -191,7 +192,7 @@ namespace AthleteMedicalBackendApi.Controllers
             return await _context.Users.AnyAsync(x => x.PhoneNumber == phoneNumber);
         }
 
-        private async Task<bool> CheckEmailExistAsync(string email) 
+        private async Task<bool> CheckEmailExistAsync(string email)
         {
             return await _context.Users.AnyAsync(x => x.Email == email);
         }

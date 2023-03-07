@@ -7,19 +7,13 @@ public partial class Journalnote
 {
     public int JournalnoteId { get; set; }
 
-    public DateTime Date { get; set; }
-
-    public TimeSpan Time { get; set; }
-
-    public int JournalId { get; set; }
-
-    public int SpecialistId { get; set; }
-
     public string? Journalnote1 { get; set; }
 
     public string? Heading { get; set; }
 
-    public virtual Journal Journal { get; set; } = null!;
+    public DateTime Created { get; set; }
 
-    public virtual User Specialist { get; set; } = null!;
+    public int Patient { get; set; }
+
+    public virtual User PatientNavigation { get; set; } = null!;
 }

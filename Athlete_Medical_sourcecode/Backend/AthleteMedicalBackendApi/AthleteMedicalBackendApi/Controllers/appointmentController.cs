@@ -62,21 +62,21 @@ namespace AthleteMedicalBackendApi.Controllers
             {
                 var appointment = await _context.Appointments.FirstOrDefaultAsync(x => x.AppointmentId == appId);
 
-                    // check if an appointment selected is actually a valid appointment
-                    if (appointment == null)
-                    {
-                        return NotFound(new { Message = "Valgt er ikke en avtale, som er registrert hos oss" });
-                    }
+                // check if an appointment selected is actually a valid appointment
+                if (appointment == null)
+                {
+                    return NotFound(new { Message = "Valgt er ikke en avtale, som er registrert hos oss" });
+                }
 
-                    // checks if the appointment is already booked
-                    if (appointment.IsAvailable == 0)
-                    {
-                        return BadRequest(new { Message = "Denne avtalen er allerede booket" });
-                    }
+                // checks if the appointment is already booked
+                if (appointment.IsAvailable == 0)
+                {
+                    return BadRequest(new { Message = "Denne avtalen er allerede booket" });
+                }
 
                 var bookAppointment = await _context.Database.ExecuteSqlInterpolatedAsync($"bookAppointment({patId}, {appId})");
 
-                    return Ok(new {Message = "Avtale registrert"});
+                return Ok(new { Message = "Avtale registrert" });
             }
             catch (Exception)
             {

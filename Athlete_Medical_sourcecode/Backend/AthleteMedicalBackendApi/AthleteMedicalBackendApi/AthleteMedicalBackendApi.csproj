@@ -31,10 +31,12 @@
     <None Remove="Context\" />
     <None Remove="ClipsHashAndSalt" />
     <None Remove="BCrypt.Net-Next" />
+    <None Remove="Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Context\" />
+    <Folder Include="Entities\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />

@@ -41,8 +41,7 @@ public partial class User
     [JsonIgnore]
     public virtual ICollection<Journalnote> Journalnotes { get; } = new List<Journalnote>();
     [JsonIgnore]
-    public virtual ICollection<Journal> Journals { get; } = new List<Journal>();
-    [JsonIgnore]
     public virtual ICollection<Role> Role { get; } = new List<Role>();
 
 }
+
