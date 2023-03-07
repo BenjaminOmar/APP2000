@@ -11,41 +11,42 @@ const Footer = () =>{
             <Link to= '/'>
               <Image src={footerImage}  alt='Company Logo'/>
             </Link>         
-            <p> "Vår profesjonalitet er din trygghet.<br/>Ta kontakt for en uforpliktene konsultasjon".</p>
+            <p> "Vår profesjonalitet er din trygghet".</p>
           </Col>
-          <Col md='2' lg='2' xl='2' className='mx-auto mb-4'>
-            <h6 className='text-uppercase fw-bold mb-4'>Overskrift</h6>
+          <Col md='2' lg='2' xl='2' className='mx-auto mb-4' >
+            {/* <h6 className='text-uppercase fw-bold mb-4'>Overskrift</h6> */}
+            <br/>
             <p>
               <Link to="/" className='text-reset'>
-                Lenke?
+                Våre behandlere
               </Link>              
             </p>
             <p>
-                <Link to="/" className='text-reset'>
-                    Lenke?
+                <Link to="/services" className='text-reset'>
+                    Tjenester
                 </Link> 
             </p>          
           </Col>
           <Col md='3' lg='2' xl='2' className='mx-auto mb-4'>
-            <h6 className='text-uppercase fw-bold mb-4'>Nyttige Lenker</h6>
+          <br/>
             <p>
                 <Link to="/termsprivacy" className='text-reset'>
-                    Vilkår
+                    Vilkår og personvern
                 </Link>  
             </p>
             <p>
-                <Link to="/termsprivacy" className='text-reset'>
-                    Personvern
+                <Link to="/contact" className='text-reset'>
+                    Kontakt oss
                 </Link> 
             </p>
            
           </Col>
 
           <Col md='4' lg='3' xl='3' className='mx-auto mb-md-0 mb-4'>
-            <h6 className='text-uppercase fw-bold mb-4'>Kontakt oss</h6>
+          <br/>
             <p>
               <i className='fas fa-home me-3'></i>
-              Kongens gate 21a, 0153 Oslo
+              Kongens gate 21A, 0153 Oslo
             </p>
             <p>
               <i className='fas fa-envelope me-3'></i>
