@@ -1,3 +1,7 @@
+//This code defines a a functional component 'CookiesModal' Its purpose is to display a modal window with information about 
+//cookies and give the user the option to either accept or decline the use of cookies in the webb application. 
+//
+
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 
@@ -31,8 +35,10 @@ const CookiesModal = () => {
     localStorage.setItem("cookiesAccepted", false);
     // redirect the user to a different page
     };
+
   // render the modal component
   return (
+    //show and hide the modal props
     <Modal show={show} onHide={handleAccept}>
       <Modal.Header closeButton>
         <Modal.Title>Informasjonskapsler</Modal.Title>
@@ -59,4 +65,5 @@ const CookiesModal = () => {
   );
 };
 
+//allows the modal to be used in other part of the codebase. 
 export  {CookiesModal};
