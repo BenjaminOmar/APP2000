@@ -17,8 +17,6 @@ public partial class App2000Context : DbContext
 
     public virtual DbSet<Appointment> Appointments { get; set; }
 
-    public virtual DbSet<Invoice> Invoices { get; set; }
-
     public virtual DbSet<Journalnote> Journalnotes { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
@@ -82,43 +80,7 @@ public partial class App2000Context : DbContext
                 .HasConstraintName("fk_avtale_bruker2");
         });
 
-        modelBuilder.Entity<Invoice>(entity =>
-        {
-            entity.HasKey(e => e.InvoiceId).HasName("PRIMARY");
-
-            entity.ToTable("invoice");
-
-            entity.HasIndex(e => e.UserId, "fk_faktura_bruker1_idx");
-
-            entity.Property(e => e.InvoiceId)
-                .HasColumnType("int(11)")
-                .HasColumnName("invoiceId");
-            entity.Property(e => e.AgreementDate)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnType("date")
-                .HasColumnName("agreementDate");
-            entity.Property(e => e.PaidDate)
-                .HasMaxLength(45)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnName("paidDate");
-            entity.Property(e => e.SendtDate)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnType("date")
-                .HasColumnName("sendtDate");
-            entity.Property(e => e.Sum)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnType("int(11)")
-                .HasColumnName("sum");
-            entity.Property(e => e.UserId)
-                .HasColumnType("int(11)")
-                .HasColumnName("userId");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Invoices)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_faktura_bruker1");
-        });
-
+        
         modelBuilder.Entity<Journalnote>(entity =>
         {
             entity.HasKey(e => e.JournalnoteId).HasName("PRIMARY");
