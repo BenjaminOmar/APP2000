@@ -100,62 +100,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `app2000`.`journal`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `app2000`.`journal` (
-  `journalId` INT NOT NULL AUTO_INCREMENT,
-  `patientId` INT NOT NULL,
-  PRIMARY KEY (`journalId`),
-  INDEX `fk_Journal_bruker1_idx` (`patientId` ASC) ,
-  CONSTRAINT `fk_Journal_bruker1`
-    FOREIGN KEY (`patientId`)
-    REFERENCES `app2000`.`user` (`userId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `app2000`.`journalnote`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `app2000`.`journalnote` (
   `journalnoteId` INT NOT NULL AUTO_INCREMENT,
-  `date` DATE NOT NULL,
-  `time` TIME NOT NULL,
-  `journalId` INT NOT NULL,
-  `specialistId` INT NOT NULL,
   `journalnote` VARCHAR(3000) NULL,
   `heading` VARCHAR(150) NULL,
+  `created` DATETIME NOT NULL,
+  `patient` INT NOT NULL,
   PRIMARY KEY (`journalnoteId`),
-  INDEX `fk_journalnotat_Journal1_idx` (`journalId` ASC) ,
-  INDEX `fk_journalnotat_bruker1_idx` (`specialistId` ASC) ,
-  CONSTRAINT `fk_journalnotat_Journal1`
-    FOREIGN KEY (`journalId`)
-    REFERENCES `app2000`.`journal` (`journalId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_journalnotat_bruker1`
-    FOREIGN KEY (`specialistId`)
-    REFERENCES `app2000`.`user` (`userId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `app2000`.`invoice`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `app2000`.`invoice` (
-  `invoiceId` INT NOT NULL,
-  `agreementDate` DATE NULL,
-  `sum` INT NULL,
-  `sendtDate` DATE NULL,
-  `paidDate` VARCHAR(45) NULL,
-  `userId` INT NOT NULL,
-  PRIMARY KEY (`invoiceId`),
-  INDEX `fk_faktura_bruker1_idx` (`userId` ASC) ,
-  CONSTRAINT `fk_faktura_bruker1`
-    FOREIGN KEY (`userId`)
+  INDEX `fk_journalnote_user1_idx` (`patient` ASC) ,
+  CONSTRAINT `fk_journalnote_user1`
+    FOREIGN KEY (`patient`)
     REFERENCES `app2000`.`user` (`userId`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

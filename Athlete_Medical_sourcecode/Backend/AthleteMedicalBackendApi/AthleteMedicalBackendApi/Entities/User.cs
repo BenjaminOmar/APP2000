@@ -37,8 +37,6 @@ public partial class User
     [JsonIgnore]
     public virtual ICollection<Appointment> AppointmentSpecialists { get; } = new List<Appointment>();
     [JsonIgnore]
-    public virtual ICollection<Invoice> Invoices { get; } = new List<Invoice>();
-    [JsonIgnore]
     public virtual ICollection<Journalnote> Journalnotes { get; } = new List<Journalnote>();
     [JsonIgnore]
     public virtual ICollection<Role> Role { get; } = new List<Role>();
