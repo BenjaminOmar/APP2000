@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AthleteMedicalBackendApi.Entities;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -74,19 +76,19 @@ namespace AthleteMedicalBackendApi.Controllers
                     return BadRequest(new { Message = "Denne avtalen er allerede booket" });
                 }
 
-                var bookAppointment = await _context.Database.ExecuteSqlInterpolatedAsync($"bookAppointment({patId}, {appId})");
+                await _context.Database.ExecuteSqlInterpolatedAsync($"bookAppointment({appId},{patId})");
 
                 return Ok(new { Message = "Avtale registrert" });
-            }
+        }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error ved booking av en time");
-            }
+                return StatusCode(StatusCodes.Status500InternalServerError);
+    }
 
-        }
+}
 
-        // specialist create an appointment
-        [HttpPost("create")]
+// specialist create an appointment
+[HttpPost("create")]
         public async Task<IActionResult> RegisterAppointment([FromBody] Appointment appointment)
         {
             if (appointment == null)
@@ -129,29 +131,51 @@ namespace AthleteMedicalBackendApi.Controllers
 
 
         // alter appointment based on id
-        [HttpPut("{AppointmentId}")]
-        public async Task<IActionResult> UpdateAppointment(int AppointmentId, [FromBody] Appointment appointment)
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateAppointment([FromBody] Appointment appointment)
         {
             try
             {
-                if (appointment == null || appointment.AppointmentId != AppointmentId)
+
+                var appointmentId = await _context.Appointments.FirstOrDefaultAsync(x => x.AppointmentId == appointment.AppointmentId);
+                if (appointment == null)
                 {
                     return BadRequest();
                 }
 
-                var existingAppointment = await _context.Appointments.FindAsync(AppointmentId);
+                var existingAppointment = await _context.Appointments.FindAsync(appointment.AppointmentId);
 
                 if (existingAppointment == null)
                 {
-                    return NotFound();
+                    return NotFound(new { Message = "Valgte avtale er ikke en avtale hos oss" });
                 }
 
-                existingAppointment.StartTime = appointment.StartTime;
-                existingAppointment.EndTime = appointment.EndTime;
+                var room = await _context.Rooms.FindAsync(appointment.RoomId);
 
-                await _context.SaveChangesAsync();
+                if (room == null)
+                {
+                    return NotFound(new { Message = "Dette romnummeret finnes ikke" });
+                }
 
-                return Ok(existingAppointment);
+                var patient = await _context.Users.FindAsync(appointment.PatientId);
+
+                if (patient == null)
+                {
+                    return NotFound(new { Message = "Valgt pasient finnes ikke" });
+                }
+
+                var specialist = await _context.Users.FindAsync(appointment.SpecialistId);
+
+                if (specialist == null)
+                {
+                    return NotFound(new { Message = "valgt spesialist finnes ikke" });
+                }
+
+
+                await _context.Database.ExecuteSqlInterpolatedAsync($"alterAppointment({appointment.AppointmentId},{appointment.StartTime},{appointment.EndTime},{appointment.RoomId},{appointment.PatientId},{appointment.SpecialistId},{appointment.IsAvailable})");
+
+                return Ok(new { Message = "Avtale er endret" });
+
             }
             catch (Exception)
             {
