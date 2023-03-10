@@ -7,6 +7,15 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- list of all specialists
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `specialists`()
+    READS SQL DATA
+BEGIN
+    SELECT * FROM user WHERE roleId = 2;
+END$$
+DELIMITER ;
+
 -- book an appointment
 DELIMITER $$
 CREATE DEFINER=`root`@`%` PROCEDURE `bookAppointment`(IN `appId` INT UNSIGNED, IN `patId` INT)

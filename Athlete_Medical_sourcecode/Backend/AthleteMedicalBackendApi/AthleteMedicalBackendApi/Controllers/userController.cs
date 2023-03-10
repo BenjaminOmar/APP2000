@@ -20,6 +20,21 @@ namespace AthleteMedicalBackendApi.Controllers
             _context = app2000Context;
         }
 
+        [HttpGet("specialists")]
+        public async Task<IActionResult> GetSpecialists()
+        {
+            try
+            {
+                var specialists = await _context.Users.FromSqlInterpolated<User>($"specialists").ToListAsync();
+
+                return Ok(specialists);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
 
         // authenticates whetever the person logging in is an actual user
         [HttpPost("authenticate")]
