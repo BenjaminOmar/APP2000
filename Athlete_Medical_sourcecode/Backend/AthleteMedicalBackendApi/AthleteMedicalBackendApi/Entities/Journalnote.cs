@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace AthleteMedicalBackendApi.Entities;
 
@@ -15,5 +16,6 @@ public partial class Journalnote
 
     public int Patient { get; set; }
 
-    public virtual User PatientNavigation { get; set; } = null!;
+    [JsonIgnore]
+    public virtual User? PatientNavigation { get; set; }
 }
