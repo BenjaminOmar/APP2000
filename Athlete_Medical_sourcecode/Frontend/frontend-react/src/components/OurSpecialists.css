@@ -6,6 +6,7 @@
     margin: 20px;
     overflow: hidden;
     border-radius: 5%;
+    justify-content: center;
   }
   
   h2 {
