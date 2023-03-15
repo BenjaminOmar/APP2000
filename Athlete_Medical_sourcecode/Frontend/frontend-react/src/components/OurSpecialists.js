@@ -11,7 +11,7 @@ function OurSpecialists() {
   return (
 
 <div>
-  <h2>Våre spesialister</h2>
+  <h2>Våre behandlere</h2>
 
     <div className="employee-section">
 

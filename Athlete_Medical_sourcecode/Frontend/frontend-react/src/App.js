@@ -9,6 +9,7 @@ import ForgotPwrdUser from "./components/ForgotPwrdUser";
 import TermsPrivacyPage from "./pages/TermsPrivacyPage";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import SpecialistSection from "./pages/SpecialistSection";
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
 					<Route path="/termsprivacy" element={<TermsPrivacyPage />}/>
 					<Route path="/services" element={<Services/>}/>
 					<Route path="/contact" element={<Contact/>}/>
+					<Route path="/specialistsection" element={<SpecialistSection/>}/>
+					
 
 					
 				</Routes>
