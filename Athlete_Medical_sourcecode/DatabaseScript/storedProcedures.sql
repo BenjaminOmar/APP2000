@@ -75,4 +75,12 @@ SET journalnoteId = id, journalnote = journalText, heading = header, created = c
 WHERE journalnoteId = id$$
 DELIMITER ;
 
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `appointmentByUserId`(IN `UserId` INT)
+    READS SQL DATA
+BEGIN
+    SELECT * FROM appointment WHERE patientId = UserId OR specialistId = UserId;
+END$$
+DELIMITER ;
+
 

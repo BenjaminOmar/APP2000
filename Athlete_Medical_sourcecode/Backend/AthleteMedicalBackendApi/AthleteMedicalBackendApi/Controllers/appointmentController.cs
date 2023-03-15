@@ -22,7 +22,7 @@ namespace AthleteMedicalBackendApi.Controllers
 
 
         // get all appointments
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<IActionResult> GetAllAppointments()
         {
             try
@@ -108,8 +108,8 @@ namespace AthleteMedicalBackendApi.Controllers
 
 
         // get appointment based on appointmentId
-        [HttpGet("{AppointmentId}")]
-        public async Task<IActionResult> GetAppointment(int AppointmentId)
+        [HttpGet("byAppointmentId")]
+        public async Task<IActionResult> GetAppointmentByAppId(int AppointmentId)
         {
             try
             {
@@ -121,6 +121,28 @@ namespace AthleteMedicalBackendApi.Controllers
                 }
 
                 return Ok(appointment);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error ved innhenting av denne spesifikke timen");
+            }
+        }
+
+        // get appointment based on userId
+        [HttpGet("byUserId")]
+        public async Task<IActionResult> GetAppointmentByUserId(int UserId)
+        {
+            try
+            {
+                var user = await _context.Appointments.FromSqlInterpolated<Appointment>($"appointmentByUserId({UserId})").ToListAsync();
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(user);
             }
             catch (Exception)
             {
@@ -186,7 +208,7 @@ namespace AthleteMedicalBackendApi.Controllers
 
 
         // delete appointment based on Id
-        [HttpDelete("{AppointmentId}")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteAppointment(int AppointmentId)
         {
             try

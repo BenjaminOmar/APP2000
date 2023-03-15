@@ -13,7 +13,7 @@ namespace AthleteMedicalBackendApi.Controllers
 
         public rolesController(App2000Context context) => _context = context;
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<IEnumerable<Role>> Get()
         {
             return await _context.Roles.ToListAsync();

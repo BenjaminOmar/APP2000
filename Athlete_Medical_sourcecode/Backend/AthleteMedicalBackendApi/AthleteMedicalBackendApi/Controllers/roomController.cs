@@ -17,7 +17,7 @@ namespace AthleteMedicalBackendApi.Controllers
         public roomController(App2000Context context) => _context = context;
 
 
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<IEnumerable<Room>> Get()
         {
             return await _context.Rooms.ToListAsync();

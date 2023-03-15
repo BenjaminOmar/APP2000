@@ -17,7 +17,7 @@ namespace AthleteMedicalBackendApi.Controllers
         public journalController(App2000Context context) => _context = context;
 
         // get all journals
-        [HttpGet]
+        [HttpGet("getAll")]
         public async Task<IActionResult> GetAllJournals()
         {
             var journals = await _context.Journalnotes.ToListAsync();
@@ -26,7 +26,7 @@ namespace AthleteMedicalBackendApi.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{journalId}")]
+        [HttpGet("byId")]
         public async Task<IActionResult> GetJournal(int journalId)
         {
             var journal = await _context.Journalnotes.FindAsync(journalId);
@@ -99,7 +99,7 @@ namespace AthleteMedicalBackendApi.Controllers
         }
 
 
-        [HttpDelete("{journalId}")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteAppointment(int journalId)
         {
             try

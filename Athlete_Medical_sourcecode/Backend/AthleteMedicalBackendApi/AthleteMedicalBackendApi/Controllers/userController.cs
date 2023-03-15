@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AthleteMedicalBackendApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController : Controller
     {
