@@ -19,7 +19,14 @@ namespace AthleteMedicalBackendApi.Controllers
         {
             _context = app2000Context;
         }
+        // gets all users
+        [HttpGet("getAll")]
+        public async Task<IEnumerable<User>> Get()
+        {
+            return await _context.Users.ToListAsync();
+        }
 
+        // gets all users that are specialists
         [HttpGet("specialists")]
         public async Task<IActionResult> GetSpecialists()
         {
@@ -35,6 +42,91 @@ namespace AthleteMedicalBackendApi.Controllers
             }
         }
 
+        // get all users that are patients
+        [HttpGet("patients")]
+        public async Task<IActionResult> GetPatients()
+        {
+            try
+            {
+                var patients = await _context.Users.FromSqlInterpolated<User>($"patients").ToListAsync();
+
+                return Ok(patients);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        // update a user based on userId
+        [HttpPut("update")]
+        public async Task<IActionResult> UpdateAppointment([FromBody] User user)
+        {
+            try
+            {
+
+                var userId = await _context.Users.FirstOrDefaultAsync(x => x.UserId == user.UserId);
+                if (userId == null)
+                {
+                    return NotFound(new { Message = "valgt bruker finnes ikke" });
+                }
+
+                if (await CheckUserNaneExistAsync(user.Username))
+                {
+                    return BadRequest(new { Message = "Brukernavn finnes fra før av" });
+                }
+
+                if (await CheckSecurityNumExistAsync(user.SocialSecurityNum!))
+                {
+                    return BadRequest(new { Message = "Personnummer finnes allerede fra før av" });
+                }
+
+                if (await CheckPhoneNumberExistAsync(user.PhoneNumber))
+                {
+                    return BadRequest(new { Message = "Telefonnummer finnes allerede fra før av" });
+                }
+
+                if (await CheckEmailExistAsync(user.Email!))
+                {
+                    return BadRequest(new { Message = "Mail finnes allerede fra før av" });
+                }
+
+                var checkUsername = CheckUsernameStrength(user.Username);
+                if (!string.IsNullOrEmpty(checkUsername))
+                {
+                    return BadRequest(new { Message = checkUsername });
+                }
+
+                var checkSsn = CheckSsnStrength(user.SocialSecurityNum!);
+                if (!string.IsNullOrEmpty(checkSsn))
+                {
+                    return BadRequest(new { Message = checkSsn });
+                }
+
+                var checkZip = CheckZipStrength(user.ZipCode.ToString());
+                if (!string.IsNullOrEmpty(checkZip))
+                {
+                    return BadRequest(new { Message = checkZip });
+                }
+
+                var checkPassword = CheckPasswordStrength(user.Password);
+                if (!string.IsNullOrEmpty(checkPassword))
+                {
+                    return BadRequest(new { Message = checkPassword });
+                }
+
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
+                await _context.Database.ExecuteSqlInterpolatedAsync($"alterUser({user.UserId},{user.FirstName},{user.MiddleName},{user.LastName},{user.PhoneNumber},{user.SocialSecurityNum},{user.Adress},{user.ZipCode},{user.RoleId},{user.Password},{user.Username},{user.Email})");
+
+                return Ok(new { Message = "Bruker er endret" });
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error ved oppdatering av journal");
+            }
+        }
 
         // authenticates whetever the person logging in is an actual user
         [HttpPost("authenticate")]

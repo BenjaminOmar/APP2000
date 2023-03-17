@@ -94,7 +94,7 @@ namespace AthleteMedicalBackendApi.Controllers
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error ved oppdatering av avtale");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error ved oppdatering av journal");
             }
         }
 

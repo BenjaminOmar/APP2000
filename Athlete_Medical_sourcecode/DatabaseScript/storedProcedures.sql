@@ -16,6 +16,15 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- list all patients
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `patients`()
+    READS SQL DATA
+BEGIN
+    SELECT * FROM user WHERE roleId = 1;
+END$$
+DELIMITER ;
+
 -- book an appointment
 DELIMITER $$
 CREATE DEFINER=`root`@`%` PROCEDURE `bookAppointment`(IN `appId` INT UNSIGNED, IN `patId` INT)
@@ -60,6 +69,7 @@ DELIMITER ;
 -- END$$
 -- DELIMITER ;
 
+-- alter a journal note
 DELIMITER $$
 CREATE DEFINER=`root`@`%` PROCEDURE `alterJournalNote`(
     IN `id` INT UNSIGNED, 
@@ -73,6 +83,29 @@ CREATE DEFINER=`root`@`%` PROCEDURE `alterJournalNote`(
 UPDATE journalnote
 SET journalnoteId = id, journalnote = journalText, heading = header, created = created, patient = patId  
 WHERE journalnoteId = id$$
+DELIMITER ;
+
+-- update a user
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `alterUser`(
+    IN `id` INT UNSIGNED, 
+    IN `firstName` VARCHAR(45),
+    IN `middleName` VARCHAR(45),
+    IN `lastName` VARCHAR(45), 
+    IN `phoneNumber` INT, 
+    IN `socialSecurityNum` VARCHAR(11),
+    IN `adress` VARCHAR(45),
+    IN `zipCode` INT,
+    IN `roleId` INT,
+    IN `password` VARCHAR(70),
+    IN `username` VARCHAR(100),
+    IN `email` VARCHAR(60) 
+    )
+    MODIFIES SQL DATA
+
+UPDATE user
+SET userId = id, FirstName = firstName, middleName = middleName, lastName = lastName, phoneNumber = phoneNumber, socialSecurityNum = socialSecurityNum, adress = adress, zipCode = zipCode, roleId = roleId, username = username, email = email  
+WHERE userId = id$$
 DELIMITER ;
 
 DELIMITER $$
