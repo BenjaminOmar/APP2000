@@ -54,6 +54,8 @@ namespace AthleteMedicalBackendApi.Controllers
                 return NotFound(new { Message = "Valgt pasient finnes ikke" });
             }
 
+            journal.Created = DateTime.Now;
+
             await _context.Journalnotes.AddAsync(journal); // adds the object
             await _context.SaveChangesAsync(); // stores it in the database
             return Ok(new { Message = "Journalnotat er registrert" });
