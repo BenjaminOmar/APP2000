@@ -42,7 +42,7 @@ const HeaderAdmin = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">                        
-            <NavLink to='/' className='list-item' activeClassName='active'>Booking</NavLink>
+            <NavLink to='/adminbooking' className='list-item' activeClassName='active'>Booking</NavLink>
             <NavLink to='/adminedituser' className='list-item' activeClassName='active'>Brukerkontoer</NavLink> 
             <NavLink to='/' className='list-item' activeClassName='active'>Journaler</NavLink>            
         </Nav>            

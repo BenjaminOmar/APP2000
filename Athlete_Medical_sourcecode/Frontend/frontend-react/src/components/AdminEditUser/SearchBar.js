@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Form, Button, Card } from 'react-bootstrap';
 
 function SearchBar({ handleSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,15 +14,28 @@ function SearchBar({ handleSearch }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Control
-        type="text"
-        placeholder="Søk etter bruker"
-        value={searchTerm}
-        onChange={handleChange}
-      />
+    <Form style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <Card style={{padding: "2%"}}>
+ <Form.Group className='mb-3' >
+        <Form.Label>
+          <p>Skriv inn fornavn, etternavn eller fødselsnummer for å søke etter bruker</p>
+        </Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Søk etter bruker"
+          value={searchTerm}
+         onChange={handleChange}
+        />
+      </Form.Group>        
+      <Button variant= "primary" type="submit" onChange={handleSubmit}>
+        Søk
+      </Button> 
+
+      </Card>
+        
     </Form>
   );
 }
 
 export default SearchBar;
+
