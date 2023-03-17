@@ -1,3 +1,11 @@
+
+
+.employee-section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
 .employee {
     position: relative;
     display: inline-block;
@@ -6,7 +14,6 @@
     margin: 20px;
     overflow: hidden;
     border-radius: 5%;
-    justify-content: center;
   }
   
   h2 {
@@ -25,7 +32,7 @@
     margin-top: -80px;
   }
   
-  .employeeimg:hover .overlay{
+  .employee img:hover.overlay{
     opacity: 1;
   }
   

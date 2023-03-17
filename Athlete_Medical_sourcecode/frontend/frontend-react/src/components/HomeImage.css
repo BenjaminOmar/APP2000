@@ -17,7 +17,7 @@
 /*Styling for the overlay*/
   .homeImageOverlay {
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -25,14 +25,18 @@
 
 /*Styling for the header in the overlay*/
   .homeImageHeader {
-    color: white;
-    font-size: 48px;
+    color:black;
+    font-size: 30px;
+    font-weight: bold;
     margin-bottom: 16px;
+    background-color: rgba(128, 128, 128, 0.5);
   }
 
 /*Styling for the text in the overlay */
   .homeImageText {
-    color: white;
+    color: black;
+    background-color: rgba(128, 128, 128, 0.5);
+    font-weight: bold;
     font-size: 16px;
     margin-bottom: -50px;
   }

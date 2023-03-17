@@ -1,20 +1,27 @@
-//Hjem lenke virker ikke 
-
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Button} from 'react-bootstrap';
-import './HeaderNormal.css';
+import './Header.css';
 import { Link, NavLink } from 'react-router-dom';
-import picture from '../images/footerImage.png'
+import picture from '../images/footerImage2.png';
+
 
 
 
 function HeaderNormal () {
+ 
   return (
     <Navbar className="navbar" expand="lg">
       <Container>
-        <Navbar.Brand href="/" className='brand'> <img src={picture} alt='Logo'/>
+        <Navbar.Brand href="/" className='brand'> 
+        <img 
+          src={picture} 
+          alt='Logo'
+          className={"logoAnimation"}
+         
+        />
+        
               </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

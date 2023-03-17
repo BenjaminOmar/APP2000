@@ -1,13 +1,10 @@
-// Gjenstår:
-// Flipp funksjon til login
-// Postnummer sjekk mot api? 
-// error meling i .catch
-
+// import required components from libraries
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button, Card, Modal} from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
+//define a functional component 
 function RegisterForm() {
 	//Declare state variables to hold user information and messages. 
 	const [firstName, setFirstName] = useState("");
@@ -26,7 +23,7 @@ function RegisterForm() {
 	const navigate = useNavigate();
 	
 
-	//Functions that sets the value based on the value passed in as a parameter from the form. 
+	//Functions that sets value based on the value passed in as a parameter from the form. 
 	const handleFirstNameChange = (value) => {setFirstName(value);};
 	const handleMiddleNameChange = (value) => {setMiddleName(value);};
 	const handleLastNameChange = (value) => {setLastName(value);};
@@ -42,32 +39,42 @@ function RegisterForm() {
 	const handleSave = async (event) => {
 		event.preventDefault();
 		//Error handling
+		//Validate user name
 		if (Username.length < 5 || Username.includes(" ")) {
 			setMessage("Brukernavnet må inneholde minst 5 karakterer og kan ikke inneholde mellomrom");
 			setShowModal(true);
 			return;			
 		}
+		//Validate phone number
 		if (!/^\d+$/.test(PhoneNumber)) {
 			setMessage("Telefonnummeret kan bare inneholde tall");
 			setShowModal(true);
 			return;
 		  }
+		  //validate ssn
 		if (!/^\d{11}$/.test(Ssn) || !/^\d+$/.test(Ssn)) {
 			setMessage("Personnummer må inneholde 11 tall");
 			setShowModal(true);
 			return;
 		}
+		//Validate zip code
 		if (ZipCode.length !== 4) {
 			setMessage("Postnummer må inneholde 4 tall");
 			setShowModal(true);
 			return;
 		}
+		const isValidZipCode = await validateZipCode(ZipCode);
+		if (!isValidZipCode) {
+		  setMessage("Ugyldig postnummer");
+		  setShowModal(true);
+		  return;
+		}
+		//Validate password
 		if (Password === Username) {
 			setMessage("Passordet kan ikke være det samme som brukernavnet");
 			setShowModal(true);
 			return;
 		}
-
 		if (!/[a-zA-ZæøåÆØÅ]/.test(Password) || !/[0-9]/.test(Password)) {
 			setMessage(
 				"Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer"
@@ -80,8 +87,8 @@ function RegisterForm() {
 			setShowModal(true);
 			return;
 		}
-		//
-
+		
+		//create an object 'data' with properties for the user's registration information.
 		const data = {
 			FirstName: firstName,
 			MiddleName: MiddleName,
@@ -95,147 +102,203 @@ function RegisterForm() {
 			Username: Username,
 			Email: Email,
 		};
+		// Specify the URL to send the registration data to.
 		const url = "https://localhost:7209/api/User/register";
-		axios
-			.post(url, data)
-			.then((result) => {
-				// alert(result.data);
-				setMessage("Bruker registrert");
-				setShowModal(true);
-				setTimeout(() => {
-					setShowModal(false);
-					setMessage("");
-					navigate("/login");
-				  }, 3000);
-				})
+		// Use the `axios.post()` method to send the registration data to the specified URL.
+		axios.post(url, data)
+		//If the request is successful, display a success message to the user in a modal dialog.
+		.then(() => {				
+			setMessage("Bruker registrert");
+			// After a delay of 3 seconds, close the modal and navigate to the login page.
+			setShowModal(true);
+			setTimeout(() => {
+			setShowModal(false);
+			setMessage("");
+			navigate("/login");
+				 }, 3000);
+			})
+			// If the request fails, display an error message to the user in an alert box.
 			.catch((error) => {
 				alert(error);
 			});
 	};
 
-	//Empty error message
+	// A function that empty error message
 	const handleClose = () => {
 		setMessage("");
 		
 	};
-
-	
+	// A function that validates the zipcode making a request to the Zippopotamus.us API	
+	async function validateZipCode(zipCode) {
+		try {
+			//Construct the API url using the zip code and country code. 
+		  const url = `https://api.zippopotam.us/no/${zipCode}`;
+		  //making a get request to the API an wait for response
+		  const response = await axios.get(url);
+		  //check if the response status is 200(OK) and return the result
+		  return response.status === 200;
+		} catch (error) {
+			//Show error message to user if validation fail
+		  setMessage("En feil oppstod ved validering av postnummer");
+		  setShowModal(true);
+		  return false;
+		}
+	  }
 
 	return (
-		
 	
-		<div
-			className="d-flex justify-content-center align-items-start min-vh-100"
-			style={{ paddingTop: "0px", position: "relative" }}>
+		<div className="d-flex justify-content-center align-items-start min-vh-100"
+			style={{ paddingTop: "50px", position: "relative", marginBottom: "100px" }}>			
 			{/*A Card component from bootstrap-react that is used to display the Register form.*/}
 			<Form onSubmit={handleSave}>
-				{/*Display error message if there is one*/}
+				{/*Display  message if there is one*/}
 				{message && (
 					<Modal show={showModal} onHide={() => setShowModal(false)} size="sm">
 						<Modal.Header closeButton onClick={handleClose} style= {{marginBottom: '5px'}}> <h5>Obs!</h5> </Modal.Header>
 						<Modal.Body>{message}</Modal.Body>
-					</Modal>
-					
+					</Modal>					
 				)}
-				<Card style={{ width: "500px", marginBottom: "50px" }}>
+				<div className="flipCard">
+				{/* Card component from a UI library */}
+				<Card>
+					{/*Card Header component */}
 					<Card.Header>
 						<h3> Registrer Bruker</h3>
 					</Card.Header>
+					{/* Card Body component */}
 					<Card.Body>
+						{/*Form.Group component*/}
 						<Form.Group style={{ marginBottom: "15px" }} controlId="username">
+							 {/* Label component with text and instructions */}
 							<Form.Label style={{ marginBottom: "-5px" }}>Brukernavn:
 								<p style={{ fontSize: "10px" }}>								
 									(Minimum 5 karakterer og uten mellomrom)
 								</p>							
-							</Form.Label>							
+							</Form.Label>	
+							{/*Form.Control component with attributes like type, placeholder, and value*/}						
 							<Form.Control
 								type="Text"
 								placeholder="Ønsket brukernavn"
 								value={Username}
+								// onChange event handler
 								onChange={(e) => handleUsernameChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
+						{/*Form.Group component*/}
 						<Form.Group style={{ marginBottom: "15px" }} controlId="firstName">
+							{/* Label component with text*/}
 							<Form.Label>Fornavn:</Form.Label>
+							{/*Form.Control component with attributes like type, placeholder, and value*/}
 							<Form.Control
 								type="Text"
 								placeholder="Fornavn"
 								value={firstName}
+								// onChange event handler
 								onChange={(e) => handleFirstNameChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
+						{/*Form.Group component*/}
 						<Form.Group style={{ marginBottom: "15px" }} controlId="middleName">
+							{/* Label component with text*/}
 							<Form.Label>Mellomnavn:</Form.Label>
+							{/*Form.Control component with attributes like type, placeholder, and value*/}
 							<Form.Control
 								type="Text"
 								placeholder="Mellomnavn"
 								value={MiddleName}
+								// onChange event handler
 								onChange={(e) => handleMiddleNameChange(e.target.value)}
 							/>
 						</Form.Group>
+						{/*Form.Group component*/}
 						<Form.Group controlId="lastName" style={{ marginBottom: "15px" }}>
+							{/* Label component with text*/}
 							<Form.Label>Etternavn:</Form.Label>
+							{/*Form.Control component with attributes like type, placeholder, and value*/}
 							<Form.Control
 								type="Text"
 								placeholder="Etternavn"
 								value={LastName}
+								// onChange event handler
 								onChange={(e) => handleLastNameChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
+						{/*Form.Group component*/}
 						<Form.Group controlId="email" style={{ marginBottom: "15px" }}>
+							{/* Label component with text*/}
 							<Form.Label>Epost:</Form.Label>
+							{/*Form.Control component with attributes like type, placeholder, and value*/}
 							<Form.Control
 								type="email"
 								placeholder="Epost"
 								value={Email}
+								// onChange event handler
 								onChange={(e) => handleEmailChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
+						{/*Form.Group component*/}
 						<Form.Group controlId="phone" style={{ marginBottom: "15px" }}>
+							{/* Label component with text*/}
 							<Form.Label>Telefonnummer:</Form.Label>
+							{/*Form.Control component with attributes like type, placeholder, and value*/}
 							<Form.Control
 								type="tel"
 								placeholder="Telefonnummer"
 								value={PhoneNumber}
+								// onChange event handler
 								onChange={(e) => handlePhoneNumberChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
+						{/*Form.Group component*/}
 						<Form.Group controlId="ssn" style={{ marginBottom: "15px" }}>
+							{/* Label component with text and instructions */}
 							<Form.Label>Personnummer, 11 tall:</Form.Label>
+							{/*Form.Control component with attributes like type, placeholder, and value*/}
 							<Form.Control
 								type="text"
 								placeholder="Personnummer"
 								value={Ssn}
+								// onChange event handler
 								onChange={(e) => handleSsnChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
+						{/*Form.Group component*/}
 						<Form.Group controlId="address" style={{ marginBottom: "15px" }}>
+							{/* Label component with text*/}
 							<Form.Label>Addresse:</Form.Label>
+							{/*Form.Control component with attributes like type, placeholder, and value*/}
 							<Form.Control
 								type="text"
 								placeholder="Adresse"
 								value={Adress}
+								// onChange event handler
 								onChange={(e) => handleAdressChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
+						{/*Form.Group component*/}
 						<Form.Group style={{ marginBottom: "15px" }} controlId="zipCode">
+							{/* Label component with text and instructions */}
 							<Form.Label>Postnummer, 4 tall:</Form.Label>
+							{/*Form.Control component with attributes like type, placeholder, and value*/}
 							<Form.Control
 								type="text"
 								placeholder="Postnummer"
 								value={ZipCode}
+								// onChange event handler
 								onChange={(e) => handleZipCodeChange(e.target.value)}
 								required
 							/>
 						</Form.Group>
+						{/*Form.Group component*/}
 						<Form.Group controlId="password" style={{ marginBottom: "15px" }}>
+							{/* Label component with text and instructions */}
 							<Form.Label style={{ marginBottom: "-5px" }}>
 								Passord:
 								<p style={{ fontSize: "10px" }}>
@@ -243,6 +306,7 @@ function RegisterForm() {
 									(minimum 8 karakterer, derav minimum en bokstav og ett tall)
 								</p>
 							</Form.Label>
+							{/*Form.Control component with attributes like type, placeholder, and value*/}
 							<Form.Control
 								type="password"
 								placeholder="Passord"
@@ -259,10 +323,13 @@ function RegisterForm() {
 								type="password"
 								placeholder="Gjenta passord"
 								value={confirmPassword}
+								// onChange event handler
 								onChange={(e) =>setConfirmPassword(e.target.value)}
 								required
 							/>
 						</Form.Group>
+						
+						{/* A submit button to register the user with specified styles */}
 						<Button
 							variant="primary"
 							type="submit"
@@ -276,7 +343,7 @@ function RegisterForm() {
 							Register Bruker
 						</Button>
 						<Form.Group style={{ marginTop: "30px" }}>
-							{/*Link components that takes the user to the forgot password page or login page */}
+							{/*Link components that redirect the user to the forgot password page or login page */}
 							<Link								
 								to="/forgotpwrduser"
 								style={{ marginLeft: "50px" }}>
@@ -285,16 +352,16 @@ function RegisterForm() {
 						</Form.Group>
 						<Form.Group style={{ marginTop: "10px" }}></Form.Group>
 							<Link
-								to="/login"
-								className="flipLink"
+								to="/login"				
 								style={{ marginLeft: "50px" }}>
 								Til logg inn{" "}
 							</Link>					
 					</Card.Body>
 				</Card>
+				</div>
 			</Form>
 		</div>				
 	);
 }
-
+// export the RegisterForm component to use it in other parts of the application
 export default RegisterForm;

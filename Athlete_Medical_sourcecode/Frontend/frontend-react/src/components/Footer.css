@@ -1,0 +1,19 @@
+/*
+This is a CSS code for styling the footer logo animation.
+It sets a transition effect on the transform property of the .logoAnimation class for 0.3 seconds.
+This means that the change in scale of the element will have a smooth transition over a period of 0.3 seconds.
+*/
+
+.logoAnimation {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+/*
+This code block sets a hover effect on the .logoAnimation class.
+It changes the scale of the element to 1.2 times its original size on hover, using the transform property.
+This gives the effect of the picture "popping-out" when the user hovers over it.
+*/
+
+  .logoAnimation:hover {
+    transform: scale(1.2);
+  }

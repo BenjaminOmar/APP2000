@@ -10,6 +10,9 @@ import TermsPrivacyPage from "./pages/TermsPrivacyPage";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import SpecialistSection from "./pages/SpecialistSection";
+import AdminEditUser from "./pages/AdminEditUser";
+import AdminBooking from "./pages/AdminBooking";
+import AdminSeeJournal from "./pages/AdminSeeJournal";
 
 
 function App() {
@@ -26,6 +29,9 @@ function App() {
 					<Route path="/services" element={<Services/>}/>
 					<Route path="/contact" element={<Contact/>}/>
 					<Route path="/specialistsection" element={<SpecialistSection/>}/>
+					<Route path="/adminedituser" element={<AdminEditUser/>}/>
+					<Route path="/adminbooking" element={<AdminBooking/>}/>
+					<Route path="/adminseejornal" element={<AdminSeeJournal/>}/>
 					
 
 					

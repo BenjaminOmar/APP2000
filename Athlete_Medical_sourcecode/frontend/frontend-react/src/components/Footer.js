@@ -1,20 +1,29 @@
+//This component creates the footer. 
+
+//import packages from react-bootstrap, react-router-dom, footer Image and style sheet. 
 import { Row, Col, Image } from 'react-bootstrap';
 import footerImage from '../images/footerImage2.png';
 import { Link } from 'react-router-dom';
+import "./Footer.css";
 
+//Create the footer component
 const Footer = () =>{
   return (
     <footer className='bg-light text-center text-lg-start' >
       <div className='container p-4'>
+        {/* Creates a row with four columns */}
         <Row>
+          {/* First column is footer image and slogan */}
           <Col md='3' lg='4' xl='3' className='mx-auto mb-4'>
             <Link to= '/'>
-              <Image src={footerImage}  alt='Company Logo'/>
-            </Link>         
+              <Image src={footerImage} className="logoAnimation"  alt='Company Logo'/>
+            </Link>  
+            <br/>       
+            <br/>
             <p> "Vår profesjonalitet er din trygghet".</p>
           </Col>
+          {/* Second collumn is links to "våre behandlere" and "Tjenester" */}
           <Col md='2' lg='2' xl='2' className='mx-auto mb-4' >
-            {/* <h6 className='text-uppercase fw-bold mb-4'>Overskrift</h6> */}
             <br/>
             <p>
               <Link to="/" className='text-reset'>
@@ -27,6 +36,7 @@ const Footer = () =>{
                 </Link> 
             </p>          
           </Col>
+          {/* Third column is links to "Vilkår og personvern" and "Konakt oss" */}
           <Col md='3' lg='2' xl='2' className='mx-auto mb-4'>
           <br/>
             <p>
@@ -38,10 +48,9 @@ const Footer = () =>{
                 <Link to="/contact" className='text-reset'>
                     Kontakt oss
                 </Link> 
-            </p>
-           
+            </p>           
           </Col>
-
+          {/* Fourth column contains contact information */}
           <Col md='4' lg='3' xl='3' className='mx-auto mb-md-0 mb-4'>
           <br/>
             <p>
@@ -59,7 +68,7 @@ const Footer = () =>{
           </Col>
         </Row>
       </div>
-
+      {/* At the bottom of the footer is a copyright mark with year and firm name */}
       <div className='text-center p-3' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
         © {new Date().getFullYear()} Athlete Medical
       </div>

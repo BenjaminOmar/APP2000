@@ -1,6 +1,9 @@
 //This code defines a a functional component 'CookiesModal' Its purpose is to display a modal window with information about 
 //cookies and give the user the option to either accept or decline the use of cookies in the webb application. 
-//
+//When the user clicks on "Avslå", the function handleDecline is called, 
+//which sets the value of "cookiesAccepted" to false in localStorage. 
+//This means that the condition in the useEffect hook will evaluate to true on subsequent page loads, 
+//causing the modal to be shown again, and thus preventing the creation of cookies.
 
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
@@ -36,9 +39,10 @@ const CookiesModal = () => {
     // redirect the user to a different page
     };
 
-  // render the modal component
+  // Render the Modal component which displays a pop-up modal with cookie policy information
   return (
-    //show and hide the modal props
+    // The show property determines if the Modal should be displayed or not, based on the value of the show state variable.
+    // The onHide property sets the function to be called when the user clicks on the close button or outside the modal to close it.
     <Modal show={show} onHide={handleAccept}>
       <Modal.Header closeButton>
         <Modal.Title>Informasjonskapsler</Modal.Title>
@@ -54,9 +58,11 @@ const CookiesModal = () => {
         </p>
       </Modal.Body>
       <Modal.Footer>
+        {/* The Button component is used to create the "Decline" button  */}
         <Button style={{backgroundColor:'#0050B1'}} variant="secondary" onClick={handleDecline}>
           Avslå
         </Button>
+        {/* The Button component is used to create the "Accept" button */}
         <Button style={{backgroundColor:'#0050B1'}} variant="primary" onClick={handleAccept}>
           Godkjenn
         </Button>

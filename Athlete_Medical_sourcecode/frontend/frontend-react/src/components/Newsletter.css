@@ -1,16 +1,17 @@
 .sidebar 
-{    
-       
+{           
     position: absolute;
     right: 0;
-    top: 50%;
+    top: 70%;
     padding: 10px;
     padding-top: 5px;
     text-align: center;    
     transform: rotate(-90deg);
     transform-origin: bottom right;
     transition: all 10s ease-out;
+    z-index: 999;
 }
+
 
 
 
