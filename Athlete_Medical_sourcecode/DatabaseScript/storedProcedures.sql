@@ -104,7 +104,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `alterUser`(
     MODIFIES SQL DATA
 
 UPDATE user
-SET userId = id, FirstName = firstName, middleName = middleName, lastName = lastName, phoneNumber = phoneNumber, socialSecurityNum = socialSecurityNum, adress = adress, zipCode = zipCode, roleId = roleId, username = username, email = email  
+SET userId = id, FirstName = firstName, middleName = middleName, lastName = lastName, phoneNumber = phoneNumber, socialSecurityNum = socialSecurityNum, adress = adress, zipCode = zipCode, roleId = roleId, password = password, username = username, email = email  
 WHERE userId = id$$
 DELIMITER ;
 

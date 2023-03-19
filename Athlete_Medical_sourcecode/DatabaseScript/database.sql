@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `app2000`.`role` (
   `roleName` VARCHAR(45) NULL,
   PRIMARY KEY (`roleId`))
 ENGINE = InnoDB;
-
+  
 
 -- -----------------------------------------------------
 -- Table `app2000`.`user`
