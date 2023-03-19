@@ -1,89 +1,138 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import Calendar from 'react-calendar';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Calendar from "react-calendar";
+import 'react-calendar/dist/Calendar.css';
 import "./Appointment.css";
 
-const Appointment = () => {
-  const [employee, setEmployee] = useState('');
-  const [date, setDate] = useState(new Date());
-  const [timeslots, setTimeslots] = useState([]);
-  const [selectedTimeslot, setSelectedTimeslot] = useState(null);
 
-  const handleEmployeeChange = (event) => {
-    setEmployee(event.target.value);
-    setTimeslots([]);
-    setSelectedTimeslot(null);
+function Appointment() {
+  const [specialists, setSpecialists] = useState([]);
+  const [selectedSpecialist, setSelectedSpecialist] = useState("");
+  const [selectedStartTime, setSelectedStartTime] = useState("");
+  const [isAvailable, setIsAvailable] = useState([]);
+  const [selectedAppointment, setSelectedAppointment] = useState("");
+  const [isAppointmentBooked, setIsAppointmentBooked] = useState(false);
+
+  useEffect(() => {
+    axios.get("https://localhost:7209/api/User/specialists").then((response) => {
+      setSpecialists(response.data);
+    });
+  }, []);
+
+  const handleSpecialistChange = (event) => {
+    setSelectedSpecialist(event.target.value);
+    setSelectedStartTime("");
+    setIsAvailable([]);
+    setSelectedAppointment("");
+    setIsAppointmentBooked(false);
   };
 
-  const handleDateChange = (newDate) => {
-    setDate(newDate);
-    setTimeslots([]);
-    setSelectedTimeslot(null);
+  const handleStartTimeChange = (startTime) => {
+    console.log("Selected date:", startTime);
+    setSelectedStartTime(startTime);
+    setSelectedAppointment("");
+    setIsAppointmentBooked(false);
+  
+    if (selectedSpecialist && startTime >= new Date()) {
+      axios
+        .get("https://localhost:7209/api/appointment/available", {
+          params: {
+            specialistId: selectedSpecialist,
+            startTime: startTime.toISOString().slice(0, 10),
+          },
+        })
+        .then((response) => {
+          const filteredAppointments = response.data.filter(
+            (appointment) =>
+              appointment.specialistId === selectedSpecialist &&
+              new Date(appointment.startTime) >= selectedStartTime &&
+              appointment.isAvailable
+          );
+          setIsAvailable(filteredAppointments);
+        });
+    } else {
+      setIsAvailable([]);
+    }
+  };
+  
+  
 
+  const handleAppointmentChange = (event) => {
+    setSelectedAppointment(event.target.value);
+    setIsAppointmentBooked(false);
+  };
+
+  const handleAppointmentBooking = () => {
     axios
-    .get(`/api/appointment/available?employee=${employee}&date=${newDate.toISOString().substring(0, 10)}`)
-      .then((response) => {
-        setTimeslots(response.data);
+      .post("/api/appointment/book", {
+        specialistId: selectedSpecialist,
+        startTime: selectedStartTime.toISOString(),
+        endTime: selectedAppointment,
+
       })
-      .catch((error) => {
-        console.error(error);
+      .then(() => {
+        setIsAppointmentBooked(true);
       });
-  };
+  }
 
-  const handleTimeslotClick = (timeslot) => {
-    setSelectedTimeslot(timeslot);
-  };
-
-  const handleConfirmAppointment = () => {
-    axios
-    .put(`/api/appointment/book?employee=${employee}&timeslot=${selectedTimeslot}`)
-      .then((response) => {
-        console.log(response.data);
-        setTimeslots([]);
-        setSelectedTimeslot(null);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  return (
-    <div className='appointment'>
-      <h1>Timebestilling</h1>
-      <label htmlFor="employee-select">Spesialist:</label>
-      <select id="employee-select" value={employee} onChange={handleEmployeeChange}>
-        <option value="">Velg en spesialist</option>
-        <option value="employee1">Geir Arne Nilsen</option>
-        <option value="employee2">Karoline Ernstsen</option>
-        <option value="employee3">Hedda Vold</option>
-      </select>
-      {employee && (
-        <div>
-          <label htmlFor="date-select">Velg dato:</label>
-          <Calendar value={date} onChange={handleDateChange} />
-          {timeslots.length > 0 && (
+      return (
+        <div className="appointment-container">
+          <div className="appointment-system">
             <div>
-              <h2>Tilgjengelig tidspunkt:</h2>
-              <ul>
-                {timeslots.map((timeslot) => (
-                  <li key={timeslot}>
-                    <button onClick={() => handleTimeslotClick(timeslot)}>{timeslot}</button>
-                  </li>
-                ))}
-              </ul>
+              <h2>Timebestilling</h2>
+              <div>
+                <label htmlFor="specialist-select">Spesialist:</label>
+                <select
+                  id="specialist-select"
+                  value={selectedSpecialist}
+                  onChange={handleSpecialistChange}
+                >
+                  <option value="">Velg en spesialist</option>
+                  {specialists.map((specialist) => (
+                    <option key={specialist.id} value={specialist.id}>
+                      {`${specialist.firstName} ${specialist.middleName} ${specialist.lastName}`}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {selectedSpecialist && (
+                <div>
+                  <label htmlFor="date-select">Dato:</label>
+                  <Calendar onChange={(date) => handleStartTimeChange(date)} value={selectedStartTime} />
+                </div>
+              )}
+              {selectedStartTime && (
+                <div>
+                  <label htmlFor="appointment-select">
+                    Velg tidspunkt for time:
+                  </label>
+                  <select
+                    id="appointment-select"
+                    value={selectedAppointment}
+                    onChange={handleAppointmentChange}
+                  >
+                    <option value="">Velg tidspunkt</option>
+                    {isAvailable.map((appointment) => (
+                      <option key={appointment.startTime} value={appointment.startTime}>
+                          {`${appointment.startTime}-${appointment.endTime}`}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+              {selectedAppointment && (
+                <div>
+                  <button onClick={handleAppointmentBooking}>
+                    Bekreft timebestilling
+                  </button>
+                </div>
+              )}
+              {isAppointmentBooked && (
+                <div>Timen er booket!</div>
+              )}
             </div>
-          )}
-          {selectedTimeslot && (
-            <div>
-              <h2>Valgt tidspunkt:</h2>
-              <p>{selectedTimeslot}</p>
-              <button onClick={handleConfirmAppointment}>Bestill time</button>
-            </div>
-          )}
+          </div>
         </div>
-      )}
-    </div>
-  );
-};
-
+      );
+  }
 export default Appointment;

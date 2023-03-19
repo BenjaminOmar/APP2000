@@ -5,7 +5,7 @@ import HeaderNormal from '../components/HeaderNormal';
 import OurServices from '../components/OurServices';
 import OurSpecialists from '../components/OurSpecialists';
 import {CookiesModal} from '../components/CookiesModal';
-
+import Appointment from '../components/Appointment';
 
 export function Home() {
     return (
@@ -14,6 +14,7 @@ export function Home() {
       <HeaderNormal/>
       <CookiesModal/>
       <HomeImage/>
+      <Appointment/>
       <OurServices/> 
       <OurSpecialists/>                    
      </div>

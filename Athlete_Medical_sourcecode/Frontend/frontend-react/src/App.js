@@ -13,6 +13,7 @@ import SpecialistSection from "./pages/SpecialistSection";
 import AdminEditUser from "./pages/AdminEditUser";
 import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
+import Appointment from "./components/Appointment";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/appointment" element={<Appointment />} />
 					<Route path="/forgotpwrduser" element={<ForgotPwrdUser />}/>
 					<Route path="/termsprivacy" element={<TermsPrivacyPage />}/>
 					<Route path="/services" element={<Services/>}/>
