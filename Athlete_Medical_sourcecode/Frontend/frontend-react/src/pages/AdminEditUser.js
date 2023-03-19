@@ -1,40 +1,14 @@
 import HeaderAdmin from "../components/HeaderAdmin";
 import React, { useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
+import _ from "lodash";
 
 function AdminEditUser() {
 	const [searchInput, setSearchInput] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
-	const [selectedUser, setSelectedUser] = useState({
-		firstName: "",
-		middleName: "",
-		lastName: "",
-		phoneNumber: "",
-		socialSecurityNum: "",
-		adress: "",
-		zipCode: "",
-		roleId: "",
-		password: "",
-		regDate: "",
-		username: "",
-		email: "",
-	});
+	const [selectedUser, setSelectedUser] = useState();
 	const [showEditForm, setShowEditForm] = useState(false);
-	const [formData, setFormData] = useState({
-		firstName: "",
-		middleName: "",
-		lastName: "",
-		phoneNumber: "",
-		socialSecurityNum: "",
-		adress: "",
-		zipCode: "",
-		roleId: "",
-		password: "",
-		regDate: "",
-		username: "",
-		email: "",
-	});
-
+	
 	const handleSearch = async (event) => {
 		event.preventDefault();
 		try {
@@ -62,27 +36,46 @@ function AdminEditUser() {
 			const response = await fetch(
 				`https://localhost:7209/api/user/getAll/${user.userId}`
 			);
+			console.log(response);
 			const userData = await response.json();
 			setSelectedUser(userData);
 			setShowEditForm(true);
+			
 		} catch (error) {
 			console.log(error);
 		}
+		
 	};
 
 	const handleFormChange = (event) => {
 		const { name, value } = event.target;
-		setSelectedUser((prevData) => ({ ...prevData, [name]: value }));
-	};
+		const updatedUser = _.cloneDeep(selectedUser); // create a new copy of the selected user object
+		_.set(updatedUser, name, value); // update the value of the field based on the input name using lodash's set method
+		setSelectedUser(updatedUser);
+	  };
 
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
-		fetch("https://localhost:7209/api/user/update", {
+		fetch("https://localhost:7209/api/User/update", {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(selectedUser),
+			body: JSON.stringify({
+				"userId": parseInt(selectedUser.userId),
+				"firstName": selectedUser.firstName,
+				"middleName": selectedUser.middleName,
+				"lastName": selectedUser.lastName,
+				"phoneNumber": parseInt(selectedUser.phoneNumber),
+				"socialSecurityNum": selectedUser.socialSecurityNum,
+				"adress": selectedUser.adress,
+				"zipCode": parseInt(selectedUser.zipCode),
+				"roleId": parseInt(selectedUser.roleId),
+				"password": selectedUser.password,
+				"regDate": new Date(selectedUser.regDate),
+				"username": selectedUser.username,
+				"email": selectedUser.email
+			}),
 		})
 			.then((response) => {
 				if (!response.ok) {
@@ -152,7 +145,17 @@ function AdminEditUser() {
 			)}
 			{selectedUser && showEditForm && (
 				<Form onSubmit={handleFormSubmit}>
-					<Form.Group controlId="formBasicFirstName">
+
+						<Form.Group>
+						<Form.Label>Brukernavn</Form.Label>
+						<Form.Control
+							type="text"
+							name="username"
+							value={selectedUser.username}
+							onChange={handleFormChange}
+						/>
+					</Form.Group>
+					<Form.Group>
 						<Form.Label>Fornavn</Form.Label>
 						<Form.Control
 							type="text"
@@ -162,8 +165,8 @@ function AdminEditUser() {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicMiddleName">
-						<Form.Label>Middle Name</Form.Label>
+					<Form.Group>
+						<Form.Label>Mellomnavn</Form.Label>
 						<Form.Control
 							type="text"
 							name="middleName"
@@ -172,7 +175,7 @@ function AdminEditUser() {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicLastName">
+					<Form.Group>
 						<Form.Label>Last Name</Form.Label>
 						<Form.Control
 							type="text"
@@ -182,8 +185,8 @@ function AdminEditUser() {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicPhoneNumber">
-						<Form.Label>Phone Number</Form.Label>
+					<Form.Group>
+						<Form.Label>Telefonnummer</Form.Label>
 						<Form.Control
 							type="number"
 							name="phoneNumber"
@@ -191,8 +194,17 @@ function AdminEditUser() {
 							onChange={handleFormChange}
 						/>
 					</Form.Group>
+					<Form.Group>
+						<Form.Label>Epost</Form.Label>
+						<Form.Control
+							type="text"
+							name="email"
+							value={selectedUser.email}
+							onChange={handleFormChange}
+						/>
+					</Form.Group>
 
-					<Form.Group controlId="formBasicSocialSecurityNum">
+					<Form.Group >
 						<Form.Label>Social Security Number</Form.Label>
 						<Form.Control
 							type="text"
@@ -202,7 +214,7 @@ function AdminEditUser() {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicAdress">
+					<Form.Group>
 						<Form.Label>Address</Form.Label>
 						<Form.Control
 							type="text"
@@ -212,7 +224,7 @@ function AdminEditUser() {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicZipCode">
+					<Form.Group>
 						<Form.Label>Zip Code</Form.Label>
 						<Form.Control
 							type="text"
@@ -222,7 +234,7 @@ function AdminEditUser() {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicRoleId">
+					<Form.Group>
 						<Form.Label>Role ID</Form.Label>
 						<Form.Control
 							type="number"
@@ -232,7 +244,7 @@ function AdminEditUser() {
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicPassword">
+					<Form.Group>
 						<Form.Label>Password</Form.Label>
 						<Form.Control
 							type="password"
