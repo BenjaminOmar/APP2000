@@ -1,0 +1,42 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color:#ffffff;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+  }
+
+  .logo img {
+    height: 3rem;
+    width: auto;
+  }
+  
+  .categories {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .category {
+    text-decoration: none;
+    color: rgb(6, 6, 6);
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color:rgb(0, 0, 0);
+    transition: background-color 0.2s ease-in-out;
+    
+  }
+  
+  .category:hover {
+    background-color:rgb(197, 221, 240);
+    border-radius: 4px !important;
+    transition: all 0.2s ease-out;
+    text-decoration: underline !important;
+  }
