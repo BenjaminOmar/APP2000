@@ -71,12 +71,6 @@ namespace AthleteMedicalBackendApi.Controllers
                     return NotFound(new { Message = "valgt bruker finnes ikke" });
                 }
 
-                var checkUsername = CheckUsernameStrength(user.Username);
-                if (!string.IsNullOrEmpty(checkUsername))
-                {
-                    return BadRequest(new { Message = checkUsername });
-                }
-
                 var checkSsn = CheckSsnStrength(user.SocialSecurityNum!);
                 if (!string.IsNullOrEmpty(checkSsn))
                 {

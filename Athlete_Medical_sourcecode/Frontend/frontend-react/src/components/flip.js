@@ -2,10 +2,11 @@
 
 //Imports the React library.
 import React from "react";
+import "./Flip.css";
 
 //A function that returns a div container that contains the video and a text overlay.
-function flip() {
-	return <div></div>;
+function Flip() {
+	return <div className="flippable-card-container"></div>;
 }
 //The component is exported as a default export.
-export default flip;
+export default Flip;
