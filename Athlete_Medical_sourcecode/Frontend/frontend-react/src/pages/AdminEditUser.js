@@ -12,7 +12,7 @@ function Registration() {
 	const [ZipCode, setZipCode] = useState("");
 	const [RoleId, setRoleId] = useState("");
 	const [Password, setPassword] = useState("");
-	const [Username, setUsername] = useState("");
+
 	const [Email, setEmail] = useState("");
 
 	const handleFirstNameChange = (value) => {
@@ -45,9 +45,7 @@ function Registration() {
 	const handlePasswordChange = (value) => {
 		setPassword(value);
 	};
-	const handleUsernameChange = (value) => {
-		setUsername(value);
-	};
+	
 	const handleEmailChange = (value) => {
 		setEmail(value);
 	};
@@ -64,7 +62,7 @@ function Registration() {
 			ZipCode: ZipCode,
 			RoleId: RoleId,
 			Password: Password,
-			Username: Username,
+			
 			Email: Email,
 		};
 		const url = "https://localhost:7209/api/user/update";
@@ -151,13 +149,7 @@ function Registration() {
 					id="txtPassword"
 					onChange={(e) => handlePasswordChange(e.target.value)}></input>
 			</div>
-			<div>
-				<label>Username</label>
-				<input
-					type="text"
-					id="txtUsername"
-					onChange={(e) => handleUsernameChange(e.target.value)}></input>
-			</div>
+			
 			<div>
 				<label>Email</label>
 				<input
