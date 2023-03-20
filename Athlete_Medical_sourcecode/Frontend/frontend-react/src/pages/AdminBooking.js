@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Table } from "react-bootstrap";
 import axios from "axios";
 
-const AdminBooking = () => {
+  const AdminBooking = () => {
   const username = Cookies.get("username");
   const [users, setUsers] = useState([]);
 
