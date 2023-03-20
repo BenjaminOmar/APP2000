@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card, Modal, ModalHeader } from "react-bootstrap";
 import Cookies from "js-cookie";
 
-
 //Define the login component
 const LoginForm = () => {
 	//Get the navigate object from the react-router-dom package
@@ -26,21 +25,21 @@ const LoginForm = () => {
 	// Get the API URL from the environment variables
 	const apiUrl = process.env.REACT_APP_API_URL;
 
-	//function that removes cookies after 30 min of inactivity with alert to user. 
+	//function that removes cookies after 30 min of inactivity with alert to user.
 	function resetInactivityTimer() {
 		clearTimeout(inactivityTimer);
 		inactivityTimer = setTimeout(() => {
-		  // Remove cookies
-		  Cookies.remove("role");
-		  Cookies.remove("username");
-	  
-		  // Show a message to the user that they have been logged out due to inactivity
-		  alert("You have been logged out due to inactivity");
-	  
-		  // Navigate the user to the login page
-		  navigate("/login");
+			// Remove cookies
+			Cookies.remove("role");
+			Cookies.remove("username");
+
+			// Show a message to the user that they have been logged out due to inactivity
+			alert("You have been logged out due to inactivity");
+
+			// Navigate the user to the login page
+			navigate("/login");
 		}, inactivityTimeout);
-	  }
+	}
 
 	// Handle the form submission
 	const handleLoginSubmit = (event) => {
@@ -58,36 +57,35 @@ const LoginForm = () => {
 				if (!response.ok) {
 					//If the response is not ok, set the error message to display to the user
 					setErrorMessage("Ugyldig brukernavn eller passord!");
-					setShowModal(true);					
+					setShowModal(true);
 				}
 				return response.json();
-			}).then((data) => {
+			})
+			.then((data) => {
 				//If the response is successful, navigate to the user page
 				//Extract the 'role' property from the response data object
 				const role = data.roleId;
 				//Set cookies with the user's role, username and expiretimer
 				Cookies.set("role", role, { expires: cookieExpiration });
 				Cookies.set("username", username, { expires: cookieExpiration });
-				
+
 				resetInactivityTimer();
 
 				//Navigate the user to different pages based on their role
 				if (role === 1) {
 					navigate("/dashboard");
-					 } else if (role === 2) {
-				 	navigate("/specialistDashboard");
-					} else if (role === 3) {
+				} else if (role === 2) {
+					navigate("/specialistDashboard");
+				} else if (role === 3) {
 					navigate("/adminbooking");
-				 }
+				}
 			})
 			.catch((error) => {
 				//Handle any errors that occur during the request or response
 				setErrorMessage(error.message);
 				setShowModal(true);
 			});
-			
 	};
-
 
 	//Add a useEffect hook to check for the cookie when the component mounts
 	useEffect(() => {
@@ -107,15 +105,20 @@ const LoginForm = () => {
 	}, [navigate]);
 
 	// close error message
-	const handleClose = () => {setErrorMessage("");};
-
+	const handleClose = () => {
+		setErrorMessage("");
+	};
 
 	return (
-		<div className="d-flex justify-content-center align-items-start" 
-			style={{ paddingTop: "50px", position: "relative", marginBottom: "100px" }}
-		>
+		<div
+			className="d-flex justify-content-center align-items-start"
+			style={{
+				paddingTop: "50px",
+				position: "relative",
+				marginBottom: "100px",
+			}}>
 			{/*A Card component from bootstrap-react that is used to display the Login form. And properties to use flipp function*/}
-			<Card>				
+			<Card>
 				<Card.Header>
 					<h3>Logg Inn</h3> {/* A heading for the Login form */}
 				</Card.Header>
@@ -124,7 +127,10 @@ const LoginForm = () => {
 					<Form onSubmit={handleLoginSubmit}>
 						{/* Display the error message, if any */}
 						{errorMessage && (
-							<Modal show={showModal} onHide={() => setShowModal(false)} size="sm">
+							<Modal
+								show={showModal}
+								onHide={() => setShowModal(false)}
+								size="sm">
 								<ModalHeader closeButton onClick={handleClose} />
 								<Modal.Body>{errorMessage}</Modal.Body>
 							</Modal>
@@ -173,14 +179,12 @@ const LoginForm = () => {
 							<Link to="/forgotpwrduser" style={{ marginLeft: "50px" }}>
 								Glemt passord?
 							</Link>
-							<Link
-								to="/register"								
-								style={{ marginLeft: "50px" }}>
-									Har du ikke bruker? Klikk her!{" "}
-								</Link>
-							</Form.Group>
-						</Form>
-					</Card.Body>			
+							<Link to="/register" style={{ marginLeft: "50px" }}>
+								Har du ikke bruker? Klikk her!{" "}
+							</Link>
+						</Form.Group>
+					</Form>
+				</Card.Body>
 			</Card>
 		</div>
 	);

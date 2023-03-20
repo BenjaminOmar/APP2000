@@ -13,7 +13,7 @@ import SpecialistSection from "./pages/SpecialistSection";
 import AdminEditUser from "./pages/AdminEditUser";
 import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
-
+import Flip from "./components/Flip";
 
 function App() {
 	return (
@@ -24,17 +24,15 @@ function App() {
 					<Route path="/login" element={<Login />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/dashboard" element={<Dashboard />} />
-					<Route path="/forgotpwrduser" element={<ForgotPwrdUser />}/>
-					<Route path="/termsprivacy" element={<TermsPrivacyPage />}/>
-					<Route path="/services" element={<Services/>}/>
-					<Route path="/contact" element={<Contact/>}/>
-					<Route path="/specialistsection" element={<SpecialistSection/>}/>
-					<Route path="/adminedituser" element={<AdminEditUser/>}/>
-					<Route path="/adminbooking" element={<AdminBooking/>}/>
-					<Route path="/adminseejornal" element={<AdminSeeJournal/>}/>
-					
-
-					
+					<Route path="/forgotpwrduser" element={<ForgotPwrdUser />} />
+					<Route path="/termsprivacy" element={<TermsPrivacyPage />} />
+					<Route path="/services" element={<Services />} />
+					<Route path="/contact" element={<Contact />} />
+					<Route path="/specialistsection" element={<SpecialistSection />} />
+					<Route path="/adminedituser" element={<AdminEditUser />} />
+					<Route path="/adminbooking" element={<AdminBooking />} />
+					<Route path="/adminseejornal" element={<AdminSeeJournal />} />
+					<Route path="/flip" element={<Flip />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>
