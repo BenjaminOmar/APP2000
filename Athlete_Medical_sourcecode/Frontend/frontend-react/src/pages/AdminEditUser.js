@@ -1,265 +1,173 @@
-import HeaderAdmin from "../components/HeaderAdmin";
 import React, { useState } from "react";
-import { Button, Form, Table } from "react-bootstrap";
-import _ from "lodash";
+import axios from "axios";
 
-function AdminEditUser() {
-	const [searchInput, setSearchInput] = useState("");
-	const [searchResults, setSearchResults] = useState([]);
-	const [selectedUser, setSelectedUser] = useState();
-	const [showEditForm, setShowEditForm] = useState(false);
-	
-	const handleSearch = async (event) => {
-		event.preventDefault();
-		try {
-			const response = await fetch("https://localhost:7209/api/user/getAll");
-			const data = await response.json();
-			const filteredResults = data.filter(
-				(user) =>
-					user.firstName.toLowerCase().includes(searchInput.toLowerCase()) ||
-					user.middleName?.toLowerCase().includes(searchInput.toLowerCase()) ||
-					user.lastName.toLowerCase().includes(searchInput.toLowerCase()) ||
-					user.socialSecurityNum.includes(searchInput)
-			);
-			setSearchResults(filteredResults);
-			setSelectedUser(filteredResults[0]);
-		} catch (error) {
-			console.log(error);
-		}
+function Registration() {
+	const [firstName, setFirstName] = useState("");
+	const [id, setId] = useState("");
+	const [MiddleName, setMiddleName] = useState("");
+	const [LastName, setLastName] = useState("");
+	const [PhoneNumber, setPhoneNumber] = useState("");
+	const [Ssn, setSsn] = useState("");
+	const [Adress, setAdress] = useState("");
+	const [ZipCode, setZipCode] = useState("");
+	const [RoleId, setRoleId] = useState("");
+	const [Password, setPassword] = useState("");
+	const [Username, setUsername] = useState("");
+	const [Email, setEmail] = useState("");
+
+	const handleFirstNameChange = (value) => {
+		setMiddleName(value);
+	};
+	const handleIdChange = (value) => {
+		setId(value);
+	};
+	const handleMiddleNameChange = (value) => {
+		setFirstName(value);
+	};
+	const handleLastNameChange = (value) => {
+		setLastName(value);
+	};
+	const handlePhoneNumberChange = (value) => {
+		setPhoneNumber(value);
+	};
+	const handleSsnChange = (value) => {
+		setSsn(value);
+	};
+	const handleAdressChange = (value) => {
+		setAdress(value);
+	};
+	const handleZipCodeChange = (value) => {
+		setZipCode(value);
+	};
+	const handleRoleIdChange = (value) => {
+		setRoleId(value);
+	};
+	const handlePasswordChange = (value) => {
+		setPassword(value);
+	};
+	const handleUsernameChange = (value) => {
+		setUsername(value);
+	};
+	const handleEmailChange = (value) => {
+		setEmail(value);
 	};
 
-	const handleUserSelect = async (user) => {
-		setSelectedUser((prevSelectedUser) =>
-			prevSelectedUser === user ? null : user
-		);
-		try {
-			const response = await fetch(
-				`https://localhost:7209/api/user/getAll/${user.userId}`
-			);
-			console.log(response);
-			const userData = await response.json();
-			setSelectedUser(userData);
-			setShowEditForm(true);
-			
-		} catch (error) {
-			console.log(error);
-		}		
-	};
-
-	const handleFormChange = (event) => {
-		const { name, value } = event.target;
-		const updatedUser = _.cloneDeep(selectedUser); // create a new copy of the selected user object
-		_.set(updatedUser, name, value); // update the value of the field based on the input name using lodash's set method
-		setSelectedUser(updatedUser);
-	  };
-
-	const handleFormSubmit = (event) => {
-		event.preventDefault();
-		fetch("https://localhost:7209/api/user/update", {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				"userId": parseInt(selectedUser.userId),
-				"firstName": selectedUser.firstName,
-				"middleName": selectedUser.middleName,
-				"lastName": selectedUser.lastName,
-				"phoneNumber": parseInt(selectedUser.phoneNumber),
-				"socialSecurityNum": selectedUser.socialSecurityNum,
-				"adress": selectedUser.adress,
-				"zipCode": parseInt(selectedUser.zipCode),
-				"roleId": parseInt(selectedUser.roleId),
-				"password": selectedUser.password,
-				"regDate": new Date(selectedUser.regDate),
-				"username": selectedUser.username,
-				"email": selectedUser.email
-			}),
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Error updating user data");
-				}
-				return response.json();
-			})
-			.then((data) => {
-				console.log("User data updated:", data);
-				setSelectedUser(data); // oppdaterer skjemaet med nye data
+	const handleSave = () => {
+		const data = {
+			userId: id,
+			FirstName: firstName,
+			MiddleName: MiddleName,
+			LastName: LastName,
+			PhoneNumber: PhoneNumber,
+			SocialSecurityNum: Ssn,
+			Adress: Adress,
+			ZipCode: ZipCode,
+			RoleId: RoleId,
+			Password: Password,
+			Username: Username,
+			Email: Email,
+		};
+		const url = "https://localhost:7209/api/user/update";
+		axios
+			.put(url, data)
+			.then((result) => {
+				alert(result.data);
 			})
 			.catch((error) => {
-				console.error("Error updating user data:", error);
+				alert(error);
 			});
 	};
 
 	return (
 		<>
-			<HeaderAdmin />
-			<Form.Group>
-				<Form.Control
+			<div>Update User</div>
+			<div>
+				<label>Id</label>
+				<input
 					type="text"
-					placeholder="Søk på fornavn, etternavn eller personnummer"
-					value={searchInput}
-					onChange={(e) => setSearchInput(e.target.value)}
-				/>
-			</Form.Group>
-			<Button variant="primary" onClick={handleSearch}>
-				Søk
-			</Button>
-
-			{searchResults.length > 0 && (
-				<Table striped bordered hover>
-					<thead>
-						<tr>
-							<th>Velg bruker</th>
-							<th>Fornavn</th>
-							<th>Mellomnavn</th>
-							<th>Etternavn</th>
-							<th>Personnummer</th>
-						</tr>
-					</thead>
-					<tbody>
-						{searchResults.map((user) => (
-							<tr key={user.userId} onClick={() => handleUserSelect(user)}>
-								<td>
-									<input
-										type="checkbox"
-										name="selectedUser"
-										onChange={() => setSelectedUser(user)}
-										checked={user === selectedUser}
-									/>
-								</td>
-								<td>{user.firstName}</td>
-								<td>{user.middleName}</td>
-								<td>{user.lastName}</td>
-								<td>{user.socialSecurityNum}</td>
-							</tr>
-						))}
-					</tbody>
-					{selectedUser && (
-						<Button variant="primary" onClick={() => setShowEditForm(true)}>
-							Velg bruker
-						</Button>
-					)}
-				</Table>
-			)}
-			{selectedUser && showEditForm && (
-				<Form onSubmit={handleFormSubmit}>
-
-						<Form.Group>
-						<Form.Label>Brukernavn</Form.Label>
-						<Form.Control
-							type="text"
-							name="username"
-							value={selectedUser.username}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-					<Form.Group>
-						<Form.Label>Fornavn</Form.Label>
-						<Form.Control
-							type="text"
-							name="firstName"
-							value={selectedUser.firstName}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-
-					<Form.Group>
-						<Form.Label>Mellomnavn</Form.Label>
-						<Form.Control
-							type="text"
-							name="middleName"
-							value={selectedUser.middleName}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-
-					<Form.Group>
-						<Form.Label>Last Name</Form.Label>
-						<Form.Control
-							type="text"
-							name="lastName"
-							value={selectedUser.lastName}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-
-					<Form.Group>
-						<Form.Label>Telefonnummer</Form.Label>
-						<Form.Control
-							type="number"
-							name="phoneNumber"
-							value={selectedUser.phoneNumber}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-					<Form.Group>
-						<Form.Label>Epost</Form.Label>
-						<Form.Control
-							type="text"
-							name="email"
-							value={selectedUser.email}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-
-					<Form.Group >
-						<Form.Label>Social Security Number</Form.Label>
-						<Form.Control
-							type="text"
-							name="socialSecurityNum"
-							value={selectedUser.socialSecurityNum}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-
-					<Form.Group>
-						<Form.Label>Address</Form.Label>
-						<Form.Control
-							type="text"
-							name="adress"
-							value={selectedUser.adress}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-
-					<Form.Group>
-						<Form.Label>Zip Code</Form.Label>
-						<Form.Control
-							type="text"
-							name="zipCode"
-							value={selectedUser.zipCode}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-
-					<Form.Group>
-						<Form.Label>Role ID</Form.Label>
-						<Form.Control
-							type="number"
-							name="roleId"
-							value={selectedUser.roleId}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-
-					<Form.Group>
-						<Form.Label>Password</Form.Label>
-						<Form.Control
-							type="password"
-							name="password"
-							value={selectedUser.password}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-
-					<Button variant="primary" type="submit" onClick={handleFormSubmit}>
-						Oppdater bruker
-					</Button>
-				</Form>
-			)}
+					id="txtId"
+					onChange={(e) => handleIdChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>First name</label>
+				<input
+					type="text"
+					id="txtFirstName"
+					onChange={(e) => handleFirstNameChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>Middle name</label>
+				<input
+					type="text"
+					id="txtMiddleName"
+					onChange={(e) => handleMiddleNameChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>Last name</label>
+				<input
+					type="text"
+					id="txtLastName"
+					onChange={(e) => handleLastNameChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>Phonenumber</label>
+				<input
+					type="text"
+					id="phoneNumber"
+					onChange={(e) => handlePhoneNumberChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>ssn</label>
+				<input
+					type="text"
+					id="txtSsn"
+					onChange={(e) => handleSsnChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>Adress</label>
+				<input
+					type="text"
+					id="txtAdress"
+					onChange={(e) => handleAdressChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>Zipcode</label>
+				<input
+					type="text"
+					id="txtZipCode"
+					onChange={(e) => handleZipCodeChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>Role Id</label>
+				<input
+					type="text"
+					id="txtRoleId"
+					onChange={(e) => handleRoleIdChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>Password</label>
+				<input
+					type="text"
+					id="txtPassword"
+					onChange={(e) => handlePasswordChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>Username</label>
+				<input
+					type="text"
+					id="txtUsername"
+					onChange={(e) => handleUsernameChange(e.target.value)}></input>
+			</div>
+			<div>
+				<label>Email</label>
+				<input
+					type="text"
+					id="txtEmail"
+					onChange={(e) => handleEmailChange(e.target.value)}></input>
+			</div>
+			<button onClick={() => handleSave()}>Save</button>
 		</>
 	);
 }
 
-export default AdminEditUser;
+export default Registration;

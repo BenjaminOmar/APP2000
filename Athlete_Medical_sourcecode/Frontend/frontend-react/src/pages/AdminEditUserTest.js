@@ -1,26 +1,69 @@
 import HeaderAdmin from "../components/HeaderAdmin";
 import React, { useState } from "react";
 import { Button, Form, Table } from "react-bootstrap";
+import _, { result } from "lodash";
+import axios from "axios";
 
 function AdminEditUser() {
 	const [searchInput, setSearchInput] = useState("");
 	const [searchResults, setSearchResults] = useState([]);
-	const [selectedUser, setSelectedUser] = useState({
-		firstName: "",
-		middleName: "",
-		lastName: "",
-		phoneNumber: "",
-		socialSecurityNum: "",
-		adress: "",
-		zipCode: "",
-		roleId: "",
-		password: "",
-		regDate: "",
-		username: "",
-		email: "",
-	});
+	const [selectedUser, setSelectedUser] = useState();
 	const [showEditForm, setShowEditForm] = useState(false);
-	
+
+	const [userId, setUserId] = useState ("");
+	const [firstName, setFirstName] = useState("");
+	const [middleName, setMiddleName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [phoneNumber, setPhoneNumber] = useState("");
+	const [ssn, setSsn] = useState("");
+	const [adress, setAdress] = useState("");
+	const [zipCode, setZipCode] = useState("");
+	const [roleId, setRoleId] = useState("");
+	const [password, setPassword] = useState("");
+	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+
+
+	const handleFirstNameChange = (value) => {
+		setMiddleName(value);
+	};
+	const handleIdChange = (value) => {
+		setUserId(value);
+	};
+	const handleMiddleNameChange = (value) => {
+		setFirstName(value);
+	};
+	const handleLastNameChange = (value) => {
+		setLastName(value);
+	};
+	const handlePhoneNumberChange = (value) => {
+		setPhoneNumber(value);
+	};
+	const handleSsnChange = (value) => {
+		setSsn(value);
+	};
+	const handleAdressChange = (value) => {
+		setAdress(value);
+	};
+	const handleZipCodeChange = (value) => {
+		setZipCode(value);
+	};
+	const handleRoleIdChange = (value) => {
+		setRoleId(value);
+	};
+	const handlePasswordChange = (value) => {
+		setPassword(value);
+	};
+	const handleUsernameChange = (value) => {
+		setUsername(value);
+	};
+	const handleEmailChange = (value) => {
+		setEmail(value);
+	};
+
+
+
+
 	const handleSearch = async (event) => {
 		event.preventDefault();
 		try {
@@ -48,41 +91,51 @@ function AdminEditUser() {
 			const response = await fetch(
 				`https://localhost:7209/api/user/getAll/${user.userId}`
 			);
+			console.log(response);
 			const userData = await response.json();
 			setSelectedUser(userData);
 			setShowEditForm(true);
+			
 		} catch (error) {
 			console.log(error);
-		}
+		}		
 	};
 
-	const handleFormChange = (event) => {
-		const { name, value } = event.target;
-		setSelectedUser((prevData) => ({ ...prevData, [name]: value }));
-	};
+	// const handleFormChange = (event) => {
+	// 	const { name, value } = event.target;
+	// 	const updatedUser = _.cloneDeep(selectedUser); // create a new copy of the selected user object
+	// 	_.set(updatedUser, name, value); // update the value of the field based on the input name using lodash's set method
+	// 	setSelectedUser(updatedUser);
+	//   };
 
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
-		fetch("https://localhost:7209/api/user/update", {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(selectedUser),
-		})
-			.then((response) => {
-				if (!response.ok) {
-					throw new Error("Error updating user data");
-				}
-				return response.json();
-			})
-			.then((data) => {
-				console.log("User data updated:", data);
-				setSelectedUser(data); // oppdaterer skjemaet med nye data
+
+		const data = {
+			userId: selectedUser.userId,
+			FirstName: selectedUser.FirstName,
+			MiddleName: selectedUser.middleName,
+			LastName: selectedUser.lastName,
+			PhoneNumber: selectedUser.phoneNumber,
+			SocialSecurityNum: selectedUser.ssn,
+			Adress: selectedUser.adress,
+			ZipCode: selectedUser.zipCode,
+			RoleId: selectedUser.roleId,
+			Password: selectedUser.password,
+			Username: selectedUser.username,
+			Email: selectedUser.email,
+		};
+		const url = "https://localhost:7209/api/user/update"
+		axios
+			.put(url,data)
+			.then((result) => {
+				alert(result.data);
 			})
 			.catch((error) => {
-				console.error("Error updating user data:", error);
+				alert(error);
 			});
+		
+		
 	};
 
 	return (
@@ -137,94 +190,113 @@ function AdminEditUser() {
 				</Table>
 			)}
 			{selectedUser && showEditForm && (
+			<tbody>	
+				
 				<Form onSubmit={handleFormSubmit}>
-					<Form.Group controlId="formBasicFirstName">
+
+					<Form.Group>
+						<Form.Label>Role ID</Form.Label>						
+						<Form.Control
+							type="number"
+							name="roleId"
+							value={selectedUser.roleId}
+							onChange={(e) => handleRoleIdChange(e.target.value)}						/>
+					</Form.Group>		
+
+						<Form.Group>
+						<Form.Label>Brukernavn</Form.Label>
+						<Form.Control
+							type="text"
+							name="username"
+							value={selectedUser.username}
+							onChange={(e) => handleUsernameChange(e.target.value)}
+						/>
+					</Form.Group>
+					<Form.Group>
 						<Form.Label>Fornavn</Form.Label>
 						<Form.Control
 							type="text"
-							name="firstName"
+							name="FirstName"
 							value={selectedUser.firstName}
-							onChange={handleFormChange}
+							onChange={(e) => handleFirstNameChange(e.target.value)}
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicMiddleName">
-						<Form.Label>Middle Name</Form.Label>
+					<Form.Group>
+						<Form.Label>Mellomnavn</Form.Label>
 						<Form.Control
 							type="text"
 							name="middleName"
 							value={selectedUser.middleName}
-							onChange={handleFormChange}
+							onChange={(e) => handleMiddleNameChange(e.target.value)}
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicLastName">
+					<Form.Group>
 						<Form.Label>Last Name</Form.Label>
 						<Form.Control
 							type="text"
 							name="lastName"
 							value={selectedUser.lastName}
-							onChange={handleFormChange}
+							onChange={(e) => handleLastNameChange(e.target.value)}
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicPhoneNumber">
-						<Form.Label>Phone Number</Form.Label>
+					<Form.Group>
+						<Form.Label>Telefonnummer</Form.Label>
 						<Form.Control
 							type="number"
 							name="phoneNumber"
 							value={selectedUser.phoneNumber}
-							onChange={handleFormChange}
+							onChange={(e) => handlePhoneNumberChange(e.target.value)}
+						/>
+					</Form.Group>
+					<Form.Group>
+						<Form.Label>Epost</Form.Label>
+						<Form.Control
+							type="text"
+							name="email"
+							value={selectedUser.email}
+							onChange={(e) => handleEmailChange(e.target.value)}
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicSocialSecurityNum">
+					<Form.Group >
 						<Form.Label>Social Security Number</Form.Label>
 						<Form.Control
 							type="text"
 							name="socialSecurityNum"
 							value={selectedUser.socialSecurityNum}
-							onChange={handleFormChange}
+							onChange={(e) => handleSsnChange(e.target.value)}
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicAdress">
+					<Form.Group>
 						<Form.Label>Address</Form.Label>
 						<Form.Control
 							type="text"
 							name="adress"
 							value={selectedUser.adress}
-							onChange={handleFormChange}
+							onChange={(e) => handleAdressChange(e.target.value)}
 						/>
 					</Form.Group>
 
-					<Form.Group controlId="formBasicZipCode">
+					<Form.Group>
 						<Form.Label>Zip Code</Form.Label>
 						<Form.Control
 							type="text"
 							name="zipCode"
 							value={selectedUser.zipCode}
-							onChange={handleFormChange}
+							onChange={(e) => handleZipCodeChange(e.target.value)}
 						/>
 					</Form.Group>
-
-					<Form.Group controlId="formBasicRoleId">
-						<Form.Label>Role ID</Form.Label>
-						<Form.Control
-							type="number"
-							name="roleId"
-							value={selectedUser.roleId}
-							onChange={handleFormChange}
-						/>
-					</Form.Group>
-
-					<Form.Group controlId="formBasicPassword">
+					<Form.Group>
 						<Form.Label>Password</Form.Label>
 						<Form.Control
 							type="password"
 							name="password"
 							value={selectedUser.password}
-							onChange={handleFormChange}
+							onChange={(e) => handlePasswordChange(e.target.value)}
 						/>
 					</Form.Group>
 
@@ -232,6 +304,7 @@ function AdminEditUser() {
 						Oppdater bruker
 					</Button>
 				</Form>
+				</tbody>
 			)}
 		</>
 	);
