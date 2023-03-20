@@ -16,7 +16,8 @@ export function Home() {
       <HomeImage/>
       <Appointment/>
       <OurServices/> 
-      <OurSpecialists/>                    
+      <OurSpecialists/>    
+      
      </div>
   );
 }
