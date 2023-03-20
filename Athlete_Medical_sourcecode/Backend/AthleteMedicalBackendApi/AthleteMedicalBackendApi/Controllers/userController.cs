@@ -76,21 +76,6 @@ namespace AthleteMedicalBackendApi.Controllers
                     return BadRequest(new { Message = "Brukernavn finnes fra før av" });
                 }
 
-                if (await CheckSecurityNumExistAsync(user.SocialSecurityNum!))
-                {
-                    return BadRequest(new { Message = "Personnummer finnes allerede fra før av" });
-                }
-
-                if (await CheckPhoneNumberExistAsync(user.PhoneNumber))
-                {
-                    return BadRequest(new { Message = "Telefonnummer finnes allerede fra før av" });
-                }
-
-                if (await CheckEmailExistAsync(user.Email!))
-                {
-                    return BadRequest(new { Message = "Mail finnes allerede fra før av" });
-                }
-
                 var checkUsername = CheckUsernameStrength(user.Username);
                 if (!string.IsNullOrEmpty(checkUsername))
                 {
