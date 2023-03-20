@@ -43,8 +43,7 @@ function AdminEditUser() {
 			
 		} catch (error) {
 			console.log(error);
-		}
-		
+		}		
 	};
 
 	const handleFormChange = (event) => {
@@ -56,7 +55,7 @@ function AdminEditUser() {
 
 	const handleFormSubmit = (event) => {
 		event.preventDefault();
-		fetch("https://localhost:7209/api/User/update", {
+		fetch("https://localhost:7209/api/user/update", {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
