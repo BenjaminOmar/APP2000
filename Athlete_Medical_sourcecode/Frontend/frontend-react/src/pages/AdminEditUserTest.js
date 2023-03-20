@@ -122,7 +122,6 @@ function AdminEditUser() {
 			ZipCode: selectedUser.zipCode,
 			RoleId: selectedUser.roleId,
 			Password: selectedUser.password,
-			Username: selectedUser.username,
 			Email: selectedUser.email,
 		};
 		const url = "https://localhost:7209/api/user/update"
@@ -178,6 +177,7 @@ function AdminEditUser() {
 								<td>{user.firstName}</td>
 								<td>{user.middleName}</td>
 								<td>{user.lastName}</td>
+								<td>{user.userName}</td>
 								<td>{user.socialSecurityNum}</td>
 							</tr>
 						))}
@@ -203,15 +203,6 @@ function AdminEditUser() {
 							onChange={(e) => handleRoleIdChange(e.target.value)}						/>
 					</Form.Group>		
 
-						<Form.Group>
-						<Form.Label>Brukernavn</Form.Label>
-						<Form.Control
-							type="text"
-							name="username"
-							value={selectedUser.username}
-							onChange={(e) => handleUsernameChange(e.target.value)}
-						/>
-					</Form.Group>
 					<Form.Group>
 						<Form.Label>Fornavn</Form.Label>
 						<Form.Control
