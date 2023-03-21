@@ -3,6 +3,8 @@ import SpecialisHeader from '../components/SpecialistDashboardComponents/Special
 import FindUsers from "../components/SpecialistDashboardComponents/FindUsers";
 import WriteJournal from "../components/SpecialistDashboardComponents/WriteJournal";
 import FindJournals from "../components/SpecialistDashboardComponents/FindJournals";
+import TopBar from "../components/SpecialistDashboardComponents/TopBar";
+import SideBar from "../components/SpecialistDashboardComponents/SideBar";
 
 
 
@@ -11,7 +13,8 @@ function SpecialistDashboard() {
   return (
 		<>
 			
-			<FindUsers/>
+			<TopBar/>
+			<SideBar/>
 
 			
 
