@@ -298,10 +298,11 @@ function RegisterForm() {
 								{/*Form.Group component*/}
 								<Form.Group controlId="ssn" style={{ marginBottom: "15px" }}>
 									{/* Label component with text and instructions */}
-									<Form.Label>Personnummer, 11 tall:</Form.Label>
+									<Form.Label style={{ marginBottom: "15px" }}>
+										Personnummer, 11 tall:
+									</Form.Label>
 									{/*Form.Control component with attributes like type, placeholder, and value*/}
 									<Form.Control
-										style={{ marginTop: "5px" }}
 										type="text"
 										placeholder="Personnummer"
 										value={Ssn}
@@ -347,9 +348,7 @@ function RegisterForm() {
 									controlId="password"
 									style={{ marginBottom: "15px" }}>
 									{/* Label component with text and instructions */}
-									<Form.Label style={{ marginBottom: "15px" }}>
-										Passord:
-									</Form.Label>
+									<Form.Label>Passord:</Form.Label>
 									{/*Form.Control component with attributes like type, placeholder, and value*/}
 									<Form.Control
 										type="password"
