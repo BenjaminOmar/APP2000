@@ -62,7 +62,7 @@ function Registration() {
 			ZipCode: ZipCode,
 			RoleId: RoleId,
 			Password: Password,
-			
+			username: '',
 			Email: Email,
 		};
 		const url = "https://localhost:7209/api/user/update";

@@ -107,6 +107,7 @@ function AdminEditUser() {
 					<thead>
 						<tr>
 							<th>Velg bruker</th>
+							<th>Brukernavn</th>
 							<th>Fornavn</th>
 							<th>Mellomnavn</th>
 							<th>Etternavn</th>
@@ -124,6 +125,7 @@ function AdminEditUser() {
 										checked={user === selectedUser}
 									/>
 								</td>
+								<td>{user.firstName}</td>
 								<td>{user.firstName}</td>
 								<td>{user.middleName}</td>
 								<td>{user.lastName}</td>
