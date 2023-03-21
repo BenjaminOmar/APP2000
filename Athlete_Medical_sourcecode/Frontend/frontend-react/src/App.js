@@ -13,7 +13,7 @@ import SpecialistSection from "./pages/SpecialistSection";
 import AdminEditUser from "./pages/AdminEditUser";
 import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
-import Flip from "./components/Flip";
+// import Flip from "./components/Flip";
 
 function App() {
 	return (
@@ -32,7 +32,7 @@ function App() {
 					<Route path="/adminedituser" element={<AdminEditUser />} />
 					<Route path="/adminbooking" element={<AdminBooking />} />
 					<Route path="/adminseejornal" element={<AdminSeeJournal />} />
-					<Route path="/flip" element={<Flip />} />
+					{/* <Route path="/flip" element={<Flip />} /> */}
 				</Routes>
 				<Footer />
 			</BrowserRouter>
