@@ -71,11 +71,6 @@ namespace AthleteMedicalBackendApi.Controllers
                     return NotFound(new { Message = "valgt bruker finnes ikke" });
                 }
 
-                var checkSsn = CheckSsnStrength(user.SocialSecurityNum!);
-                if (!string.IsNullOrEmpty(checkSsn))
-                {
-                    return BadRequest(new { Message = checkSsn });
-                }
 
                 var checkZip = CheckZipStrength(user.ZipCode.ToString());
                 if (!string.IsNullOrEmpty(checkZip))
@@ -91,7 +86,7 @@ namespace AthleteMedicalBackendApi.Controllers
 
                 user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
 
-                await _context.Database.ExecuteSqlInterpolatedAsync($"alterUser({user.UserId},{user.FirstName},{user.MiddleName},{user.LastName},{user.PhoneNumber},{user.SocialSecurityNum},{user.Adress},{user.ZipCode},{user.RoleId},{user.Password},{user.Email})");
+                await _context.Database.ExecuteSqlInterpolatedAsync($"alterUser({user.UserId},{user.FirstName},{user.MiddleName},{user.LastName},{user.PhoneNumber},{user.Adress},{user.ZipCode},{user.RoleId},{user.Password},{user.Email})");
 
                 return Ok(new { Message = "Bruker er endret" });
 

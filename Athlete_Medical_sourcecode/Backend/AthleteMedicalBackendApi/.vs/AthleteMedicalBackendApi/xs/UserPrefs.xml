@@ -1,18 +1,21 @@
 ﻿<Properties StartupConfiguration="{BEA6208D-AD0B-4D33-BFBB-CD4D922F1B4E}|https">
-  <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Controllers/appointmentController.cs">
     <Files>
       <File FileName="AthleteMedicalBackendApi/Controllers/appointmentController.cs" Line="27" Column="10" />
       <File FileName="AthleteMedicalBackendApi/Controllers/journalController.cs" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/userController.cs" Line="81" Column="45" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/userController.cs" />
       <File FileName="AthleteMedicalBackendApi/Entities/Journalnote.cs" />
       <File FileName="AthleteMedicalBackendApi/Entities/Role.cs" />
       <File FileName="AthleteMedicalBackendApi/Entities/Room.cs" />
       <File FileName="AthleteMedicalBackendApi/Controllers/rolesController.cs" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/roomController.cs" Line="22" Column="10" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/roomController.cs" />
       <File FileName="AthleteMedicalBackendApi/Entities/User.cs" />
       <File FileName="AthleteMedicalBackendApi/Entities/Appointment.cs" />
     </Files>
@@ -34,7 +37,4 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

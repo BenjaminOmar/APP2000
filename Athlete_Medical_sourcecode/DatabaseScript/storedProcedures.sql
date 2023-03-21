@@ -93,7 +93,6 @@ CREATE DEFINER=`root`@`%` PROCEDURE `alterUser`(
     IN `middleName` VARCHAR(45),
     IN `lastName` VARCHAR(45), 
     IN `phoneNumber` INT, 
-    IN `socialSecurityNum` VARCHAR(11),
     IN `adress` VARCHAR(45),
     IN `zipCode` INT,
     IN `roleId` INT,
@@ -103,7 +102,7 @@ CREATE DEFINER=`root`@`%` PROCEDURE `alterUser`(
     MODIFIES SQL DATA
 
 UPDATE user
-SET userId = id, FirstName = firstName, middleName = middleName, lastName = lastName, phoneNumber = phoneNumber, socialSecurityNum = socialSecurityNum, adress = adress, zipCode = zipCode, roleId = roleId, password = password, email = email  
+SET userId = id, FirstName = firstName, middleName = middleName, lastName = lastName, phoneNumber = phoneNumber, adress = adress, zipCode = zipCode, roleId = roleId, password = password, email = email  
 WHERE userId = id$$
 DELIMITER ;
 
