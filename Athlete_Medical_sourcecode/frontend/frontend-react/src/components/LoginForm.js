@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card, Modal, ModalHeader } from "react-bootstrap";
 import Cookies from "js-cookie";
+import "./LoginForm.css";
 
 //Define the login component
 const LoginForm = () => {
@@ -118,7 +119,7 @@ const LoginForm = () => {
 				marginBottom: "100px",
 			}}>
 			{/*A Card component from bootstrap-react that is used to display the Login form. And properties to use flipp function*/}
-			<Card>
+			<Card className="card-container">
 				<Card.Header>
 					<h3>Logg Inn</h3> {/* A heading for the Login form */}
 				</Card.Header>
@@ -169,17 +170,17 @@ const LoginForm = () => {
 								paddingLeft: "150px",
 								paddingRight: "150px",
 								marginTop: "30px",
-								marginLeft: "50px",
+								marginLeft: "10px",
 								backgroundColor: "#0050B1",
 							}}>
 							Logg Inn
 						</Button>
 						<Form.Group style={{ marginTop: "30px" }}>
 							{/*Link components that takes the user to the forgot password page or register page */}
-							<Link to="/forgotpwrduser" style={{ marginLeft: "50px" }}>
+							<Link to="/forgotpwrduser" style={{ marginLeft: "10px" }}>
 								Glemt passord?
 							</Link>
-							<Link to="/register" style={{ marginLeft: "50px" }}>
+							<Link to="/register" style={{ marginLeft: "20px" }}>
 								Har du ikke bruker? Klikk her!{" "}
 							</Link>
 						</Form.Group>
