@@ -1,9 +1,10 @@
 // import required components from libraries
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, Button, Card, Modal } from "react-bootstrap";
+import { Form, Button, Card, Modal, OverlayTrigger } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "./RegisterForm.css";
+import { Tooltip } from "react-bootstrap";
 
 //define a functional component
 function RegisterForm() {
@@ -167,6 +168,25 @@ function RegisterForm() {
 		}
 	}
 
+	const ssnTooltip = (
+		<Tooltip id="tooltip">Personnummer må være 11 siffer</Tooltip>
+	);
+	const zipCodeTooltip = (
+		<Tooltip id="tooltip">postnummer må være 4 siffer</Tooltip>
+	);
+	const usernameTooltip = (
+		<Tooltip id="tooltip">
+			brukernavn må inneholde: <br></br> - 5 siffer <br></br> - være uten
+			mellomrom
+		</Tooltip>
+	);
+	const passwordTooltip = (
+		<Tooltip id="tooltip">
+			passord må inneholde: <br></br> - 8 siffer <br></br> - en alphanumerisk
+			karakter <br></br> - et tall
+		</Tooltip>
+	);
+
 	return (
 		<div
 			className="d-flex justify-content-center align-items-start min-vh-100"
@@ -201,23 +221,25 @@ function RegisterForm() {
 						<Card.Body>
 							{/*Form.Group component*/}
 							<Card.Text className="left">
-								<Form.Group
-									style={{ marginBottom: "15px" }}
-									controlId="username">
-									{/* Label component with text and instructions */}
-									<Form.Label style={{ marginBottom: "15px" }}>
-										Brukernavn:
-									</Form.Label>
-									{/*Form.Control component with attributes like type, placeholder, and value*/}
-									<Form.Control
-										type="Text"
-										placeholder="Ønsket brukernavn"
-										value={Username}
-										// onChange event handler
-										onChange={(e) => handleUsernameChange(e.target.value)}
-										required
-									/>
-								</Form.Group>
+								<OverlayTrigger placement="left" overlay={usernameTooltip}>
+									<Form.Group
+										style={{ marginBottom: "15px" }}
+										controlId="username">
+										{/* Label component with text and instructions */}
+										<Form.Label style={{ marginBottom: "15px" }}>
+											Brukernavn:
+										</Form.Label>
+										{/*Form.Control component with attributes like type, placeholder, and value*/}
+										<Form.Control
+											type="Text"
+											placeholder="Ønsket brukernavn"
+											value={Username}
+											// onChange event handler
+											onChange={(e) => handleUsernameChange(e.target.value)}
+											required
+										/>
+									</Form.Group>
+								</OverlayTrigger>
 								{/*Form.Group component*/}
 								<Form.Group
 									style={{ marginBottom: "15px" }}
@@ -296,21 +318,23 @@ function RegisterForm() {
 							</Card.Text>
 							<Card.Text className="right">
 								{/*Form.Group component*/}
-								<Form.Group controlId="ssn" style={{ marginBottom: "15px" }}>
-									{/* Label component with text and instructions */}
-									<Form.Label style={{ marginBottom: "15px" }}>
-										Personnummer, 11 tall:
-									</Form.Label>
-									{/*Form.Control component with attributes like type, placeholder, and value*/}
-									<Form.Control
-										type="text"
-										placeholder="Personnummer"
-										value={Ssn}
-										// onChange event handler
-										onChange={(e) => handleSsnChange(e.target.value)}
-										required
-									/>
-								</Form.Group>
+								<OverlayTrigger placement="right" overlay={ssnTooltip}>
+									<Form.Group controlId="ssn" style={{ marginBottom: "15px" }}>
+										{/* Label component with text and instructions */}
+										<Form.Label style={{ marginBottom: "15px" }}>
+											Personnummer, 11 tall:
+										</Form.Label>
+										{/*Form.Control component with attributes like type, placeholder, and value*/}
+										<Form.Control
+											type="text"
+											placeholder="Personnummer"
+											value={Ssn}
+											// onChange event handler
+											onChange={(e) => handleSsnChange(e.target.value)}
+											required
+										/>
+									</Form.Group>
+								</OverlayTrigger>
 								{/*Form.Group component*/}
 								<Form.Group
 									controlId="address"
@@ -328,36 +352,40 @@ function RegisterForm() {
 									/>
 								</Form.Group>
 								{/*Form.Group component*/}
-								<Form.Group
-									style={{ marginBottom: "15px" }}
-									controlId="zipCode">
-									{/* Label component with text and instructions */}
-									<Form.Label>Postnummer, 4 tall:</Form.Label>
-									{/*Form.Control component with attributes like type, placeholder, and value*/}
-									<Form.Control
-										type="text"
-										placeholder="Postnummer"
-										value={ZipCode}
-										// onChange event handler
-										onChange={(e) => handleZipCodeChange(e.target.value)}
-										required
-									/>
-								</Form.Group>
+								<OverlayTrigger placement="right" overlay={zipCodeTooltip}>
+									<Form.Group
+										style={{ marginBottom: "15px" }}
+										controlId="zipCode">
+										{/* Label component with text and instructions */}
+										<Form.Label>Postnummer, 4 tall:</Form.Label>
+										{/*Form.Control component with attributes like type, placeholder, and value*/}
+										<Form.Control
+											type="text"
+											placeholder="Postnummer"
+											value={ZipCode}
+											// onChange event handler
+											onChange={(e) => handleZipCodeChange(e.target.value)}
+											required
+										/>
+									</Form.Group>
+								</OverlayTrigger>
 								{/*Form.Group component*/}
-								<Form.Group
-									controlId="password"
-									style={{ marginBottom: "15px" }}>
-									{/* Label component with text and instructions */}
-									<Form.Label>Passord:</Form.Label>
-									{/*Form.Control component with attributes like type, placeholder, and value*/}
-									<Form.Control
-										type="password"
-										placeholder="Passord"
-										value={Password}
-										onChange={(e) => handlePasswordChange(e.target.value)}
-										required
-									/>
-								</Form.Group>
+								<OverlayTrigger placement="right" overlay={passwordTooltip}>
+									<Form.Group
+										controlId="password"
+										style={{ marginBottom: "15px" }}>
+										{/* Label component with text and instructions */}
+										<Form.Label>Passord:</Form.Label>
+										{/*Form.Control component with attributes like type, placeholder, and value*/}
+										<Form.Control
+											type="password"
+											placeholder="Passord"
+											value={Password}
+											onChange={(e) => handlePasswordChange(e.target.value)}
+											required
+										/>
+									</Form.Group>
+								</OverlayTrigger>
 								<Form.Group
 									controlId="confirmPassword"
 									style={{ marginBottom: "15px" }}>
