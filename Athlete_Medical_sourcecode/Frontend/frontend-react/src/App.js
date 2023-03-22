@@ -14,6 +14,7 @@ import AdminEditUser from "./pages/AdminEditUser";
 import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
 import Flip from "./components/Flip";
+import Flip2 from "./components/flip/Flip2";
 
 function App() {
 	return (
@@ -21,8 +22,6 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/login" element={<Login />} />
-					<Route path="/register" element={<Register />} />
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/forgotpwrduser" element={<ForgotPwrdUser />} />
 					<Route path="/termsprivacy" element={<TermsPrivacyPage />} />
@@ -32,7 +31,8 @@ function App() {
 					<Route path="/adminedituser" element={<AdminEditUser />} />
 					<Route path="/adminbooking" element={<AdminBooking />} />
 					<Route path="/adminseejornal" element={<AdminSeeJournal />} />
-					<Route path="/flip" element={<Flip />} />
+					<Route path="/login" element={<Flip />} />
+					<Route path="/flip2" element={<Flip2 />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>

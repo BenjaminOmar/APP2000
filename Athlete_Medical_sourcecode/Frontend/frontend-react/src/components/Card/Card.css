@@ -64,3 +64,17 @@
 .flip-enter-done {
 	transform: rotateY(0deg);
 }
+
+.flip-button-front {
+	position: absolute;
+	margin-top: 250px;
+	margin-left: 110px;
+	width: 217px;
+}
+
+.flip-button-back {
+	position: absolute;
+	margin-top: 250px;
+	margin-left: 150px;
+	width: 217px;
+}

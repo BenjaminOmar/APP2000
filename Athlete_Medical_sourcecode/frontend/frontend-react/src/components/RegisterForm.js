@@ -385,16 +385,12 @@ function RegisterForm() {
 								}}>
 								Register Bruker
 							</Button>
-							<Form.Group style={{ marginTop: "30px" }}>
+							<Form.Group style={{ marginTop: "30px", marginBottom: "40px" }}>
 								{/*Link components that redirect the user to the forgot password page or login page */}
 								<Link to="/forgotpwrduser" style={{ marginLeft: "88px" }}>
 									Glemt passord eller brukernavn?
 								</Link>
 							</Form.Group>
-							<Form.Group style={{ marginTop: "10px" }}></Form.Group>
-							<Link to="/login" style={{ marginLeft: "160px" }}>
-								Til logg inn{" "}
-							</Link>
 						</Card.Body>
 					</Card>
 				</div>

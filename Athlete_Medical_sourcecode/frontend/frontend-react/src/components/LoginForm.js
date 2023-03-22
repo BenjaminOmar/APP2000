@@ -180,9 +180,6 @@ const LoginForm = () => {
 							<Link to="/forgotpwrduser" style={{ marginLeft: "10px" }}>
 								Glemt passord?
 							</Link>
-							<Link to="/register" style={{ marginLeft: "20px" }}>
-								Har du ikke bruker? Klikk her!{" "}
-							</Link>
 						</Form.Group>
 					</Form>
 				</Card.Body>
