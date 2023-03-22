@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import "./LoginForm.css";
 
 //Define the login component
-const LoginForm = () => {
+const LoginForm = ({ onClick }) => {
 	//Get the navigate object from the react-router-dom package
 	const navigate = useNavigate();
 	//Define the state variables for the login forms inputs and error message
