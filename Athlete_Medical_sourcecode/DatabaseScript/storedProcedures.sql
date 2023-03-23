@@ -7,6 +7,15 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- list of all available appointments based on specialistId
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `availableAppointmentsbySpecId`(IN `specId` INT)
+    READS SQL DATA
+BEGIN
+    SELECT * FROM appointment WHERE isAvailable = 1 AND specialistId = specId;
+END$$
+DELIMITER ;
+
 -- list of all specialists
 DELIMITER $$
 CREATE DEFINER=`root`@`%` PROCEDURE `specialists`()

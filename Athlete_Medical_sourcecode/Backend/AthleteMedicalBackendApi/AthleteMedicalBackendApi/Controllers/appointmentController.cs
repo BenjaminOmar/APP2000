@@ -55,6 +55,22 @@ namespace AthleteMedicalBackendApi.Controllers
             }
         }
 
+        // get all available appointments by specialistId
+        [HttpGet("available/specId")]
+        public async Task<IActionResult> GetAvailableAppointmentsBySpecId(int specId)
+        {
+            try
+            {
+                var availableAppointments = await _context.Appointments.FromSqlInterpolated<Appointment>($"availableAppointmentsbySpecId({specId})").ToListAsync();
+
+                return Ok(availableAppointments);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error ved visning av alle ledige avtaler");
+            }
+        }
+
 
         // book an available appointment
         [HttpPut("book")]
