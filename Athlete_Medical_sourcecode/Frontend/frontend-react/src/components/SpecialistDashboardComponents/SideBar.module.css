@@ -1,9 +1,9 @@
 :root{
-    --primaryColor: #f3f6fc;
+    --primaryColor: #fafafa;
     --secondaryColor:#fcf8f3;
     --tertiaryColor: #8ccdfc;
     --quaternaryColor:#69abfa;
-    --hoverColor:#5aa3fc;
+    --hoverColor:#e2edfc;
     --border: 1rem;
     --border-radius: 2rem;
     --pri-shadow:rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -51,7 +51,7 @@
 
 .titleWrapper{
     border:black;
-    background-color: var(--tertiaryColor);
+    background-color: var(--secondaryColor);
     border-radius: 2rem;
     display: flex;
     flex-direction: row;
@@ -67,7 +67,7 @@
 
 .linkWrapper{
     border:black;
-    background-color: var(--tertiaryColor);
+    background-color:var(--secondaryColor);
     border-radius: 2rem;
     display: flex;
     flex-direction: column;
@@ -82,7 +82,8 @@
 
 
 .links{
-    background-color: var(--quaternaryColor);
+    background-color: var(--secondaryColor);
+    color: black;
     border-radius: 2rem;
     margin-left: 1.5rem;
     margin-right: 2rem;

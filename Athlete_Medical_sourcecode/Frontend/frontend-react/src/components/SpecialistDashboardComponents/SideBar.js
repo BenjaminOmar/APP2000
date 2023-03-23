@@ -1,4 +1,5 @@
 import React from 'react';
+import FindUsers from './FindUsers';
 import { Link } from 'react-router-dom';
 
 
@@ -19,7 +20,7 @@ function SideBar() {
                 </div>
             </div>
             <div className={SideBarCSS.linkWrapper}>
-                <Link to='/' className={SideBarCSS.links}>Finn Pasient</Link><br></br>
+                <Link to='/FindUsers' className={SideBarCSS.links}>Finn Pasient</Link><br></br>
                 <Link to='/' className={SideBarCSS.links}>Finn Avtalen</Link><br></br>
             </div>
         </div>
