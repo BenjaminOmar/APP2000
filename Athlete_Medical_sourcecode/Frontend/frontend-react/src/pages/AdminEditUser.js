@@ -1,3 +1,6 @@
+//Kommentere koden. 
+
+
 import HeaderAdmin from "../components/HeaderAdmin";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
@@ -10,6 +13,13 @@ function AdminEditUser() {
 	const [searchResults, setSearchResults] = useState([]);
 	const [selectedUser, setSelectedUser] = useState(null);
 	const [showModal, setShowModal] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  
+ 
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
+  };
 	
 	const searchUsers = async (event) => {
 		event.preventDefault();
@@ -26,11 +36,67 @@ function AdminEditUser() {
 			setSearchResults(filteredResults);
 			
 		} catch (error) {
-			Alert(error);
+			alert(error);
 		};		
 	  }  
 
-	const handleSave = () => {
+    	// A function that validates the zipcode making a request to the Zippopotamus.us API
+      async function validateZipCode(zipCode) {
+        try {
+            //Construct the API url using the zip code.
+            const url = `https://api.zippopotam.us/no/${zipCode}`;
+            //making a get request to the API an wait for response
+            const response = await axios.get(url);
+            //check if the response status is 200(OK) and return the result
+            return response.status === 200;
+        } catch (error) {
+            //Return false if validation fails
+            return false;
+        }
+    }
+    
+
+	const handleSave = async () => {
+
+    //Error handling
+    //Validate phone number
+    if (!/^\d+$/.test(selectedUser.phoneNumber)) {
+     		alert("Telefonnummeret kan bare inneholde tall");
+			return;
+		}
+
+    //Validate that the zip code is a valid zipCode in norway
+    const isValidZipCode = await validateZipCode(selectedUser.zipCode);
+		if (!isValidZipCode) {
+			alert("Ugyldig postnummer");			
+			return;
+		}
+
+    if (selectedUser.roleId.toString() !== "1" && selectedUser.roleId.toString() !== "2" && selectedUser.roleId.toString() !== "3")
+    {
+      alert("Kun 1, 2 og 3 er gyldige rolle nummer")
+      return;
+    }
+
+    if (!selectedUser.email.includes("@") || !selectedUser.email.includes(".")) {
+      alert("Vennligst fyll inn en gyldig e-postadresse");
+      return;
+    }
+    if (!/[a-zA-ZæøåÆØÅ]/.test(selectedUser.password) || !/[0-9]/.test(selectedUser.password)) {
+			alert(
+				"Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer"
+			);
+				return;
+		}
+    if (selectedUser.password.includes(selectedUser.username.toString())) {
+      alert("Passordet kan ikke inneholde brukernavnet.");
+      return;
+    }
+    if (password.length > 0 && password !== confirmPassword) {
+      alert("Passordene du har skrevet inn er ikke like");
+      return;
+    }
+
 		const data = {
 			userId: selectedUser.userId,
     		firstName: selectedUser.firstName,
@@ -48,12 +114,14 @@ function AdminEditUser() {
 		axios
 			.put(url, data)
 			.then((result) => {
-				alert(result.data);
+				alert('Lagring vellykket! Trykk "Avslutt" for å gå ut av skjemaet.');
 			})
 			.catch((error) => {
 				Alert(error);
 			});
 	};
+
+ 
 
 	return (
 		<>
@@ -145,6 +213,7 @@ function AdminEditUser() {
                   type="text" 
                   value={selectedUser.firstName} 
                   onChange={(e) => {setSelectedUser({...selectedUser, firstName: e.target.value});}} 
+                  required
                 />
               </Form.Group>
               <Form.Group>
@@ -161,6 +230,7 @@ function AdminEditUser() {
                   type="text" 
                   value={selectedUser.lastName} 
                   onChange={(e) => {setSelectedUser({...selectedUser, lastName: e.target.value});}} 
+                  required
                 />
               </Form.Group>	
 		          <Form.Group>
@@ -169,6 +239,7 @@ function AdminEditUser() {
                   type="text" 
                   value={selectedUser.phoneNumber} 
                   onChange={(e) => {setSelectedUser({...selectedUser, phoneNumber: e.target.value});}} 
+                  required
                   />
                 </Form.Group>	
 		            <Form.Group>
@@ -177,6 +248,7 @@ function AdminEditUser() {
                     type="text" 
                     value={selectedUser.adress} 
                     onChange={(e) => {setSelectedUser({...selectedUser, adress: e.target.value});}} 
+                    required
                   />
                 </Form.Group>
 		            <Form.Group>
@@ -185,6 +257,7 @@ function AdminEditUser() {
                     type="text" 
                     value={selectedUser.zipCode} 
                     onChange={(e) => {setSelectedUser({...selectedUser, zipCode: e.target.value});}} 
+                    required
                     />
                 </Form.Group>
                 <Form.Group>
@@ -193,14 +266,16 @@ function AdminEditUser() {
                     type="text" 
                     value={selectedUser.roleId} 
                     onChange={(e) => {setSelectedUser({...selectedUser, roleId: e.target.value});}} 
+                    required
                   />
                 </Form.Group>
 		            <Form.Group>
                   <Form.Label>Epost</Form.Label>
                   <Form.Control 
-                    type="email" 
+                    type="text" 
                     value={selectedUser.email} 
                     onChange={(e) => {setSelectedUser({...selectedUser, email: e.target.value});}} 
+                    required
                     />
                 </Form.Group>
 		            <Form.Group>
@@ -208,15 +283,18 @@ function AdminEditUser() {
                   <Form.Control 
                     type="password" 
                     value={selectedUser.password} 
-                    onChange={(e) => {setSelectedUser({...selectedUser, password: e.target.value});}} 
+                    onChange={(e) => {setSelectedUser({...selectedUser, password: e.target.value});  setPassword(e.target.value) }} 
+                    required
                   />
                 </Form.Group>
 		            <Form.Group>
-                  <Form.Label>Gjenta Passord</Form.Label>
+                  <Form.Label>Bekreft Passord</Form.Label>
                   <Form.Control 
+                    placeholder="Brukes kun ved registrering av nytt passord"
                     type="password" 
-                    value={selectedUser.password} 
-                    onChange={(e) => {setSelectedUser({...selectedUser, password: e.target.value});}} 
+                    value={confirmPassword}
+                    onChange={handleConfirmPasswordChange} 
+                    required
                   />
                 </Form.Group>		
               </Form>
@@ -225,9 +303,17 @@ function AdminEditUser() {
               <Button 
                 style={{width: '60%', marginRight: '21%'}}
                 variant="primary"                 
-                onClick={() => {handleSave(selectedUser); setShowModal(false);}}>
+                onClick={() => {handleSave(selectedUser);}}>
                 Lagre
-              </Button>
+              </Button>            
+            </Modal.Footer>
+            <Modal.Footer>
+            <Button 
+                style={{width: '60%', marginRight: '21%'}}
+                variant="primary"   
+                onClick={() => setShowModal(false)} >
+                Avslutt
+            </Button>
             </Modal.Footer>
           </Modal>
         )}
