@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import LoginForm from "../LoginForm";
 import RegisterForm from "../RegisterForm";
-import "./Flip2.css";
+// import "./Flip2.css";
 
 //A function that returns a div container that contains the video and a text overlay.
 function Flip2() {
