@@ -2,7 +2,7 @@
 
 //Imports the React library.
 import React, { useState } from "react";
-import "./flip.css";
+import "./Flip.css";
 import Card from "./Card/Card";
 import { CSSTransition } from "react-transition-group";
 
