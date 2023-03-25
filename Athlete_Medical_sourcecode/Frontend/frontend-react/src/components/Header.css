@@ -1,42 +1,159 @@
-.navbar{
-    background-color: #f8f9fa;  
-    
+.navbar {
+	background-color: #f8f9fa;
 }
 
-.list-item{
-    color:rgb(0, 0, 0) !important ;
-    padding: 0px 10px !important;
+.list-item {
+	color: rgb(0, 0, 0) !important ;
+	padding: 0px 10px !important;
 }
 
-.mx-auto{
-    margin: 0 !important;
-    padding: 0 !important;
+.mx-auto {
+	margin: 0 !important;
+	padding: 0 !important;
 }
 
 .list-item:hover {
-    background-color:rgb(197, 221, 240);
-    border-radius: 4px !important;
-    transition: all 0.2s ease-out;
-    text-decoration: underline !important;
+	background-color: rgb(197, 221, 240);
+	border-radius: 4px !important;
+	transition: all 0.2s ease-out;
+	text-decoration: underline !important;
 }
 
-.btn{
-    background: #1D75BD !important;
-    border: none;
-    margin-right: 10px;
+.btn {
+	background: #1d75bd !important;
+	border: none;
+	margin-right: 10px;
 }
 
-.btn:hover{
-    color: rgb(0, 0, 0) !important;
+.btn:hover {
+	color: rgb(0, 0, 0) !important;
 }
 
 /* style for the  logo animation, make the picture "pop-out" on hoover */
 
-.logoAnimation {
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .logoAnimation:hover {
-    transform: scale(1.2);
-  }
+.logoAnimationHeader {
+	transition: transform 0.3s ease-in-out;
+}
 
+.logoAnimationHeader:hover {
+	transform: scale(1.2);
+}
+
+.logoAnimation {
+	transition: transform 0.3s ease-in-out;
+}
+
+.logoAnimation:hover {
+	transform: scale(1.2);
+}
+
+.logoAnimationHeader {
+	-webkit-animation: logoAnimationHeader 0.1s
+		cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	animation: logoAnimationHeader 1.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes logoAnimationHeader {
+	0% {
+		-webkit-transform: translateZ(-1400px) translateY(-800px)
+			translateX(-1000px);
+		transform: translateZ(-1400px) translateY(-800px) translateX(-1000px);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: translateZ(0) translateY(0) translateX(0);
+		transform: translateZ(0) translateY(0) translateX(0);
+		opacity: 1;
+	}
+}
+@keyframes logoAnimationHeader {
+	0% {
+		-webkit-transform: translateZ(-1400px) translateY(-800px)
+			translateX(-1000px);
+		transform: translateZ(-1400px) translateY(-800px) translateX(-1000px);
+		opacity: 0;
+	}
+	100% {
+		-webkit-transform: translateZ(0) translateY(0) translateX(0);
+		transform: translateZ(0) translateY(0) translateX(0);
+		opacity: 1;
+	}
+}
+
+/* CSS */
+.loginButton {
+	background-color: #0d6efd;
+	align-items: center;
+	appearance: none;
+	border-radius: 24px;
+	border-style: none;
+	box-shadow: rgba(0, 0, 0, 0.2) 0 3px 5px -1px,
+		rgba(0, 0, 0, 0.14) 0 6px 10px 0, rgba(0, 0, 0, 0.12) 0 1px 18px 0;
+	box-sizing: border-box;
+	color: #ffff;
+	cursor: pointer;
+	fill: currentcolor;
+	font-family: "Google Sans", Roboto, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 500;
+	height: 48px;
+	justify-content: center;
+	letter-spacing: 0.25px;
+	line-height: normal;
+	max-width: 100%;
+	overflow: visible;
+	padding: 2px 24px;
+	position: relative;
+	text-align: center;
+	text-transform: none;
+	transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1),
+		opacity 15ms linear 30ms, transform 270ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+	user-select: none;
+	-webkit-user-select: none;
+	touch-action: manipulation;
+	width: auto;
+	will-change: transform, opacity;
+	z-index: 0;
+}
+
+.loginButton:hover {
+	background: #f6f9fe;
+	color: #0d6efd;
+	transform: scale(1.1);
+}
+
+.loginButton:active {
+	box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%),
+		0 8px 12px 6px rgb(60 64 67 / 15%);
+	outline: none;
+}
+
+.loginButton:focus {
+	outline: none;
+	border: 2px solid #4285f4;
+}
+
+.loginButton:not(:disabled) {
+	box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
+		rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
+}
+
+.loginButton:not(:disabled):hover {
+	box-shadow: rgba(60, 64, 67, 0.3) 0 2px 3px 0,
+		rgba(60, 64, 67, 0.15) 0 6px 10px 4px;
+}
+
+.loginButton:not(:disabled):focus {
+	box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
+		rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
+}
+
+.loginButton:not(:disabled):active {
+	box-shadow: rgba(60, 64, 67, 0.3) 0 4px 4px 0,
+		rgba(60, 64, 67, 0.15) 0 8px 12px 6px;
+}
+
+.loginButton:disabled {
+	box-shadow: rgba(60, 64, 67, 0.3) 0 1px 3px 0,
+		rgba(60, 64, 67, 0.15) 0 4px 8px 3px;
+}
