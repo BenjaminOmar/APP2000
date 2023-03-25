@@ -48,7 +48,7 @@ const HeaderAdmin = () => {
         </Nav>            
             <Nav className='ms-auto'> 
                 <DropdownButton style={{backgroundColor: '#f8f9fa'}} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>
-                  <Dropdown.Item as={Link} to="/">Dine opplysninger</Dropdown.Item>
+                  <Dropdown.Item as={Link} to="/alteruser">Dine opplysninger</Dropdown.Item>
                   <Dropdown.Item onClick={handleLogout}>Logg ut</Dropdown.Item>
                     
                 </DropdownButton>                           
