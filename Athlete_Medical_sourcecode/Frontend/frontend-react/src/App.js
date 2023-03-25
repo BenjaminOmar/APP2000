@@ -14,6 +14,7 @@ import AdminEditUser from "./pages/AdminEditUser";
 import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
 import Flip from "./components/flip";
+import AppointmentBooking from "./pages/AppointmentBooking";
 // import Flip2 from "./components/flip/Flip2";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 					<Route path="/termsprivacy" element={<TermsPrivacyPage />} />
 					<Route path="/services" element={<Services />} />
 					<Route path="/contact" element={<Contact />} />
+					<Route path="/appointmentbooking" element={<AppointmentBooking />} />
 					<Route path="/specialistsection" element={<SpecialistSection />} />
 					<Route path="/adminedituser" element={<AdminEditUser />} />
 					<Route path="/adminbooking" element={<AdminBooking />} />
