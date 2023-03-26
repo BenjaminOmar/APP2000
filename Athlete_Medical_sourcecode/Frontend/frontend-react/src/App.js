@@ -13,7 +13,7 @@ import SpecialistSection from "./pages/SpecialistSection";
 import AdminEditUser from "./pages/AdminEditUser";
 import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
-import Flip from "./components/flip";
+import Flip from "./components/Flip";
 import AlterUser from "./pages/AlterUser";
 // import Flip2 from "./components/flip/Flip2";
 
@@ -34,7 +34,7 @@ function App() {
 					<Route path="/adminseejornal" element={<AdminSeeJournal />} />
 					<Route path="/login" element={<Flip />} />
 					<Route path="/alteruser" element={<AlterUser />} />
-					
+
 					{/* <Route path="/flip2" element={<Flip2 />} /> */}
 				</Routes>
 				<Footer />
