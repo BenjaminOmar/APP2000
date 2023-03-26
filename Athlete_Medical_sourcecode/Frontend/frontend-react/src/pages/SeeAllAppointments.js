@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table } from 'react-bootstrap';
+import Cookies from "js-cookie";
 
 
 function SeeAllAppointments() {
   const [appointments, setAppointments] = useState([]);
   const [selectedSpecialist, setSelectedSpecialist] = useState('');
+  const username = Cookies.get("username");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     axios.get('https://localhost:7209/api/appointment/getAll')

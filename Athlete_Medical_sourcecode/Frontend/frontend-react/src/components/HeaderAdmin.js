@@ -44,7 +44,7 @@ const HeaderAdmin = () => {
           <Nav className="ms-auto">                        
             <NavLink to='/adminbooking' className='list-item' activeClassName='active'>Booking</NavLink>
             <NavLink to='/adminedituser' className='list-item' activeClassName='active'>Brukerkontoer</NavLink> 
-            <NavLink to='/' className='list-item' activeClassName='active'>Journaler</NavLink>            
+            <NavLink to='/adminseejournal' className='list-item' activeClassName='active'>Journaler</NavLink>            
         </Nav>            
             <Nav className='ms-auto'> 
                 <DropdownButton style={{backgroundColor: '#f8f9fa'}} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>

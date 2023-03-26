@@ -6,7 +6,7 @@ import OurServices from '../components/OurServices';
 import OurSpecialists from '../components/OurSpecialists';
 import {CookiesModal} from '../components/CookiesModal';
 import AppointmentBooking from './AppointmentBooking';
-import SeeAllJournals from './SeeAllJournals';
+import SeeAllJournals from '../components/SeeAllJournals';
 import SeeAllAppointments from './SeeAllAppointments';
 
 
@@ -16,8 +16,6 @@ export function Home() {
      <div className="App">
       <Popup/>
       <HeaderNormal/>
- <SeeAllJournals/>
-      <SeeAllAppointments/>
       <CookiesModal/>
       <HomeImage/>
       <OurServices/> 
