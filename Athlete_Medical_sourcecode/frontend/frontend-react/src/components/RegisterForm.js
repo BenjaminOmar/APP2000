@@ -1,5 +1,12 @@
+/*This code defines a functional React component that displays a registration form to register users. 
+The component contains several state change functions to update input fields when the user enters information into the form. 
+When the user submits the form, the code validates input fields and sends a POST request to a backend API to store the user 
+information in a database. If the registration is successful, the code displays a modal dialog with a 
+message that the user is registered, before navigating the user to the login page after three seconds.
+*/
+
 // import required components from libraries
-import React, { useState } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 import { Form, Button, Card, Modal, OverlayTrigger } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +14,7 @@ import "./RegisterForm.css";
 import { Tooltip } from "react-bootstrap";
 
 //define a functional component
-function RegisterForm() {
+function RegisterForm({ setShowFrontProp }) {
 	//Declare state variables to hold user information and messages.
 	const [firstName, setFirstName] = useState("");
 	const [MiddleName, setMiddleName] = useState("");
@@ -23,38 +30,19 @@ function RegisterForm() {
 	const [message, setMessage] = useState("");
 	const [showModal, setShowModal] = useState(false);
 	const navigate = useNavigate();
+	const handleLoginClick = () => {setShowFrontProp(true);};
 
 	//Functions that sets value based on the value passed in as a parameter from the form.
-	const handleFirstNameChange = (value) => {
-		setFirstName(value);
-	};
-	const handleMiddleNameChange = (value) => {
-		setMiddleName(value);
-	};
-	const handleLastNameChange = (value) => {
-		setLastName(value);
-	};
-	const handlePhoneNumberChange = (value) => {
-		setPhoneNumber(value);
-	};
-	const handleSsnChange = (value) => {
-		setSsn(value);
-	};
-	const handleAdressChange = (value) => {
-		setAdress(value);
-	};
-	const handleZipCodeChange = (value) => {
-		setZipCode(value);
-	};
-	const handlePasswordChange = (value) => {
-		setPassword(value);
-	};
-	const handleUsernameChange = (value) => {
-		setUsername(value);
-	};
-	const handleEmailChange = (value) => {
-		setEmail(value);
-	};
+	const handleFirstNameChange = (value) => {setFirstName(value);};
+	const handleMiddleNameChange = (value) => {setMiddleName(value);};
+	const handleLastNameChange = (value) => {setLastName(value);};
+	const handlePhoneNumberChange = (value) => {setPhoneNumber(value);};
+	const handleSsnChange = (value) => {setSsn(value);};
+	const handleAdressChange = (value) => {setAdress(value);};
+	const handleZipCodeChange = (value) => {setZipCode(value);};
+	const handlePasswordChange = (value) => {setPassword(value);};
+	const handleUsernameChange = (value) => {setUsername(value);};
+	const handleEmailChange = (value) => {setEmail(value);	};
 
 	//Function that sends the user input to backend api or returns a errorMessage if something fails.
 	const handleSave = async (event) => {
@@ -62,9 +50,7 @@ function RegisterForm() {
 		//Error handling
 		//Validate user name
 		if (Username.length < 5 || Username.includes(" ")) {
-			setMessage(
-				"Brukernavnet må inneholde minst 5 karakterer og kan ikke inneholde mellomrom"
-			);
+			setMessage("Brukernavnet må inneholde minst 5 karakterer og kan ikke inneholde mellomrom");
 			setShowModal(true);
 			return;
 		}
@@ -168,18 +154,25 @@ function RegisterForm() {
 		}
 	}
 
+	// Define a tooltip component for a social security number input field
 	const ssnTooltip = (
 		<Tooltip id="tooltip">Personnummer må være 11 siffer</Tooltip>
 	);
+
+	// Define a tooltip component for a zip code input field
 	const zipCodeTooltip = (
 		<Tooltip id="tooltip">postnummer må være 4 siffer</Tooltip>
 	);
+
+	// Define a tooltip component for a username input field
 	const usernameTooltip = (
 		<Tooltip id="tooltip">
 			brukernavn må inneholde: <br></br> - 5 siffer <br></br> - være uten
 			mellomrom
 		</Tooltip>
 	);
+
+	// Define a tooltip component for a password input field
 	const passwordTooltip = (
 		<Tooltip id="tooltip">
 			passord må inneholde: <br></br> - 8 siffer <br></br> - en alphanumerisk
@@ -212,7 +205,7 @@ function RegisterForm() {
 				)}
 				<div className="flipCard">
 					{/* Card component from a UI library */}
-					<Card className="card-container">
+					<Card className="card-container" style={{width: '500px'}}>
 						{/*Card Header component */}
 						<Card.Header>
 							<h3> Registrer Bruker</h3>
@@ -418,6 +411,9 @@ function RegisterForm() {
 								<Link to="/forgotpwrduser" style={{ marginLeft: "110px" }}>
 									Glemt passord eller brukernavn?
 								</Link>
+								<Link onClick={handleLoginClick}>
+									Til Login
+									</Link> 
 							</Form.Group>
 						</Card.Body>
 					</Card>

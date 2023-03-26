@@ -1,15 +1,18 @@
+
+
+/* Set the style rules for the sidebar element in the Newsletter.js file*/
 .sidebar 
-{           
-    position: absolute;
-    right: 0;
-    top: 70%;
-    padding: 10px;
-    padding-top: 5px;
-    text-align: center;    
-    transform: rotate(-90deg);
-    transform-origin: bottom right;
-    transition: all 10s ease-out;
-    z-index: 999;
+{                
+    position: absolute; /* Position the element absolutely, relative to the nearest positioned ancestor (if any) */
+    right: 0;/* Align the element to the right edge of its containing element */
+    top: 70%;/* Position the top of the element 70% down from the top of the containing element */
+    padding: 10px;/* Set padding on all sides of the element */
+    padding-top: 5px;/* Add additional padding to the top of the element */
+    text-align: center; /* Center the content within the element horizontally */
+    transform: rotate(-90deg);/* Rotate the element counterclockwise by 90 degrees */
+    transform-origin: bottom right;/* Set the transform origin to the bottom right corner of the element */
+    transition: all 10s ease-out;/* Apply a transition effect to all style properties over a duration of 10 seconds, using an ease-out timing function */
+    z-index: 999;/* Set the stacking order of the element relative to other elements */
 }
 
 

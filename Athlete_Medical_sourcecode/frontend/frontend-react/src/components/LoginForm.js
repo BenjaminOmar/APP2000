@@ -1,14 +1,19 @@
-//Kommentere koden
-//Lage flipp funksjon
+// This code defines a login form component in React that sends a POST request to an ASP.NET Core API 
+//with the user's login credentials (username and password) and receives a response with the user's role. 
+//The component sets cookies with the user's role, username, and expiration timer, and navigates the user to 
+//different pages based on their role. It also handles the timeout and removes cookies after 30 minutes of 
+//inactivity with an alert to the user. The component also displays an error message to the user if the 
+//response from the server is not OK. It uses the react-bootstrap and react-router-dom packages.
 
+// Importing required modules from React and other libraries
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card, Modal, ModalHeader } from "react-bootstrap";
 import Cookies from "js-cookie";
-import "./LoginForm.css";
 
-//Define the login component
-const LoginForm = ({ onClick }) => {
+
+//Define the LoginForm component
+const LoginForm = () => {
 	//Get the navigate object from the react-router-dom package
 	const navigate = useNavigate();
 	//Define the state variables for the login forms inputs and error message
@@ -33,10 +38,8 @@ const LoginForm = ({ onClick }) => {
 			// Remove cookies
 			Cookies.remove("role");
 			Cookies.remove("username");
-
 			// Show a message to the user that they have been logged out due to inactivity
-			alert("You have been logged out due to inactivity");
-
+			alert("Du har blitt logget ut på grunn av inaktivitet");
 			// Navigate the user to the login page
 			navigate("/login");
 		}, inactivityTimeout);
@@ -50,17 +53,17 @@ const LoginForm = ({ onClick }) => {
 		fetch("https://localhost:7209/api/User/authenticate", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",
+				"Content-Type": "application/json",// Set the content type of the request body to JSON
 			},
-			body: JSON.stringify({ username, password }),
+			body: JSON.stringify({ username, password }),// Set the request body with the username and password values
 		})
 			.then((response) => {
-				if (!response.ok) {
+				if (!response.ok) {// Check if the response is not successful
 					//If the response is not ok, set the error message to display to the user
 					setErrorMessage("Ugyldig brukernavn eller passord!");
-					setShowModal(true);
+					setShowModal(true);// Show a modal with the error message
 				}
-				return response.json();
+				return response.json();// Parse the response body as JSON
 			})
 			.then((data) => {
 				//If the response is successful, navigate to the user page
@@ -70,7 +73,7 @@ const LoginForm = ({ onClick }) => {
 				Cookies.set("role", role, { expires: cookieExpiration });
 				Cookies.set("username", username, { expires: cookieExpiration });
 
-				resetInactivityTimer();
+				resetInactivityTimer();// Reset the user's inactivity timer
 
 				//Navigate the user to different pages based on their role
 				if (role === 1) {
@@ -90,6 +93,7 @@ const LoginForm = ({ onClick }) => {
 
 	//Add a useEffect hook to check for the cookie when the component mounts
 	useEffect(() => {
+		// Retrieve the user's role and username from cookies
 		const role = Cookies.get("role");
 		const username = Cookies.get("username");
 
@@ -103,9 +107,9 @@ const LoginForm = ({ onClick }) => {
 				navigate("/adminbooking");
 			}
 		}
-	}, [navigate]);
+	}, [navigate]);//the hook will only run if the navigate function changes
 
-	// close error message
+	/// Define a function to close the error message
 	const handleClose = () => {
 		setErrorMessage("");
 	};
@@ -119,7 +123,7 @@ const LoginForm = ({ onClick }) => {
 				marginBottom: "100px",
 			}}>
 			{/*A Card component from bootstrap-react that is used to display the Login form. And properties to use flipp function*/}
-			<Card className="card-container">
+			<Card style={{ width: '450px'}}>
 				<Card.Header>
 					<h3>Logg Inn</h3> {/* A heading for the Login form */}
 				</Card.Header>
@@ -180,6 +184,7 @@ const LoginForm = ({ onClick }) => {
 							<Link to="/forgotpwrduser" style={{ marginLeft: "10px" }}>
 								Glemt passord?
 							</Link>
+
 						</Form.Group>
 					</Form>
 				</Card.Body>

@@ -5,10 +5,13 @@
 //This means that the condition in the useEffect hook will evaluate to true on subsequent page loads, 
 //causing the modal to be shown again, and thus preventing the creation of cookies.
 
+
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 
+// Importing necessary modules from react and react-bootstrap
 const CookiesModal = () => {
+  
   // useState hook to keep track of the visibility of the modal
   const [show, setShow] = useState(false);
 
@@ -37,7 +40,7 @@ const CookiesModal = () => {
     // set the cookiesAccepted value in localStorage to false
     localStorage.setItem("cookiesAccepted", false);
     // redirect the user to a different page
-    };
+  };
 
   // Render the Modal component which displays a pop-up modal with cookie policy information
   return (
@@ -49,21 +52,21 @@ const CookiesModal = () => {
       </Modal.Header>
       <Modal.Body>
         <p>
-            Vi bruker nødvendige informasjonskapsler for å sikre at du kan logge inn og bruke 
-            funksjonaliteten til nettstedet vårt.
+          Vi bruker nødvendige informasjonskapsler for å sikre at du kan logge inn og bruke
+          funksjonaliteten til nettstedet vårt.
         </p>
         <p>
-        Du kan velge å avvise informasjonskapsler ved å klikke på "Avslå"-knappen nedenfor. 
-        Vær oppmerksom på at dette kan begrense funksjonaliteten til nettstedet vårt
+          Du kan velge å avvise informasjonskapsler ved å klikke på "Avslå"-knappen nedenfor.
+          Vær oppmerksom på at dette kan begrense funksjonaliteten til nettstedet vårt
         </p>
       </Modal.Body>
       <Modal.Footer>
         {/* The Button component is used to create the "Decline" button  */}
-        <Button style={{backgroundColor:'#0050B1'}} variant="secondary" onClick={handleDecline}>
+        <Button style={{ backgroundColor: '#0050B1' }} variant="secondary" onClick={handleDecline}>
           Avslå
         </Button>
         {/* The Button component is used to create the "Accept" button */}
-        <Button style={{backgroundColor:'#0050B1'}} variant="primary" onClick={handleAccept}>
+        <Button style={{ backgroundColor: '#0050B1' }} variant="primary" onClick={handleAccept}>
           Godkjenn
         </Button>
       </Modal.Footer>
@@ -72,4 +75,4 @@ const CookiesModal = () => {
 };
 
 //allows the modal to be used in other part of the codebase. 
-export  {CookiesModal};
+export { CookiesModal };
