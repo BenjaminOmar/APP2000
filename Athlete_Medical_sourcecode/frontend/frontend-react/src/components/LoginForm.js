@@ -1,8 +1,8 @@
-// This code defines a login form component in React that sends a POST request to an ASP.NET Core API 
-//with the user's login credentials (username and password) and receives a response with the user's role. 
-//The component sets cookies with the user's role, username, and expiration timer, and navigates the user to 
-//different pages based on their role. It also handles the timeout and removes cookies after 30 minutes of 
-//inactivity with an alert to the user. The component also displays an error message to the user if the 
+// This code defines a login form component in React that sends a POST request to an ASP.NET Core API
+//with the user's login credentials (username and password) and receives a response with the user's role.
+//The component sets cookies with the user's role, username, and expiration timer, and navigates the user to
+//different pages based on their role. It also handles the timeout and removes cookies after 30 minutes of
+//inactivity with an alert to the user. The component also displays an error message to the user if the
 //response from the server is not OK. It uses the react-bootstrap and react-router-dom packages.
 
 // Importing required modules from React and other libraries
@@ -10,7 +10,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Form, Button, Card, Modal, ModalHeader } from "react-bootstrap";
 import Cookies from "js-cookie";
-
 
 //Define the LoginForm component
 const LoginForm = () => {
@@ -53,17 +52,18 @@ const LoginForm = () => {
 		fetch("https://localhost:7209/api/User/authenticate", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",// Set the content type of the request body to JSON
+				"Content-Type": "application/json", // Set the content type of the request body to JSON
 			},
-			body: JSON.stringify({ username, password }),// Set the request body with the username and password values
+			body: JSON.stringify({ username, password }), // Set the request body with the username and password values
 		})
 			.then((response) => {
-				if (!response.ok) {// Check if the response is not successful
+				if (!response.ok) {
+					// Check if the response is not successful
 					//If the response is not ok, set the error message to display to the user
 					setErrorMessage("Ugyldig brukernavn eller passord!");
-					setShowModal(true);// Show a modal with the error message
+					setShowModal(true); // Show a modal with the error message
 				}
-				return response.json();// Parse the response body as JSON
+				return response.json(); // Parse the response body as JSON
 			})
 			.then((data) => {
 				//If the response is successful, navigate to the user page
@@ -73,7 +73,7 @@ const LoginForm = () => {
 				Cookies.set("role", role, { expires: cookieExpiration });
 				Cookies.set("username", username, { expires: cookieExpiration });
 
-				resetInactivityTimer();// Reset the user's inactivity timer
+				resetInactivityTimer(); // Reset the user's inactivity timer
 
 				//Navigate the user to different pages based on their role
 				if (role === 1) {
@@ -107,7 +107,7 @@ const LoginForm = () => {
 				navigate("/adminbooking");
 			}
 		}
-	}, [navigate]);//the hook will only run if the navigate function changes
+	}, [navigate]); //the hook will only run if the navigate function changes
 
 	/// Define a function to close the error message
 	const handleClose = () => {
@@ -123,7 +123,7 @@ const LoginForm = () => {
 				marginBottom: "100px",
 			}}>
 			{/*A Card component from bootstrap-react that is used to display the Login form. And properties to use flipp function*/}
-			<Card style={{ width: '450px'}}>
+			<Card style={{ width: "450px" }}>
 				<Card.Header>
 					<h3>Logg Inn</h3> {/* A heading for the Login form */}
 				</Card.Header>
@@ -174,17 +174,16 @@ const LoginForm = () => {
 								paddingLeft: "150px",
 								paddingRight: "150px",
 								marginTop: "30px",
-								marginLeft: "10px",
+								marginLeft: "25px",
 								backgroundColor: "#0050B1",
 							}}>
 							Logg Inn
 						</Button>
 						<Form.Group style={{ marginTop: "30px" }}>
 							{/*Link components that takes the user to the forgot password page or register page */}
-							<Link to="/forgotpwrduser" style={{ marginLeft: "10px" }}>
+							<Link to="/forgotpwrduser" style={{ marginLeft: "20px" }}>
 								Glemt passord?
 							</Link>
-
 						</Form.Group>
 					</Form>
 				</Card.Body>
