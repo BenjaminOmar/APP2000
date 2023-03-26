@@ -14,10 +14,7 @@ function Flip() {
 		<div className="background">
 			<div className="flippable-card-container">
 				<CSSTransition in={showFront} timeout={300} classNames="flip">
-					<Card
-						onClick={() => {
-							setShowFront((v) => !v);
-						}}
+					<Card setShowFront={setShowFront}
 					/>
 				</CSSTransition>
 			</div>

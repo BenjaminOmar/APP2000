@@ -1,13 +1,15 @@
 // import required components from libraries
-import React, { useState } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 import { Form, Button, Card, Modal, OverlayTrigger } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import "./RegisterForm.css";
 import { Tooltip } from "react-bootstrap";
 
+
+
 //define a functional component
-function RegisterForm() {
+function RegisterForm({ setShowFrontProp }) {
 	//Declare state variables to hold user information and messages.
 	const [firstName, setFirstName] = useState("");
 	const [MiddleName, setMiddleName] = useState("");
@@ -23,6 +25,10 @@ function RegisterForm() {
 	const [message, setMessage] = useState("");
 	const [showModal, setShowModal] = useState(false);
 	const navigate = useNavigate();
+
+	const handleLoginClick = () => {
+		setShowFrontProp(true);
+	};
 
 	//Functions that sets value based on the value passed in as a parameter from the form.
 	const handleFirstNameChange = (value) => {
@@ -212,7 +218,7 @@ function RegisterForm() {
 				)}
 				<div className="flipCard">
 					{/* Card component from a UI library */}
-					<Card className="card-container">
+					<Card className="card-container" style={{width: '500px'}}>
 						{/*Card Header component */}
 						<Card.Header>
 							<h3> Registrer Bruker</h3>
@@ -418,6 +424,9 @@ function RegisterForm() {
 								<Link to="/forgotpwrduser" style={{ marginLeft: "88px" }}>
 									Glemt passord eller brukernavn?
 								</Link>
+								<Link onClick={handleLoginClick}>
+									Til Login
+									</Link> 
 							</Form.Group>
 						</Card.Body>
 					</Card>

@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import "./LoginForm.css";
 
 //Define the login component
-const LoginForm = ({ onClick }) => {
+const LoginForm = () => {
 	//Get the navigate object from the react-router-dom package
 	const navigate = useNavigate();
 	//Define the state variables for the login forms inputs and error message
@@ -16,6 +16,8 @@ const LoginForm = ({ onClick }) => {
 	const [password, setPassword] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [showModal, setShowModal] = useState(false);
+
+
 
 	// Set the cookie expiration time to 30 minutes
 	const cookieExpiration = 30 * 60; // 30 minutes in seconds
@@ -180,6 +182,7 @@ const LoginForm = ({ onClick }) => {
 							<Link to="/forgotpwrduser" style={{ marginLeft: "10px" }}>
 								Glemt passord?
 							</Link>
+
 						</Form.Group>
 					</Form>
 				</Card.Body>
