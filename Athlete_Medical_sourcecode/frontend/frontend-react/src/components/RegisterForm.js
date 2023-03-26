@@ -211,7 +211,7 @@ function RegisterForm({ setShowFrontProp }) {
 							<h3> Registrer Bruker</h3>
 						</Card.Header>
 						{/* Card Body component */}
-						<Card.Body>
+						<Card.Body style={{ width: "480px" }}>
 							{/*Form.Group component*/}
 							<Card.Text className="left">
 								<OverlayTrigger placement="left" overlay={usernameTooltip}>
@@ -408,7 +408,7 @@ function RegisterForm({ setShowFrontProp }) {
 							</Button>
 							<Form.Group style={{ marginTop: "30px", marginBottom: "40px" }}>
 								{/*Link components that redirect the user to the forgot password page or login page */}
-								<Link to="/forgotpwrduser" style={{ marginLeft: "88px" }}>
+								<Link to="/forgotpwrduser" style={{ marginLeft: "110px" }}>
 									Glemt passord eller brukernavn?
 								</Link>
 								<Link onClick={handleLoginClick}>
