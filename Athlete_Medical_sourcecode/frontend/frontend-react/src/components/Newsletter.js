@@ -1,3 +1,8 @@
+/*This code defines a React functional component called "Newsletter" that renders a button to trigger a modal window. 
+Clicking on the button toggles the display of the modal window. The modal window contains a form to subscribe to the 
+newsletter and a message describing the newsletter's benefits. The component imports necessary React components and CSS styles 
+and exports itself as the default export.*/
+
 // Importing necessary components and CSS styles
 import React, {useState} from "react";
 import {Button} from "react-bootstrap";

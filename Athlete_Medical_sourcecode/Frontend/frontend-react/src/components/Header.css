@@ -1,42 +1,48 @@
-.navbar{
-    background-color: #f8f9fa;  
-    
+/*  this code is used to style the header components, including the navigation bar, list items, buttons, and logo animation. 
+*/
+
+/*sets the background color of the navigation bar */
+.navbar {
+    background-color: #f8f9fa;    
 }
 
-.list-item{
-    color:rgb(0, 0, 0) !important ;
+/* Sets the color and padding of each list item in the navigation bar */
+.list-item {
+    color: rgb(0, 0, 0) !important;
     padding: 0px 10px !important;
 }
 
-.mx-auto{
+/* Sets the margin and padding of an element with the class "mx-auto" to zero */
+.mx-auto {
     margin: 0 !important;
     padding: 0 !important;
 }
 
+/* Sets the background color, border radius, and underline text decoration of a list item when the user hovers over it */
 .list-item:hover {
-    background-color:rgb(197, 221, 240);
+    background-color: rgb(197, 221, 240);
     border-radius: 4px !important;
     transition: all 0.2s ease-out;
     text-decoration: underline !important;
 }
 
-.btn{
+/* Sets the background color and border properties of a button */
+.btn {
     background: #1D75BD !important;
     border: none;
     margin-right: 10px;
 }
 
-.btn:hover{
+/* Sets the color of a button when the user hovers over it */
+.btn:hover {
     color: rgb(0, 0, 0) !important;
 }
 
-/* style for the  logo animation, make the picture "pop-out" on hoover */
-
+/* Define a CSS animation that scales up the logo image when the user hovers over it */
 .logoAnimation {
     transition: transform 0.3s ease-in-out;
-  }
-  
-  .logoAnimation:hover {
-    transform: scale(1.2);
-  }
+}
 
+.logoAnimation:hover {
+    transform: scale(1.2);
+}

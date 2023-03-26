@@ -1,4 +1,10 @@
+/*The code is a component function for the user profile page. 
+It imports necessary packages, including React Bootstrap for UI components, Axios for HTTP client requests, and Cookies for handling browser cookies. 
+The component retrieves the username from a browser cookie and uses it to fetch user data. 
+It displays the user data in a table and allows the user to edit their profile information. 
+The component includes functions for handling form input changes, submitting form data, and validating zip codes using an API.
 
+*/
 // Importing necessary packages
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Modal, Form, Card } from 'react-bootstrap';
