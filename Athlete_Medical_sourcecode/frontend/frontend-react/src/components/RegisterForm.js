@@ -6,7 +6,7 @@ message that the user is registered, before navigating the user to the login pag
 */
 
 // import required components from libraries
-import React, { useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { Form, Button, Card, Modal, OverlayTrigger } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -30,19 +30,41 @@ function RegisterForm({ setShowFrontProp }) {
 	const [message, setMessage] = useState("");
 	const [showModal, setShowModal] = useState(false);
 	const navigate = useNavigate();
-	const handleLoginClick = () => {setShowFrontProp(true);};
+	const handleLoginClick = () => {
+		setShowFrontProp(true);
+	};
 
 	//Functions that sets value based on the value passed in as a parameter from the form.
-	const handleFirstNameChange = (value) => {setFirstName(value);};
-	const handleMiddleNameChange = (value) => {setMiddleName(value);};
-	const handleLastNameChange = (value) => {setLastName(value);};
-	const handlePhoneNumberChange = (value) => {setPhoneNumber(value);};
-	const handleSsnChange = (value) => {setSsn(value);};
-	const handleAdressChange = (value) => {setAdress(value);};
-	const handleZipCodeChange = (value) => {setZipCode(value);};
-	const handlePasswordChange = (value) => {setPassword(value);};
-	const handleUsernameChange = (value) => {setUsername(value);};
-	const handleEmailChange = (value) => {setEmail(value);	};
+	const handleFirstNameChange = (value) => {
+		setFirstName(value);
+	};
+	const handleMiddleNameChange = (value) => {
+		setMiddleName(value);
+	};
+	const handleLastNameChange = (value) => {
+		setLastName(value);
+	};
+	const handlePhoneNumberChange = (value) => {
+		setPhoneNumber(value);
+	};
+	const handleSsnChange = (value) => {
+		setSsn(value);
+	};
+	const handleAdressChange = (value) => {
+		setAdress(value);
+	};
+	const handleZipCodeChange = (value) => {
+		setZipCode(value);
+	};
+	const handlePasswordChange = (value) => {
+		setPassword(value);
+	};
+	const handleUsernameChange = (value) => {
+		setUsername(value);
+	};
+	const handleEmailChange = (value) => {
+		setEmail(value);
+	};
 
 	//Function that sends the user input to backend api or returns a errorMessage if something fails.
 	const handleSave = async (event) => {
@@ -50,7 +72,9 @@ function RegisterForm({ setShowFrontProp }) {
 		//Error handling
 		//Validate user name
 		if (Username.length < 5 || Username.includes(" ")) {
-			setMessage("Brukernavnet må inneholde minst 5 karakterer og kan ikke inneholde mellomrom");
+			setMessage(
+				"Brukernavnet må inneholde minst 5 karakterer og kan ikke inneholde mellomrom"
+			);
 			setShowModal(true);
 			return;
 		}
@@ -205,7 +229,7 @@ function RegisterForm({ setShowFrontProp }) {
 				)}
 				<div className="flipCard">
 					{/* Card component from a UI library */}
-					<Card className="card-container" style={{width: '500px'}}>
+					<Card className="card-container" style={{ width: "500px" }}>
 						{/*Card Header component */}
 						<Card.Header>
 							<h3> Registrer Bruker</h3>
@@ -406,14 +430,16 @@ function RegisterForm({ setShowFrontProp }) {
 								}}>
 								Register Bruker
 							</Button>
-							<Form.Group style={{ marginTop: "30px", marginBottom: "40px" }}>
+							<Form.Group style={{ marginTop: "30px", marginBottom: "12px" }}>
 								{/*Link components that redirect the user to the forgot password page or login page */}
 								<Link to="/forgotpwrduser" style={{ marginLeft: "110px" }}>
 									Glemt passord eller brukernavn?
 								</Link>
-								<Link onClick={handleLoginClick}>
+							</Form.Group>
+							<Form.Group style={{ marginLeft: "200px" }}>
+								<Link className="loginLink" onClick={handleLoginClick}>
 									Til Login
-									</Link> 
+								</Link>
 							</Form.Group>
 						</Card.Body>
 					</Card>

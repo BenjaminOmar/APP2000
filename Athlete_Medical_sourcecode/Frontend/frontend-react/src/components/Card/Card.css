@@ -65,15 +65,9 @@
 	transform: rotateY(0deg);
 }
 
-.flip-button-back {
-	position: absolute;
-	margin-top: 590px;
-	width: 60px;
-}
-
 .flip-button-front {
 	position: absolute;
-	margin-top: 248px;
+	margin-top: 225px;
 	margin-left: 110px;
 	width: 217px;
 }
