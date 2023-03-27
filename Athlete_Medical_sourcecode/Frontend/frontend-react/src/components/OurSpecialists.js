@@ -20,8 +20,9 @@ function OurSpecialists() {
         <img src={doctor1} alt="Employee 1"/> 
         <div className="employee-text">
         <h3>Geir Arne Nilsen</h3>
-    <p>Ortoped</p>
-    Quisque ipsum tortor, sagittis et viverra ac, sagittis at felis consequat turpis vel. </div> </Link>
+        <p>Ortoped</p>
+    Geir Arne Nilsen er en erfaren ortoped med spesialkompetanse innen behandling av bein- og leddskader og 
+    sykdommer. Han er grundig, oppmerksom og en verdifull tilføyelse til teamet vårt. </div> </Link>
       </div>
       
 
@@ -29,19 +30,31 @@ function OurSpecialists() {
       <Link to="/">
         <img src={doctor2} alt="Employee 2" />
         <div className="employee-text">
-          Vivamus vitae felis ullamcorper, consequat turpis vel, maximus neque. Quisque ipsum tortor, sagittis et viverra ac, sagittis at felis. Suspendisse eu lacinia magna.</div> </Link>
+        <h3>Eva Johnsen</h3>
+        <p>Sykepleier</p>
+        Eva Johnsen er en sykepleier med omfattende erfaring med idrettsskader.
+        Hun er dedikert til å hjelpe pasientene sine med å komme seg tilbake til idretten så raskt og
+        trygt som mulig. </div> </Link>
       </div>
 
       <div className="employee">
       <Link to="/">
         <img src={physician} alt="Employee 3" />
-        <div className="employee-text">Aenean enim felis, elementum sed consequat quis, accumsan sed lacus. Sed rhoncus mauris ultrices diam euismod maximus. Quisque lorem lorem, eleifend eu neque eget, ultrices accumsan augue.</div> </Link>
+        <div className="employee-text">
+        <h3>Karoline Ernstsen</h3>
+        <p>Fysikalsk lege</p>
+        Karoline Ernstsen er en erfaren fysikalsk lege med kompetanse innen rehabilitering av muskel- og
+         skjelettplager. Hun er kjent for sin pasientfokuserte tilnærming og grundige vurderinger.</div> </Link>
       </div>
 
       <div className="employee">
       <Link to="/">
         <img src={physiotherapist} alt="Employee 4" />
-        <div className="employee-text">Duis metus lacus, consectetur quis auctor at, vehicula et risus. Donec elit augue, pretium in odio in, auctor vestibulum ex. Aliquam erat volutpat. Proin at semper purus, eu suscipit arcu.</div> </Link>
+        <div className="employee-text">
+        <h3>Hedda Vold</h3>
+        <p>Fysioterapeut</p>
+        Hedda Vold er en fysioterapeut med kompetanse innenfor muskel- og skjelettplager.
+        Hun tilbyr helhetlig og personlig behandling og legger stor vekt på å lytte til pasientenes behov og ønsker.</div> </Link>
       </div>
     </div>
     </div>
