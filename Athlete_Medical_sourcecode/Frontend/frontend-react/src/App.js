@@ -13,7 +13,7 @@ import SpecialistSection from "./pages/SpecialistSection";
 import AdminEditUser from "./pages/AdminEditUser";
 import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
-import Flip from "./components/Flip";
+import Flip from "./components/flip";
 import AlterUser from "./pages/AlterUser";
 // import Flip2 from "./components/flip/Flip2";
 
