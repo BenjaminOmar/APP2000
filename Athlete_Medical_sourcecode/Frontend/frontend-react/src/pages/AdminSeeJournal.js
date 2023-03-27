@@ -37,10 +37,11 @@ function AdminSeeJournal() {
         <h2>Velkommen {username} </h2>
       </div>  
       <Card >
-        <Card.Header style={{textAlign: "center" }} as="h5">Søk i Journaler</Card.Header>
+        <Card.Header style={{textAlign: "center" }} as="h5">Søk i journaler</Card.Header>
         <Card.Body>
           <Card.Text style={{paddingRight:'12%', paddingLeft: '12%'}} >
             Her kan du søke etter en journal ved å skrive inn en tekst i søkefeltet under. Søket vil returnere alle journalnotater som inneholder den angitte teksten i tittel eller innhold. 
+           Du kan finne en journal ved å søke etter pasient ID eller tittel på journal.
           </Card.Text>
         </Card.Body>
       </Card>

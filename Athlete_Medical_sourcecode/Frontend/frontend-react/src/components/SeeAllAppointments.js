@@ -4,9 +4,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button, Form, Table, Card, Alert } from "react-bootstrap";
 import '../components/SeeAllJournals.css';
-import Appointment from "./AppointmentBooking";
 
-function AdminBooking() {
+function SeeAllAppointments() {
 const username = Cookies.get("username");
 const [searchTerm, setSearchTerm] = useState("");
 const [searchResults, setSearchResults] = useState([]);
@@ -42,12 +41,11 @@ return (
           </div>
           <Card>
             <Card.Header style={{ textAlign: "center" }} as="h5">
-              Søk i avtaler
+              Søk i Avtaler
             </Card.Header>
             <Card.Body>
               <Card.Text style={{ paddingRight: "12%", paddingLeft: "12%" }}>
                 Her kan du søke etter en avtale ved å skrive inn en tekst i søkefeltet under. Søket vil returnere alle avtaler som inneholder den angitte teksten.
-             Du kan finne en avtale ved å søke etter pasient ID, spesialist ID eller Rom ID.
               </Card.Text>
             </Card.Body>
           </Card>
@@ -116,10 +114,9 @@ return (
         </div>
       </div>
     </div>
-    <div> <Appointment/> </div>
   </>
 );
 
 }
 
-export default AdminBooking;
+export default SeeAllAppointments;

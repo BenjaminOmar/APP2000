@@ -7,7 +7,7 @@ import OurSpecialists from '../components/OurSpecialists';
 import {CookiesModal} from '../components/CookiesModal';
 import AppointmentBooking from './AppointmentBooking';
 import SeeAllJournals from '../components/SeeAllJournals';
-import SeeAllAppointments from './SeeAllAppointments';
+
 
 
 

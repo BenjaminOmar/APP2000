@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import "../components/Appointment.css";
+import Cookies from "js-cookie";
 
-function AppointmentBooking() {
+function Appointment() {
+  const username = Cookies.get("username");
   const [specialists, setSpecialists] = useState([]);
   const [selectedSpecialist, setSelectedSpecialist] = useState('');
   const [availableAppointments, setAvailableAppointments] = useState([]);
@@ -22,12 +23,10 @@ function AppointmentBooking() {
     setSelectedSpecialist(event.target.value);
     setSelectedAppointment('');
     if (event.target.value) {
-        axios.get(`https://localhost:7209/api/appointment/available/specId`)
+      axios.get("https://localhost:7209/api/appointment/available?specId")
         .then(response => {
-          const specialistAppointments = response.data.filter(appointment => appointment.specialistId === event.target.value);
-          setAvailableAppointments(specialistAppointments);
+          setAvailableAppointments(response.data);
         })
-      
         .catch(error => {
           console.log(error);
         });
@@ -86,8 +85,8 @@ function AppointmentBooking() {
             <select value={selectedAppointment} onChange={handleAppointmentChange}>
               <option value="">Velg avtaletidspunkt</option>
               {availableAppointments.map(appointment => (
-                <option key={appointment.id} value={appointment.id}>{appointment.startTime}</option>
-              ))}
+                <option key={appointment.id} value={appointment.id}>{new Date (appointment.startTime).toLocaleString()}</option>
+              ))} 
             </select>
           </div>
         )}
@@ -101,4 +100,4 @@ function AppointmentBooking() {
   );
 }
 
-export default AppointmentBooking;
+export default Appointment;
