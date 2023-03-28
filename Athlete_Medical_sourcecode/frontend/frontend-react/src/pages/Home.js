@@ -1,7 +1,7 @@
-
-
-
-
+/*This code imports various components such as a home image, a newsletter popup, a header, 
+services, and specialists, and renders them on the home page of a React application. 
+Additionally, a cookies modal is also imported and rendered. The function "Home" returns all these components enclosed in a div.
+*/
 import React from 'react';
 import HomeImage from '../components/HomeImage';
 import Popup from '../components/Newsletter';

@@ -18,5 +18,5 @@ const TermsPrivacyPage  = () => {
         
     )
 };
-
+//The component is exported as a default export
 export default TermsPrivacyPage;

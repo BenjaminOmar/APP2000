@@ -7,11 +7,11 @@ import { Button } from "react-bootstrap";
 const Dashboard = () => {
 
     <>
-        <HeaderNormal/>
-        <DashboardForm/>
-        
+        <HeaderNormal />
+        <DashboardForm />
+
     </>
 }
 
-export default Dashboard; 
+export default Dashboard;
 

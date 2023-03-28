@@ -188,7 +188,7 @@ function AlterUser() {
             await axios.put("https://localhost:7209/api/user/update", editValues);
             // If the request is successful, show an alert message to inform the user that the save was successful.
             alert('Lagring vellykket!');
-           // If an error occurs during the request, show an alert message to inform the user of the error. 
+            // If an error occurs during the request, show an alert message to inform the user of the error. 
         } catch (error) {
             alert(error);
         }
@@ -201,7 +201,7 @@ function AlterUser() {
     // Define an asynchronous function called getUserValue
     const getUserValue = async () => {
         try {
-             // Send a GET request to the specified URL using axios library
+            // Send a GET request to the specified URL using axios library
             const response = await axios.get("https://localhost:7209/api/user/getAll");
             // Extract the data from the response object
             const data = response.data;
@@ -216,24 +216,32 @@ function AlterUser() {
     };
 
     return (
+        // A div to hold the entire component
         <div>
+            {/* Header component for the admin section */}
             <HeaderAdmin />
+            {/* A div with grid display and center alignment */}
             <div
                 style={{
                     display: 'grid',
                     placeItems: 'center',
                 }}
             >
+                {/* A card component to display user information */}
                 <Card style={{ marginTop: '5%', width: '60%' }}>
                     <Card.Header style={{ textAlign: "center" }} as="h5">
+                        {/* Displaying a welcome message with the username */}
                         <h4>Velkommen til dine sider {username}</h4>
+                        {/* Information about the functions of the page to the user */}
                         <p>Her kommer informasjon om hvordan brukeren kan redigere informasjonen som er lagret om seg selv i databasen.</p>
                     </Card.Header>
                     <Card.Body style={{ marginTop: '2%' }}>
-                        {searchResults.length > 0 ? ( // hvis det er minst ett resultat
+                        {/* Conditional rendering to display search results */}
+                        {searchResults.length > 0 ? ( //if there is at least one result of the search
                             <Table hover style={{ width: '70%', marginLeft: '12%', marginBottom: '100px' }}>
                                 <tbody>
-                                    {searchResults.map((user) => ( // for hvert resultat, lag en rad i tabellen
+                                    {/* Mapping through the search results to create table rows with information from the database */}
+                                    {searchResults.map((user) => (
                                         <>
                                             <tr>
                                                 <td><b>Rolle ID:</b></td>
@@ -277,6 +285,7 @@ function AlterUser() {
                                             </tr>
                                             <tr>
                                                 <td colSpan={2}>
+                                                    {/* A Button with the handleEditClick function, styled to fit the form */}
                                                     <Button
                                                         onClick={handleEditClick}
                                                         style={{
@@ -294,14 +303,17 @@ function AlterUser() {
                                 </tbody>
                             </Table>
                         ) : (
-                            <p>Fant ingen resultater for {username}</p>
+                            <p>Fant ingen resultater for {username}</p> //If there is no information it'll be messaged to the user. 
                         )}
                     </Card.Body>
                 </Card>
+                {/* A modal that gives the user the opportunity to edit information  */}
                 <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
-                    <Modal.Header closeButton>
+                    <Modal.Header closeButton>{/* A close button in the modal header */}
+                        {/* Modal title*/}
                         <Modal.Title>Rediger informasjon</Modal.Title>
                     </Modal.Header>
+                    {/* Modal Body with form groups containing forms with the different editable information */}
                     <Modal.Body>
                         <Form >
                             <Form.Group>
@@ -390,9 +402,11 @@ function AlterUser() {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
+                        {/* A cancel button in the modal footer which cancels editing and closes the modal */}
                         <Button variant="secondary" onClick={() => setShowEditModal(false)}>
                             Avbryt
                         </Button>
+                        {/* A save button that calls the handleSubmit function*/}
                         <Button onClick={handleSubmit}>
                             Lagre endringer
                         </Button>
@@ -402,5 +416,5 @@ function AlterUser() {
         </div>
     );
 };
-
+//The component is exported as a default export
 export default AlterUser; 
