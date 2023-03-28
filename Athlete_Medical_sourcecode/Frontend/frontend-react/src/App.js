@@ -1,8 +1,12 @@
+/*This code defines a React component called App. 
+The component contains a BrowserRouter component and a list of Route components 
+that specify how each URL path should be matched to a React component to be displayed. 
+The Footer component always appears at the bottom of the page. 
+As the user navigates through the app, BrowserRouter will ensure that the correct React component is loaded and displayed.*/
+
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
-import { Login } from "./pages/Login";
-import Register from "./pages/Register";
 import Footer from "./components/Footer"; // legg til import for Footer-komponenten
 import Dashboard from "./pages/Dashboard";
 import ForgotPwrdUser from "./components/ForgotPwrdUser";
@@ -15,7 +19,7 @@ import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
 import Flip from "./components/flip";
 import AlterUser from "./pages/AlterUser";
-// import Flip2 from "./components/flip/Flip2";
+
 
 function App() {
 	return (
@@ -34,8 +38,6 @@ function App() {
 					<Route path="/adminseejornal" element={<AdminSeeJournal />} />
 					<Route path="/login" element={<Flip />} />
 					<Route path="/alteruser" element={<AlterUser />} />
-
-					{/* <Route path="/flip2" element={<Flip2 />} /> */}
 				</Routes>
 				<Footer />
 			</BrowserRouter>
