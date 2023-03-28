@@ -36,7 +36,7 @@ function AdminSeeJournal() {
       <div style={{paddingTop: '30px', paddingBottom: '30px' }}>
         <h2>Velkommen {username} </h2>
       </div>  
-      <Card >
+      <Card>
         <Card.Header style={{textAlign: "center" }} as="h5">Søk i journaler</Card.Header>
         <Card.Body>
           <Card.Text style={{paddingRight:'12%', paddingLeft: '12%'}} >
