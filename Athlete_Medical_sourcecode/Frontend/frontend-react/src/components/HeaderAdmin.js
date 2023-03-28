@@ -54,7 +54,7 @@ const HeaderAdmin = () => {
           <Nav className="ms-auto"> {/* A navigation bar component with a right-aligned list of navigation items */}
             <NavLink to='/adminbooking' className='list-item' activeClassName='active'>Booking</NavLink>
             <NavLink to='/adminedituser' className='list-item' activeClassName='active'>Brukerkontoer</NavLink>
-            <NavLink to='/' className='list-item' activeClassName='active'>Journaler</NavLink>
+            <NavLink to='/adminseejournal' className='list-item' activeClassName='active'>Journaler</NavLink>
           </Nav>
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>

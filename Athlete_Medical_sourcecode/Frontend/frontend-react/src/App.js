@@ -35,7 +35,7 @@ function App() {
 					<Route path="/specialistsection" element={<SpecialistSection />} />
 					<Route path="/adminedituser" element={<AdminEditUser />} />
 					<Route path="/adminbooking" element={<AdminBooking />} />
-					<Route path="/adminseejornal" element={<AdminSeeJournal />} />
+					<Route path="/adminseejournal" element={<AdminSeeJournal />} />
 					<Route path="/login" element={<Flip />} />
 					<Route path="/alteruser" element={<AlterUser />} />
 				</Routes>
