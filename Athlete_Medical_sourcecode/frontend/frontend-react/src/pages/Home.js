@@ -1,3 +1,7 @@
+
+
+
+
 import React from 'react';
 import HomeImage from '../components/HomeImage';
 import Popup from '../components/Newsletter';
@@ -9,7 +13,7 @@ import {CookiesModal} from '../components/CookiesModal';
 
 export function Home() {
     return (
-     <div className="App">
+     <div>
       <Popup/>
       <HeaderNormal/>
       <CookiesModal/>
