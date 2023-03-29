@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button, Form, Table, Card, Alert } from "react-bootstrap";
 import '../components/SeeAllJournals.css';
+import Appointment from "../components/Appointment";
 
 
 function AdminBooking() {
@@ -116,7 +117,9 @@ return (
         </div>
       </div>
     </div>
- 
+ <div>
+  <Appointment/>
+ </div>
   </>
 );
 
