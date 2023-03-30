@@ -1,6 +1,6 @@
 // This code defines a login form component in React that sends a POST request to an ASP.NET Core API
 //with the user's login credentials (username and password) and receives a response with the user's role.
-//The component sets cookies with the user's role, username, and expiration timer, and navigates the user to
+//The component sets cookies with the user's role, username, userId and expiration timer, and navigates the user to
 //different pages based on their role. It also handles the timeout and removes cookies after 30 minutes of
 //inactivity with an alert to the user. The component also displays an error message to the user if the
 //response from the server is not OK. It uses the react-bootstrap and react-router-dom packages.
@@ -15,7 +15,7 @@ import Cookies from "js-cookie";
 const LoginForm = () => {
 	//Get the navigate object from the react-router-dom package
 	const navigate = useNavigate();
-	//Define the state variables for the login forms inputs and error message
+	//Define the state variables for the login forms inputs,  and error message
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
@@ -67,15 +67,21 @@ const LoginForm = () => {
 			})
 			.then((data) => {
 				//If the response is successful, navigate to the user page
-				//Extract the 'role' property from the response data object
+				//Extract the 'role' an 'userId property from the response data object
+				console.log(data); // Log the data object to check the userId field
 				const role = data.roleId;
-				//Set cookies with the user's role, username and expiretimer
+				const userId = data.userId;
+				console.log(userId); 
+
+				if (role && username && userId){
+					//Set cookies with the user's role, username, userId and expiretimer
 				Cookies.set("role", role, { expires: cookieExpiration });
 				Cookies.set("username", username, { expires: cookieExpiration });
+				Cookies.set("userId", userId.toString(), { expires: cookieExpiration });
 
 				resetInactivityTimer(); // Reset the user's inactivity timer
 
-				//Navigate the user to different pages based on their role
+				//Navigate the user to different pages based on the users role
 				if (role === 1) {
 					navigate("/dashboard");
 				} else if (role === 2) {
@@ -83,6 +89,10 @@ const LoginForm = () => {
 				} else if (role === 3) {
 					navigate("/adminbooking");
 				}
+				}else{
+					alert("Feil med informasjonskapsler")
+				}
+				
 			})
 			.catch((error) => {
 				//Handle any errors that occur during the request or response
@@ -96,9 +106,11 @@ const LoginForm = () => {
 		// Retrieve the user's role and username from cookies
 		const role = Cookies.get("role");
 		const username = Cookies.get("username");
+		const userId = Cookies.get("userId");
+
 
 		//If there is a cookie with the user's role and username, navigate to their dashboard
-		if (role && username) {
+		if (role && username && userId) {
 			if (role === "1") {
 				navigate("/dashboard");
 			} else if (role === "2") {

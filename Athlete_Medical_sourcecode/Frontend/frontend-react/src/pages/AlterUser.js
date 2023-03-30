@@ -15,6 +15,7 @@ import HeaderAdmin from "../components/HeaderAdmin";// Component for the header 
 // React component function for the user profile page
 function AlterUser() {
     const username = Cookies.get("username");// Retrieving the username from the browser cookie
+    const userId = Cookies.get("userId"); 
     const [searchResults, setSearchResults] = useState([]);// State variable for storing search result
     const [showEditModal, setShowEditModal] = useState(false); // State variable for showing/hiding the edit modal
     const [password, setPassword] = useState("");// State variable for storing the password input
@@ -231,7 +232,7 @@ function AlterUser() {
                 <Card style={{ marginTop: '5%', width: '60%' }}>
                     <Card.Header style={{ textAlign: "center" }} as="h5">
                         {/* Displaying a welcome message with the username */}
-                        <h4>Velkommen til dine sider {username}</h4>
+                        <h4>Velkommen til dine sider {username}, {userId}</h4>
                         {/* Information about the functions of the page to the user */}
                         <p>Her kommer informasjon om hvordan brukeren kan redigere informasjonen som er lagret om seg selv i databasen.</p>
                     </Card.Header>

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi.csproj": {}
+    "C:\\Users\\ekj\\Xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi.csproj": {}
   },
   "projects": {
-    "C:\\xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi.csproj": {
+    "C:\\Users\\ekj\\Xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi.csproj",
+        "projectUniqueName": "C:\\Users\\ekj\\Xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi.csproj",
         "projectName": "AthleteMedicalBackendApi",
-        "projectPath": "C:\\xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi.csproj",
-        "packagesPath": "C:\\Users\\gunil\\.nuget\\packages\\",
-        "outputPath": "C:\\xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\obj\\",
+        "projectPath": "C:\\Users\\ekj\\Xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi.csproj",
+        "packagesPath": "C:\\Users\\ekj\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ekj\\Xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\gunil\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ekj\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -94,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
