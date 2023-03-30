@@ -18,7 +18,6 @@ const LoginForm = () => {
 	//Define the state variables for the login forms inputs,  and error message
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [userId, setUserId] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [showModal, setShowModal] = useState(false);
 
@@ -38,7 +37,6 @@ const LoginForm = () => {
 			// Remove cookies
 			Cookies.remove("role");
 			Cookies.remove("username");
-			Cookies.remove("userId");
 			// Show a message to the user that they have been logged out due to inactivity
 			alert("Du har blitt logget ut på grunn av inaktivitet");
 			// Navigate the user to the login page
@@ -69,12 +67,17 @@ const LoginForm = () => {
 			})
 			.then((data) => {
 				//If the response is successful, navigate to the user page
-				//Extract the 'role' property from the response data object
+				//Extract the 'role' an 'userId property from the response data object
+				console.log(data); // Log the data object to check the userId field
 				const role = data.roleId;
-				//Set cookies with the user's role, username, userId and expiretimer
+				const userId = data.userId;
+				console.log(userId); 
+
+				if (role && username && userId){
+					//Set cookies with the user's role, username, userId and expiretimer
 				Cookies.set("role", role, { expires: cookieExpiration });
 				Cookies.set("username", username, { expires: cookieExpiration });
-				Cookies.set("userId", userId, { expires: cookieExpiration })
+				Cookies.set("userId", userId.toString(), { expires: cookieExpiration });
 
 				resetInactivityTimer(); // Reset the user's inactivity timer
 
@@ -86,6 +89,10 @@ const LoginForm = () => {
 				} else if (role === 3) {
 					navigate("/adminbooking");
 				}
+				}else{
+					alert("Feil med informasjonskapsler")
+				}
+				
 			})
 			.catch((error) => {
 				//Handle any errors that occur during the request or response
@@ -101,8 +108,9 @@ const LoginForm = () => {
 		const username = Cookies.get("username");
 		const userId = Cookies.get("userId");
 
+
 		//If there is a cookie with the user's role and username, navigate to their dashboard
-		if (role && username) {
+		if (role && username && userId) {
 			if (role === "1") {
 				navigate("/dashboard");
 			} else if (role === "2") {
