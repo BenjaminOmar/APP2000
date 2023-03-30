@@ -68,10 +68,8 @@ const LoginForm = () => {
 			.then((data) => {
 				//If the response is successful, navigate to the user page
 				//Extract the 'role' an 'userId property from the response data object
-				console.log(data); // Log the data object to check the userId field
 				const role = data.roleId;
 				const userId = data.userId;
-				console.log(userId); 
 
 				if (role && username && userId){
 					//Set cookies with the user's role, username, userId and expiretimer

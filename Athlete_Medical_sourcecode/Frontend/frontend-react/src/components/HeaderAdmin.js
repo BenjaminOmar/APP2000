@@ -24,7 +24,8 @@ const HeaderAdmin = () => {
 
   const username = Cookies.get("username");// getting the value of the username cookie
   const role = Cookies.get("role");// getting the value of the role cookie
-  if (!username || !role) {// if either username or role cookie is not set
+  const userId = Cookies.get("userId"); //getting the value of the userId cookie
+  if (!username || !role ||!userId) {// if either username, userId or role cookie is not set
     navigate("/");// navigate to the homepage
     return null;// return null to prevent the rest of the code from executing
   }
@@ -35,6 +36,7 @@ const HeaderAdmin = () => {
     // Sett the cookies to null and with an expire date in the past
     Cookies.set("role", null, { expires: new Date(0) });
     Cookies.set("username", null, { expires: new Date(0) });
+    Cookies.set("userId", null, { expires: new Date(0) });
     // Navigate to the homepage after the cookies are deleted
     navigate("/");
   }
