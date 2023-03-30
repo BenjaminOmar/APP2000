@@ -13,7 +13,10 @@ import SpecialistSection from "./pages/SpecialistSection";
 import AdminEditUser from "./pages/AdminEditUser";
 import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
-import SpecialistDashboard from "./pages/SpecialistDashboard";
+import FindPasient from "./pages/SpecialistDashboardPages/FindPasient";
+import FindAppointment from "./pages/SpecialistDashboardPages/FindAppointment";
+import MakeSchedule from "./pages/SpecialistDashboardPages/MakeSchedule";
+import GetJournal from "./pages/SpecialistDashboardPages/GetJournal";
 
 
 function App() {
@@ -33,7 +36,10 @@ function App() {
 					<Route path="/adminedituser" element={<AdminEditUser/>}/>
 					<Route path="/adminbooking" element={<AdminBooking/>}/>
 					<Route path="/adminseejornal" element={<AdminSeeJournal/>}/>
-					<Route path="/SpecialistDashboard" element={<SpecialistDashboard/>}/>
+					<Route path="/FindPasient" element={<FindPasient/>}/>
+					<Route path="/FindAppointment" element={<FindAppointment/>}/>
+					<Route path="/MakeSchedule" element={<MakeSchedule/>}/>
+					<Route path="/GetJournal" element={<GetJournal/>}/>
 
 					
 
