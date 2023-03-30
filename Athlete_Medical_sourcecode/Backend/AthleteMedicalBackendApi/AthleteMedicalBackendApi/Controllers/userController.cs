@@ -123,7 +123,7 @@ namespace AthleteMedicalBackendApi.Controllers
 
             var roleId = user.RoleId;
 
-            var userId = user.UserId
+            var userId = user.UserId;
 
             return Ok(new { Message = "vellykket innlogging", roleId, userId }); // if the users username and password are correct, the person will be routed at frontend
 
