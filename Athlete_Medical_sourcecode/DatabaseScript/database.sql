@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `app2000`.`role` (
   `roleName` VARCHAR(45) NULL,
   PRIMARY KEY (`roleId`))
 ENGINE = InnoDB;
-  
+
 
 -- -----------------------------------------------------
 -- Table `app2000`.`user`
@@ -42,11 +42,9 @@ CREATE TABLE IF NOT EXISTS `app2000`.`user` (
   `username` VARCHAR(100) NOT NULL,
   `email` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`userId`),
-  INDEX `fk_bruker_rolle1_idx` (`roleId` ASC) ,
-  UNIQUE INDEX `username_UNIQUE` (`username` ASC) ,
-  UNIQUE INDEX `Email_UNIQUE` (`email` ASC) ,
-  UNIQUE INDEX `socialSecurityNum_UNIQUE` (`socialSecurityNum` ASC) ,
-  UNIQUE INDEX `phoneNumber_UNIQUE` (`phoneNumber` ASC) ,
+  INDEX `fk_bruker_rolle1_idx` (`roleId` ASC) VISIBLE,
+  UNIQUE INDEX `username_UNIQUE` (`username` ASC) VISIBLE,
+  UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) VISIBLE,
   CONSTRAINT `fk_bruker_rolle1`
     FOREIGN KEY (`roleId`)
     REFERENCES `app2000`.`role` (`roleId`)
@@ -78,9 +76,9 @@ CREATE TABLE IF NOT EXISTS `app2000`.`appointment` (
   `specialistId` INT NOT NULL,
   `isAvailable` TINYINT NOT NULL,
   PRIMARY KEY (`appointmentId`),
-  INDEX `fk_avtale_rom1_idx` (`roomId` ASC) ,
-  INDEX `fk_avtale_bruker1_idx` (`patientId` ASC) ,
-  INDEX `fk_avtale_bruker2_idx` (`specialistId` ASC) ,
+  INDEX `fk_avtale_rom1_idx` (`roomId` ASC) VISIBLE,
+  INDEX `fk_avtale_bruker1_idx` (`patientId` ASC) VISIBLE,
+  INDEX `fk_avtale_bruker2_idx` (`specialistId` ASC) VISIBLE,
   CONSTRAINT `fk_avtale_rom1`
     FOREIGN KEY (`roomId`)
     REFERENCES `app2000`.`room` (`roomId`)
@@ -109,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `app2000`.`journalnote` (
   `created` DATETIME NOT NULL,
   `patient` INT NOT NULL,
   PRIMARY KEY (`journalnoteId`),
-  INDEX `fk_journalnote_user1_idx` (`patient` ASC) ,
+  INDEX `fk_journalnote_user1_idx` (`patient` ASC) VISIBLE,
   CONSTRAINT `fk_journalnote_user1`
     FOREIGN KEY (`patient`)
     REFERENCES `app2000`.`user` (`userId`)
