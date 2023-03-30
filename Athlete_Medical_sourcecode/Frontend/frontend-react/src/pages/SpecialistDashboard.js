@@ -15,7 +15,6 @@ function SpecialistDashboard() {
 			
 			<TopBar/>
 			<SideBar/>
-			<FindUsers/>
 
 			
 
