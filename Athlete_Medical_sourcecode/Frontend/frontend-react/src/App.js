@@ -19,6 +19,7 @@ import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
 import Flip from "./components/flip";
 import AlterUser from "./pages/AlterUser";
+import Booking from "./pages/Booking";
 
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
 					<Route path="/contact" element={<Contact />} />
 					<Route path="/specialistsection" element={<SpecialistSection />} />
 					<Route path="/adminedituser" element={<AdminEditUser />} />
-					<Route path="/adminbooking" element={<AdminBooking />} />
+					<Route path="/adminbooking" element={<Booking />} />
 					<Route path="/adminseejournal" element={<AdminSeeJournal />} />
 					<Route path="/login" element={<Flip />} />
 					<Route path="/alteruser" element={<AlterUser />} />
