@@ -117,6 +117,8 @@ namespace AthleteMedicalBackendApi.Controllers
                 return BadRequest(new { Message = "Avtalen må være frem i tid" });
             }
 
+            appointment.IsAvailable = 1;
+
             await _context.Appointments.AddAsync(appointment); // adds the object
             await _context.SaveChangesAsync(); // stores it in the database
             return Ok(new { Message = "Avtale er registrert" });
