@@ -8,15 +8,15 @@ function SearchBar({setResults}) {
     const [input, setInput] = useState("")
 
     const fetchData = (value) => {
-        fetch("https://localhost:7209/api/User/check")
+        fetch("'https://localhost:7209/api/user/patients'/")
         .then((response) => response.json())
         .then((json) => {
             const results = json.filter((user) => {
                 return(
                     value &&
                     user &&
-                    user.name &&
-                    user.name.toLower().includes(value)
+                    user.firsName &&
+                    user.secondName.toLower().includes(value)
 
                 );
             });
@@ -42,4 +42,8 @@ function SearchBar({setResults}) {
 }
 
 export default SearchBar;
+
+
+
+
 

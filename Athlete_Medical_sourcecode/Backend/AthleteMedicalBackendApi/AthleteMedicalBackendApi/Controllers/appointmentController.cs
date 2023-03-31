@@ -27,7 +27,7 @@ namespace AthleteMedicalBackendApi.Controllers
         {
             try
             {
-                var appointments = await _context.Appointments.ToListAsync();
+                var appointments = await _context.AppointmentsGetAll.FromSqlInterpolated<AppointmentGetAll>($"getAll").ToListAsync();
 
                 return Ok(appointments);
             }
@@ -116,6 +116,8 @@ namespace AthleteMedicalBackendApi.Controllers
             {
                 return BadRequest(new { Message = "Avtalen må være frem i tid" });
             }
+
+            appointment.IsAvailable = 1;
 
             await _context.Appointments.AddAsync(appointment); // adds the object
             await _context.SaveChangesAsync(); // stores it in the database
