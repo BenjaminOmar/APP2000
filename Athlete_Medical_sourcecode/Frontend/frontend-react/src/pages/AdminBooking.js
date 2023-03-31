@@ -4,6 +4,9 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import HeaderAdmin from "../components/HeaderAdmin";
 import Cookies from 'js-cookie';
+import '../components/AdminBooking.css';
+
+
 function AdminBooking() {
   const [specialistId, setSpecialistId] = useState("");
   const [appointments, setAppointments] = useState([]);
@@ -87,7 +90,7 @@ function AdminBooking() {
   return (
     <>
       <HeaderAdmin />
-      <div className="container mx-auto my-10 flex flex-col items-center">
+      <div className="admin-booking-container">
         <style>
           {`
             .selected-appointment {
