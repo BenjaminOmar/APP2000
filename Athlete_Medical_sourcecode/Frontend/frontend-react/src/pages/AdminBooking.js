@@ -1,211 +1,158 @@
-import React, { useState } from "react";
-import axios from "axios";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import React, { useEffect, useState } from "react";
 import HeaderAdmin from "../components/HeaderAdmin";
-import Cookies from 'js-cookie';
-import '../components/AdminBooking.css';
-
+import axios from "axios";
+import { Table, Button } from "react-bootstrap";
+import "react-datepicker/dist/react-datepicker.css";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import AdminSeeAppointments from "../components/AdminSeeAppointments";
 
 function AdminBooking() {
-  const [specialistId, setSpecialistId] = useState("");
-  const [appointments, setAppointments] = useState([]);
+  const [specialist, setSpecialist] = useState([]);
+  const [selectedSpecialist, setSelectedSpecialist] = useState(null);
+  const [availableAppointments, setAvailableAppointments] = useState(null);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const [patientId, setPatientId] = useState("");
-  const [calendarDate, setCalendarDate] = useState(new Date());
-  const [showCalendar, setShowCalendar] = useState(false);
+  const username = Cookies.get("username");
 
-  const handleSpecialistIdChange = (value) => {
-    setSpecialistId(value);
-    console.log(value);
+  const startOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
   };
-
-  const specialistOptions = [
-    { name: "Ortoped: Geir Arne Nilsen", id: 20 },
-    { name: "Fysioterapeut: Hedda Vold", id: 21 },
-    { name: "Fysikalsk lege: Karoline Ernstsen", id: 22 },
-  ];
-
-  const handleSearch = () => {
-    const url = `https://localhost:7209/api/appointment/available/specId?specId=${specialistId}&isAvailable=1`;
+  
+  const endOptions = {
+    hour: "numeric",
+    minute: "numeric",
+  };
+  
+  useEffect(() => {
     axios
-      .get(url)
-      .then((result) => {
-        setAppointments(result.data);
-        setShowCalendar(true);
+      .get("https://localhost:7209/api/user/getAll")
+      .then((response) => {
+        const filteredUsers = response.data.filter(
+          (specialist) => specialist.roleId === 2
+        );
+        setSpecialist(filteredUsers);
       })
       .catch((error) => {
-        alert(error);
-        console.log(error);
+        console.error(error);
+      });
+  }, []);
+
+  const handleShowAvailableAppointments = (selectedSpecialist) => {
+    axios
+      .get(`https://localhost:7209/api/appointment/available`)
+      .then((response) => {
+        const filteredAppointments = response.data.filter(
+          (appointment) => appointment.specialistId === selectedSpecialist.userId
+        );
+        setAvailableAppointments(filteredAppointments);
+        setSelectedSpecialist(selectedSpecialist);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   };
 
-  const handleAppointmentClick = (appointment) => {
-    setSelectedAppointment(appointment);
-  };
+  const navigate = useNavigate();
 
-  const handleBookAppointment = () => {
+  const handleBookAppointment = (appointment) => {
     const data = {
-      appointmentId: selectedAppointment.appointmentId,
-      patientId: Cookies.get('userId'), // Fetch userId from cookies
+      appointmentId: appointment.appointmentId,
+      patientId: Cookies.get("userId"), // Fetches userId from cookies
     };
-    const url = `https://localhost:7209/api/appointment/book?appId=${selectedAppointment.appointmentId}&patId=${Cookies.get('userId')}`;
+    const url = `https://localhost:7209/api/appointment/book?appId=${appointment.appointmentId}&patId=${Cookies.get(
+      "userId"
+    )}`;
     axios
-      .put(url, data)
-      .then((result) => {
-        alert(result.data);
-        console.log(data);
-        console.log(result.data);
-      })
-      .catch((error) => {
-        alert(error);
-        console.log(error);
-      });
-  };
+    .put(url, data)
+    .then((result) => {
+      alert(`Bekreftelse på timebestilling \n\nDu har time ${new Date(appointment.startTime).toLocaleDateString("nb-NO", startOptions)} - ${new Date(appointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos ${selectedSpecialist.firstName} ${selectedSpecialist.middleName} ${selectedSpecialist.lastName}`);
+      navigate("/adminseejournal") // Need to be updated to 'mypage'
+      console.log(data);
+      console.log(result.data);
+    })
+    .catch((error) => {
+      alert(error);
+      console.log(error);
+    });
+};
   
-
-  const handlePatientIdChange = (value) => {
-    setPatientId(value);
-    console.log(value);
-  };
-
-  const formatDate = (dateString) => {
-    const options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    };
-    const date = new Date(dateString);
-    return date.toLocaleDateString("nb-NO", options);
-  };
-
-  const handleCalendarDayClick = (value) => {
-    setCalendarDate(value);
-    console.log(value);
-  };
-
-  return (
-    <>
-      <HeaderAdmin />
-      <div className="admin-booking-container">
-        <style>
-          {`
-            .selected-appointment {
-              background-color: #ccc;
-              cursor: pointer;
-            }
-  
-            .search-button {
-              background-color: #1d75bd;
-              color: #fff;
-              border: none;
-              padding: 0.5rem 1rem;
-              border-radius: 0.25rem;
-              font-size: 1rem;
-              cursor: pointer;
-            }
-  
-            .search-button:hover,
-            .appointment:hover,
-            .book-appointment:hover {
-              background-color: #1a202c;
-            }
-  
-            .book-appointment {
-              background-color: #1d75bd;
-              color: #fff;
-              border: none;
-              padding: 0.5rem 1rem;
-              border-radius: 0.25rem;
-              font-size: 1rem;
-              cursor: pointer;
-              margin-top: 1rem;
-            }
-          `}
-        </style>
-        <div className="w-full text-center">
-          <h2 className="text-lg font-medium mb-2">Bestill time</h2>
-          <div className="flex items-center mb-4 justify-center">
-            <label htmlFor="selectSpecialist" className="mr-2">
-              Spesialist
-            </label>
-            <select
-              id="selectSpecialist"
-              onChange={(e) => handleSpecialistIdChange(e.target.value)}
-              className="border border-gray-400 rounded p-1"
-            >
-              <option value="">Velg en spesialist</option>
-              {specialistOptions.map((specialist) => (
-                <option key={specialist.id} value={specialist.id}>
-                  {specialist.name}
-                </option>
-              ))}
-            </select>
-            <button className="ml-4 search-button" onClick={handleSearch}>
-              Søk
-            </button>
-          </div>
-          {specialistId && appointments.length > 0 && (
-            <div className="flex flex-col items-center">
-              <h2 className="text-lg font-medium mb-2">Ledige avtaler:</h2>
-              <div className="flex flex-col lg:flex-row items-center">
-                <div className="flex-1 lg:mr-8">
-                  <Calendar
-                    onClickDay={handleCalendarDayClick}
-                    value={calendarDate}
-                  />
-                </div>
-                <div className="flex-1">
-                  <ul>
-                    {appointments
-                      .filter(
-                        (appointment) =>
-                          new Date(appointment.startTime).toDateString() ===
-                          calendarDate.toDateString()
-                      )
-                      .map((appointment) => (
-                        <li
-                          key={appointment.appointmentId}
-                          onClick={() => handleAppointmentClick(appointment)}
-                          className={
-                            selectedAppointment === appointment
-                              ? "selected-appointment appointment"
-                              : "appointment"
-                          }
-                        >
-                          {formatDate(appointment.startTime)} -{" "}
-                          {formatDate(appointment.endTime)}
-                        </li>
-                      ))}
-                  </ul>
-                 
-                </div>
-              </div>
-            </div>
-          )}
-          {selectedAppointment && (
-            <div>
-              <p className="text-lg font-medium">
-                Valgt time:{" "}
-                {formatDate(selectedAppointment.startTime)} -{" "}
-                {formatDate(selectedAppointment.endTime)}
-              </p>
-           
-              <div className="mt-4">
-                <button className="ml-4 book-appointment" onClick={handleBookAppointment}>
-                  Bestill time
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
+return (
+  <>
+    <HeaderAdmin />
+    <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
+        <h2>Velkommen {username} </h2>
       </div>
-    </>
-  );
-  
-  
-        }  
+    <div className="container my-5">
+      <h2 className="mb-3">Timebestilling</h2>
+      <Table bordered hover>
+        <thead>
+          <tr>
+            <th>Spesialist</th>
+            <th>Epostadresse</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {specialist.map((specialist) => (
+            <tr key={specialist.userId}>
+              <td>{specialist.firstName} {specialist.middleName} {specialist.lastName}</td>
+              <td>{specialist.email}</td>
+              <td>
+                <Button
+                  variant="primary"
+                  onClick={() => handleShowAvailableAppointments(specialist)}
+                >
+                  Se ledige avtaler
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+      {availableAppointments !== null && selectedSpecialist !== null && (
+        <>
+          <h2 className="mt-5">{`${selectedSpecialist.firstName} ${selectedSpecialist.lastName} sine ledige avtaler`}</h2>
+          <Table bordered hover>
+            <thead>
+              <tr>
+                <th>Avtaletidspunkt</th>         
+                <th>Rom nummer</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {availableAppointments.map((appointment) => (
+                <tr key={appointment.appointmentId}>    
+                  <td>
+                    {new Date(appointment.startTime).toLocaleDateString("nb-NO", startOptions)} {" - "}
+                    {"kl. " + new Date(appointment.endTime).toLocaleTimeString("nb-NO", endOptions)}
+                  </td>
+                  <td>{appointment.roomId}</td>
+                  <td>
+                    <Button
+                      variant="primary"
+                      onClick={() => handleBookAppointment(appointment)}
+                    >
+                      Bestill time
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </>
+      )}
+    </div>
+    <div>
+      <AdminSeeAppointments/>
+    </div>
+  </>
+);
+
+  }
   export default AdminBooking;  

@@ -29,6 +29,7 @@ function Booking() {
         const filteredAppointments = response.data.filter(appointment => appointment.specialistId === selectedSpecialist.userId);
         setAvailableAppointments(filteredAppointments);
         setSelectedSpecialist(selectedSpecialist);
+        
       })
       .catch(error => {
         console.error(error);
@@ -102,4 +103,3 @@ function Booking() {
 }
 
 export default Booking;
-

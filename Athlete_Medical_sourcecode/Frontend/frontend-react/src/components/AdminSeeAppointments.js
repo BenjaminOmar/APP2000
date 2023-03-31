@@ -7,7 +7,7 @@ import '../components/SeeAllJournals.css';
 import AppointmentTest from "../components/AppointmentTest";
 import BookingTest from "../components/BookingTest";
 
-function AdminBookingTest() {
+function AdminSeeAppointments() {
 const username = Cookies.get("username");
 const [searchTerm, setSearchTerm] = useState("");
 const [searchResults, setSearchResults] = useState([]);
@@ -34,12 +34,11 @@ Alert(error);
 
 return (
   <>
-    <HeaderAdmin />
     <div className="AllJournals">
       <div className="container d-flex justify-content-center">
         <div className="box">
           <div style={{ paddingTop: "30px", paddingBottom: "30px" }}>
-            <h2>Velkommen {username} </h2>
+            <h2>Søk etter avtale</h2>
           </div>
           <Card>
             <Card.Header style={{ textAlign: "center" }} as="h5">
@@ -117,12 +116,9 @@ return (
         </div>
       </div>
     </div>
- <div>
-  <AppointmentTest/>
- </div>
   </>
 );
 
 }
 
-export default AdminBookingTest;
+export default AdminSeeAppointments;
