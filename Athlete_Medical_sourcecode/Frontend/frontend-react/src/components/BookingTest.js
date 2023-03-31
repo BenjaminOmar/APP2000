@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Cookies from "js-cookie";
 
-function Registration() {
+function BookingTest() {
 	const [patientId, setPatientId] = useState("");
 	const [appointmentId, setAppointmentId] = useState("");
 
@@ -55,4 +56,4 @@ function Registration() {
 	);
 }
 
-export default Registration;
+export default BookingTest;

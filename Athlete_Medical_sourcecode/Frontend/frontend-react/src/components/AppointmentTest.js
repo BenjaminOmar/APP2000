@@ -1,102 +1,165 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import "./Appointment.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
-function Appointment() {
+function AppointmentTest() {
   const [specialists, setSpecialists] = useState([]);
-  const [selectedSpecialist, setSelectedSpecialist] = useState('');
-  const [availableAppointments, setAvailableAppointments] = useState([]);
-  const [selectedAppointment, setSelectedAppointment] = useState('');
-  
+  const [selectedSpecialistId, setSelectedSpecialistId] = useState("");
+  const [appointments, setAppointments] = useState([]);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [patientId, setPatientId] = useState("");
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [calendarDate, setCalendarDate] = useState(new Date());
+
   useEffect(() => {
-    axios.get('https://localhost:7209/api/User/specialists')
-      .then(response => {
-        setSpecialists(response.data);
-      })  
-      .catch(error => {
+    axios
+      .get("https://localhost:7209/api/User/specialists")
+      .then((result) => {
+        setSpecialists(result.data);
+      })
+      .catch((error) => {
+        alert(error);
         console.log(error);
       });
   }, []);
 
-  const handleSpecialistChange = event => {
-    setSelectedSpecialist(event.target.value);
-    setSelectedAppointment('');
-    if (event.target.value) {
-      axios.get(`https://localhost:7209/api/appointment/available?specialistId=${event.target.value}&isAvailable=1`)
-        .then(response => {
-          setAvailableAppointments(response.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    } else {
-      setAvailableAppointments([]);
-    }
-  };
-  
-
-  const handleAppointmentChange = event => {
-    setSelectedAppointment(event.target.value);
+  const handleSpecialistChange = (event) => {
+    const selectedSpecialist = specialists.find(
+      (specialist) =>
+        specialist.firstName + " " + specialist.lastName === event.target.value
+    );
+    setSelectedSpecialistId(selectedSpecialist.userId);
+    setShowCalendar(true);
   };
 
-  const bookAppointment = appointmentId => {
-    const loggedInPatientId = 1; 
-    axios.post('https://localhost:7209/api/appointment/book', {
-      appointmentId,
-      patientId: loggedInPatientId
-    })
-      .then(response => {
-        alert('Time er booket!');
+  const handleSearch = () => {
+    const url = `https://localhost:7209/api/appointment/available/specId?specId=${selectedSpecialistId}&isAvailable=1`;
+    axios
+      .get(url)
+      .then((result) => {
+        setAppointments(result.data);
       })
-      .catch(error => {
+      .catch((error) => {
+        alert(error);
         console.log(error);
       });
   };
 
-  const handleBooking = event => {
-    event.preventDefault();
-    bookAppointment(selectedAppointment);
-    setSelectedSpecialist('');
-    setSelectedAppointment('');
-    setAvailableAppointments([]);
+  const handleAppointmentClick = (appointment) => {
+    setSelectedAppointment(appointment);
+  };
+
+  const handleBookAppointment = () => {
+    const data = {
+      appointmentId: selectedAppointment.appointmentId,
+      patientId: patientId,
+    };
+    const url = `https://localhost:7209/api/appointment/book?appId=${selectedAppointment.appointmentId}&patId=${patientId}`;
+    axios
+      .put(url, data)
+      .then((result) => {
+        alert(result.data);
+        console.log(data);
+        console.log(result.data);
+      })
+      .catch((error) => {
+        alert(error);
+        console.log(error);
+      });
+  };
+
+  const handlePatientIdChange = (value) => {
+    setPatientId(value);
+    console.log(value);
+  };
+
+  const formatDate = (dateString) => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("nb-NO", options);
+  };
+
+  const handleCalendarDayClick = (value) => {
+    setCalendarDate(value);
+    console.log(value);
   };
 
   return (
-    <div className="appointment-container">
-    <div className="appointment-system">
-    <div>
-      <h1>Timebestilling</h1>
-      <form onSubmit={handleBooking}>
+    <>
+      <style>
+        {`
+          .selected-appointment {
+            background-color: #ccc;
+            cursor: pointer;
+          }
+        `}
+      </style>
+      <div>
+        <label>Specialist</label>
+        <select value={selectedSpecialistId} onChange={handleSpecialistChange}>
+          <option value="">Select Specialist</option>
+          {specialists.map((specialist) => (
+            <option key={specialist.userId} value={specialist.userId}>
+              {specialist.firstName} {specialist.lastName}
+            </option>
+          ))}
+        </select>
+        <button onClick={handleSearch}>Search</button>
+      </div>
+      {selectedSpecialistId && (
         <div>
-          <label>Spesialist:</label>
-          <select value={selectedSpecialist} onChange={handleSpecialistChange}>
-            <option value="">Velg spesialist</option>
-            {specialists.map(specialist => (
-              <option key={specialist.id} value={specialist.id}>
-                   {`${specialist.firstName} ${specialist.middleName} ${specialist.lastName}`}
-              </option>
-            ))}
-          </select>
-        </div>
-        {selectedSpecialist && (
-          <div>
-            <label>Avtaletidspunkt:</label>
-            <select value={selectedAppointment} onChange={handleAppointmentChange}>
-              <option value="">Velg avtaletidspunkt</option>
-              {availableAppointments.map(appointment => (
-                <option key={appointment.id} value={appointment.id}>{appointment.startTime}</option>
-              ))}
-            </select>
+          <h2>Available Appointments:</h2>
+          <div style={{ display: "flex" }}>
+            <div style={{ flex: "1", marginRight: "20px" }}>
+              <Calendar onClickDay={handleCalendarDayClick} value={calendarDate} />
+            </div>
+            <div style={{ flex: "1" }}>
+              <ul>
+                {appointments
+                  .filter(
+                    (appointment) =>
+                      new Date(appointment.startTime).toDateString() === calendarDate.toDateString()
+                  )
+                  .map((appointment) => (
+                    <li
+                      key={appointment.appointmentId}
+                      onClick={() => handleAppointmentClick(appointment)}
+                      className={selectedAppointment === appointment ? "selected-appointment" : ""}
+                    >
+                      {formatDate(appointment.startTime)} - {formatDate(appointment.endTime)}
+                    </li>
+                  ))}
+              </ul>
+            </div>
           </div>
-        )}
-        {selectedAppointment && (
-          <button type="submit">Bestill time</button>
-        )}
-      </form>
-    </div>
-    </div>
-    </div>
+        </div>
+      )}
+      {selectedAppointment && (
+        <div>
+          <p>
+            Selected Appointment: {formatDate(selectedAppointment.startTime)} -{" "}
+            {formatDate(selectedAppointment.endTime)}
+          </p>
+          <div>
+            <label>Patient Id</label>
+            <input
+              type="text"
+              id="txtPatientId"
+              onChange={(e) => handlePatientIdChange(e.target.value)}
+            ></input>
+            <button onClick={handleBookAppointment}>Book selected appointment</button>
+          </div>
+        </div>
+      )}
+    </>
   );
-}
-
-export default Appointment;
+      }
+      export default AppointmentTest;

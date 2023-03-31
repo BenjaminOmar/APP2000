@@ -1,128 +1,211 @@
-import HeaderAdmin from "../components/HeaderAdmin";
-import Cookies from "js-cookie";
 import React, { useState } from "react";
 import axios from "axios";
-import { Button, Form, Table, Card, Alert } from "react-bootstrap";
-import '../components/SeeAllJournals.css';
-import Appointment from "../components/Appointment";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import HeaderAdmin from "../components/HeaderAdmin";
+import Cookies from 'js-cookie';
+import '../components/AdminBooking.css';
 
 
 function AdminBooking() {
-const username = Cookies.get("username");
-const [searchTerm, setSearchTerm] = useState("");
-const [searchResults, setSearchResults] = useState([]);
+  const [specialistId, setSpecialistId] = useState("");
+  const [appointments, setAppointments] = useState([]);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [patientId, setPatientId] = useState("");
+  const [calendarDate, setCalendarDate] = useState(new Date());
+  const [showCalendar, setShowCalendar] = useState(false);
 
-const searchAppointments = async (event) => {
-event.preventDefault();
-try{
-const response = await axios.get("https://localhost:7209/api/appointment/getAll");
-const data = response.data;
-const filteredResults = data.filter(
-(appointment) =>
-appointment.appointmentId.toString().includes(searchTerm) ||
-new Date(appointment.startTime).toLocaleString().includes(searchTerm) ||
-new Date(appointment.endTime).toLocaleString().includes(searchTerm) ||
-appointment.roomId.toString().includes(searchTerm) ||
-appointment.patientId.toString().includes(searchTerm) ||
-appointment.specialistId.toString().includes(searchTerm)
-);
-setSearchResults(filteredResults);
-} catch (error) {
-Alert(error);
-};
-}
+  const handleSpecialistIdChange = (value) => {
+    setSpecialistId(value);
+    console.log(value);
+  };
 
-return (
-  <>
-    <HeaderAdmin />
-    <div className="AllJournals">
-      <div className="container d-flex justify-content-center">
-        <div className="box">
-          <div style={{ paddingTop: "30px", paddingBottom: "30px" }}>
-            <h2>Velkommen {username} </h2>
-          </div>
-          <Card>
-            <Card.Header style={{ textAlign: "center" }} as="h5">
-              Søk i avtaler
-            </Card.Header>
-            <Card.Body>
-              <Card.Text style={{ paddingRight: "12%", paddingLeft: "12%" }}>
-                Her kan du søke etter en avtale ved å skrive inn en tekst i søkefeltet under. Søket vil returnere alle avtaler som inneholder den angitte teksten.
-             Du kan finne en avtale ved å søke etter pasient ID, spesialist ID eller Rom ID.
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Form.Group
-            className="mb-3"
-            style={{ marginLeft: "39%", marginRight: "40%" }}
-          >
-            <Form.Control
-              type="text"
-              placeholder="Søk etter en avtale"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </Form.Group>
-          <Button
-            onClick={searchAppointments}
-            style={{
-              marginLeft: "40%",
-              width: "19%",
-              marginBottom: "50px",
-            }}
-          >
-            Søk
-          </Button>
-          {searchResults.length > 0 && (
-            <Table
-              striped
-              bordered
-              hover
-              style={{
-                width: "70%",
-                marginLeft: "12%",
-                marginBottom: "100px",
-              }}
+  const specialistOptions = [
+    { name: "Ortoped: Geir Arne Nilsen", id: 20 },
+    { name: "Fysioterapeut: Hedda Vold", id: 21 },
+    { name: "Fysikalsk lege: Karoline Ernstsen", id: 22 },
+  ];
+
+  const handleSearch = () => {
+    const url = `https://localhost:7209/api/appointment/available/specId?specId=${specialistId}&isAvailable=1`;
+    axios
+      .get(url)
+      .then((result) => {
+        setAppointments(result.data);
+        setShowCalendar(true);
+      })
+      .catch((error) => {
+        alert(error);
+        console.log(error);
+      });
+  };
+
+  const handleAppointmentClick = (appointment) => {
+    setSelectedAppointment(appointment);
+  };
+
+  const handleBookAppointment = () => {
+    const data = {
+      appointmentId: selectedAppointment.appointmentId,
+      patientId: Cookies.get('userId'), // Fetch userId from cookies
+    };
+    const url = `https://localhost:7209/api/appointment/book?appId=${selectedAppointment.appointmentId}&patId=${Cookies.get('userId')}`;
+    axios
+      .put(url, data)
+      .then((result) => {
+        alert(result.data);
+        console.log(data);
+        console.log(result.data);
+      })
+      .catch((error) => {
+        alert(error);
+        console.log(error);
+      });
+  };
+  
+
+  const handlePatientIdChange = (value) => {
+    setPatientId(value);
+    console.log(value);
+  };
+
+  const formatDate = (dateString) => {
+    const options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("nb-NO", options);
+  };
+
+  const handleCalendarDayClick = (value) => {
+    setCalendarDate(value);
+    console.log(value);
+  };
+
+  return (
+    <>
+      <HeaderAdmin />
+      <div className="admin-booking-container">
+        <style>
+          {`
+            .selected-appointment {
+              background-color: #ccc;
+              cursor: pointer;
+            }
+  
+            .search-button {
+              background-color: #1d75bd;
+              color: #fff;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 0.25rem;
+              font-size: 1rem;
+              cursor: pointer;
+            }
+  
+            .search-button:hover,
+            .appointment:hover,
+            .book-appointment:hover {
+              background-color: #1a202c;
+            }
+  
+            .book-appointment {
+              background-color: #1d75bd;
+              color: #fff;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 0.25rem;
+              font-size: 1rem;
+              cursor: pointer;
+              margin-top: 1rem;
+            }
+          `}
+        </style>
+        <div className="w-full text-center">
+          <h2 className="text-lg font-medium mb-2">Bestill time</h2>
+          <div className="flex items-center mb-4 justify-center">
+            <label htmlFor="selectSpecialist" className="mr-2">
+              Spesialist
+            </label>
+            <select
+              id="selectSpecialist"
+              onChange={(e) => handleSpecialistIdChange(e.target.value)}
+              className="border border-gray-400 rounded p-1"
             >
-              <thead>
-                <tr>
-                  <th>Avtale ID</th>
-                  <th>Starttidspunkt</th>
-                  <th>Sluttidspunkt</th>
-                  <th>Rom ID</th>
-                  <th>Pasient ID</th>
-                  <th>Spesialist ID</th>
-                  <th>Er avtalen booket</th>
-                </tr>
-              </thead>
-              <tbody>
-                {searchResults.map((appointment) => (
-                  <tr key={appointment.appointmentId}>
-                    <td>{appointment.appointmentId}</td>
-                    <td>
-                      {new Date(appointment.startTime).toLocaleString()}
-                    </td>
-                    <td>
-                      {new Date(appointment.endTime).toLocaleString()}
-                    </td>
-                    <td>{appointment.roomId}</td>
-                    <td>{appointment.patientId}</td>
-                    <td>{appointment.specialistId}</td>
-                    <td>{appointment.isAvailable ? "Nei" : "Ja"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </Table>
+              <option value="">Velg en spesialist</option>
+              {specialistOptions.map((specialist) => (
+                <option key={specialist.id} value={specialist.id}>
+                  {specialist.name}
+                </option>
+              ))}
+            </select>
+            <button className="ml-4 search-button" onClick={handleSearch}>
+              Søk
+            </button>
+          </div>
+          {specialistId && appointments.length > 0 && (
+            <div className="flex flex-col items-center">
+              <h2 className="text-lg font-medium mb-2">Ledige avtaler:</h2>
+              <div className="flex flex-col lg:flex-row items-center">
+                <div className="flex-1 lg:mr-8">
+                  <Calendar
+                    onClickDay={handleCalendarDayClick}
+                    value={calendarDate}
+                  />
+                </div>
+                <div className="flex-1">
+                  <ul>
+                    {appointments
+                      .filter(
+                        (appointment) =>
+                          new Date(appointment.startTime).toDateString() ===
+                          calendarDate.toDateString()
+                      )
+                      .map((appointment) => (
+                        <li
+                          key={appointment.appointmentId}
+                          onClick={() => handleAppointmentClick(appointment)}
+                          className={
+                            selectedAppointment === appointment
+                              ? "selected-appointment appointment"
+                              : "appointment"
+                          }
+                        >
+                          {formatDate(appointment.startTime)} -{" "}
+                          {formatDate(appointment.endTime)}
+                        </li>
+                      ))}
+                  </ul>
+                 
+                </div>
+              </div>
+            </div>
+          )}
+          {selectedAppointment && (
+            <div>
+              <p className="text-lg font-medium">
+                Valgt time:{" "}
+                {formatDate(selectedAppointment.startTime)} -{" "}
+                {formatDate(selectedAppointment.endTime)}
+              </p>
+           
+              <div className="mt-4">
+                <button className="ml-4 book-appointment" onClick={handleBookAppointment}>
+                  Bestill time
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>
-    </div>
- <div>
-  <Appointment/>
- </div>
-  </>
-);
-
-}
-
-export default AdminBooking;
+    </>
+  );
+  
+  
+        }  
+  export default AdminBooking;  

@@ -16,7 +16,7 @@ function OurSpecialists() {
     <div className="employee-section">
 
       <div className="employee">
-        <Link to="/">
+        <Link to="/specialistsection">
         <img src={doctor1} alt="Employee 1"/> 
         <div className="employee-text">
         <h3>Geir Arne Nilsen</h3>
@@ -27,7 +27,7 @@ function OurSpecialists() {
       
 
       <div className="employee">
-      <Link to="/">
+      <Link to="/specialistsection">
         <img src={doctor2} alt="Employee 2" />
         <div className="employee-text">
         <h3>Eva Johnsen</h3>
@@ -38,7 +38,7 @@ function OurSpecialists() {
       </div>
 
       <div className="employee">
-      <Link to="/">
+      <Link to="/specialistsection">
         <img src={physician} alt="Employee 3" />
         <div className="employee-text">
         <h3>Karoline Ernstsen</h3>
@@ -48,7 +48,7 @@ function OurSpecialists() {
       </div>
 
       <div className="employee">
-      <Link to="/">
+      <Link to="/specialistsection#behandlere">
         <img src={physiotherapist} alt="Employee 4" />
         <div className="employee-text">
         <h3>Hedda Vold</h3>
