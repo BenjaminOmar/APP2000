@@ -25,14 +25,6 @@ BEGIN
 END$$
 DELIMITER ;
 
-DELIMITER $$
-CREATE DEFINER=`root`@`%` PROCEDURE `findUserByPatId`()
-    READS SQL DATA
-BEGIN
-    SELECT CONCAT(user.FirstName, " ",user.middleName, " ", user.lastName) AS 'Name' FROM appointment, user WHERE appointment.patientId = user.userId;
-END$$
-DELIMITER ;
-
 -- list of all specialists
 DELIMITER $$
 CREATE DEFINER=`root`@`%` PROCEDURE `specialists`()

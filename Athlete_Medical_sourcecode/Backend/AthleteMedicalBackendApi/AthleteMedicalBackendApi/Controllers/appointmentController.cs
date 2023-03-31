@@ -27,7 +27,7 @@ namespace AthleteMedicalBackendApi.Controllers
         {
             try
             {
-                var appointments = await _context.Appointments.ToListAsync();
+                var appointments = await _context.AppointmentsGetAll.FromSqlInterpolated<AppointmentGetAll>($"getAll").ToListAsync();
 
                 return Ok(appointments);
             }
