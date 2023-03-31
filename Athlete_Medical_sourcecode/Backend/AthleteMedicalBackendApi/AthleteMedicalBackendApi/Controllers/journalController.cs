@@ -39,30 +39,7 @@ namespace AthleteMedicalBackendApi.Controllers
             return Ok(journal);
         }
 
-        [HttpGet("{firstName}/{lastName}")]
-        public async Task<ActionResult<Journalnote>> GetJournalnoteByFullName(string firstName, string lastName)
-        {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.FirstName == firstName && u.LastName == lastName);
-
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            var journalnote = await _context.Journalnotes
-                .Include(j => j.PatientNavigation)
-                .SingleOrDefaultAsync(j => j.PatientNavigation.UserId == user.UserId);
-
-            if (journalnote == null)
-            {
-                return NotFound();
-            }
-
-            journalnote.PatientNavigation = user;
-
-            return journalnote;
-        }
-
+     
 
 
         [HttpPost("create")]
