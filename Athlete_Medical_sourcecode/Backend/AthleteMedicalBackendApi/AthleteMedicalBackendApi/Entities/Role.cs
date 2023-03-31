@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace AthleteMedicalBackendApi.Entities;
 
@@ -9,5 +10,6 @@ public partial class Role
 
     public string? RoleName { get; set; }
 
+    [JsonIgnore]
     public virtual ICollection<User> Users { get; } = new List<User>();
 }
