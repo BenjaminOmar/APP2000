@@ -18,9 +18,9 @@ function AdminBooking() {
   };
 
   const specialistOptions = [
-    { name: "Geir Arne Nilsen", id: 20 },
-    { name: "Hedda Vold", id: 21 },
-    { name: "Karoline Ernstsen", id: 22 },
+    { name: "Ortoped: Geir Arne Nilsen", id: 20 },
+    { name: "Fysioterapeut: Hedda Vold", id: 21 },
+    { name: "Fysikalsk lege: Karoline Ernstsen", id: 22 },
   ];
 
   const handleSearch = () => {
@@ -86,90 +86,123 @@ function AdminBooking() {
 
   return (
     <>
-    <HeaderAdmin />
-    <div className="container mx-auto my-10">
-    
-      <style>
-        {`
-          .selected-appointment {
-            background-color: #ccc;
-            cursor: pointer;
-          }
-        `}
-      </style>
-      <div className="flex flex-col items-center text-center">
-  <div> 
-  <h2 className="text-lg font-medium mb-2">Bestill time</h2>
-    <label>Specialist</label>
-    <select
-      id="selectSpecialist"
-      onChange={(e) => handleSpecialistIdChange(e.target.value)}
-    >
-      <option value="">Velg en spesialist</option>
-      {specialistOptions.map((specialist) => (
-        <option key={specialist.id} value={specialist.id}>
-          {specialist.name}
-        </option>
-      ))}
-    </select>
-    <button className="ml-4" onClick={handleSearch}>
-      Søk
-    </button>
-  </div>
-  {specialistId && appointments.length > 0 && (
-    <div>
-      <h2 className="text-lg font-medium mb-2">Ledige avtaler:</h2>
-      <div className="flex">
-        <div className="flex-1 mr-8">
-          <Calendar onClickDay={handleCalendarDayClick} value={calendarDate} />
-        </div>
-        <div className="flex-1">
-          <ul>
-            {appointments
-              .filter(
-                (appointment) =>
-                  new Date(appointment.startTime).toDateString() ===
-                  calendarDate.toDateString()
-              )
-              .map((appointment) => (
-                <li
-                  key={appointment.appointmentId}
-                  onClick={() => handleAppointmentClick(appointment)}
-                  className={
-                    selectedAppointment === appointment ? "selected-appointment" : ""
-                  }
-                >
-                  {formatDate(appointment.startTime)} - {formatDate(appointment.endTime)}
-                </li>
+      <HeaderAdmin />
+      <div className="container mx-auto my-10 flex flex-col items-center">
+        <style>
+          {`
+            .selected-appointment {
+              background-color: #ccc;
+              cursor: pointer;
+            }
+  
+            .search-button {
+              background-color: #1d75bd;
+              color: #fff;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 0.25rem;
+              font-size: 1rem;
+              cursor: pointer;
+            }
+  
+            .search-button:hover,
+            .appointment:hover,
+            .book-appointment:hover {
+              background-color: #1a202c;
+            }
+  
+            .book-appointment {
+              background-color: #1d75bd;
+              color: #fff;
+              border: none;
+              padding: 0.5rem 1rem;
+              border-radius: 0.25rem;
+              font-size: 1rem;
+              cursor: pointer;
+              margin-top: 1rem;
+            }
+          `}
+        </style>
+        <div className="w-full text-center">
+          <h2 className="text-lg font-medium mb-2">Bestill time</h2>
+          <div className="flex items-center mb-4 justify-center">
+            <label htmlFor="selectSpecialist" className="mr-2">
+              Spesialist
+            </label>
+            <select
+              id="selectSpecialist"
+              onChange={(e) => handleSpecialistIdChange(e.target.value)}
+              className="border border-gray-400 rounded p-1"
+            >
+              <option value="">Velg en spesialist</option>
+              {specialistOptions.map((specialist) => (
+                <option key={specialist.id} value={specialist.id}>
+                  {specialist.name}
+                </option>
               ))}
-          </ul>
+            </select>
+            <button className="ml-4 search-button" onClick={handleSearch}>
+              Søk
+            </button>
+          </div>
+          {specialistId && appointments.length > 0 && (
+            <div className="flex flex-col items-center">
+              <h2 className="text-lg font-medium mb-2">Ledige avtaler:</h2>
+              <div className="flex flex-col lg:flex-row items-center">
+                <div className="flex-1 lg:mr-8">
+                  <Calendar
+                    onClickDay={handleCalendarDayClick}
+                    value={calendarDate}
+                  />
+                </div>
+                <div className="flex-1">
+                  <ul>
+                    {appointments
+                      .filter(
+                        (appointment) =>
+                          new Date(appointment.startTime).toDateString() ===
+                          calendarDate.toDateString()
+                      )
+                      .map((appointment) => (
+                        <li
+                          key={appointment.appointmentId}
+                          onClick={() => handleAppointmentClick(appointment)}
+                          className={
+                            selectedAppointment === appointment
+                              ? "selected-appointment appointment"
+                              : "appointment"
+                          }
+                        >
+                          {formatDate(appointment.startTime)} -{" "}
+                          {formatDate(appointment.endTime)}
+                        </li>
+                      ))}
+                  </ul>
+                 
+                </div>
+              </div>
+            </div>
+          )}
+          {selectedAppointment && (
+            <div>
+              <p className="text-lg font-medium">
+                Valgt time:{" "}
+                {formatDate(selectedAppointment.startTime)} -{" "}
+                {formatDate(selectedAppointment.endTime)}
+              </p>
+           
+              <div className="mt-4">
+                <button className="ml-4 book-appointment" onClick={handleBookAppointment}>
+                  Bestill time
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-    </div>
-  )}
-  {selectedAppointment && (
-    <div>
-      <p className="text-lg font-medium">
-        Selected Appointment: {formatDate(selectedAppointment.startTime)} -{" "}
-        {formatDate(selectedAppointment.endTime)}
-      </p>
-      <div className="mt-4">
-        <label>Patient Id</label>
-        <input
-          type="text"
-          id="txtPatientId"
-          onChange={(e) => setPatientId(e.target.value)}
-        ></input>
-        <button className="ml-4" onClick={handleBookAppointment}>
-          Book selected appointment
-        </button>
-      </div>
-    </div>
-  )}
-</div>
-<div/>
-    </div>
     </>
   );
+  
+  
         }  
   export default AdminBooking;  
