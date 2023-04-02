@@ -9,6 +9,8 @@ import HeaderNormal from '../components/HeaderNormal';
 import OurServices from '../components/OurServices';
 import OurSpecialists from '../components/OurSpecialists';
 import {CookiesModal} from '../components/CookiesModal';
+import FindPasient from './SpecialistDashboardPages/FindPasient';
+import { Link } from 'react-router-dom';
 
 
 export function Home() {
@@ -19,7 +21,8 @@ export function Home() {
       <CookiesModal/>
       <HomeImage/>
       <OurServices/> 
-      <OurSpecialists/>                    
+      <OurSpecialists/> 
+      <Link to="/FindPasient" className="button">specialists</Link>     
      </div>
   );
 }
