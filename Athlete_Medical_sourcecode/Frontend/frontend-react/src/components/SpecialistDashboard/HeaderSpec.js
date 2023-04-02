@@ -14,6 +14,7 @@ import '../Header.css';// importing Header.css stylesheet
 import { Link, NavLink, useNavigate } from 'react-router-dom';// importing Link, NavLink, and useNavigate from react-router-dom
 import picture from '../../images/footerImage2.png';// importing an image file
 import symbol from '../../images/admin.png';// importing an image file
+import Cookies from 'js-cookie';
 
 
 
@@ -39,6 +40,7 @@ const HeaderSpec = () => {
     navigate("/");
   }
   */
+  
 
   return (
     <Navbar className="navbar" expand="lg"> {/* The main navigation bar component */}

@@ -1,76 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import styles from './FindAppointment.module.css';
+import HeaderSpec from '../../components/SpecialistDashboard/HeaderSpec';
 
-import HeaderSpec from "../../components/SpecialistDashboard/HeaderSpec";
-import axios from "axios";
-
-const FindAppointment = () => {
+function FindAppointment() {
   const [appointments, setAppointments] = useState([]);
+  //const specialistId = Cookies.get('userID');
+  const specialistId = 20;
 
   useEffect(() => {
-    const fetchAppointments = async () => {
-      const specialistId = 27; // replace with the logged-in specialist id from cookies
+    fetch(`https://localhost:7209/api/appointment/available/specId?specId=${specialistId}`)
+      .then(response => response.json())
+      .then(data => setAppointments(data));
+  }, [specialistId]);
 
-      const appointmentsResponse = await axios.get(
-        `https://localhost:7209/api/appointment/getAll`
-      );
-
-      const patientsResponse = await axios.get(
-        `https://localhost:7209/api/user/patients`
-      );
-
-      const patientsMap = patientsResponse.data.reduce(
-        (map, patient) => ({ ...map, [patient.id]: patient }),
-        {}
-      );
-
-      const filteredAppointments = appointmentsResponse.data.filter(
-        (appointment) =>
-          appointment.specialistId === specialistId &&
-          patientsMap[appointment.patientId]
-      );
-
-      const enrichedAppointments = filteredAppointments.map(
-        (appointment) => ({
-          ...appointment,
-          patient: patientsMap[appointment.patientId].name,
-          specialist: "Dr. Specialist", // replace with specialist name if available in API
-        })
-      );
-
-      setAppointments(enrichedAppointments);
-    };
-
-    fetchAppointments();
-  }, []);
+  const formatDate = (date, index) => {
+    const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    const start = new Date(date.startTime).toLocaleDateString('en-US', options);
+    const end = new Date(date.endTime).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
+    return `Appointment ${index + 1} - ${start} ${end}`;
+  };
+  
 
   return (
-    <div>
-        <HeaderSpec/>
-      <h1>Appointments</h1>
-      <table>
-        <thead>
-          <tr>
-            <th>Patient</th>
-            <th>Specialist</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Room ID</th>
-          </tr>
-        </thead>
-        <tbody>
-          {appointments.map((appointment) => (
-            <tr key={appointment.id}>
-              <td>{appointment.patient}</td>
-              <td>{appointment.specialist}</td>
-              <td>{appointment.startTime}</td>
-              <td>{appointment.endTime}</td>
-              <td>{appointment.roomId}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <>
+      <HeaderSpec/>
+    <div className={styles.appointmentListContainer}>
+      <h2>Appointments</h2>
+      <ul className={styles.appointmentList}>
+          {appointments.map((appointment, index) => (
+          <li key={appointment.appointmentId} className={styles.appointmentItem}>
+            <span className={styles.appointmentTime}>{formatDate(appointment, index)}</span>
+          </li>
+        ))}
+      </ul>
+
+
     </div>
+    </>
+  
   );
-};
+}
 
 export default FindAppointment;
