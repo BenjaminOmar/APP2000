@@ -19,6 +19,8 @@ public partial class App2000Context : DbContext
 
     public virtual DbSet<AppointmentGetAll> AppointmentsGetAll { get; set; }
 
+    public virtual DbSet<JournalnoteGetAll> JournalNoteGetAll { get; set; }
+
     public virtual DbSet<Journalnote> Journalnotes { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }

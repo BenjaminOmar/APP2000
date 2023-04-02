@@ -25,6 +25,16 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- list of all journalnotes
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `getAllJournals`()
+    READS SQL DATA
+BEGIN
+    SELECT journalnote.*, CONCAT(user.FirstName, " ",user.middleName, " ", user.lastName) AS 'Name' FROM journalnote, user WHERE journalnote.patient = user.userId;
+END$$
+DELIMITER ;
+
+
 -- list of all specialists
 DELIMITER $$
 CREATE DEFINER=`root`@`%` PROCEDURE `specialists`()

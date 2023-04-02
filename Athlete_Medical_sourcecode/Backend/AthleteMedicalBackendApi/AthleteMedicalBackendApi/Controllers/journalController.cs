@@ -18,11 +18,18 @@ namespace AthleteMedicalBackendApi.Controllers
 
         // get all journals
         [HttpGet("getAll")]
-        public async Task<IActionResult> GetAllJournals()
+        public async Task<IActionResult> GetAllAppointments()
         {
-            var journals = await _context.Journalnotes.ToListAsync();
+            //try
+            {
+                var journals = await _context.JournalNoteGetAll.FromSqlInterpolated<JournalnoteGetAll>($"getAllJournals").ToListAsync();
 
-            return Ok(journals);
+                return Ok(journals);
+            }
+            //catch (Exception)
+            //{
+            //    return StatusCode(StatusCodes.Status500InternalServerError, "Error ved visning av alle avtaler");
+            //}
         }
 
         // GET api/values/5
