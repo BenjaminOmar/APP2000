@@ -81,6 +81,7 @@ function AdminSeeJournal() {
               <th>Tittel</th>
               <th>Opprettet</th>
               <th>Pasient ID</th>
+              <th>Pasient ID</th>
             </tr>
           </thead>
           <tbody>
@@ -92,6 +93,7 @@ function AdminSeeJournal() {
                 <td>{new Date(journal.created).toLocaleString()}</td>
 
                 <td>{journal.patient}</td>
+                <td>{journal.name}</td>
               </tr>
             ))}
           </tbody>

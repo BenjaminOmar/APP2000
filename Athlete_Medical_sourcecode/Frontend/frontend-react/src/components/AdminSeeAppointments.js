@@ -24,8 +24,10 @@ new Date(appointment.startTime).toLocaleString().includes(searchTerm) ||
 new Date(appointment.endTime).toLocaleString().includes(searchTerm) ||
 appointment.roomId.toString().includes(searchTerm) ||
 appointment.patientId.toString().includes(searchTerm) ||
-appointment.specialistId.toString().includes(searchTerm)
+appointment.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+appointment.specialistId.toString().includes(searchTerm) 
 );
+
 setSearchResults(filteredResults);
 } catch (error) {
 Alert(error);
@@ -47,7 +49,7 @@ return (
             <Card.Body>
               <Card.Text style={{ paddingRight: "12%", paddingLeft: "12%" }}>
                 Her kan du søke etter en avtale ved å skrive inn en tekst i søkefeltet under. Søket vil returnere alle avtaler som inneholder den angitte teksten.
-             Du kan finne en avtale ved å søke etter pasient ID, spesialist ID eller Rom ID.
+             Du kan finne en avtale ved å søke etter pasient ID, navn på pasient, spesialist ID eller Rom ID.
               </Card.Text>
             </Card.Body>
           </Card>
@@ -90,6 +92,7 @@ return (
                   <th>Sluttidspunkt</th>
                   <th>Rom ID</th>
                   <th>Pasient ID</th>
+                  <th>Navn på pasient</th>
                   <th>Spesialist ID</th>
                   <th>Er avtalen booket</th>
                 </tr>
@@ -106,6 +109,7 @@ return (
                     </td>
                     <td>{appointment.roomId}</td>
                     <td>{appointment.patientId}</td>
+                    <td>{appointment.name}</td>
                     <td>{appointment.specialistId}</td>
                     <td>{appointment.isAvailable ? "Nei" : "Ja"}</td>
                   </tr>

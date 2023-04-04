@@ -124,7 +124,7 @@ return (
             <thead>
               <tr>
                 <th>Avtaletidspunkt</th>         
-                <th>Rom nummer</th>
+                <th>Romnummer</th>
                 <th></th>
               </tr>
             </thead>
