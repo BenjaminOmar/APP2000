@@ -49,7 +49,10 @@ function AdminBooking() {
         const filteredAppointments = response.data.filter(
           (appointment) => appointment.specialistId === selectedSpecialist.userId
         );
-        setAvailableAppointments(filteredAppointments);
+        const sortedAppointments = filteredAppointments.sort((a, b) => {
+          return new Date(a.startTime) - new Date(b.startTime);
+        });
+        setAvailableAppointments(sortedAppointments);
         setSelectedSpecialist(selectedSpecialist);
       })
       .catch((error) => {
