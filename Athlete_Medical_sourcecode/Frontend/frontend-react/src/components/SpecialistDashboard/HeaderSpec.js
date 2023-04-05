@@ -59,6 +59,7 @@ const HeaderSpec = () => {
             <NavLink to='/FindAppointment' className='list-item' activeclassname='active'>Finn dine avtaler</NavLink>
             <NavLink to='/MakeSchedule' className='list-item' activeclassname='active'>Lag Timeplan</NavLink>
             <NavLink to='/GetJournal' className='list-item' activeclassname='active'>Finn Journal</NavLink>
+            <NavLink to='/WriteJournal' className='list-item' activeclassname='active'>Skrive Journal</NavLink>
           </Nav>
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>
