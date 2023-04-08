@@ -1,0 +1,21 @@
+.journalNote {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .created {
+    color: #999;
+    font-size: 14px;
+  }
+  
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .journalNoteContent {
+    margin-top: 8px;
+    font-size: 16px;
+  }
+  
