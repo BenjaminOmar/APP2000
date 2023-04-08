@@ -19,7 +19,7 @@ function GetJournal() {
 
   const handleSearch = () => {
     const filtered = journals.filter((journal) =>
-      journal.heading.toLowerCase().includes(searchText.toLowerCase())
+      journal.name.toLowerCase().includes(searchText.toLowerCase())
     );
     setFilteredJournals(filtered);
     if (filtered.length > 0) {

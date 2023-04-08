@@ -56,6 +56,7 @@ const HeaderUser = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto"> {/* A navigation bar component with a right-aligned list of navigation items */}
             <NavLink to='/FutureAppointment' className='list-item' activeclassname='active'> Avtaler</NavLink>
+            <NavLink to='/UserJournal' className='list-item' activeclassname='active'> Din Journal</NavLink>
           </Nav>
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>
