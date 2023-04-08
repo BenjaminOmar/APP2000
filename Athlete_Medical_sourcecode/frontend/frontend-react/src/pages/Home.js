@@ -9,7 +9,7 @@ import HeaderNormal from '../components/HeaderNormal';
 import OurServices from '../components/OurServices';
 import OurSpecialists from '../components/OurSpecialists';
 import {CookiesModal} from '../components/CookiesModal';
-import { Link } from 'react-router-dom';
+
 
 
 
@@ -21,9 +21,7 @@ export function Home() {
       <CookiesModal/>
       <HomeImage/>
       <OurServices/> 
-      <OurSpecialists/>
-     <Link to="/FindPasient" className="button">specialists</Link>   
-     <Link to="/FutureAppointment" className="button">User dashboard</Link>         
+      <OurSpecialists/>        
      </div>
   );
 }

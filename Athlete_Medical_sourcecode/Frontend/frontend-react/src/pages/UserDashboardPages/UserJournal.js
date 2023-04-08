@@ -6,7 +6,8 @@ import HeaderUser from '../../components/UserDashboard/HeaderUser';
 
 const UserJournal = () => {
   const [journalNotes, setJournalNotes] = useState([]);
-  const username = Cookies.get('username');
+  
+  const userId = Cookies.get('userId');
   
 
   useEffect(() => {
@@ -14,13 +15,13 @@ const UserJournal = () => {
     axios.get('https://localhost:7209/api/journal/getAll')
       .then(response => {
         // Filter journal notes based on logged-in user's username
-        const filteredNotes = response.data.filter(note => note.name === username);
+        const filteredNotes = response.data.filter(note => note.patient == userId);
         setJournalNotes(filteredNotes);
       })
       .catch(error => {
         console.error('Failed to fetch journal notes:', error);
       });
-  }, [username]);
+  }, [userId]);
 
   return (
     <>

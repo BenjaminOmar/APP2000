@@ -5,8 +5,8 @@ import HeaderSpec from '../../components/SpecialistDashboard/HeaderSpec';
 
 function FindAppointment() {
   const [appointments, setAppointments] = useState([]);
-  //const specialistId = Cookies.get('userID');
-  const specialistId = 20;
+  const specialistId = Cookies.get('userId');
+  
 
   useEffect(() => {
     fetch(`https://localhost:7209/api/appointment/available/specId?specId=${specialistId}`)

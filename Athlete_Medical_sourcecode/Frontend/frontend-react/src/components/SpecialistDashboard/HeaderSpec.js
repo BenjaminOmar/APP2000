@@ -14,17 +14,18 @@ import '../Header.css';// importing Header.css stylesheet
 import { Link, NavLink, useNavigate } from 'react-router-dom';// importing Link, NavLink, and useNavigate from react-router-dom
 import picture from '../../images/footerImage2.png';// importing an image file
 import symbol from '../../images/admin.png';// importing an image file
-
+import Cookies from "js-cookie";// importing Cookies module
 
 
 // This component represents the header component for the admin page
 const HeaderSpec = () => {
   // Navigate variable using useNavigate hook from react-router-dom
- /* const navigate = useNavigate();
+ const navigate = useNavigate();
 
   const username = Cookies.get("username");// getting the value of the username cookie
   const role = Cookies.get("role");// getting the value of the role cookie
-  if (!username || !role) {// if either username or role cookie is not set
+  const userId = Cookies.get("userId");// getting the value of the userID cookie
+  if (!username || !role ||!userId) {// if either username, userId or role cookie is not set
     navigate("/");// navigate to the homepage
     return null;// return null to prevent the rest of the code from executing
   }
@@ -35,10 +36,11 @@ const HeaderSpec = () => {
     // Sett the cookies to null and with an expire date in the past
     Cookies.set("role", null, { expires: new Date(0) });
     Cookies.set("username", null, { expires: new Date(0) });
+    Cookies.set("userId", null, { expires: new Date(0) });
     // Navigate to the homepage after the cookies are deleted
     navigate("/");
   }
-  */
+  
 
   return (
     <Navbar className="navbar" expand="lg"> {/* The main navigation bar component */}
@@ -61,7 +63,7 @@ const HeaderSpec = () => {
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>
               <Dropdown.Item as={Link} to="/alteruser">Dine opplysninger</Dropdown.Item>
-              <Dropdown.Item>Logg ut</Dropdown.Item>
+              <Dropdown.Item onClick={handleLogout}>Logg ut</Dropdown.Item>
             </DropdownButton>
           </Nav>
         </Navbar.Collapse>

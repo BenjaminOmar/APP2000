@@ -51,8 +51,9 @@ function App() {
 					<Route path="/MakeSchedule" element={<MakeSchedule/>}/>
 					<Route path="/GetJournal" element={<GetJournal/>}/>
 					<Route path="WriteJournal" element={<WriteJournal/>}/>
-					<Route path="FutureAppointment" element={<FutureAppointments/>}/>
+					<Route path="futureappointment" element={<FutureAppointments/>}/>
 					<Route path="UserJournal" element={<UserJournal/>}/>
+					<Route path="Booking" element={<Booking/>}/>
 
 				</Routes>
 				<Footer />

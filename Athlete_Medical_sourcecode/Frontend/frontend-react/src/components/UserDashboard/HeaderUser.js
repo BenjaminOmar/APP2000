@@ -15,13 +15,14 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';// importing Link,
 import picture from '../../images/footerImage2.png';// importing an image file
 import symbol from '../../images/admin.png';// importing an image file
 import Cookies from 'js-cookie';
+import Booking from '../../pages/Booking';
 
 
 
 // This component represents the header component for the admin page
 const HeaderUser = () => {
   // Navigate variable using useNavigate hook from react-router-dom
- /* const navigate = useNavigate();
+const navigate = useNavigate();
 
   const username = Cookies.get("username");// getting the value of the username cookie
   const role = Cookies.get("role");// getting the value of the role cookie
@@ -36,10 +37,11 @@ const HeaderUser = () => {
     // Sett the cookies to null and with an expire date in the past
     Cookies.set("role", null, { expires: new Date(0) });
     Cookies.set("username", null, { expires: new Date(0) });
+    Cookies.set("userId", null, { expires: new Date(0) });
     // Navigate to the homepage after the cookies are deleted
     navigate("/");
   }
-  */
+  
   
 
   return (
@@ -55,13 +57,14 @@ const HeaderUser = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto"> {/* A navigation bar component with a right-aligned list of navigation items */}
-            <NavLink to='/FutureAppointment' className='list-item' activeclassname='active'> Avtaler</NavLink>
+            <NavLink to='/FutureAppointment' className='list-item' activeclassname='active'> Dine Avtaler</NavLink>
             <NavLink to='/UserJournal' className='list-item' activeclassname='active'> Din Journal</NavLink>
+            <NavLink to='/Booking' className='list-item' activeclassname='active'> Bestill avtale</NavLink>
           </Nav>
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>
               <Dropdown.Item as={Link} to="/alteruser">Dine opplysninger</Dropdown.Item>
-              <Dropdown.Item>Logg ut</Dropdown.Item>
+              <Dropdown.Item onClick={handleLogout}>Logg ut</Dropdown.Item>
             </DropdownButton>
           </Nav>
         </Navbar.Collapse>

@@ -27,7 +27,7 @@ const FindPasient = () => {
   return (
     <>
      
-        <HeaderSpec />
+        <HeaderSpec/>
         <div className={FindPasientCSS.container}>
         <div className={FindPasientCSS.inputWrapper}>
           <FaSearch className={FindPasientCSS.searchIcon} />

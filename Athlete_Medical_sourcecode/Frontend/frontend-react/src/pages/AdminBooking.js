@@ -91,6 +91,7 @@ return (
         <h2>Velkommen {username} </h2>
       </div>
     <div className="container my-5">
+      <p>Her må vi kanskje skrive litt om timestilling....</p>
       <h2 className="mb-3">Timebestilling</h2>
       <Table bordered hover>
         <thead>
