@@ -19,7 +19,9 @@ export function Home() {
       <CookiesModal/>
       <HomeImage/>
       <OurServices/> 
-      <OurSpecialists/>                    
+      <OurSpecialists/>
+      <link to="/FindPasient" className="button"> specialists </link>         
+      <link to="/FutureAppointment" className="button"> User Dashboard </link>              
      </div>
   );
 }

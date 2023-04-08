@@ -20,6 +20,7 @@ import AdminSeeJournal from "./pages/AdminSeeJournal";
 import Flip from "./components/flip";
 import AlterUser from "./pages/AlterUser";
 import Booking from "./pages/Booking";
+import FutureAppointments from "./components/FutureAppointments";
 
 
 function App() {
@@ -39,6 +40,8 @@ function App() {
 					<Route path="/adminseejournal" element={<AdminSeeJournal />} />
 					<Route path="/login" element={<Flip />} />
 					<Route path="/alteruser" element={<AlterUser />} />
+					<Route path="/FutureAppointment" element={<FutureAppointments />} />
+					
 				</Routes>
 				<Footer />
 			</BrowserRouter>
