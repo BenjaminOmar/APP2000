@@ -25,7 +25,7 @@ function GetJournal() {
     if (filtered.length > 0) {
       setFeedback("");
     } else {
-      setFeedback("Can't find the journal");
+      setFeedback("kan ikke finne den journalen");
     }
   };
 
@@ -33,7 +33,7 @@ function GetJournal() {
     <>
     <HeaderSpec/>
     <div className={styles.container}>
-      <h2>Journal Entries</h2>
+      <h2>Søk på navn</h2>
       <div className={styles.searchBox}>
         <input
           type="text"

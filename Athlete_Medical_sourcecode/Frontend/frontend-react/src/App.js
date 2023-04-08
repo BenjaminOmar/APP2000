@@ -25,6 +25,7 @@ import FindAppointment from "./pages/SpecialistDashboardPages/FindAppointment"
 import GetJournal from "./pages/SpecialistDashboardPages/GetJournal"
 import MakeSchedule from "./pages/SpecialistDashboardPages/MakeSchedule"
 import WriteJournal from "./pages/SpecialistDashboardPages/WriteJournal";
+import FutureAppointments from "./pages/UserDashboardPages/FutureAppointment";
 
 
 function App() {
@@ -49,6 +50,8 @@ function App() {
 					<Route path="/MakeSchedule" element={<MakeSchedule/>}/>
 					<Route path="/GetJournal" element={<GetJournal/>}/>
 					<Route path="WriteJournal" element={<WriteJournal/>}/>
+					<Route path="FutureAppointment" element={<FutureAppointments/>}/>
+
 				</Routes>
 				<Footer />
 			</BrowserRouter>
