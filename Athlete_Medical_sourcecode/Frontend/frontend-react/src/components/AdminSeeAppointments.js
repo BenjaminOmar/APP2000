@@ -1,3 +1,4 @@
+// Importing necessary modules
 import HeaderAdmin from "../components/HeaderAdmin";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
@@ -7,16 +8,20 @@ import '../components/SeeAllJournals.css';
 import AppointmentTest from "../components/AppointmentTest";
 import BookingTest from "../components/BookingTest";
 
+// Component for searching and displaying appointments
 function AdminSeeAppointments() {
-const username = Cookies.get("username");
-const [searchTerm, setSearchTerm] = useState("");
+const username = Cookies.get("username"); // Get the username from the cookie
+const [searchTerm, setSearchTerm] = useState(""); // Set the state for the search term and the search results
 const [searchResults, setSearchResults] = useState([]);
 
+// Function for searching appointments
 const searchAppointments = async (event) => {
 event.preventDefault();
 try{
+// Make a GET request to the API to get all appointments
 const response = await axios.get("https://localhost:7209/api/appointment/getAll");
-const data = response.data;
+const data = response.data; // Get the data from the response
+// Filter the results based on the search term
 const filteredResults = data.filter(
 (appointment) =>
 appointment.appointmentId.toString().includes(searchTerm) ||
@@ -30,10 +35,11 @@ appointment.specialistId.toString().includes(searchTerm)
 
 setSearchResults(filteredResults);
 } catch (error) {
-Alert(error);
+Alert(error); // Display an alert if there is an error
 };
 }
 
+// Return the JSX to render the component
 return (
   <>
     <div className="AllJournals">
@@ -49,7 +55,7 @@ return (
             <Card.Body>
               <Card.Text style={{ paddingRight: "12%", paddingLeft: "12%" }}>
                 Her kan du søke etter en avtale ved å skrive inn en tekst i søkefeltet under. Søket vil returnere alle avtaler som inneholder den angitte teksten.
-             Du kan finne en avtale ved å søke etter pasient ID, navn på pasient, spesialist ID eller Rom ID.
+             Du kan finne en avtale ved å søke etter pasient ID, navn på pasient, spesialist ID eller Rom ID. {/*Description*/}
               </Card.Text>
             </Card.Body>
           </Card>
@@ -72,9 +78,9 @@ return (
               marginBottom: "50px",
             }}
           >
-            Søk
+            Søk {/*Search button*/}
           </Button>
-          {searchResults.length > 0 && (
+          {searchResults.length > 0 && ( // If there are search results, render the table below
             <Table
               striped
               bordered
@@ -98,20 +104,20 @@ return (
                 </tr>
               </thead>
               <tbody>
-                {searchResults.map((appointment) => (
+                {searchResults.map((appointment) => ( // Loop through the search results and create a row for each appointment
                   <tr key={appointment.appointmentId}>
                     <td>{appointment.appointmentId}</td>
                     <td>
-                      {new Date(appointment.startTime).toLocaleString()}
+                      {new Date(appointment.startTime).toLocaleString()} {/*Convert the start time to a readable format*/} 
                     </td>
                     <td>
-                      {new Date(appointment.endTime).toLocaleString()}
+                      {new Date(appointment.endTime).toLocaleString()} {/*Convert the end time to a readable format*/}
                     </td>
                     <td>{appointment.roomId}</td>
                     <td>{appointment.patientId}</td>
                     <td>{appointment.name}</td>
                     <td>{appointment.specialistId}</td>
-                    <td>{appointment.isAvailable ? "Nei" : "Ja"}</td>
+                    <td>{appointment.isAvailable ? "Nei" : "Ja"}</td> {/*Display "Ja" if the appointment is available, "Nei" otherwise*/}
                   </tr>
                 ))}
               </tbody>

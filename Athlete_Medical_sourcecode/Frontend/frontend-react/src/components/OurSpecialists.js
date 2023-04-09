@@ -1,3 +1,4 @@
+// Importing neccessary components and files 
 import React from "react";
 import './OurSpecialists.css';
 import { Link } from "react-router-dom";
@@ -6,18 +7,22 @@ import doctor2 from '../images/doctor2.jpg';
 import physician from '../images/physician.jpg';
 import physiotherapist from '../images/physiotherapist.jpg';
 
-
+// Defining the OurSpecialists function component
 function OurSpecialists() {
-  return (
 
+// Returning JSX code for the OurSpecialists component
+return (
 <div>
-  <h2>Våre behandlere</h2>
+<h2>Våre behandlere</h2>
 
     <div className="employee-section">
+    {/* Rendering employee section */}
 
       <div className="employee">
+        {/* Linking employee to specialist section using React Router */}
         <Link to="/specialistsection">
         <img src={doctor1} alt="Employee 1"/> 
+        {/* Displaying information about the employee */}
         <div className="employee-text">
         <h3>Geir Arne Nilsen</h3>
         <p>Ortoped</p>
@@ -25,10 +30,11 @@ function OurSpecialists() {
     sykdommer. Han er grundig, oppmerksom og en verdifull tilføyelse til teamet vårt. </div> </Link>
       </div>
       
-
       <div className="employee">
+      {/* Linking employee to specialist section using React Router */}
       <Link to="/specialistsection">
         <img src={doctor2} alt="Employee 2" />
+        {/* Displaying information about the employee */}
         <div className="employee-text">
         <h3>Eva Johnsen</h3>
         <p>Sykepleier</p>
@@ -38,8 +44,10 @@ function OurSpecialists() {
       </div>
 
       <div className="employee">
+      {/* Linking employee to specialist section using React Router */}
       <Link to="/specialistsection">
         <img src={physician} alt="Employee 3" />
+        {/* Displaying information about the employee */}
         <div className="employee-text">
         <h3>Karoline Ernstsen</h3>
         <p>Fysikalsk lege</p>
@@ -48,8 +56,10 @@ function OurSpecialists() {
       </div>
 
       <div className="employee">
+      {/* Linking employee to specialist section using React Router */}
       <Link to="/specialistsection#behandlere">
         <img src={physiotherapist} alt="Employee 4" />
+        {/* Displaying information about the employee */}
         <div className="employee-text">
         <h3>Hedda Vold</h3>
         <p>Fysioterapeut</p>
@@ -60,4 +70,6 @@ function OurSpecialists() {
     </div>
   );
 }
+
+// Exporting OurSpecialist component as the default export
 export default OurSpecialists;
