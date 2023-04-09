@@ -18,6 +18,8 @@ import AdminEditUser from "./pages/AdminEditUser";
 import AdminBooking from "./pages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminSeeJournal";
 import Flip from "./components/flip";
+import AlterUserAdmin from "./pages/AlterUserAdmin";
+import AlterUserSpecialist from "./pages/AlterUserSpecialist";
 import AlterUser from "./pages/AlterUser";
 import Booking from "./pages/Booking";
 import FindPasient from "./pages/SpecialistDashboardPages/FindPasient"
@@ -45,7 +47,9 @@ function App() {
 					<Route path="/adminbooking" element={<AdminBooking />} />
 					<Route path="/adminseejournal" element={<AdminSeeJournal />} />
 					<Route path="/login" element={<Flip />} />
-					<Route path="/alteruser" element={<AlterUser />} />
+					<Route path="/alteruseradmin" element={<AlterUserAdmin />} />
+					<Route path="/alteruserspecialist" element={<AlterUserSpecialist/>} />
+					<Route path="/alteruser" element={<AlterUser/>} />
 					<Route path="/FindPasient" element={<FindPasient/>}/>
 					<Route path="/FindAppointment" element={<FindAppointment/>}/>
 					<Route path="/MakeSchedule" element={<MakeSchedule/>}/>

@@ -62,7 +62,7 @@ const HeaderSpec = () => {
           </Nav>
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>
-              <Dropdown.Item as={Link} to="/alteruser">Dine opplysninger</Dropdown.Item>
+              <Dropdown.Item as={Link} to="/alteruserspecialist">Dine opplysninger</Dropdown.Item>
               <Dropdown.Item onClick={handleLogout}>Logg ut</Dropdown.Item>
             </DropdownButton>
           </Nav>

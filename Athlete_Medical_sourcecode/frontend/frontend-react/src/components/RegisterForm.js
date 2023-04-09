@@ -191,7 +191,7 @@ function RegisterForm({ setShowFrontProp }) {
 	// Define a tooltip component for a username input field
 	const usernameTooltip = (
 		<Tooltip id="tooltip">
-			brukernavn må inneholde: <br></br> - 5 siffer <br></br> - være uten
+			brukernavn må inneholde: <br></br> -  minst 5 tegn <br></br> - være uten
 			mellomrom
 		</Tooltip>
 	);

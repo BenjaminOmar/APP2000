@@ -10,10 +10,11 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button, Modal, Form, Card } from 'react-bootstrap';
 import axios from 'axios';// HTTP client library for making API requests
 import Cookies from "js-cookie";// JavaScript library for handling browser cookies
-import HeaderUser from '../components/UserDashboard/HeaderUser';// Component for the header of the page
+import HeaderSpec from '../components/SpecialistDashboard/HeaderSpec';
+
 
 // React component function for the user profile page
-function AlterUser() {
+function AlterUserSpecialist() {
     const username = Cookies.get("username");// Retrieving the username from the browser cookie
     const [searchResults, setSearchResults] = useState([]);// State variable for storing search result
     const [showEditModal, setShowEditModal] = useState(false); // State variable for showing/hiding the edit modal
@@ -219,7 +220,7 @@ function AlterUser() {
         // A div to hold the entire component
         <div>
             {/* Header component for the admin section */}
-            <HeaderUser />
+            <HeaderSpec />
             {/* A div with grid display and center alignment */}
             <div
                 style={{
@@ -437,4 +438,4 @@ function AlterUser() {
     );
 };
 //The component is exported as a default export
-export default AlterUser; 
+export default AlterUserSpecialist; 
