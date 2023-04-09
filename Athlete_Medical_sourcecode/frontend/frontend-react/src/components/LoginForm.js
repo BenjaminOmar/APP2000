@@ -86,11 +86,7 @@ const LoginForm = () => {
 					navigate("/FindPasient");
 				} else if (role === 3) {
 					navigate("/adminbooking");
-				}
-				}else{
-					alert("Feil med informasjonskapsler")
-				}
-				
+				}}				
 			})
 			.catch((error) => {
 				//Handle any errors that occur during the request or response
