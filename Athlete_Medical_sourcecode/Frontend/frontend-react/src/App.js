@@ -8,7 +8,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import Footer from "./components/Footer"; // legg til import for Footer-komponenten
-import Dashboard from "./pages/Dashboard";
+
 import ForgotPwrdUser from "./components/ForgotPwrdUser";
 import TermsPrivacyPage from "./pages/TermsPrivacyPage";
 import Services from "./pages/Services";
@@ -37,7 +37,7 @@ function App() {
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Home />} />
-					<Route path="/dashboard" element={<Dashboard />} />
+			
 					<Route path="/forgotpwrduser" element={<ForgotPwrdUser />} />
 					<Route path="/termsprivacy" element={<TermsPrivacyPage />} />
 					<Route path="/services" element={<Services />} />

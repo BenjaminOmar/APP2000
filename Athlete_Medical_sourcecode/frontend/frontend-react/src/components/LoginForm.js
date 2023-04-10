@@ -81,7 +81,7 @@ const LoginForm = () => {
 
 				//Navigate the user to different pages based on the users role
 				if (role === 1) {
-					navigate("/futureappointment");
+					navigate("/FutureAppointment");
 				} else if (role === 2) {
 					navigate("/FindPasient");
 				} else if (role === 3) {
@@ -106,7 +106,7 @@ const LoginForm = () => {
 		//If there is a cookie with the user's role and username, navigate to their dashboard
 		if (role && username && userId) {
 			if (role === "1") {
-				navigate("/futureappointment");
+				navigate("/FutureAppointment");
 			} else if (role === "2") {
 				navigate("/FindPasient");
 			} else if (role === "3") {
