@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Button, Form, Table, Card, Alert } from "react-bootstrap";
 import '../components/SeeAllJournals.css';
-import AppointmentTest from "../components/AppointmentTest";
 import BookingTest from "../components/BookingTest";
 
 // Component for searching and displaying appointments
