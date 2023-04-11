@@ -83,31 +83,34 @@ function AdminSeeJournal() {
                       <td>{journal.patient}</td>
                       <td>{journal.name}</td>
                       <td>
-                        <Button onClick={() => setShowModal(true)}>Vis Journalnotat</Button>
-                        <Modal show={showModal} onHide={() => setShowModal(false)}>
-                          <Modal.Header closeButton>
-                            <Modal.Title>Journalnotat</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                            {journal.journalnote}
-                          </Modal.Body>
-                          <Modal.Footer>
-                            <Button variant="secondary" onClick={() => setShowModal(false)}>
-                              Lukk
-                            </Button>
-                          </Modal.Footer>
-                        </Modal>
+                        <Button onClick={() => setSelectedJournalnote(journal.journalnote)}>Vis Journalnotat</Button>
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </Table>
             )}
+            {selectedJournalnote !== "" && (
+              <Modal show={true} onHide={() => setSelectedJournalnote("")}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Journalnotat</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {selectedJournalnote}
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={() => setSelectedJournalnote("")}>
+                    Lukk
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            )}
           </div>
         </div>
       </div>
     </>
   );
+
   
 }
 
