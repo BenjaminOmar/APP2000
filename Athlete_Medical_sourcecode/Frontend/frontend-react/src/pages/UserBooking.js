@@ -1,6 +1,6 @@
 // Importing necessary packages and components
 import React, { useEffect, useState } from "react";
-import HeaderAdmin from "../components/HeaderAdmin";
+import HeaderUser from "../components//UserDashboard/HeaderUser";
 import axios from "axios";
 import { Table, Button } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
@@ -89,7 +89,7 @@ function UserBooking() {
       // If the booking is successful, it will display an alert with the appointment start time, specialist name
       // and confirmation message and navigates to 'min side' or 'fremtidige avtaler'
       alert(`Bekreftelse på timebestilling \n\nDu har time ${new Date(appointment.startTime).toLocaleDateString("nb-NO", startOptions)} - ${new Date(appointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos ${selectedSpecialist.firstName} ${selectedSpecialist.middleName} ${selectedSpecialist.lastName}`);
-      navigate("/adminseejournal") // Need to be updated to 'mypage'
+      navigate("/FutureAppointment") // Sends the user to future appointment after booking
       console.log(data);
       console.log(result.data);
     })
@@ -103,7 +103,7 @@ function UserBooking() {
 // It contains a table of specialist users and a table of available appointments, and allows patients to book appointments.
 return (
   <>
-    <HeaderAdmin /> {/*Renders the 'HeaderAdmin' component */}
+    <HeaderUser /> {/*Renders the 'HeaderUser' component */}
     <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
         <h2>Velkommen {username} </h2> {/*Displays a welcome message with the username*/}
       </div>
@@ -172,12 +172,9 @@ return (
         </>
       )}
     </div>
-    <div>
-      <AdminSeeAppointments/> {/*Renders the AdminSeeAppointments component */}
-    </div>
   </>
 );
  }
 
-  // Exports the AdminBooking component as the default export
+  // Exports the UserBooking component as the default export
   export default UserBooking;  

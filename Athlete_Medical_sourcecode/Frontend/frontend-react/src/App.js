@@ -20,7 +20,7 @@ import Flip from "./components/flip";
 import AlterUserAdmin from "./pages/AlterUserAdmin";
 import AlterUserSpecialist from "./pages/AlterUserSpecialist";
 import AlterUser from "./pages/AlterUser";
-import Booking from "./pages/Booking";
+import UserBooking from "./pages/UserBooking";
 import FindPasient from "./pages/SpecialistDashboardPages/FindPasient"
 import FindAppointment from "./pages/SpecialistDashboardPages/FindAppointment"
 import GetJournal from "./pages/SpecialistDashboardPages/GetJournal"
@@ -55,7 +55,7 @@ function App() {
 					<Route path="WriteJournal" element={<WriteJournal/>}/>
 					<Route path="futureappointment" element={<FutureAppointments/>}/>
 					<Route path="UserJournal" element={<UserJournal/>}/>
-					<Route path="Booking" element={<Booking/>}/>
+					<Route path="UserBooking" element={<UserBooking/>}/>
 				</Routes>
 				<Footer />
 			</BrowserRouter>
