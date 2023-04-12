@@ -89,7 +89,7 @@ function AdminBooking() {
       // If the booking is successful, it will display an alert with the appointment start time, specialist name
       // and confirmation message and navigates to 'min side' or 'fremtidige avtaler'
       alert(`Bekreftelse på timebestilling \n\nDu har time ${new Date(appointment.startTime).toLocaleDateString("nb-NO", startOptions)} - ${new Date(appointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos ${selectedSpecialist.firstName} ${selectedSpecialist.middleName} ${selectedSpecialist.lastName}`);
-      navigate("/adminseejournal") // Need to be updated to 'mypage'
+      navigate("/adminbooking") // Need to be updated to 'mypage'
       console.log(data);
       console.log(result.data);
     })
