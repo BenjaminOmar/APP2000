@@ -5,7 +5,7 @@ The function also includes logic to search for users and validate user data befo
 */
 
 // Import necessary components and libraries
-import HeaderAdmin from "../components/HeaderAdmin";
+import HeaderAdmin from "../../components/AdminDashboard/HeaderAdmin";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import axios from "axios";

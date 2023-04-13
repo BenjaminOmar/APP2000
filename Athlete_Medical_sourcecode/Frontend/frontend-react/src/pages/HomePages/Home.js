@@ -3,15 +3,12 @@ services, and specialists, and renders them on the home page of a React applicat
 Additionally, a cookies modal is also imported and rendered. The function "Home" returns all these components enclosed in a div.
 */
 import React from 'react';
-import HomeImage from '../components/HomeImage';
-import Popup from '../components/Newsletter';
-import HeaderNormal from '../components/HeaderNormal';
-import OurServices from '../components/OurServices';
-import OurSpecialists from '../components/OurSpecialists';
-import {CookiesModal} from '../components/CookiesModal';
-
-
-
+import HomeImage from '../../components/Home/HomeImage';
+import Popup from '../../components/Home/Newsletter';
+import HeaderNormal from '../../components/Home/HeaderNormal';
+import OurServices from '../../components/Home/OurServices';
+import OurSpecialists from '../../components/Home/OurSpecialists';
+import { CookiesModal } from '../../components/Home/CookiesModal';
 
 export function Home() {
     return (

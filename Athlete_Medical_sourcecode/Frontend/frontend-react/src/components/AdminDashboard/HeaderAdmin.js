@@ -10,11 +10,12 @@ import Container from 'react-bootstrap/Container';// importing Container compone
 import Nav from 'react-bootstrap/Nav';// importing Nav component from react-bootstrap
 import Navbar from 'react-bootstrap/Navbar';// importing Navbar component from react-bootstrap
 import { Dropdown, DropdownButton } from 'react-bootstrap';// importing Dropdown and DropdownButton components from react-bootstrap
-import './Header.css';// importing Header.css stylesheet
+import '../Header.css';// importing Header.css stylesheet
 import { Link, NavLink, useNavigate } from 'react-router-dom';// importing Link, NavLink, and useNavigate from react-router-dom
-import picture from '../images/footerImage2.png';// importing an image file
-import symbol from '../images/admin.png';// importing an image file
+import picture from '../../images/footerImage2.png';// importing an image file
+import symbol from '../../images/admin.png';// importing an image file
 import Cookies from "js-cookie";// importing Cookies module
+
 
 
 // This component represents the header component for the admin page

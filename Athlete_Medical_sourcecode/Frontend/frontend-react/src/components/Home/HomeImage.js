@@ -3,7 +3,7 @@
 //Imports the React library.
 import React from 'react';
 //Imports the video file to be used as the background
-import video from '../images/pexels-cottonbro-5310858.mp4';
+import video from '../../images/pexels-cottonbro-5310858.mp4';
 //imports the CSS file for this component
 import './HomeImage.css';
 

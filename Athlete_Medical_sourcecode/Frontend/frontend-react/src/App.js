@@ -6,21 +6,21 @@ As the user navigates through the app, BrowserRouter will ensure that the correc
 
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home";
+import { Home } from "./pages/HomePages/Home";
 import Footer from "./components/Footer"; // legg til import for Footer-komponenten
-import ForgotPwrdUser from "./components/ForgotPwrdUser";
-import TermsPrivacyPage from "./pages/TermsPrivacyPage";
-import Services from "./pages/Services";
-import Contact from "./pages/Contact";
-import SpecialistSection from "./pages/SpecialistSection";
-import AdminEditUser from "./pages/AdminEditUser";
-import AdminBooking from "./pages/AdminBooking";
-import AdminSeeJournal from "./pages/AdminSeeJournal";
-import Flip from "./components/flip";
-import AlterUserAdmin from "./pages/AlterUserAdmin";
-import AlterUserSpecialist from "./pages/AlterUserSpecialist";
-import AlterUser from "./pages/AlterUser";
-import UserBooking from "./pages/UserBooking";
+import ForgotPwrdUser from "./components/UserDashboard/ForgotPwrdUser";
+import TermsPrivacyPage from "./pages/HomePages/TermsPrivacyPage";
+import Services from "./pages/HomePages/Services";
+import Contact from "./pages/HomePages/Contact";
+import SpecialistSection from "./pages/SpecialistDashboardPages/SpecialistSection";
+import AdminEditUser from "./pages/AdminDashboardPages/AdminEditUser";
+import AdminBooking from "./pages/AdminDashboardPages/AdminBooking";
+import AdminSeeJournal from "./pages/AdminDashboardPages/AdminSeeJournal";
+import Flip from "./components/Home/flip";
+import AlterUserAdmin from "./pages/AdminDashboardPages/AlterUserAdmin";
+import AlterUserSpecialist from "./pages/SpecialistDashboardPages/AlterUserSpecialist";
+import AlterUser from "./pages/UserDashboardPages/AlterUser";
+import UserBooking from "./pages/UserDashboardPages/UserBooking";
 import FindPasient from "./pages/SpecialistDashboardPages/FindPasient"
 import FindAppointment from "./pages/SpecialistDashboardPages/FindAppointment"
 import GetJournal from "./pages/SpecialistDashboardPages/GetJournal"

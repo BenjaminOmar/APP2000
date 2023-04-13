@@ -1,11 +1,11 @@
 // Importing necessary modules
-import HeaderAdmin from "../components/HeaderAdmin";
+
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import axios from "axios";
 import { Button, Form, Table, Card, Alert } from "react-bootstrap";
-import '../components/SeeAllJournals.css';
-import BookingTest from "../components/BookingTest";
+import '../SeeAllJournals.css' ;
+
 
 // Component for searching and displaying appointments
 function AdminSeeAppointments() {

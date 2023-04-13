@@ -1,6 +1,6 @@
 import "./Card.css";
-import RegisterForm from "./../RegisterForm";
-import LoginForm from "./../LoginForm";
+import RegisterForm from ".././Home/RegisterForm";
+import LoginForm from ".././Home/LoginForm";
 import React from "react";
 import { Link } from "react-router-dom";
 

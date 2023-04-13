@@ -6,11 +6,11 @@ The overall function of the code is to display a list of medical services and th
 
 
 import { Container, Row, Col, Card } from 'react-bootstrap'; //import necessary components from 'react-bootstrap'
-import HeaderNormal from '../components/HeaderNormal'; //import HeaderNormal component
-import ortoped from '../images/ortoped.png';//import local image files
-import nurse from '../images/nurse.png';
-import fysio from '../images/fysio.png';
-import fysikalskLege from '../images/fysikalskLege.png'
+import HeaderNormal from '../../components/Home/HeaderNormal'; //import HeaderNormal component
+import ortoped from '../../images/ortoped.png';//import local image files
+import nurse from '../../images/nurse.png';
+import fysio from '../../images/fysio.png';
+import fysikalskLege from '../../images/fysikalskLege.png'
 
 const Services = () => {
     return (

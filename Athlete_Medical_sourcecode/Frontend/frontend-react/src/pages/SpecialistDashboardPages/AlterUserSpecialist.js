@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Button, Modal, Form, Card } from 'react-bootstrap';
 import axios from 'axios';// HTTP client library for making API requests
 import Cookies from "js-cookie";// JavaScript library for handling browser cookies
-import HeaderSpec from '../components/SpecialistDashboard/HeaderSpec';
+import HeaderSpec from '../../components/SpecialistDashboard/HeaderSpec';
 
 
 // React component function for the user profile page

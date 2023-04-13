@@ -2,10 +2,10 @@
 import React from "react";
 import './OurSpecialists.css';
 import { Link } from "react-router-dom";
-import doctor1 from '../images/doctor1.jpg';
-import doctor2 from '../images/doctor2.jpg';
-import physician from '../images/physician.jpg';
-import physiotherapist from '../images/physiotherapist.jpg';
+import doctor1 from '../../images/doctor1.jpg';
+import doctor2 from '../../images/doctor2.jpg';
+import physician from '../../images/physician.jpg';
+import physiotherapist from '../../images/physiotherapist.jpg';
 
 // Defining the OurSpecialists function component
 function OurSpecialists() {

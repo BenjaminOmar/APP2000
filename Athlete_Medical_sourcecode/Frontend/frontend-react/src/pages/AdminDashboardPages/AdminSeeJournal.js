@@ -1,10 +1,10 @@
-import HeaderAdmin from "../components/HeaderAdmin";
+import HeaderAdmin from "../../components/AdminDashboard/HeaderAdmin";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import axios from "axios";
 import { Button, Form, Table, Card, Modal } from "react-bootstrap";
 import { Alert } from "react-bootstrap";
-import '../components/SeeAllJournals.css';
+import '../../components/SeeAllJournals.css';
 
 function AdminSeeJournal() {
   const username = Cookies.get("username");

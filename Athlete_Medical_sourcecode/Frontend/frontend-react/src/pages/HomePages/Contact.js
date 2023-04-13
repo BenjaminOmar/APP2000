@@ -5,7 +5,7 @@ The form includes fields for the user to enter their name, email, phone number, 
 
 // Importing React, HeaderNormal component from "../components/HeaderNormal", and several Bootstrap components from 'react-bootstrap'
 import React from "react";
-import HeaderNormal from "../components/HeaderNormal";
+import HeaderNormal from "../../components/Home/HeaderNormal";
 import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
 
 // Defining the Contact function

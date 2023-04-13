@@ -2,9 +2,9 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import "./Header.css";
+import "../Header.css";
 import { Link, NavLink } from "react-router-dom";
-import picture from "../images/footerImage2.png";
+import picture from "../../images/footerImage2.png";
 
 
 // Defining the HeaderNormal function component

@@ -6,7 +6,7 @@ import React from "react";
 import {Button, Card} from "react-bootstrap";
 import {Form} from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import HeaderNormal from "./HeaderNormal";
+import HeaderNormal from "../Home/HeaderNormal";
 
 // Define the ForgotPwrdUser component.
 const ForgotPwrdUser = () => {

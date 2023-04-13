@@ -1,11 +1,11 @@
 // Importing modules, components, and image files
 import React, {useState} from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-import HeaderNormal from '../components/HeaderNormal';
-import doctor1 from '../images/doctor1.jpg';
-import doctor2 from '../images/doctor2.jpg';
-import physician from '../images/physician.jpg';
-import physiotherapist from '../images/physiotherapist.jpg';
+import HeaderNormal from '../../components/Home/HeaderNormal';
+import doctor1 from '../../images/doctor1.jpg';
+import doctor2 from '../../images/doctor2.jpg';
+import physician from '../../images/physician.jpg';
+import physiotherapist from '../../images/physiotherapist.jpg';
 
 // Array of objects representing staff members
 const staff = [
