@@ -138,7 +138,7 @@ DELIMITER $$
 CREATE DEFINER=`root`@`%` PROCEDURE `appointmentByUserId`(IN `UserId` INT)
     READS SQL DATA
 BEGIN
-    SELECT * FROM appointment WHERE patientId = UserId OR specialistId = UserId;
+    SELECT appointment.*, CONCAT(user.FirstName, " ",user.middleName, " ", user.lastName) AS 'Name' FROM appointment, user WHERE appointment.specialistId = user.userId AND appointment.patientId = UserId OR appointment.specialistId = UserId;
 END$$
 DELIMITER ;
 

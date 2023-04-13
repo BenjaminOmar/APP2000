@@ -153,7 +153,7 @@ namespace AthleteMedicalBackendApi.Controllers
         {
             try
             {
-                var user = await _context.Appointments.FromSqlInterpolated<Appointment>($"appointmentByUserId({UserId})").ToListAsync();
+                var user = await _context.AppointmentGetByIds.FromSqlInterpolated<AppointmentGetById>($"appointmentByUserId({UserId})").ToListAsync();
 
                 if (user == null)
                 {

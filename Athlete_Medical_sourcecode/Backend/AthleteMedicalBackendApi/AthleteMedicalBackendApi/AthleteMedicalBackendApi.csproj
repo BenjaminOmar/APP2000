@@ -41,4 +41,7 @@
   <ItemGroup>
     <None Include="..\.editorconfig" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Entities\AppointmentGetById.json" />
+  </ItemGroup>
 </Project>
