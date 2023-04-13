@@ -15,6 +15,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';// importing Link,
 import picture from '../../images/footerImage2.png';// importing an image file
 import symbol from '../../images/admin.png';// importing an image file
 import Cookies from "js-cookie";// importing Cookies module
+import WriteJournal from '../../pages/SpecialistDashboardPages/WriteJournal';
 
 
 // This component represents the header component for the admin page
@@ -59,6 +60,7 @@ const HeaderSpec = () => {
             <NavLink to='/FindAppointment' className='list-item' activeclassname='active'>Finn dine avtaler</NavLink>
             <NavLink to='/MakeSchedule' className='list-item' activeclassname='active'>Lag Timeplan</NavLink>
             <NavLink to='/GetJournal' className='list-item' activeclassname='active'>Finn Journal</NavLink>
+            <NavLink to='/WriteJournal' className='list-item' activeclassname='active'>Skriv Journalnotat</NavLink>
           </Nav>
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>

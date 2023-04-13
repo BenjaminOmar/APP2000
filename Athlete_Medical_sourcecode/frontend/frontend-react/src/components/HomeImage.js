@@ -18,9 +18,9 @@ function HomeImage(){
             <video src={video} autoPlay loop muted className="homeImage" />
             {/* The homeImageOverlay div contains the text that overlays the video */}
             <div className='homeImageOverlay'>
-                <h3 className='homeImageHeader'>Velkommen til vår medisinske sportsklinikk.</h3>
+                <h3 className='homeImageHeader' style={{textShadow:'white 1px 0 3px' }} >Velkommen til vår medisinske sportsklinikk.</h3>
                 <br/> <br/>  
-                <p className='homeImageText'>
+                <p className='homeImageText' style={{textShadow:'white 1px 0 5px' }}>
                 "Her finner du informasjon om våre behandlinger og vårt dyktige team av ansatte. 
                 Som registrert bruker kan du enkelt booke avtaler online og se din medisinske historie fra klinikken. 
                 Vi er her for å hjelpe deg å nå dine sportsrelaterte mål, enten du er en profesjonell utøver eller en mosjonist. 

@@ -12,8 +12,8 @@ const FutureAppointment = () => {
     useEffect(() => {
       const fetchAppointments = async () => {
         try {
-          //const userId = Cookies.get("UserID");
-          const userId=20;
+          const userId = Cookies.get("UserID");
+          
           const response = await axios.get(`https://localhost:7209/api/appointment/byUserId?UserId=${userId}`);
           setAppointments(response.data);
         } catch (error) {
