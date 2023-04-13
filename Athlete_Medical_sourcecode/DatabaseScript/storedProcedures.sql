@@ -104,12 +104,13 @@ CREATE DEFINER=`root`@`%` PROCEDURE `alterJournalNote`(
     IN `journalText` VARCHAR(3000), 
     IN `header` VARCHAR(150), 
     IN `created` DATETIME, 
-    IN `patId` INT
+    IN `patId` INT,
+    IN `specId` INT
     )
     MODIFIES SQL DATA
 
 UPDATE journalnote
-SET journalnoteId = id, journalnote = journalText, heading = header, created = created, patient = patId  
+SET journalnoteId = id, journalnote = journalText, heading = header, created = created, patient = patId, specialist = specId  
 WHERE journalnoteId = id$$
 DELIMITER ;
 

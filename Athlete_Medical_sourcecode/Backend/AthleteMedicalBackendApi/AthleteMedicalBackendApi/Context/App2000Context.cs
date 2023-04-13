@@ -95,6 +95,8 @@ public partial class App2000Context : DbContext
 
             entity.HasIndex(e => e.Patient, "fk_journalnote_user1_idx");
 
+            entity.HasIndex(e => e.Specialist, "fk_journalnote_user2_idx");
+
             entity.Property(e => e.JournalnoteId)
                 .HasColumnType("int(11)")
                 .HasColumnName("journalnoteId");
@@ -117,6 +119,11 @@ public partial class App2000Context : DbContext
                 .HasForeignKey(d => d.Patient)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_journalnote_user1");
+
+            entity.HasOne(d => d.SpecialistNavigation).WithMany(p => p.Journalnotes)
+                .HasForeignKey(d => d.Specialist)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_journalnote_user2");
         });
 
         modelBuilder.Entity<Role>(entity =>

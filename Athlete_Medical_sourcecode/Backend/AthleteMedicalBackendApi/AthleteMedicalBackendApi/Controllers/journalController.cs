@@ -96,7 +96,7 @@ namespace AthleteMedicalBackendApi.Controllers
                 }
 
 
-                await _context.Database.ExecuteSqlInterpolatedAsync($"alterJournalNote({journalnote.JournalnoteId},{journalnote.Journalnote1},{journalnote.Heading},{journalnote.Created},{journalnote.Patient})");
+                await _context.Database.ExecuteSqlInterpolatedAsync($"alterJournalNote({journalnote.JournalnoteId},{journalnote.Journalnote1},{journalnote.Heading},{journalnote.Created},{journalnote.Patient},{journalnote.Specialist})");
 
                 return Ok(new { Message = "Journal er endret" });
 

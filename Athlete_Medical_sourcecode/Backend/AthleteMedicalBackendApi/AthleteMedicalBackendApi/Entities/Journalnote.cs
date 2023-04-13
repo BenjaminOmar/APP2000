@@ -16,6 +16,11 @@ public partial class Journalnote
 
     public int Patient { get; set; }
 
+    public int Specialist { get; set; }
+
     [JsonIgnore]
     public virtual User? PatientNavigation { get; set; }
+
+    [JsonIgnore]
+    public virtual User? SpecialistNavigation { get; set; }
 }
