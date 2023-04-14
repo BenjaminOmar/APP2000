@@ -12,7 +12,7 @@ import ForgotPwrdUser from "./components/UserDashboard/ForgotPwrdUser";
 import TermsPrivacyPage from "./pages/HomePages/TermsPrivacyPage";
 import Services from "./pages/HomePages/Services";
 import Contact from "./pages/HomePages/Contact";
-import SpecialistSection from "./pages/SpecialistDashboardPages/SpecialistSection";
+import SpecialistSection from "./pages/HomePages/SpecialistSection";
 import AdminEditUser from "./pages/AdminDashboardPages/AdminEditUser";
 import AdminBooking from "./pages/AdminDashboardPages/AdminBooking";
 import AdminSeeJournal from "./pages/AdminDashboardPages/AdminSeeJournal";

@@ -26,7 +26,7 @@ function HeaderNormal() {
 							to="/services"
 							className="list-item"
 							activeClassName="active">
-							Tjenester
+							Våre tjenester
 						</NavLink>
 						<NavLink
 							to="/specialistsection"
