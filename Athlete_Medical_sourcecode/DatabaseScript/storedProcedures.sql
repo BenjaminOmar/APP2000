@@ -104,12 +104,13 @@ CREATE DEFINER=`root`@`%` PROCEDURE `alterJournalNote`(
     IN `journalText` VARCHAR(3000), 
     IN `header` VARCHAR(150), 
     IN `created` DATETIME, 
-    IN `patId` INT
+    IN `patId` INT,
+    IN `specId` INT
     )
     MODIFIES SQL DATA
 
 UPDATE journalnote
-SET journalnoteId = id, journalnote = journalText, heading = header, created = created, patient = patId  
+SET journalnoteId = id, journalnote = journalText, heading = header, created = created, patient = patId, specialist = specId  
 WHERE journalnoteId = id$$
 DELIMITER ;
 
@@ -138,7 +139,7 @@ DELIMITER $$
 CREATE DEFINER=`root`@`%` PROCEDURE `appointmentByUserId`(IN `UserId` INT)
     READS SQL DATA
 BEGIN
-    SELECT * FROM appointment WHERE patientId = UserId OR specialistId = UserId;
+    SELECT appointment.*, CONCAT(user.FirstName, " ",user.middleName, " ", user.lastName) AS 'Name' FROM appointment, user WHERE appointment.specialistId = user.userId AND appointment.patientId = UserId OR appointment.specialistId = UserId;
 END$$
 DELIMITER ;
 

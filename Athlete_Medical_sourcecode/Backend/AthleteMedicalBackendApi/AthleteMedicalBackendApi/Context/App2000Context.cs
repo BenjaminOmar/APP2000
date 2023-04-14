@@ -19,6 +19,8 @@ public partial class App2000Context : DbContext
 
     public virtual DbSet<AppointmentGetAll> AppointmentsGetAll { get; set; }
 
+    public virtual DbSet<AppointmentGetById> AppointmentGetByIds { get; set; }
+
     public virtual DbSet<JournalnoteGetAll> JournalNoteGetAll { get; set; }
 
     public virtual DbSet<Journalnote> Journalnotes { get; set; }
@@ -93,6 +95,8 @@ public partial class App2000Context : DbContext
 
             entity.HasIndex(e => e.Patient, "fk_journalnote_user1_idx");
 
+            entity.HasIndex(e => e.Specialist, "fk_journalnote_user2_idx");
+
             entity.Property(e => e.JournalnoteId)
                 .HasColumnType("int(11)")
                 .HasColumnName("journalnoteId");
@@ -110,11 +114,19 @@ public partial class App2000Context : DbContext
             entity.Property(e => e.Patient)
                 .HasColumnType("int(11)")
                 .HasColumnName("patient");
+            entity.Property(e => e.Specialist)
+                .HasColumnType("int(11)")
+                .HasColumnName("specialist");
 
             entity.HasOne(d => d.PatientNavigation).WithMany(p => p.Journalnotes)
                 .HasForeignKey(d => d.Patient)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_journalnote_user1");
+
+            //entity.HasOne(d => d.SpecialistNavigation).WithMany(p => p.Journalnotes)
+            //    .HasForeignKey(d => d.Specialist)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("fk_journalnote_user2");
         });
 
         modelBuilder.Entity<Role>(entity =>
