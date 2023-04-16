@@ -9,7 +9,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Home } from "./pages/HomePages/Home";
 import Footer from "./components/Footer"; // legg til import for Footer-komponenten
-import ForgotPwrdUser from "./components/UserDashboard/ForgotPwrdUser";
+import ForgotPwrdUser from "./components/Home/ForgotPwrdUser";
 import TermsPrivacyPage from "./pages/HomePages/TermsPrivacyPage";
 import Services from "./pages/HomePages/Services";
 import Contact from "./pages/HomePages/Contact";

@@ -3409,25 +3409,31 @@
     ]
   },
   "packageFolders": {
-    "/Users/benjamin/.nuget/packages/": {}
+    "C:\\Users\\ekj\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj",
+      "projectUniqueName": "C:\\Users\\ekj\\Xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi.csproj",
       "projectName": "AthleteMedicalBackendApi",
-      "projectPath": "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj",
-      "packagesPath": "/Users/benjamin/.nuget/packages/",
-      "outputPath": "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/obj/",
+      "projectPath": "C:\\Users\\ekj\\Xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi.csproj",
+      "packagesPath": "C:\\Users\\ekj\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ekj\\Xampp\\htdocs\\xampp\\APP2000\\Athlete_Medical_sourcecode\\Backend\\AthleteMedicalBackendApi\\AthleteMedicalBackendApi\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/benjamin/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\ekj\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3496,7 +3502,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.201/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

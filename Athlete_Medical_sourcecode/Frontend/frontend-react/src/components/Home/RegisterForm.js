@@ -142,6 +142,19 @@ function RegisterForm({ setShowFrontProp }) {
 			.post(url, data)
 			//If the request is successful, display a success message to the user in a modal dialog.
 			.then(() => {
+				// clear the form inputs
+				setFirstName("");
+				setMiddleName("");
+				setLastName("");
+				setPhoneNumber("");
+				setSsn("");
+				setAdress("");
+				setZipCode("");
+				setPassword("");
+				setUsername("");
+				setEmail("");
+				setConfirmPassword("");
+				// display a success message to the user in a modal dialog
 				setMessage("Bruker registrert");
 				// After a delay of 3 seconds, close the modal and navigate to the login page.
 				setShowModal(true);
@@ -151,9 +164,11 @@ function RegisterForm({ setShowFrontProp }) {
 					navigate("/login");
 				}, 3000);
 			})
-			// If the request fails, display an error message to the user in an alert box.
+			// If the request fails, display an error message from backend to the user in a modal.
 			.catch((error) => {
-				alert(error);
+				setMessage(error.message);
+				setShowModal(true);
+				return;
 			});
 	};
 
@@ -161,6 +176,7 @@ function RegisterForm({ setShowFrontProp }) {
 	const handleClose = () => {
 		setMessage("");
 	};
+
 	// A function that validates the zipcode making a request to the Zippopotamus.us API
 	async function validateZipCode(zipCode) {
 		try {
@@ -220,9 +236,8 @@ function RegisterForm({ setShowFrontProp }) {
 						<Modal.Header
 							closeButton
 							onClick={handleClose}
-							style={{ marginBottom: "5px" }}>
-							{" "}
-							<h5>Obs!</h5>{" "}
+							style={{ marginBottom: "5px" }}
+						>
 						</Modal.Header>
 						<Modal.Body>{message}</Modal.Body>
 					</Modal>

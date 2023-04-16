@@ -19,6 +19,8 @@ function AlterUserAdmin() {
     const [showEditModal, setShowEditModal] = useState(false); // State variable for showing/hiding the edit modal
     const [password, setPassword] = useState("");// State variable for storing the password input
     const [confirmPassword, setConfirmPassword] = useState("");// State variable for storing the confirm password input
+    const [infoMessage, setInfoMessage] = useState(''); //State variable for storing the information message in the info modal
+    const [showInfoModal, setShowInfoModal] = useState(false); //State variable for showing/hiding the info modal. 
 
     // Cleanup function to reset the confirm password input field when the component unmounts
     useEffect(() => {
@@ -92,6 +94,8 @@ function AlterUserAdmin() {
             //check if the response status is 200(OK) and return the result
             return response.status === 200;
         } catch (error) {
+            setInfoMessage(error); // Set the error message from backend api
+            setShowInfoModal(true); // Show the info modal
             //Return false if validation fails
             return false;
         }
@@ -119,67 +123,75 @@ function AlterUserAdmin() {
 
         // Check if the first name input is empty
         if (!editValues.firstName) {
-            // If it is, show an alert message and stop the function execution
-            alert('Vennligst fyll ut fornavn');
+            // If it is, show a message and stop the function execution
+            setInfoMessage('Vennligst fyll ut fornavn'); // Set the error message
+            setShowInfoModal(true); // Show the info modal
             return;
         }
 
         // Check if the last name input is empty
         if (!editValues.lastName) {
-            // If it is, show an alert message and stop the function execution
-            alert('Vennligst fyll ut etternavn');
+            // If it is, show a message and stop the function execution
+            setInfoMessage('Vennligst fyll ut etternavn'); // Set the error message
+            setShowInfoModal(true); // Show the info modal
             return;
         }
 
         // Check if the phone number input is empty or doesn't match the Norwegian phone number format
         if (!editValues.phoneNumber || !/^[\d]{8}$/.test(editValues.phoneNumber)) {
-            // If it doesn't, show an alert message and stop the function execution
-            alert('Telefonnummeret må inneholde 8 sifre');
+            // If it is, show a message and stop the function execution
+            setInfoMessage('Vennligst fyll inn riktig telefonnummer'); // Set the error message
+            setShowInfoModal(true); // Show the info modal
             return;
         }
 
         // Check if the address input is empty
         if (!editValues.adress) {
-            // If it is, show an alert message and stop the function execution
-            alert('Vennligst fyll ut adresse');
+            // If it is, show a message and stop the function execution
+            setInfoMessage('Vennligst fyll ut adresse'); // Set the error message
+            setShowInfoModal(true); // Show the info modal
             return;
         }
-
 
         // Call a function called 'validateZipCode' with the 'editValues.zipCode' as an argument and wait for it to finish
         const isValidZipCode = await validateZipCode(editValues.zipCode);
-        // Check if the zip code is valid
+        // Check if the zip code not is valid
         if (!isValidZipCode) {
-            // If it's not, show an alert message and stop the function execution
-            alert("Ugyldig postnummer");
+            // If it is, show a message and stop the function execution
+            setInfoMessage('Ugyldig postnummer'); // Set the error message
+            setShowInfoModal(true); // Show the info modal
             return;
         }
 
-        // Check if the email input is a valid email address
+        // Check if the email input is a not valid email address
         if (!editValues.email.includes("@") || !editValues.email.includes(".")) {
-            // If it's not, show an alert message and stop the function execution
-            alert("Vennligst fyll inn en gyldig e-postadresse");
+            // If it is, show a message and stop the function execution
+            setInfoMessage('Vennligst fyll inn en gyldig e-postadresse'); // Set the error message
+            setShowInfoModal(true); // Show the info modal
             return;
         }
 
         // Check if the password input contains at least one letter and one number, and has a minimum length of 8 characters
         if (!/[a-zA-ZæøåÆØÅ]/.test(editValues.password) || !/[0-9]/.test(editValues.password)) {
-            // If it doesn't, show an alert message and stop the function execution
-            alert("Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer");
+            // If it does not, show a message and stop the function execution
+            setInfoMessage('Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer'); // Set the error message
+            setShowInfoModal(true); // Show the info modal
             return;
         }
 
         // Check if the password input contains the username input
         if (editValues.password.includes(editValues.username)) {
-            // If it does, show an alert message and stop the function execution
-            alert("Passordet kan ikke inneholde brukernavnet.");
+            // If it does, show a message and stop the function execution
+            setInfoMessage('Passordet kan ikke inneholde brukernavnet'); // Set the error message
+            setShowInfoModal(true); // Show the info modal
             return;
         }
 
-        // Check if the password and confirm password inputs match
+        // Check if the password and confirm password inputs not match
         if (password.length > 0 && password !== confirmPassword) {
-            // If they don't match, show an alert message and stop the function execution
-            alert("Passordene du har skrevet inn er ikke like");
+            // If it is, show a message and stop the function execution
+            setInfoMessage('Passordene du har skrevet inn er ikke like'); // Set the error message
+            setShowInfoModal(true); // Show the info modal
             return;
         }
 
@@ -187,10 +199,12 @@ function AlterUserAdmin() {
             // Use the axios library to make a PUT request to the specified API endpoint with the specified editValues data.
             await axios.put("https://localhost:7209/api/user/update", editValues);
             // If the request is successful, show an alert message to inform the user that the save was successful.
-            alert('Lagring vellykket!');
+            setInfoMessage('Oppdatering vellykket!'); // Set the success message
+            setShowInfoModal(true); // Show the info modal
             // If an error occurs during the request, show an alert message to inform the user of the error. 
         } catch (error) {
-            alert(error);
+            setInfoMessage(error); // Set the error message from backend api
+            setShowInfoModal(true); // Show the info modal
         }
         // Regardless of whether the request was successful or not, hide the edit modal.
         setShowEditModal(false);
@@ -211,34 +225,23 @@ function AlterUserAdmin() {
             setSearchResults(filteredResults);
         } catch (error) {
             // Display an alert if there was an error with the GET request
-            alert(error);
+            setInfoMessage(error); // Set the error message from backend api
+            setShowInfoModal(true); // Show the info modal
         }
     };
 
     return (
         // A div to hold the entire component
-        <div>
+        <div style={{ minHeight: 'calc(100vh - 275px)', marginBottom: '70px' }}>
             {/* Header component for the admin section */}
             <HeaderAdmin />
+            {/* Displaying message */}
+            <h2 style={{ marginTop: '72px' }}>Dine opplysninger:</h2>
             {/* A div with grid display and center alignment */}
-            <div
-                style={{
-                    display: 'grid',
-                    placeItems: 'center',
-                }}
-            >
+            <div style={{ display: 'grid', placeItems: 'center' }}>
                 {/* A card component to display user information */}
-                <Card style={{ marginTop: '5%', width: '60%' }}>
-                    <Card.Header style={{ textAlign: "center" }} as="h5" >
-                        {/* Displaying a welcome message with the username */}
-                        <h4>Velkommen til dine sider {username}</h4>
-                        {/* Information about the functions of the page to the user */}
-                        <p>Nedenfor ser du informasjon om opplysningene som er lagret om deg som bruker.
-                            Hvis du trykker på "Rediger" knappen får du mulighet til å endre informasjonen som er lagret om det.
-                            Vær oppmerksom på at når eventuelle endringer er lagret, vil det ikke være mulig å reversere dette.
-                        </p>
-                    </Card.Header>
-                    <Card.Body style={{ marginTop: '2%' }}>
+                <Card style={{ width: '50%', marginTop: '40px' }}>
+                    <Card.Body>
                         {/* Conditional rendering to display search results */}
                         {searchResults.length > 0 ? ( //if there is at least one result of the search
                             <Table hover style={{ width: '70%', marginLeft: '12%', marginBottom: '100px' }}>
@@ -299,7 +302,7 @@ function AlterUserAdmin() {
                                                         }}>
                                                         Rediger
                                                     </Button>
-                                                        {/* A Button that directs the user to the previous page*/}
+                                                    {/* A Button that directs the user to the previous page*/}
                                                     <Button
                                                         style={{
                                                             width: '60%',
@@ -312,7 +315,7 @@ function AlterUserAdmin() {
                                                             borderRadius: '5px',
                                                             padding: '10px',
                                                         }}
-                                                        onClick={() =>window.history.back()}
+                                                        onClick={() => window.history.back()}
                                                     >
                                                         Avbryt
                                                     </Button>
@@ -432,6 +435,22 @@ function AlterUserAdmin() {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+                <Modal
+            show={showInfoModal}
+            onHide={() => setShowInfoModal(false)}
+            backdrop="static"
+            keyboard={false}
+          >
+            <Modal.Header closeButton> {/* This creates a header within the modal dialog with a close button. */}
+              <Modal.Title></Modal.Title> {/* This sets the title of the modal dialog. */}
+            </Modal.Header>
+            <Modal.Body>{infoMessage}</Modal.Body> {/* This displays the error message within the modal dialog. */}
+            <Modal.Footer>
+              <Button style={{ width: '60%', marginRight: '21%' }} variant="primary" onClick={() => setShowInfoModal(false)}>
+                OK
+              </Button>
+            </Modal.Footer>
+          </Modal>
             </div>
         </div>
     );

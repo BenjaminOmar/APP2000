@@ -71,22 +71,23 @@ const LoginForm = () => {
 				const role = data.roleId;
 				const userId = data.userId;
 
-				if (role && username && userId){
+				if (role && username && userId) {
 					//Set cookies with the user's role, username, userId and expiretimer
-				Cookies.set("role", role, { expires: cookieExpiration });
-				Cookies.set("username", username, { expires: cookieExpiration });
-				Cookies.set("userId", userId.toString(), { expires: cookieExpiration });
+					Cookies.set("role", role, { expires: cookieExpiration });
+					Cookies.set("username", username, { expires: cookieExpiration });
+					Cookies.set("userId", userId.toString(), { expires: cookieExpiration });
 
-				resetInactivityTimer(); // Reset the user's inactivity timer
+					resetInactivityTimer(); // Reset the user's inactivity timer
 
-				//Navigate the user to different pages based on the users role
-				if (role === 1) {
-					navigate("/FutureAppointment");
-				} else if (role === 2) {
-					navigate("/FindPasient");
-				} else if (role === 3) {
-					navigate("/adminbooking");
-				}}				
+					//Navigate the user to different pages based on the users role
+					if (role === 1) {
+						navigate("/FutureAppointment");
+					} else if (role === 2) {
+						navigate("/FindPasient");
+					} else if (role === 3) {
+						navigate("/adminbooking");
+					}
+				}
 			})
 			.catch((error) => {
 				//Handle any errors that occur during the request or response
@@ -143,7 +144,7 @@ const LoginForm = () => {
 								onHide={() => setShowModal(false)}
 								size="sm">
 								<ModalHeader closeButton onClick={handleClose} />
-								<Modal.Body>{errorMessage}</Modal.Body>
+								<Modal.Body >{errorMessage}</Modal.Body>
 							</Modal>
 						)}
 						{/* A Form.Group component that contains a Label and a Form.Control for the username */}

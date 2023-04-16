@@ -17,24 +17,24 @@ const Contact = () => {
     }
     // Rendering the Contact component
     return (
-        <>
+        <div style={{ minHeight: 'calc(100vh - 275px)', marginBottom: '70px' }} > 
             <HeaderNormal /> {/* Rendering the HeaderNormal component */}
             {/* Rendering three columns for displaying the clinic's contact information */}
             <Container style={{ marginTop: "50px", marginBottom: "50px" }}>{/* A container component to hold other components */}
-                <Row>
-                    <Col>
+                <Row >
+                    <Col style={{marginLeft: '12%'}}>
                         <h3>Åpningstider</h3>
                         <br />
                         <p>Mandag-fredag: 07:00-17:00</p>
                         <p>Lørdag-søndag: Stengt</p>
                     </Col>
-                    <Col>
+                    <Col style={{marginLeft: '2%'}}>
                         <h3>Telefontider</h3>
                         <br />
                         <p>Mandag-fredag: 08:00-16:00</p>
                         <p>Lørdag-søndag: Stengt </p>
                     </Col>
-                    <Col>
+                    <Col >
                         <h3>Kontaktinformasjon</h3>
                         <br />
                         <p><i className='fas fa-home me-3'></i>Kongens gate 21A, 0153 Oslo</p>
@@ -43,7 +43,7 @@ const Contact = () => {
                     </Col>
                 </Row>
                 {/* Rendering a card with a contact form */}
-                <div style={{ marginTop: "50px" }} className="d-flex justify-content-center align-items-start ">
+                <div style={{ marginTop: "50px",  }} className="d-flex justify-content-center align-items-start ">
                     <Card style={{ width: "700px" }}>
                         <Card.Header  >
                             <h4 style={{ textAlign: "center" }}>Kontaktskjema</h4>
@@ -93,7 +93,7 @@ const Contact = () => {
                     </Card>
                 </div>
             </Container>
-        </>
+        </div>
     );
 };
 
