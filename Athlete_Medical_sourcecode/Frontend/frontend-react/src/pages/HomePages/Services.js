@@ -1,8 +1,9 @@
-/*This code imports React Bootstrap components and images. It then defines a function, called Services, 
-that returns a view of a set of cards showing various services. 
-Each of these cards contains a description of investigations and treatments for a specific medical condition, such as Orthopedic or Physiotherapist. 
-The code also includes a header component and styling to set the margin around the cards. 
-The overall function of the code is to display a list of medical services and their descriptions on a web page.*/
+/*This code imports necessary modules and image files for a React app. It also creates an array of 
+objects that represent medical services offered, such as orthopedics and physical therapy. 
+Each object contains information about the service, such as a description and a corresponding image. 
+This information will be used to display the services on the app's frontend. The useState hook is also imported, 
+which allows for state management within the app. Additionally, the react-bootstrap and
+ HeaderNormal components are imported, which provide pre-built UI components for the app.*/
 
 // Importing modules, components, and image files
 import React, { useState } from 'react';
@@ -15,7 +16,6 @@ import fysikalskLege from '../../images/fysikalskLege.png'
 
 
 // Array of objects representing services
-
 const serviceArray = [
     {
         service: 'Ortoped',
@@ -63,7 +63,7 @@ const serviceArray = [
     {
         service: 'Fysioterapaut',
         description: ` En Fysioterapeuts arbeidsoppgaver innebærer å utrede og behandle muskuloskeletale 
-        symptomer og plager hos pasienter. Dette inkluderer klinisk undersøkelse av bevegelighet, 
+        symptomer og plager hos pasienter. Dette inkluderer bla. klinisk undersøkelse av bevegelighet, 
         styrke og funksjonelle bevegelser. Det blir også vurdert biomekanikk og holdning for å identifisere 
         mulige årsaker til smerte eller skade. Pasientens trenings- og aktivitetsnivå blir kartlagt, inkludert 
         teknikk og intensitet, sammen med sykehistorie og tidligere skader. For å bekrefte diagnoser 
@@ -81,7 +81,7 @@ const serviceArray = [
     },
     {
         service: 'Sykepleier',
-        description: `En sykepleier har en svært viktig rolle i å hjelpe og støtte pasientene på ulike måter. 
+        description: `En sykepleier har en viktig rolle i å hjelpe og støtte pasientene på ulike måter. 
         En av deres hovedoppgaver er å gi pasientveiledning og informasjon om behandlingsalternativer 
         og prosedyrer. Dette kan inkludere forberedelse av pasienter til operasjoner eller prosedyrer ved å ta 
         blodprøver, sette opp intravenøse linjer, sjekke vitale tegn og lignende. Sykepleieren er også 

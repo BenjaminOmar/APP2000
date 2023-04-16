@@ -354,7 +354,7 @@ function AdminEditUser() {
               style={{ width: '60%', marginRight: '21%' }}// This sets the width and right margin of the button element using inline styles.
               variant="primary"// This sets the color variant of the button to "primary", which is a predefined style in "react-bootstrap".
               onClick={() => setShowModal(false)} >{/* This adds an event handler to the button that sets the "showModal" state to "false" when the button is clicked. */}
-              Avslutt {/* Label text that will be displayed on the button. */}
+              Avbryt {/* Label text that will be displayed on the button. */}
             </Button>
           </Modal.Footer>
         </Modal>

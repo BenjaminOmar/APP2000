@@ -19,11 +19,15 @@ const CookiesModal = () => {
   useEffect(() => {
     // check if the cookiesAccepted value is present in localStorage
     const cookiesAccepted = localStorage.getItem("cookiesAccepted");
-    if (!cookiesAccepted) {
-      // if not, show the modal
+    if (cookiesAccepted === "false") {
+      // if the value is explicitly set to false, show the modal
+      setShow(true);
+    } else if (!cookiesAccepted) {
+      // if the value is not present, show the modal
       setShow(true);
     }
   }, []);
+  
 
   // function to handle the user accepting cookies
   const handleAccept = () => {

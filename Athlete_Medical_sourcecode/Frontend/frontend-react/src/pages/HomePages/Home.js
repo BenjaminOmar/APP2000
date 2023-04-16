@@ -8,14 +8,14 @@ import Popup from '../../components/Home/Newsletter';
 import HeaderNormal from '../../components/Home/HeaderNormal';
 import OurServices from '../../components/Home/OurServices';
 import OurSpecialists from '../../components/Home/OurSpecialists';
-import { CookiesModal } from '../../components/Home/CookiesModal';
+
 
 export function Home() {
     return (
      <div>
       <Popup/>
       <HeaderNormal/>
-      <CookiesModal/>
+     
       <HomeImage/>
       <OurServices/> 
       <OurSpecialists/>        

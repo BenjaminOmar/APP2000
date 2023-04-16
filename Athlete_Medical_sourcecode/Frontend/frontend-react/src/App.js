@@ -2,6 +2,7 @@
 The component contains a BrowserRouter component and a list of Route components 
 that specify how each URL path should be matched to a React component to be displayed. 
 The Footer component always appears at the bottom of the page. 
+Additionally, a cookies modal is also imported and rendered. 
 As the user navigates through the app, BrowserRouter will ensure that the correct React component is loaded and displayed.*/
 
 import React from "react";
@@ -28,6 +29,7 @@ import MakeSchedule from "./pages/SpecialistDashboardPages/MakeSchedule"
 import WriteJournal from "./pages/SpecialistDashboardPages/WriteJournal";
 import FutureAppointments from "./pages/UserDashboardPages/FutureAppointment";
 import UserJournal from "./pages/UserDashboardPages/UserJournal";
+import { CookiesModal } from "./components/Home/CookiesModal";
 
 
 function App() {
@@ -58,6 +60,7 @@ function App() {
 					<Route path="UserBooking" element={<UserBooking/>}/>
 				</Routes>
 				<Footer />
+				<CookiesModal/>
 			</BrowserRouter>
 		</>
 	);
