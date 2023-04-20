@@ -14,8 +14,7 @@ export function Home() {
     return (
      <div>
       <Popup/>
-      <HeaderNormal/>
-     
+      <HeaderNormal/>     
       <HomeImage/>
       <OurServices/> 
       <OurSpecialists/>        

@@ -36,11 +36,11 @@ const TermsPrivacyForm = () => {
           </p>
           <h3 className="mt-5 mb-3">Innhold og moderering:</h3>
           <p>
-            Nettstedet inneholder informasjon om legekontoret, priser, behandlinger og ansatte.
-            Når en bruker registrerer en bruker vil klinikken lagre informason om brukeren. Når en bruker booker en avtale,
+            Nettstedet inneholder informasjon om legekontoret, behandlinger og ansatte.
+            Når en person registrerer ved å opprette bruker, vil klinikken lagre informason om brukeren. Når en bruker booker en avtale,
             vil personopplysninger som er lagret på klinikken deles med den aktuelle behandler.
             Det vil eksempelvis være navn, adresse, fødselsnummer og andre registrerte opplysninger i tilleg til notater fra
-            eventuelle tidligere besøk pasienten har hatt på klinikken. Videre er all brukerinnhold på nettstedet underlagt moderering.
+            eventuelle tidligere besøk pasienten har hatt på klinikken. Videre er alt brukerinnhold på nettstedet underlagt moderering.
           </p>
           <h3 className="mt-5 mb-3">Klager og tvister:</h3>
           <p>
@@ -49,22 +49,21 @@ const TermsPrivacyForm = () => {
           </p>
           <h3 className="mt-5 mb-3">Personvern:</h3>
           <p>
-            Nettstedet inneholder inn personlig og sensitiv informasjon om brukere som benytter seg av Athlete Medicals tjenester,
-            denne informasjonen er forbeholdt aktuell kunde og behandlere. Denne informasjonen blir brukt for å gi brukere en helhetlig behandling
-            ved klinikken og en brukervennlig mulighet til å elektronisk booke avtaler, se sine fremtidige avtaler og sine journaler fra tidligere konsultasjoner og behandlinge.r
+            Nettstedet inneholder personlig og sensitiv informasjon om brukere som benytter seg av Athlete Medicals tjenester,
+            denne informasjonen er forbeholdt aktuell bruker og behandlere. Denne informasjonen blir brukt for å gi brukere en helhetlig behandling
+            ved klinikken og en brukervennlig mulighet til å elektronisk booke avtaler, se sine fremtidige avtaler og sine journaler fra tidligere konsultasjoner og behandlinger.
             All informasjon som samles inn vil bli behandlet i henhold til gjeldende personvernlover.
           </p>
           <h3 className="mt-5 mb-3">Informasjonskapsler:</h3>
           <p>
             Nettstedet tar alle nødvendige forholdsregler for å beskytte personlig informasjon mot uautorisert tilgang,
-            endring eller ødeleggelse. Informasjonen vil ikke bli delt med tredjeparter, med mindre det er pålagt for
+            endring eller ødeleggelse. Informasjonen vil ikke bli delt med tredjeparter uten skriftlig samtykke fra bruker, med mindre det er pålagt for
             å etterkomme en lov eller forskrift.
           </p>
           <h3 className="mt-5 mb-3">Brukernes rettigheter:</h3>
           <p>
-            Brukere har rett til å be om sletting eller korrigering av personlig informasjon. Klinikken har med hjemmel i lov ikke anledning til å slette
-            legejournal. Dersom en bruker ønsker, kan hens personopplysninger bli "inaktivert", det vil si at personopplysningene fortsatt er lagret,
-            men at klinikkens ansatte ikke har disse tilgjengelig gjennom elektronisk søk.
+            Brukere har rett til å be om korrigering av personlig informasjon. Klinikken har med hjemmel i lov ikke anledning til å slette
+            legejournal.
           </p>
         </Col>
       </Row>
