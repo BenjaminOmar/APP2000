@@ -5,6 +5,7 @@
 .list-item {
 	color: rgb(0, 0, 0) !important ;
 	padding: 0px 10px !important;
+	text-decoration: none;
 }
 
 .mx-auto {
@@ -16,7 +17,7 @@
 	background-color: rgb(197, 221, 240);
 	border-radius: 4px !important;
 	transition: all 0.2s ease-out;
-	text-decoration: underline !important;
+	text-decoration: none;
 }
 
 .btn {
