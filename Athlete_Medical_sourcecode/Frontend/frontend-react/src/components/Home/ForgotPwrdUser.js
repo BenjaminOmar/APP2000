@@ -3,8 +3,7 @@
 
 // Import the necessary modules from React, React Bootstrap, and React Router DOM. 
 import React from "react";
-import { Button, Card } from "react-bootstrap";
-import { Form } from "react-bootstrap";
+import { Button, Card, Modal, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import HeaderNormal from "./HeaderNormal";
 import { useState } from "react";
@@ -16,16 +15,20 @@ const ForgotPwrdUser = () => {
     const navigate = useNavigate();
     const [infoMessage, setInfoMessage] = useState('');
     const [showInfoModal, setShowInfoModal] = useState(false);
-    
-    const handleSubmit = (event) => {
+
+    const handleSubmit = async (event) => {
         // Prevent the default form submission behavior.
         event.preventDefault();
         // Display an alert to indicate that an email has been sent to the user with instructions.
         setInfoMessage('Vi har nå sendt deg en epost med brukernavn og instruksjoner for å tilbakestille passordet'); // Set the error message from backend api
         setShowInfoModal(true); // Show the info modal
-        // Navigate to the login page.
-        navigate('/login');
+        // Add a delay of 2 seconds before navigating to the login page.
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Add this delay
+        navigate('/login'); // Navigate to the login page.
     }
+
+    
+
     // This is a functional component that renders a form where users can enter their email
     return (
         // A fragment is used here to wrap the HeaderNormal component and the form in the return statement.
@@ -73,7 +76,24 @@ const ForgotPwrdUser = () => {
                         </Form>
                     </Card.Body>
                 </Card>
-                
+                {/* This creates a modal that is displayed when the "showInfoModal" state is set to "true". */}
+                <Modal
+                    show={showInfoModal}
+                    onHide={() => setShowInfoModal(false)}
+                    backdrop="static"
+                    keyboard={false}
+                >
+                    <Modal.Header closeButton> {/* This creates a header within the modal dialog with a close button. */}
+                        <Modal.Title></Modal.Title> {/* This sets the title of the modal dialog. */}
+                    </Modal.Header>
+                    <Modal.Body>{infoMessage}</Modal.Body> {/* This displays the error message within the modal dialog. */}
+                    <Modal.Footer>
+                        <Button style={{ width: '60%', marginRight: '21%' }} variant="primary" onClick={() => setShowInfoModal(false)}>
+                            OK
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
             </div>
 
         </>
