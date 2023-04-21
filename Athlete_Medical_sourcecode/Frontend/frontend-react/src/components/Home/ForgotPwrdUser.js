@@ -23,11 +23,9 @@ const ForgotPwrdUser = () => {
         setInfoMessage('Vi har nå sendt deg en epost med brukernavn og instruksjoner for å tilbakestille passordet'); // Set the error message from backend api
         setShowInfoModal(true); // Show the info modal
         // Add a delay of 2 seconds before navigating to the login page.
-        await new Promise(resolve => setTimeout(resolve, 5000)); // Add this delay
+        await new Promise(resolve => setTimeout(resolve, 5000)); 
         navigate('/login'); // Navigate to the login page.
-    }
-
-    
+    }    
 
     // This is a functional component that renders a form where users can enter their email
     return (
