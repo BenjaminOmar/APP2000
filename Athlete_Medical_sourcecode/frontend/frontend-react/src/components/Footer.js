@@ -26,7 +26,7 @@ const Footer = () =>{
           <Col md='2' lg='2' xl='2' className='mx-auto mb-4' >
             <br/>
             <p>
-              <Link to="/" className='text-reset'>
+              <Link to="/specialistsection" className='text-reset'>
                 Våre behandlere
               </Link>              
             </p>

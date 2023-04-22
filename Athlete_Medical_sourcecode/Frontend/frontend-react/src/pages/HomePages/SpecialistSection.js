@@ -119,7 +119,7 @@ const SpecialistSection = () => {
     <>
     {/*Renders the "HeaderNormal" component*/} 
     <HeaderNormal/>
-    <div className="container" style={{ whiteSpace: 'pre-line' ,marginTop: '50px', marginBottom: '50px' }}>
+    <div className="container" style={{ whiteSpace: 'pre-line' ,marginTop: '50px', marginBottom: '70px' }}>
       <div className="row">
         <div className="col-12 text-center" style={{ marginBottom: '20px' }}>
           <h1 id="behandlere">Våre behandlere</h1>
