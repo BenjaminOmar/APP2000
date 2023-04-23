@@ -55,9 +55,10 @@ const HeaderAdmin = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto"> {/* A navigation bar component with a right-aligned list of navigation items */}
+          <NavLink to='/adminseeappointment' className='list-item' activeClassName='active'>Søk etter avtale</NavLink>
             <NavLink to='/adminbooking' className='list-item' activeClassName='active'>Booking</NavLink>
-            <NavLink to='/adminedituser' className='list-item' activeClassName='active'>Rediger Brukerkonto</NavLink>
-            <NavLink to='/adminseejournal' className='list-item' activeClassName='active'>Journaler</NavLink>
+            <NavLink to='/adminedituser' className='list-item' activeClassName='active'>Rediger brukerkonto</NavLink>
+            <NavLink to='/adminseejournal' className='list-item' activeClassName='active'>Journal oversikt</NavLink>
           </Nav>
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>

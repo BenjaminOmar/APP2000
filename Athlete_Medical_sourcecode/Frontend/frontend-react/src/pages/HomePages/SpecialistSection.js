@@ -36,7 +36,7 @@ const staff = [
      // Biography of second staff member
     bio: `Karoline Ernstsen er en fysikalsk lege med flere års erfaring innenfor feltet. Hennes spesialområder 
     inkluderer rehabilitering av pasienter med ulike former for muskel- og skjelettplager, så vel som behandling
-    av idrettsrelaterte skader og arbeidsrelaterte lidelser. Karoline er kjent for å være grundig og nøyaktig i 
+    av idrettsrelaterte skader og arbeids lidelser. Karoline er kjent for å være grundig og nøyaktig i 
     sine vurderinger og for å ha en pasientfokusert tilnærming til behandling.
 
     Karoline har en imponerende utdanningsbakgrunn, med en bachelorgrad i fysioterapi og en doktorgrad i medisin
@@ -127,7 +127,13 @@ const SpecialistSection = () => {
       </div>
 
       {/*A row containing Cards for each employeee in the staff array*/}
-      <div className="row">
+      <div className='row row-cols-1 row-cols-md-2 g-4' 
+                style={{ 
+                    marginBottom: '100px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                                      
+                }}>
         {staff.map((employee, index) => (
           // A Card component with the employee's picture, name, title, bio, and "Read More"/"Read Less" button
           <div key={index} className="col-md-6">

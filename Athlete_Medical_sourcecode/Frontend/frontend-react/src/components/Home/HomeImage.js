@@ -6,6 +6,8 @@ import React from 'react';
 import video from '../../images/pexels-cottonbro-5310858.mp4';
 //imports the CSS file for this component
 import './HomeImage.css';
+import { Link } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
 
 //A function that returns a div container that contains the video and a text overlay.
@@ -28,6 +30,14 @@ function HomeImage(){
                 <br/> <br/>   
                 "Vår profesjonalitet er din trygghet"                  
                 </p>
+                <br/> <br/>
+                <Nav className="buttonRegister" style={{display: 'flex', justifyContent: 'center', marginTop: '10px'}}
+>
+						<Link to="/login">
+							{" "}
+							<button className="registerButton" style={{}}>Registrer deg</button>{" "}
+						</Link>
+					</Nav>
             </div>
         </div>
     )

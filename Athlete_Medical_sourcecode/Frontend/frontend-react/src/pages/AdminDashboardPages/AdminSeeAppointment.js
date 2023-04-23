@@ -6,7 +6,7 @@ import { Button, Form, Table, Card, Modal } from "react-bootstrap";
 import { Alert } from "react-bootstrap";
 import '../../components/SeeAllJournals.css';
 
-function AdminSeeJournal() {
+function AdminSeeAppointment() {
   const username = Cookies.get("username");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -38,7 +38,7 @@ function AdminSeeJournal() {
        <HeaderAdmin />
       {/* Create a div with padding at the top and bottom and display a welcome message with the username */}
       <div style={{ paddingTop: '50px', paddingBottom: '30px', }}>
-        <h2>Journal oversikt</h2>
+        <h2>Søk etter avtaler</h2>
       </div>
             {/* Create a Form.Group component with margin on the left and right */}
       <Form.Group className="mb-3" style={{ display: 'flex', justifyContent: 'center' }}>
@@ -72,7 +72,6 @@ function AdminSeeJournal() {
                     <th>Opprettet</th>
                     <th>Pasient ID</th>
                     <th>Pasientnavn</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -113,4 +112,4 @@ function AdminSeeJournal() {
   
 }
 
-export default AdminSeeJournal;
+export default AdminSeeAppointment;

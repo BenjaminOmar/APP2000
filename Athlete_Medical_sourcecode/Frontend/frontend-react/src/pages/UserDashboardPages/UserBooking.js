@@ -104,12 +104,8 @@ function UserBooking() {
 return (
   <>
     <HeaderUser /> {/*Renders the 'HeaderUser' component */}
-    <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
-        <h2>Velkommen {username} </h2> {/*Displays a welcome message with the username*/}
-      </div>
-    <div className="container my-5">
-      <p>Her må vi kanskje skrive litt om timestilling....</p> {/*Displays an introduction text */}
-      <h2 className="mb-3">Timebestilling</h2>
+    <div className="container my-5" style={{ paddingBottom:'70px'}}>
+      <h2 className="mb-3" style={{ paddingTop:'50px'}}>Timebestilling</h2>
       <Table bordered hover>
         <thead>
           <tr>

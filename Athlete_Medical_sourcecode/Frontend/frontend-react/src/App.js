@@ -30,6 +30,7 @@ import WriteJournal from "./pages/SpecialistDashboardPages/WriteJournal";
 import FutureAppointments from "./pages/UserDashboardPages/FutureAppointment";
 import UserJournal from "./pages/UserDashboardPages/UserJournal";
 import { CookiesModal } from "./components/Home/CookiesModal";
+import AdminSeeAppointment from "./pages/AdminDashboardPages/AdminSeeAppointment";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
 					<Route path="/adminedituser" element={<AdminEditUser />} />
 					<Route path="/adminbooking" element={<AdminBooking />} />
 					<Route path="/adminseejournal" element={<AdminSeeJournal />} />
+					<Route path="/adminseeappointment" element={<AdminSeeAppointment />} />
 					<Route path="/login" element={<Flip />} />
 					<Route path="/alteruseradmin" element={<AlterUserAdmin />} />
 					<Route path="/alteruserspecialist" element={<AlterUserSpecialist/>} />
