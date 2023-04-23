@@ -11,7 +11,7 @@ import './HomeImage.css';
 //A function that returns a div container that contains the video and a text overlay.
 function HomeImage(){
     return(
-        <div className='homeImageContainer' style={{marginTop: "15px"}}>
+        <div className='homeImageContainer'>
             {/* The video is inserted using the HTML5 video tag, with the src attribute set to the imported video file, 
             and the autoPlay, loop, and muted attributes set to play the video automatically, 
             loop it, and mute the sound, respectively. */}
