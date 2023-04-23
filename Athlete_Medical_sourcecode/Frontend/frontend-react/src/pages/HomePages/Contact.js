@@ -17,18 +17,18 @@ const Contact = () => {
     }
     // Rendering the Contact component
     return (
-        <div style={{ minHeight: 'calc(100vh - 275px)', marginBottom: '70px' }} > 
+        <div style={{ minHeight: 'calc(100vh - 275px)', marginBottom: '70px' }} >
             <HeaderNormal /> {/* Rendering the HeaderNormal component */}
             {/* Rendering three columns for displaying the clinic's contact information */}
             <Container style={{ marginTop: "50px", marginBottom: "50px" }}>{/* A container component to hold other components */}
                 <Row >
-                    <Col style={{marginLeft: '12%'}}>
+                    <Col style={{ marginLeft: '12%' }}>
                         <h3>Åpningstider</h3>
                         <br />
                         <p>Mandag-fredag: 07:00-17:00</p>
                         <p>Lørdag-søndag: Stengt</p>
                     </Col>
-                    <Col style={{marginLeft: '2%'}}>
+                    <Col style={{ marginLeft: '2%' }}>
                         <h3>Telefontider</h3>
                         <br />
                         <p>Mandag-fredag: 08:00-16:00</p>
@@ -43,7 +43,7 @@ const Contact = () => {
                     </Col>
                 </Row>
                 {/* Rendering a card with a contact form */}
-                <div style={{ marginTop: "50px",  }} className="d-flex justify-content-center align-items-start ">
+                <div style={{ marginTop: "50px", }} className="d-flex justify-content-center align-items-start ">
                     <Card style={{ width: "700px" }}>
                         <Card.Header  >
                             <h4 style={{ textAlign: "center" }}>Kontaktskjema</h4>
@@ -77,17 +77,18 @@ const Contact = () => {
                                     <Form.Control type="tel" placeholder="Skriv inn telefonnummer" />
                                 </Form.Group>
                                 {/*// A button component to submit the form */}
-                                <Button variant="primary" type="submit"
-                                    style={{  //A style object to modify the button's appearance 
-                                        paddingLeft: "150px",
-                                        paddingRight: "150px",
-                                        textAlign: "center",
-                                        backgroundColor: "#0050B1",
-                                        marginLeft: "20%"
-                                    }}
-                                >
-                                    Send melding{/* The text displayed on the button */}
-                                </Button>
+                                <div style={{ display: "grid", placeItems: "center" }}>
+                                    <Button variant="primary" type="submit"
+                                        style={{  //A style object to modify the button's appearance 
+                                            paddingLeft: "100px",
+                                            paddingRight: "100px",                                           
+                                            backgroundColor: "#0050B1",
+                                        }}
+                                    >
+                                        Send melding{/* The text displayed on the button */}
+                                    </Button>
+                                </div>
+
                             </Form>
                         </Card.Body>
                     </Card>
