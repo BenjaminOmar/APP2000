@@ -236,23 +236,19 @@ function AlterUserAdmin() {
             {/* Header component for the admin section */}
             <HeaderAdmin />
             {/* Displaying message */}
-            <h2 style={{ marginTop: '72px' }}>Dine opplysninger:</h2>
+            <h2 style={{ marginTop: '70px' }}>Dine opplysninger:</h2>
             {/* A div with grid display and center alignment */}
             <div style={{ display: 'grid', placeItems: 'center' }}>
                 {/* A card component to display user information */}
-                <Card style={{ width: '50%', marginTop: '40px' }}>
+                <Card style={{ width: '500px', marginTop: '40px' }}>
                     <Card.Body>
                         {/* Conditional rendering to display search results */}
                         {searchResults.length > 0 ? ( //if there is at least one result of the search
-                            <Table hover style={{ width: '70%', marginLeft: '12%', marginBottom: '100px' }}>
+                            <Table style={{ display: 'grid', placeItems: 'center' }}>
                                 <tbody>
                                     {/* Mapping through the search results to create table rows with information from the database */}
                                     {searchResults.map((user) => (
                                         <>
-                                            <tr>
-                                                <td><b>Rolle ID:</b></td>
-                                                <td>{user.roleId}</td>
-                                            </tr>
                                             <tr key={user.userId}>
                                                 <td><b>Brukernavn:</b></td>
                                                 <td>{user.username}</td>

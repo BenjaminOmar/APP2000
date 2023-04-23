@@ -151,7 +151,7 @@ function AdminEditUser() {
     axios
       .put(url, data)
       .then((result) => {
-        setInfoMessage('Lagring vellykket! Trykk "Avslutt" for å gå ut av skjemaet'); // Set the info message
+        setInfoMessage('Endring vellykket!'); // Set the info message
         setShowInfoModal(true);// Show the info modal
 
       })

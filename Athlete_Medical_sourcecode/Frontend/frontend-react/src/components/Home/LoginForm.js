@@ -15,11 +15,12 @@ import Cookies from "js-cookie";
 const LoginForm = () => {
 	//Get the navigate object from the react-router-dom package
 	const navigate = useNavigate();
-	//Define the state variables for the login forms inputs,  and error message
+	//Define the state variables for the login forms inputs,  and error message, inactivity timer
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
 	const [showModal, setShowModal] = useState(false);
+
 
 	// Set the cookie expiration time to 30 minutes
 	const cookieExpiration = 30 * 60; // 30 minutes in seconds
@@ -33,15 +34,27 @@ const LoginForm = () => {
 	//function that removes cookies after 30 min of inactivity with alert to user.
 	function resetInactivityTimer() {
 		clearTimeout(inactivityTimer);
+		//Add event listener to user activities
+		window.addEventListener("mousemove", handleUserActivity);
+		window.addEventListener("keydown", handleUserActivity);
+		window.addEventListener("touchstart", handleUserActivity);
+
 		inactivityTimer = setTimeout(() => {
 			// Remove cookies
 			Cookies.remove("role");
 			Cookies.remove("username");
+			Cookies.remove("userId");
 			// Show a message to the user that they have been logged out due to inactivity
 			alert("Du har blitt logget ut på grunn av inaktivitet");
 			// Navigate the user to the login page
 			navigate("/login");
 		}, inactivityTimeout);
+	}
+
+	// Reset the timeout value to delay the logout function
+	function handleUserActivity() {
+		clearTimeout(inactivityTimer);
+		resetInactivityTimer();
 	}
 
 	// Handle the form submission
