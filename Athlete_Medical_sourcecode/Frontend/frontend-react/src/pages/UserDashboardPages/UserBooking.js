@@ -2,17 +2,18 @@
 import React, { useEffect, useState } from "react";
 import HeaderUser from "../../components/UserDashboard/HeaderUser";
 import axios from "axios";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Modal } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-
+import AdminSeeAppointments from "../../components/AdminDashboard/AdminSeeAppointments";
 
 function UserBooking() {
   const [specialist, setSpecialist] = useState([]);
   const [selectedSpecialist, setSelectedSpecialist] = useState(null);
   const [availableAppointments, setAvailableAppointments] = useState(null);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const username = Cookies.get("username"); // Retrieving username from Cookies using js-cookie
 
   // Defining options for formatting start and end dates and times
@@ -73,6 +74,12 @@ function UserBooking() {
   // The navigate function is obtained from the useNavigate hook imported from react-router-dom
   const navigate = useNavigate();
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+    navigate("/FutureAppointment");
+  };
+  
+
   // handleBookAppointment function takes an appointment object and constructs a data object with
   // the appointmentId and patientId (fetched from cookies), and makes a PUT request to book the appointment
   const handleBookAppointment = (appointment) => {
@@ -88,8 +95,9 @@ function UserBooking() {
     .then((result) => {
       // If the booking is successful, it will display an alert with the appointment start time, specialist name
       // and confirmation message and navigates to 'min side' or 'fremtidige avtaler'
-      alert(`Bekreftelse på timebestilling \n\nDu har time ${new Date(appointment.startTime).toLocaleDateString("nb-NO", startOptions)} - ${new Date(appointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos ${selectedSpecialist.firstName} ${selectedSpecialist.middleName} ${selectedSpecialist.lastName}`);
-      navigate("/FutureAppointment") // Sends the user to future appointment after booking
+      setShowModal(true);
+      setSelectedAppointment(appointment);
+
       console.log(data);
       console.log(result.data);
     })
@@ -103,9 +111,9 @@ function UserBooking() {
 // It contains a table of specialist users and a table of available appointments, and allows patients to book appointments.
 return (
   <>
-    <HeaderUser /> {/*Renders the 'HeaderUser' component */}
-    <div className="container my-5" style={{ paddingBottom:'70px'}}>
-      <h2 className="mb-3" style={{ paddingTop:'50px'}}>Timebestilling</h2>
+    <HeaderUser /> {/*Renders the 'HeaderAdmin' component */}
+    <div className="container my-5">
+      <h2 className="mb-3" style={{marginTop: '50px'}}>Timebestilling</h2>
       <Table bordered hover>
         <thead>
           <tr>
@@ -165,6 +173,22 @@ return (
               ))}
             </tbody>
           </Table>
+           {/* Renders a Modal component */}
+           <Modal show={showModal} onHide={handleCloseModal}>
+  <Modal.Header closeButton>
+
+          <Modal.Title>Bekreftelse på timebestilling</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Du har time {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleDateString("nb-NO", startOptions)} - {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos {selectedSpecialist && selectedSpecialist.firstName} {selectedSpecialist && selectedSpecialist.middleName} {selectedSpecialist && selectedSpecialist.lastName}</p>
+          <p>{selectedAppointment && "Timebestillingen din er bekreftet. Takk!"}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Lukk
+          </Button>
+        </Modal.Footer>
+      </Modal>
         </>
       )}
     </div>
@@ -172,5 +196,5 @@ return (
 );
  }
 
-  // Exports the UserBooking component as the default export
+  // Exports the AdminBooking component as the default export
   export default UserBooking;  

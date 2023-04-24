@@ -53,7 +53,7 @@ function AdminSeeJournal() {
       </Form.Group>
       {/* Create a Button component with a onClick function, margin on the left, width, and marginBottom */}
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button onClick={searchJournals} style={{ width: '15%', marginBottom: '70px' }}>Search</Button>
+        <Button onClick={searchJournals} style={{ width: '15%', marginBottom: '70px' }}>Søk</Button>
       </div>
   
            
@@ -63,7 +63,7 @@ function AdminSeeJournal() {
           <Table className="mx-auto"
             //Style the table with striped rows, bordered cells and hover effects
             striped bordered hover
-            // Set the table's width to 70% of its container and give it a left margin of 12% and a bottom margin of 100px
+            // Set the table's width to 70% and a bottom margin of 70px
             style={{ width: '70%', marginBottom: '70px' }} >
                 <thead>
                   <tr>

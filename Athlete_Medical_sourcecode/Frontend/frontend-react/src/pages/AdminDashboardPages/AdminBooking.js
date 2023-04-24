@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import HeaderAdmin from "../../components/AdminDashboard/HeaderAdmin";
 import axios from "axios";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Modal } from "react-bootstrap";
 import "react-datepicker/dist/react-datepicker.css";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ function AdminBooking() {
   const [selectedSpecialist, setSelectedSpecialist] = useState(null);
   const [availableAppointments, setAvailableAppointments] = useState(null);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   const username = Cookies.get("username"); // Retrieving username from Cookies using js-cookie
 
   // Defining options for formatting start and end dates and times
@@ -88,7 +89,8 @@ function AdminBooking() {
     .then((result) => {
       // If the booking is successful, it will display an alert with the appointment start time, specialist name
       // and confirmation message and navigates to 'min side' or 'fremtidige avtaler'
-      alert(`Bekreftelse på timebestilling \n\nDu har time ${new Date(appointment.startTime).toLocaleDateString("nb-NO", startOptions)} - ${new Date(appointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos ${selectedSpecialist.firstName} ${selectedSpecialist.middleName} ${selectedSpecialist.lastName}`);
+      setShowModal(true);
+      setSelectedAppointment(appointment);
       navigate("/adminbooking") // Need to be updated to 'mypage'
       console.log(data);
       console.log(result.data);
@@ -104,12 +106,8 @@ function AdminBooking() {
 return (
   <>
     <HeaderAdmin /> {/*Renders the 'HeaderAdmin' component */}
-    <div style={{ paddingTop: '30px', paddingBottom: '10px' }}>
-        <h2>Velkommen {username} </h2> {/*Displays a welcome message with the username*/}
-      </div>
     <div className="container my-5">
-      <p>Her må vi kanskje skrive litt om timestilling....</p> {/*Displays an introduction text */}
-      <h2 className="mb-3">Timebestilling</h2>
+      <h2 className="mb-3" style={{marginTop: '50px'}}>Timebestilling for pasienter</h2>
       <Table bordered hover>
         <thead>
           <tr>
@@ -169,11 +167,23 @@ return (
               ))}
             </tbody>
           </Table>
+           {/* Renders a Modal component */}
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Bekreftelse på timebestilling</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>Du har time {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleDateString("nb-NO", startOptions)} - {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos {selectedSpecialist && selectedSpecialist.firstName} {selectedSpecialist && selectedSpecialist.middleName} {selectedSpecialist && selectedSpecialist.lastName}</p>
+          <p>{selectedAppointment && "Timebestillingen din er bekreftet. Takk!"}</p>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Lukk
+          </Button>
+        </Modal.Footer>
+      </Modal>
         </>
       )}
-    </div>
-    <div>
-      <AdminSeeAppointments/> {/*Renders the AdminSeeAppointments component */}
     </div>
   </>
 );
