@@ -98,7 +98,7 @@ const LoginForm = () => {
 					} else if (role === 2) {
 						navigate("/FindPasient");
 					} else if (role === 3) {
-						navigate("/adminbooking");
+						navigate("/adminseeappointment");
 					}
 				}
 			})

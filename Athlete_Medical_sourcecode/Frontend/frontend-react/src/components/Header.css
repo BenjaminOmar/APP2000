@@ -9,13 +9,13 @@
 }
 
 .mx-auto {
-	margin: 0 !important;
-	padding: 0 !important;
+	margin: 0;
+	padding: 0;
 }
 
 .list-item:hover {
 	background-color: rgb(197, 221, 240);
-	border-radius: 4px !important;
+	border-radius: 4px;
 	transition: all 0.2s ease-out;
 	text-decoration: none;
 }

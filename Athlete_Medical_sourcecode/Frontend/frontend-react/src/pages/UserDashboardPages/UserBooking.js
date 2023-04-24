@@ -184,7 +184,7 @@ return (
           <p>{selectedAppointment && "Timebestillingen din er bekreftet. Takk!"}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
+           <Button variant="primary" onClick={handleCloseModal}>
             Lukk
           </Button>
         </Modal.Footer>
