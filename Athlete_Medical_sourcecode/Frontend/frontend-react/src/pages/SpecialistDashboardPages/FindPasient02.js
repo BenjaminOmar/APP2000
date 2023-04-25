@@ -30,10 +30,7 @@ function FindPasient02() {
     const endIndex = startIndex + pageSize;
   
   
-    // Define a function to handle changes to the confirm password input field
-    const handleConfirmPasswordChange = (event) => {
-      setConfirmPassword(event.target.value);
-    };
+  
   
     // Define an asynchronous function to search for users
     const searchUsers = async (event) => {
@@ -55,108 +52,10 @@ function FindPasient02() {
       };
     }
   
-    // A function that validates the zipcode making a request to the Zippopotamus.us API
-    async function validateZipCode(zipCode) {
-      try {
-        //Construct the API url using the zip code.
-        const url = `https://api.zippopotam.us/no/${zipCode}`;
-        //making a get request to the API an wait for response
-        const response = await axios.get(url);
-        //check if the response status is 200(OK) and return the result
-        return response.status === 200;
-      } catch (error) {
-        setInfoMessage(error); // Set the error message from backend api
-        setShowInfoModal(true); // Show the info modal
-      }
-    }
+    
+     
   
-    // Define an async function to handle saving user data
-    const handleSave = async () => {
-  
-      // Error handling begins here
-  
-      // Validate phone number - must contain only 8 numbers
-      if (!/^[\d]{8}$/.test(selectedUser.phoneNumber)) {
-        setInfoMessage('Telefonnummeret må inneholde 8 sifre'); // Set the error message
-        setShowInfoModal(true); // Show the info modal
-        return;
-      }
-  
-      //Validate that the zip code is a valid zipCode in norway
-      const isValidZipCode = await validateZipCode(selectedUser.zipCode);
-      if (!isValidZipCode) {
-        setInfoMessage('Ugyldig postnummer'); // Set the error message
-        setShowInfoModal(true); // Show the info modal
-        return;
-      }
-  
-      // Ensure that the roleId is either 1, 2 or 3
-      if (selectedUser.roleId.toString() !== "1" && selectedUser.roleId.toString() !== "2" && selectedUser.roleId.toString() !== "3") {
-        setInfoMessage('Kun 1, 2 og 3 er gyldige rolle nummer'); // Set the error message
-        setShowInfoModal(true); // Show the info modal
-        return;
-      }
-      // Ensure that a valid email address is provided
-      if (!selectedUser.email.includes("@") || !selectedUser.email.includes(".")) {
-        setInfoMessage('Vennligst fyll inn en gyldig e-postadresse'); // Set the error message
-        setShowInfoModal(true); // Show the info modal
-        return;
-      }
-  
-      // Ensure that the password meets the minimum requirements
-      if (!/[a-zA-ZæøåÆØÅ]/.test(selectedUser.password) || !/[0-9]/.test(selectedUser.password)) {
-        setInfoMessage('Passordet må inneholde mist 8 karakterer, inkludert minst en bokstav og ett nummer'); // Set the error message
-        setShowInfoModal(true); // Show the info modal
-  
-        return;
-      }
-  
-      // Ensure that the password does not contain the username
-      if (selectedUser.password.includes(selectedUser.username.toString())) {
-        setInfoMessage('Passordet kan ikke inneholde brukernavnet'); // Set the error message
-        setShowInfoModal(true); // Show the info modal
-        return;
-      }
-  
-      // Ensure that the password and confirm password fields match
-      if (password.length > 0 && password !== confirmPassword) {
-        setInfoMessage('Passordene du har skrevet inn er ikke like'); // Set the error message
-        setShowInfoModal(true); // Show the info modal
-        return;
-      }
-  
-      // If all validations pass, create an object containing the updated user data
-      const data = {
-        userId: selectedUser.userId,
-        firstName: selectedUser.firstName,
-        MiddleName: selectedUser.middleName,
-        LastName: selectedUser.lastName,
-        PhoneNumber: selectedUser.phoneNumber,
-        Adress: selectedUser.adress,
-        ZipCode: selectedUser.zipCode,
-        RoleId: selectedUser.roleId,
-        Password: selectedUser.password,
-        username: '',
-        Email: selectedUser.email,
-      };
-  
-      // Define the URL to send the updated data to
-      const url = "https://localhost:7209/api/user/update";
-  
-      // Send a PUT request to the server with the updated user data
-      axios
-        .put(url, data)
-        .then((result) => {
-          setInfoMessage('Endring vellykket!'); // Set the info message
-          setShowInfoModal(true);// Show the info modal
-  
-        })
-        .catch((error) => {
-          setInfoMessage(error); // Set the error message from backend api
-          setShowInfoModal(true); // Show the info modal
-        });
-    };
-  
+     
     // Define a function to handle page changes
     const handlePageChange = (pageNumber) => {
       // Update the current page to the selected page number
@@ -170,7 +69,7 @@ function FindPasient02() {
         <HeaderSpec />
         {/* Create a div with padding at the top and bottom and display a welcome message with the username */}
         <div style={{ paddingTop: '50px', paddingBottom: '30px', }}>
-          <h2>FindPasient </h2>
+          <h2> Søk pasient </h2>
         </div>
   
         {/* Create a Form.Group component with margin on the left and right */}
@@ -201,16 +100,13 @@ function FindPasient02() {
               <thead>
                 <tr>
                   {/* Create table headers */}
-                  <th>Rediger</th>
                   <th>Brukernavn</th>
-                  <th>ID</th>
                   <th>Fornavn</th>
                   <th>Mellomnavn</th>
                   <th>Etternavn</th>
                   <th>Telefonnummer</th>
                   <th>Addresse</th>
                   <th>Postkode</th>
-                  <th>Rolle ID</th>
                   <th>Epost</th>
                 </tr>
               </thead>
@@ -219,24 +115,14 @@ function FindPasient02() {
                 {searchResults.slice(startIndex, endIndex).map((user) => (
                   // Render a table row for each user object, with a unique key based on its userId
                   <tr key={user.userId}>
-                    <td>
-                      {/* Render a button to edit the user's information, which opens a modal */}
-                      <Button onClick={() => {
-                        setSelectedUser(user);
-                        setShowModal(true);
-                      }}>Rediger
-                      </Button>
-                    </td>
                     {/* Display the user's information in each table cell */}
                     <td>{user.username}</td>
-                    <td>{user.userId}</td>
                     <td>{user.firstName}</td>
                     <td>{user.middleName}</td>
                     <td>{user.lastName}</td>
                     <td>{user.phoneNumber}</td>
                     <td>{user.adress}</td>
                     <td>{user.zipCode}</td>
-                    <td>{user.roleId}</td>
                     <td>{user.email}</td>
                   </tr>
                 ))}

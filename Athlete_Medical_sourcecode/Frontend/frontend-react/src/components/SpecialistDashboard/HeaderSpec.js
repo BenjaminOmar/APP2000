@@ -17,6 +17,7 @@ import symbol from '../../images/admin.png';// importing an image file
 import Cookies from "js-cookie";// importing Cookies module
 import WriteJournal from '../../pages/SpecialistDashboardPages/WriteJournal';
 import FindPasient02 from '../../pages/SpecialistDashboardPages/FindPasient02';
+import FindAppointment02 from '../../pages/SpecialistDashboardPages/FindAppointment02';
 
 
 
@@ -64,6 +65,7 @@ const HeaderSpec = () => {
             <NavLink to='/GetJournal' className='list-item' activeclassname='active'>Finn Journal</NavLink>
             <NavLink to='/WriteJournal' className='list-item' activeclassname='active'>Skriv Journalnotat</NavLink>
             <NavLink to='/FindPasient02' className='list-item' activeclassname='active'>ny finn pasient</NavLink>
+            <NavLink to='/FindAppointment02' className='list-item' activeclassname='active'>Dine avtaler</NavLink>
           </Nav>
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>

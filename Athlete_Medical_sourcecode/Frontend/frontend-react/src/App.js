@@ -32,6 +32,7 @@ import UserJournal from "./pages/UserDashboardPages/UserJournal";
 import { CookiesModal } from "./components/Home/CookiesModal";
 import AdminSeeAppointment from "./pages/AdminDashboardPages/AdminSeeAppointment";
 import FindPasient02 from "./pages/SpecialistDashboardPages/FindPasient02";
+import FindAppointment02 from "./pages/SpecialistDashboardPages/FindAppointment02";
 
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
 					<Route path="UserJournal" element={<UserJournal/>}/>
 					<Route path="UserBooking" element={<UserBooking/>}/>
 					<Route path="FindPasient02" element={<FindPasient02/>}/>
+					<Route path="FindAppointment02" element={<FindAppointment02/>}/>
 
 				</Routes>
 				<Footer />
