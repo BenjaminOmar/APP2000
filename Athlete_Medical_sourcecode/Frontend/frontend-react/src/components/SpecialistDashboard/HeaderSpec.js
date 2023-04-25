@@ -16,6 +16,8 @@ import picture from '../../images/footerImage2.png';// importing an image file
 import symbol from '../../images/admin.png';// importing an image file
 import Cookies from "js-cookie";// importing Cookies module
 import WriteJournal from '../../pages/SpecialistDashboardPages/WriteJournal';
+import FindPasient02 from '../../pages/SpecialistDashboardPages/FindPasient02';
+
 
 
 // This component represents the header component for the admin page
@@ -61,6 +63,7 @@ const HeaderSpec = () => {
             <NavLink to='/MakeSchedule' className='list-item' activeclassname='active'>Lag Timeplan</NavLink>
             <NavLink to='/GetJournal' className='list-item' activeclassname='active'>Finn Journal</NavLink>
             <NavLink to='/WriteJournal' className='list-item' activeclassname='active'>Skriv Journalnotat</NavLink>
+            <NavLink to='/FindPasient02' className='list-item' activeclassname='active'>ny finn pasient</NavLink>
           </Nav>
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>

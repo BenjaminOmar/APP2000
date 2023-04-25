@@ -31,6 +31,7 @@ import FutureAppointments from "./pages/UserDashboardPages/FutureAppointment";
 import UserJournal from "./pages/UserDashboardPages/UserJournal";
 import { CookiesModal } from "./components/Home/CookiesModal";
 import AdminSeeAppointment from "./pages/AdminDashboardPages/AdminSeeAppointment";
+import FindPasient02 from "./pages/SpecialistDashboardPages/FindPasient02";
 
 
 function App() {
@@ -60,6 +61,8 @@ function App() {
 					<Route path="futureappointment" element={<FutureAppointments/>}/>
 					<Route path="UserJournal" element={<UserJournal/>}/>
 					<Route path="UserBooking" element={<UserBooking/>}/>
+					<Route path="FindPasient02" element={<FindPasient02/>}/>
+
 				</Routes>
 				<Footer />
 				<CookiesModal/>
