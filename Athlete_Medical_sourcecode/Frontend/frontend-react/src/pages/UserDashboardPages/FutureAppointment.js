@@ -39,11 +39,11 @@ const FutureAppointment = () => {
       // Reset deleteConfirmation state
       setDeleteConfirmation(null);
       // Show success message
-      alert("Appointment deleted successfully!");
+      alert("avtalen er slettet!");
     } catch (error) {
       console.error("Error deleting appointment:", error);
       // Show error message
-      alert("Failed to delete appointment. Please try again later.");
+      alert("avtalen er ikke slettet, prøve igjen!.");
     }
   };
 

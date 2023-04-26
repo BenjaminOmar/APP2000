@@ -7,8 +7,7 @@ import HeaderUser from '../../components/UserDashboard/HeaderUser';
 
 const UserJournal = () => {
   const [journals, setJournals] = useState([]);
-  const userId = 12
-  //Cookies.get('userid');
+  const userId = parseInt(Cookies.get('userId'), 10);
 
   useEffect(() => {
     axios.get('https://localhost:7209/api/journal/getAll')
@@ -23,7 +22,7 @@ const UserJournal = () => {
   return (
     <>
     <HeaderUser/>
-    <Container className="my-3" style={{ minHeight: 'calc(100vh - 275px)' }}>
+    <Container className="my-3" style={{ minHeight:'50vh' }}>
       {journals.length === 0 && <p>No journals to show.</p>}
       <Row>
         {journals.map(journal => (

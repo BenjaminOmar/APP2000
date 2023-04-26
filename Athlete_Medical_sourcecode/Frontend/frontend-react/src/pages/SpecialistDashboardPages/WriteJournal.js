@@ -14,7 +14,8 @@ function WriteJournal() {
   const [heading, setHeading] = useState('');
   
 
-  const specID = Cookies.get('userID');
+  const specID = parseInt(Cookies.get('userId'), 10);
+
 
   const handleSearch = async (event) => {
     event.preventDefault();
