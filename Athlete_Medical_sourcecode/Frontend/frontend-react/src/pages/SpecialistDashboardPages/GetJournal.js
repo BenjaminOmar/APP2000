@@ -1,59 +1,87 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import styles from "./GetJournal.module.css";
+import React, { useState } from "react";
+import { Button, Form, Modal, Table } from "react-bootstrap";
 import HeaderSpec from "../../components/SpecialistDashboard/HeaderSpec";
 
 function GetJournal() {
-  const [journals, setJournals] = useState([]);
-  const [searchText, setSearchText] = useState("");
-  const [filteredJournals, setFilteredJournals] = useState([]);
-  const [feedback, setFeedback] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [journalNote, setJournalNote] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get("https://localhost:7209/api/journal/getAll");
-      setJournals(response.data);
-    };
-    fetchData();
-  }, []);
-
-  const handleSearch = () => {
-    const filtered = journals.filter((journal) =>
-      journal.name.toLowerCase().includes(searchText.toLowerCase())
-    );
-    setFilteredJournals(filtered);
-    if (filtered.length > 0) {
-      setFeedback("");
-    } else {
-      setFeedback("kan ikke finne den journalen");
+  const handleSearch = async () => {
+    try {
+      const response = await fetch(`https://localhost:7209/api/journal/getAll?name=${searchTerm}`);
+      const data = await response.json();
+      if (data.length > 0) {
+        setJournalNote(data[0]);
+        setShowModal(true);
+      } else {
+        alert("Ingen journalnotater funnet.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Noe gikk galt. Vennligst prøv igjen senere.");
     }
   };
+
+  const handleClose = () => {
+    setJournalNote(null);
+    setShowModal(false);
+    setSearchTerm("");
+  };
+  
 
   return (
     <>
     <HeaderSpec/>
-    <div className={styles.container}>
-      <h2>Søk på navn</h2>
-      <div className={styles.searchBox}>
-        <input
-          type="text"
-          value={searchText}
-          onChange={(event) => setSearchText(event.target.value)}
+    <style>
+      min
+    </style>
+    <div className="d-flex justify-content-center" style={{minHeight: "50vh"}}>
+    <Form className="w-50">
+      <h2 className="text-center mb-4">Søk journal</h2>
+      <Form.Group controlId="searchTerm">
+        <Form.Control
+        type="text"
+        placeholder="fornavn middelnavn etternavn"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button onClick={handleSearch}>Find</button>
-      </div>
-      {filteredJournals.length > 0 ? (
-        <ul className={styles.list}>
-          {filteredJournals.map((journal) => (
-            <li key={journal.journalnoteId} className={styles.listItem}>
-              <div className={styles.heading}>{journal.heading}</div>
-              <div className={styles.journalnote1}>{journal.journalnote1}</div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className={styles.feedback}>{feedback}</p>
-      )}
+      </Form.Group>
+  <div className="d-flex justify-content-center mb-4">
+    <Button variant="primary" onClick={handleSearch}>
+      Søk
+    </Button>
+  </div>
+</Form>
+
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{journalNote?.heading}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Table striped bordered hover>
+            <tbody>
+              <tr>
+                <td>Pasientnavn:</td>
+                <td>{journalNote?.name}</td>
+              </tr>
+              <tr>
+                <td>Dato opprettet:</td>
+                <td>{journalNote?.created}</td>
+              </tr>
+              <tr>
+                <td>Journalnotat:</td>
+                <td>{journalNote?.journalnote}</td>
+              </tr>
+            </tbody>
+          </Table>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Lukk
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
     </>
   );
