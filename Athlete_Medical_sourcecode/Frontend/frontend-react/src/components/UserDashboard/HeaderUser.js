@@ -16,6 +16,7 @@ import picture from '../../images/footerImage2.png';// importing an image file
 import symbol from '../../images/admin.png';// importing an image file
 import Cookies from 'js-cookie';
 import UserBooking from '../../pages/UserDashboardPages/UserBooking';
+import UserJournal from '../../pages/UserDashboardPages/UserJournal';
 
 
 

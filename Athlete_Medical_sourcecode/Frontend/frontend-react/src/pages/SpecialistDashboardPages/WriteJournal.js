@@ -12,8 +12,7 @@ function WriteJournal() {
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [journalNote, setJournalNote] = useState('');
   const [heading, setHeading] = useState('');
-  const [infoMessage, setInfoMessage] = useState('');
-  const [showInfoModal, setShowInfoModal] = useState(false);
+  
 
   const specID = Cookies.get('userID');
 
@@ -22,7 +21,7 @@ function WriteJournal() {
     const searchQuery = event.target.search.value.toLowerCase();
     const response = await axios.get(`${USERS_API_URL}`);
     const matchingUsers = response.data.filter((user) => {
-      const fullName = `${user.firstName} ${user.middleName} ${user.lastName}`.toLowerCase();
+    const fullName = `${user.firstName} ${user.middleName} ${user.lastName}`.toLowerCase();
       return fullName.includes(searchQuery);
     });
     setSearchResults(matchingUsers);
@@ -35,31 +34,23 @@ function WriteJournal() {
   };
 
   const handlePostNote = async (event) => {
-    event.preventDefault();
-    const newNote = {
-      journalnote1: journalNote,
-      heading: heading,
-      //created: new Date().toISOString(),
-      patient: selectedPatient.userId,
-      specialist: specID,
-    };
-    //await axios.post(`${API_URL}/`, newNote);
-    //setJournalNote('');
-    //setSelectedPatient(null);
-
-    axios
-      .post(API_URL, newNote)
-      .then((result) => {
-        setInfoMessage('lagringen er vellykket!'); // Set the info message
-        setShowInfoModal(true);// Show the info modal
-
-      })
-      .catch((error) => {
-        setInfoMessage(error); // Set the error message from backend api
-        setShowInfoModal(true); // Show the info modal
-      });
-
-
+    try {
+      event.preventDefault();
+      const newNote = {
+        journalnote1: journalNote,
+        heading: heading,
+        //created: new Date().toISOString(),
+        patient: selectedPatient.userId,
+        specialist: specID,
+      };
+      await axios.post(`${API_URL}/`, newNote);
+      setJournalNote('');
+      setSelectedPatient(null);
+    } catch (error) {
+      console.error('Error posting note:', error);
+      // handle the error, for example:
+      // show an error message to the user
+    }
   };
 
   return (
