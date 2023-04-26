@@ -1,13 +1,14 @@
-import React from "react";
+/*import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Pagination } from "react-bootstrap";
 import { Button, Form, Table, Modal } from "react-bootstrap";
 import HeaderSpec from "../../components/SpecialistDashboard/HeaderSpec";
+import styles from "./FindPasient02.module.css";
 
 
 
-function FindPasient() {
+function FindPasient02() {
     // Define state variables using the useState hook
     const [searchTerm, setSearchTerm] = useState("");
     const [searchResults, setSearchResults] = useState([]);
@@ -64,16 +65,16 @@ function FindPasient() {
   
     return (
       <div style={{ minHeight: 'calc(100vh - 275px)' }}>
-        {/* Render the HeaderAdmin component */}
+        
         <HeaderSpec />
-        {/* Create a div with padding at the top and bottom and display a welcome message with the username */}
+        
         <div style={{ paddingTop: '50px', paddingBottom: '30px', }}>
           <h2> Søk pasient </h2>
         </div>
   
-        {/* Create a Form.Group component with margin on the left and right */}
+       
         <Form.Group className="mb-3" style={{ display: 'flex', justifyContent: 'center' }}>
-          {/* Create a Form.Control component with a text type, placeholder text, value, and onChange function */}
+         
           <Form.Control
             style={{ width: '22%' }}
             type="text"
@@ -82,7 +83,7 @@ function FindPasient() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </Form.Group>
-        {/* Create a Button component with a onClick function, margin on the left, width, and marginBottom */}
+        
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <Button onClick={searchUsers} style={{ width: '15%', marginBottom: '30px' }}>Search</Button>
         </div>
@@ -98,7 +99,7 @@ function FindPasient() {
             >
               <thead>
                 <tr>
-                  {/* Create table headers */}
+                 
                   <th>Brukernavn</th>
                   <th>Fornavn</th>
                   <th>Mellomnavn</th>
@@ -110,12 +111,13 @@ function FindPasient() {
                 </tr>
               </thead>
               <tbody>
-                {/* Loop through each user object in the searchResults array, showing 25 users at a time */}
+               
                 {searchResults.slice(startIndex, endIndex).map((user) => (
                   // Render a table row for each user object, with a unique key based on its userId
                   <tr key={user.userId}>
-                    {/* Display the user's information in each table cell */}
+                   
                     <td>{user.username}</td>
+
                     <td>{user.firstName}</td>
                     <td>{user.middleName}</td>
                     <td>{user.lastName}</td>
@@ -127,7 +129,7 @@ function FindPasient() {
                 ))}
               </tbody>
             </Table>
-            {/* Render a pagination component to allow the user to navigate between pages if there is more than 25 users in the table */}
+            
             <Pagination
               size="sm"
               className="justify-content-center" // Center the pagination component horizontally
@@ -139,12 +141,11 @@ function FindPasient() {
           </div>
         )}
   
-        {/* This is a conditional rendering statement, showing the Modal only if "selectedUser" is truthy */}
-       
-      </div>
+        
     );
   }
   //The component is exported as a default export
-  export default FindPasient;
+  export default FindPasient02;
+  */
 
    

@@ -1,45 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import styles from './UserJournal.module.css';
+import { Container, Row, Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
+
 import HeaderUser from '../../components/UserDashboard/HeaderUser';
 
 const UserJournal = () => {
-  const [journalNotes, setJournalNotes] = useState([]);
-  
-  const userId = Cookies.get('userId');
-  
+  const [journals, setJournals] = useState([]);
+  const userId = 12
+  //Cookies.get('userid');
 
   useEffect(() => {
-    // Fetch data from API using axios
     axios.get('https://localhost:7209/api/journal/getAll')
       .then(response => {
-        // Filter journal notes based on logged-in user's username
-        const filteredNotes = response.data.filter(note => note.patient == userId);
-        setJournalNotes(filteredNotes);
+        const filteredJournals = response.data.filter(journal => journal.patient === userId);
+        setJournals(filteredJournals);
       })
       .catch(error => {
-        console.error('Failed to fetch journal notes:', error);
+        console.error(error);
       });
   }, [userId]);
-
   return (
     <>
     <HeaderUser/>
-     <div>
-      <h1>Mine journaler</h1>
-      {journalNotes.length === 0 ? (
-        <div className={styles.noJournalMessage}>Du har ingen journaler akkurat nå.</div>
-      ) : (
-        journalNotes.map(note => (
-          <div key={note.journalnoteId} className={styles.journalNote}>
-            <div className={styles.created}>{note.created}</div>
-            <div className={styles.title}>{note.heading}</div>
-            <div className={styles.journalNoteContent}>{note.journalnote}</div>
-          </div>
-        ))
-      )}
-    </div>
+    <Container className="my-3" style={{ minHeight: 'calc(100vh - 275px)' }}>
+      {journals.length === 0 && <p>No journals to show.</p>}
+      <Row>
+        {journals.map(journal => (
+          <Col md="6" className="my-3" key={journal.journalnoteId}>
+            <Card>
+              <CardBody>
+                <CardTitle>{journal.heading}</CardTitle>
+                <CardText>{journal.journalnote}</CardText>
+                <CardText><small className="text-muted">{new Date(journal.created).toLocaleString()}</small></CardText>
+              </CardBody>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
     </>
   );
 };

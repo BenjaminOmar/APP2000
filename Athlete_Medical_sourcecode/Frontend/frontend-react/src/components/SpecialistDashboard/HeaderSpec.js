@@ -18,6 +18,7 @@ import Cookies from "js-cookie";// importing Cookies module
 import WriteJournal from '../../pages/SpecialistDashboardPages/WriteJournal';
 
 
+
 // This component represents the header component for the admin page
 const HeaderSpec = () => {
   // Navigate variable using useNavigate hook from react-router-dom
@@ -56,11 +57,11 @@ const HeaderSpec = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto"> {/* A navigation bar component with a right-aligned list of navigation items */}
-            <NavLink to='/FindPasient' className='list-item' activeclassname='active'>Find Pasient</NavLink>
-            <NavLink to='/FindAppointment' className='list-item' activeclassname='active'>Finn dine avtaler</NavLink>
+            <NavLink to='/FindPasient' className='list-item' activeclassname='active'>Søk Pasient</NavLink>
             <NavLink to='/MakeSchedule' className='list-item' activeclassname='active'>Lag Timeplan</NavLink>
             <NavLink to='/GetJournal' className='list-item' activeclassname='active'>Finn Journal</NavLink>
-            <NavLink to='/WriteJournal' className='list-item' activeclassname='active'>Skriv Journalnotat</NavLink>
+            <NavLink to='/WriteJournal' className='list-item' activeclassname='active'>Skriv Journal</NavLink>
+            <NavLink to='/FindAppointment' className='list-item' activeclassname='active'>Dine avtaler</NavLink>
           </Nav>
           <Nav className='ms-auto'>{/* A navigation bar component with a right-aligned dropdown menu */}
             <DropdownButton style={{ backgroundColor: '#f8f9fa' }} title={<><img src={symbol} alt="Administrasjons symbol" /><span></span></>}>

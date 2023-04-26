@@ -1,100 +1,126 @@
-import React, { useState, useEffect } from "react";
-import HeaderSpec from "../../components/SpecialistDashboard/HeaderSpec";
-import styles from "./WriteJournal.module.css";
+import React, { useState } from 'react';
+import { Form, Button, Table } from 'react-bootstrap';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import HeaderSpec from '../../components/SpecialistDashboard/HeaderSpec';
 
-const WriteJournal = () => {
-  const [heading, setHeading] = useState("");
-  const [journalNote, setJournalNote] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [userId, setUserId] = useState(null); // added state for user ID
+const API_URL = 'https://localhost:7209/api/journal/create';
+const USERS_API_URL = 'https://localhost:7209/api/user/getAll';
 
-  useEffect(() => {
-    // Fetch the user data based on first name and last name
-    const fetchData = async () => {
-      const response = await fetch(
-        `api-url-here/users?firstName=${firstName}&lastName=${lastName}`
-      );
-      const data = await response.json();
-      if (data.length > 0) {
-        setUserId(data[0].id); // set the user ID to the first matching user's ID
-      }
-    };
-    if (firstName && lastName) {
-      fetchData();
+function WriteJournal() {
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [journalNote, setJournalNote] = useState('');
+  const [heading, setHeading] = useState('');
+  
+
+  const specID = Cookies.get('userID');
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    const searchQuery = event.target.search.value.toLowerCase();
+    const response = await axios.get(`${USERS_API_URL}`);
+    const matchingUsers = response.data.filter((user) => {
+    const fullName = `${user.firstName} ${user.middleName} ${user.lastName}`.toLowerCase();
+      return fullName.includes(searchQuery);
+    });
+    setSearchResults(matchingUsers);
+  };
+  
+
+  const handleSelectPatient = (patient) => {
+    setSelectedPatient(patient);
+    setSearchResults([]);
+  };
+
+  const handlePostNote = async (event) => {
+    try {
+      event.preventDefault();
+      const newNote = {
+        journalnote1: journalNote,
+        heading: heading,
+        //created: new Date().toISOString(),
+        patient: selectedPatient.userId,
+        specialist: specID,
+      };
+      await axios.post(`${API_URL}/`, newNote);
+      setJournalNote('');
+      setSelectedPatient(null);
+    } catch (error) {
+      console.error('Error posting note:', error);
+      // handle the error, for example:
+      // show an error message to the user
     }
-  }, [firstName, lastName]);
-
-  const handleSave = () => {
-    // Make a POST request to the API with the journal data and user ID
-    const journalData = {
-      journalnote1: journalNote,
-      heading,
-      patient: userId // use the user ID in the journal data
-    };
-    // Make the POST request using fetch or axios
-    fetch("api-url-here/journal-notes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(journalData)
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data)) // log the response data to the console
-      .catch((error) => console.log(error)); // log any errors to the console
   };
 
   return (
     <>
-    <HeaderSpec/>
-    <div className={styles.container}>
-      <h2 className={styles.heading}>Skrive Journal</h2>
-      <div className={styles.inputContainer}>
-        <label htmlFor="heading">Oversikt:</label>
-        <input
-          type="text"
-          id="heading"
-          value={heading}
-          onChange={(e) => setHeading(e.target.value)}
-        />
-      </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="journalNote">Journal Notat:</label>
-        <textarea
-          id="journalNote"
-          value={journalNote}
-          onChange={(e) => setJournalNote(e.target.value)}
-        />
-      </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="firstName">Pasient førstnavn:</label>
-        <input
-          type="text"
-          id="firstName"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-      </div>
-      <div className={styles.inputContainer}>
-        <label htmlFor="lastName">Pasient etternavn:</label>
-        <input
-          type="text"
-          id="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-      </div>
-      <button
-        className={styles.saveButton}
-        onClick={handleSave}
-        disabled={!userId} // disable the button if user ID is not found
-      >
-        Save
-      </button>
+      <HeaderSpec />
+      <div style={{ minHeight: "75vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+        <h1 style={{ fontSize: "2rem", marginBottom: "1rem" }}>Skriv Journal</h1>
+        <Form onSubmit={handleSearch}>
+          <Form.Group controlId="search" className="mb-3">
+            <Form.Label>Søk etter pasient</Form.Label>
+            <Form.Control type="text" placeholder="Skriv inn pasientnavn" />
+          </Form.Group>
+          <Button type="submit">Søk</Button>
+        </Form>
+        {searchResults.length > 0 && (
+          <Table>
+            <thead>
+              <tr>
+                <th>Fornavn</th>
+                <th>Mellomnavn</th>
+                <th>Etternavn</th>
+                <th>E-post</th>
+                <th>Adresse</th>
+                <th>Telefonnummer</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {searchResults.map((result) => (
+                <tr key={result.userId}>
+                  <td>{result.firstName}</td>
+                  <td>{result.middleName}</td>
+                  <td>{result.lastName}</td>
+                  <td>{result.email}</td>
+                  <td>{result.adress}</td>
+                  <td>{result.phoneNumber}</td>
+                  <td >
+                  <Button onClick={() => handleSelectPatient(result)} >Skriv journalnotat</Button>
+                  </td>
+                </tr>
+            ))}
+          </tbody>
+        </Table>
+      )}
+      {selectedPatient && (
+        <Form onSubmit={handlePostNote}>
+           <Form.Group controlId="heading">
+          <Form.Label>Skriv inn overskrift</Form.Label>
+          <Form.Control
+            type="text"
+            value={heading}
+            onChange={(event) => setHeading(event.target.value)}
+          />
+        </Form.Group>
+        <Form.Group controlId="journalNote">
+          <Form.Label>Skriv journalnotat</Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            value={journalNote}
+            onChange={(event) => setJournalNote(event.target.value)}
+          />
+        </Form.Group>
+        <Button type="submit">Lagre</Button>
+      </Form>
+      
+      )}
     </div>
     </>
-  );
-};
+  )
+}
 
 export default WriteJournal;
