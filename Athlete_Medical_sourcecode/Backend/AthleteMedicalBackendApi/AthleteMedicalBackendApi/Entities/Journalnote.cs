@@ -21,6 +21,6 @@ public partial class Journalnote
     [JsonIgnore]
     public virtual User? PatientNavigation { get; set; }
 
-    [JsonIgnore]
-    public virtual User? SpecialistNavigation { get; set; }
+    //[JsonIgnore]
+    //public virtual User? SpecialistNavigation { get; set; }
 }
