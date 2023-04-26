@@ -23,7 +23,7 @@ const UserJournal = () => {
     <>
     <HeaderUser/>
     <Container className="my-3" style={{ minHeight:'50vh' }}>
-      {journals.length === 0 && <p>No journals to show.</p>}
+      {journals.length === 0 && <p>Du har ingen journal for å se.</p>}
       <Row>
         {journals.map(journal => (
           <Col md="6" className="my-3" key={journal.journalnoteId}>
