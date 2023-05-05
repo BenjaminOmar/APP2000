@@ -10,6 +10,7 @@ import AdminSeeAppointments from "../../components/AdminDashboard/AdminSeeAppoin
 
 function AdminBooking() {
   const [specialist, setSpecialist] = useState([]);
+  const [patientId, setPatientId] = useState("");
   const [selectedSpecialist, setSelectedSpecialist] = useState(null);
   const [availableAppointments, setAvailableAppointments] = useState(null);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
@@ -79,11 +80,9 @@ function AdminBooking() {
   const handleBookAppointment = (appointment) => {
     const data = {
       appointmentId: appointment.appointmentId,
-      patientId: Cookies.get("userId"), // Fetches userId from cookies
+      patientId: patientId, // Fetches userId from cookies
     };
-    const url = `https://localhost:7209/api/appointment/book?appId=${appointment.appointmentId}&patId=${Cookies.get(
-      "userId"
-    )}`;
+    const url = `https://localhost:7209/api/appointment/book?appId=${appointment.appointmentId}&patId=${patientId}`;
     axios
     .put(url, data)
     .then((result) => {
@@ -100,7 +99,12 @@ function AdminBooking() {
       console.log(error);
     });
 };
-  
+
+const handlePatientIdChange = (value) => {
+  setPatientId(value);
+  console.log(value);
+};
+
 // This is the JSX code that renders the component.
 // It contains a table of specialist users and a table of available appointments, and allows patients to book appointments.
 return (
@@ -155,13 +159,22 @@ return (
                   </td>
                   <td>{appointment.roomId}</td> {/*Displays the room number for the appointment*/}
                   <td>
-                    <Button
-                      variant="primary"
-                      // Calls handleBookAppointment function when the button is clicked
-                      onClick={() => handleBookAppointment(appointment)}
-                    >
-                      Bestill time {/*Displays a button to book the appointment*/}
-                    </Button>
+                  <div>
+				<label>Pasient ID: 
+        </label>
+        <br></br>
+				<input
+					type="text"
+					id="txtPatientId"
+					onChange={(e) => handlePatientIdChange(e.target.value)}></input>  <Button
+          variant="primary"
+          // Calls handleBookAppointment function when the button is clicked
+          onClick={() => handleBookAppointment(appointment)}
+        >
+          Bestill time {/*Displays a button to book the appointment*/}
+        </Button>
+			</div>  
+                   
                   </td>
                 </tr>
               ))}
@@ -173,8 +186,8 @@ return (
           <Modal.Title>Bekreftelse på timebestilling</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Du har time {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleDateString("nb-NO", startOptions)} - {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos {selectedSpecialist && selectedSpecialist.firstName} {selectedSpecialist && selectedSpecialist.middleName} {selectedSpecialist && selectedSpecialist.lastName}</p>
-          <p>{selectedAppointment && "Timebestillingen din er bekreftet. Takk!"}</p>
+          <p>Time {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleDateString("nb-NO", startOptions)} - {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos {selectedSpecialist && selectedSpecialist.firstName} {selectedSpecialist && selectedSpecialist.middleName} {selectedSpecialist && selectedSpecialist.lastName}</p>
+          <p>{selectedAppointment && "Timebestillingen er bekreftet!"}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>
