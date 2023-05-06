@@ -180,7 +180,7 @@ return (
           <Modal.Title>Bekreftelse på timebestilling</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Du har time {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleDateString("nb-NO", startOptions)} - {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos {selectedSpecialist && selectedSpecialist.firstName} {selectedSpecialist && selectedSpecialist.middleName} {selectedSpecialist && selectedSpecialist.lastName}</p>
+          <p>Du har time {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleDateString("nb-NO", startOptions)} - {selectedAppointment && new Date(selectedAppointment.endTime).toLocaleTimeString("nb-NO", endOptions)} hos {selectedSpecialist && selectedSpecialist.firstName} {selectedSpecialist && selectedSpecialist.middleName} {selectedSpecialist && selectedSpecialist.lastName}</p>
           <p>{selectedAppointment && "Timebestillingen din er bekreftet. Takk!"}</p>
         </Modal.Body>
         <Modal.Footer>
