@@ -72,8 +72,6 @@ function AdminBooking() {
       });
   };
 
-  // The navigate function is obtained from the useNavigate hook imported from react-router-dom
-  const navigate = useNavigate();
 
   // handleBookAppointment function takes an appointment object and constructs a data object with
   // the appointmentId and patientId (fetched from cookies), and makes a PUT request to book the appointment
@@ -104,6 +102,15 @@ const handlePatientIdChange = (value) => {
   setPatientId(value);
   console.log(value);
 };
+
+  // The navigate function is obtained from the useNavigate hook imported from react-router-dom
+  const navigate = useNavigate();
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    navigate("/adminseeappointment");
+  };
+  
 
 // This is the JSX code that renders the component.
 // It contains a table of specialist users and a table of available appointments, and allows patients to book appointments.
@@ -181,16 +188,17 @@ return (
             </tbody>
           </Table>
            {/* Renders a Modal component */}
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
+           <Modal show={showModal} onHide={handleCloseModal}>
+  <Modal.Header closeButton>
+
           <Modal.Title>Bekreftelse på timebestilling</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <p>Time {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleDateString("nb-NO", startOptions)} - {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleTimeString("nb-NO", endOptions)} hos {selectedSpecialist && selectedSpecialist.firstName} {selectedSpecialist && selectedSpecialist.middleName} {selectedSpecialist && selectedSpecialist.lastName}</p>
+          <p>Timeavtale for pasientnummer {patientId}: {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleDateString("nb-NO", startOptions)} - {selectedAppointment && new Date(selectedAppointment.endTime).toLocaleTimeString("nb-NO", endOptions)} hos {selectedSpecialist && selectedSpecialist.firstName} {selectedSpecialist && selectedSpecialist.middleName} {selectedSpecialist && selectedSpecialist.lastName}</p>
           <p>{selectedAppointment && "Timebestillingen er bekreftet!"}</p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
+           <Button variant="primary" onClick={handleCloseModal}>
             Lukk
           </Button>
         </Modal.Footer>
