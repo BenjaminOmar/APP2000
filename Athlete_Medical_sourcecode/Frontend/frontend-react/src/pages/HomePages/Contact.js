@@ -4,17 +4,25 @@ The form includes fields for the user to enter their name, email, phone number, 
 */
 
 // Importing React, HeaderNormal component from "../components/HeaderNormal", and several Bootstrap components from 'react-bootstrap'
-import React from "react";
+import React, { useState } from "react";
 import HeaderNormal from "../../components/Home/HeaderNormal";
-import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Card, Modal } from 'react-bootstrap';
 
 // Defining the Contact function
 const Contact = () => {
+    // Define state variables using the useState hook
+    const [infoMessage, setInfoMessage] = useState('');
+    const [showInfoModal, setShowInfoModal] = useState(false);
 
-    // Defining a function to handle the form submission, which displays an alert message
+    // Defining a function to handle the form submission, which displays a message
     const handleSubmit = () => {
-        alert("Tusen takk for din henvendelse! Vi vil kontakte deg så snart som mulig.");
+        setInfoMessage("Tusen takk for din henvendelse! Vi vil kontakte deg så snart som mulig."); // Set the error message
+        setShowInfoModal(true); // Show the info modal
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000); // Wait 3 seconds before reloading the page
     }
+    
     // Rendering the Contact component
     return (
         <div style={{ minHeight: 'calc(100vh - 275px)', marginBottom: '70px' }} >
@@ -50,7 +58,7 @@ const Contact = () => {
                             <p style={{ textAlign: "center" }}> Fyll ut skjemaet, så vil en av våre erfarne medarbeidere kontakte deg innen 2 virkedager</p>
                         </Card.Header>
                         <Card.Body>
-                            <Form onSubmit={handleSubmit}>
+                            <Form >
                                 {/* Render a form group for the subject input */}
                                 <Form.Group controlId="formSubject" style={{ marginBottom: "20px" }}>
                                     <Form.Label>Overskrift</Form.Label>
@@ -78,11 +86,13 @@ const Contact = () => {
                                 </Form.Group>
                                 {/*// A button component to submit the form */}
                                 <div style={{ display: "grid", placeItems: "center" }}>
-                                    <Button variant="primary" type="submit"
+                                    <Button 
+                                        variant="primary" 
+                                        onClick= {handleSubmit}
                                         style={{  //A style object to modify the button's appearance 
                                             paddingLeft: "100px",
-                                            paddingRight: "100px",                                           
-                                            backgroundColor: "#0050B1",
+                                            paddingRight: "100px",
+                                            backgroundColor: "#0050B1"                                           
                                         }}
                                     >
                                         Send melding{/* The text displayed on the button */}
@@ -94,6 +104,22 @@ const Contact = () => {
                     </Card>
                 </div>
             </Container>
+            <Modal
+                show={showInfoModal}
+                onHide={() => setShowInfoModal(false)}
+                backdrop="static"
+                keyboard={false}
+            >
+                <Modal.Header closeButton> {/* This creates a header within the modal dialog with a close button. */}
+                    <Modal.Title></Modal.Title> {/* This sets the title of the modal dialog. */}
+                </Modal.Header>
+                <Modal.Body>{infoMessage}</Modal.Body> {/* This displays the error message within the modal dialog. */}
+                <Modal.Footer>
+                    <Button style={{ width: '60%', marginRight: '21%' }} variant="primary" onClick={() => setShowInfoModal(false)}>
+                        OK
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
