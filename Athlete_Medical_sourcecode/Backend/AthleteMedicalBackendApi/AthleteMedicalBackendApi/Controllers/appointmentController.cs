@@ -37,6 +37,21 @@ namespace AthleteMedicalBackendApi.Controllers
             }
         }
 
+        [HttpGet("getAll2")]
+        public async Task<IActionResult> GetAllAppointments2()
+        {
+            try
+            {
+                var appointments = await _context.Appointments.FromSqlInterpolated<Appointment>($"getAll2").ToListAsync();
+
+                return Ok(appointments);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error ved visning av alle avtaler");
+            }
+        }
+
 
 
         // get all available appointments

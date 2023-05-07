@@ -16,12 +16,21 @@ BEGIN
 END$$
 DELIMITER ;
 
--- list of all appointments
+-- list of all appointments with name
 DELIMITER $$
 CREATE DEFINER=`root`@`%` PROCEDURE `getAll`()
     READS SQL DATA
 BEGIN
     SELECT appointment.*, CONCAT(user.FirstName, " ",user.middleName, " ", user.lastName) AS 'Name' FROM appointment, user WHERE appointment.patientId = user.userId;
+END$$
+DELIMITER ;
+
+-- list of all appointments
+DELIMITER $$
+CREATE DEFINER=`root`@`%` PROCEDURE `getAll2`()
+    READS SQL DATA
+BEGIN
+    SELECT * FROM appointment;
 END$$
 DELIMITER ;
 
