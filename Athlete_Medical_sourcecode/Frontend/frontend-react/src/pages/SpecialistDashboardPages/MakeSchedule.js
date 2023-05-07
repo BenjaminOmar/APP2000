@@ -92,6 +92,7 @@ const MakeSchedule = () => {
       const appointmentRoomID = parseInt(appointment.roomId);
       const appointmentDataRoomID = parseInt(appointmentData.roomId);
       // Check if the selected room is already booked for the selected time
+      console.log(appointments); 
       if (
         appointmentDataRoomID == appointmentRoomID &&
         ((appointmentDataStartTime.valueOf() >= appointmentStartTime.valueOf() &&
