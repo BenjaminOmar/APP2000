@@ -25,12 +25,12 @@ function UserBooking() {
     hour: "numeric",
     minute: "numeric",
   };
-  
+
   const endOptions = {
     hour: "numeric",
     minute: "numeric",
   };
-  
+
   // This useEffect hook will be called once on initial render,
   // and fetches all users with a roleId of 2 from the backend
   useEffect(() => {
@@ -78,7 +78,7 @@ function UserBooking() {
     setShowModal(false);
     navigate("/FutureAppointment");
   };
-  
+
 
   // handleBookAppointment function takes an appointment object and constructs a data object with
   // the appointmentId and patientId (fetched from cookies), and makes a PUT request to book the appointment
@@ -91,110 +91,110 @@ function UserBooking() {
       "userId"
     )}`;
     axios
-    .put(url, data)
-    .then((result) => {
-      // If the booking is successful, it will display an alert with the appointment start time, specialist name
-      // and confirmation message and navigates to 'min side' or 'fremtidige avtaler'
-      setShowModal(true);
-      setSelectedAppointment(appointment);
+      .put(url, data)
+      .then((result) => {
+        // If the booking is successful, it will display an alert with the appointment start time, specialist name
+        // and confirmation message and navigates to 'min side' or 'fremtidige avtaler'
+        setShowModal(true);
+        setSelectedAppointment(appointment);
 
-      console.log(data);
-      console.log(result.data);
-    })
-    .catch((error) => {
-      alert(error);
-      console.log(error);
-    });
-};
-  
-// This is the JSX code that renders the component.
-// It contains a table of specialist users and a table of available appointments, and allows patients to book appointments.
-return (
-  <>
-    <HeaderUser /> {/*Renders the 'HeaderAdmin' component */}
-    <div className="container my-5">
-      <h2 className="mb-3" style={{marginTop: '50px'}}>Timebestilling</h2>
-      <Table bordered hover>
-        <thead>
-          <tr>
-            <th>Spesialist</th>
-            <th>Epostadresse</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {specialist.map((specialist) => ( // Maps through a list of specialists and renders a table row for each one
-            <tr key={specialist.userId}>
-              <td>{specialist.firstName} {specialist.middleName} {specialist.lastName}</td> {/* Displays the specialist's name */}
-              <td>{specialist.email}</td> {/* Displays the specialist's email address*/}
-              <td>
-                <Button
-                  variant="primary"
-                  // Calls handleShowAvailableAppointments function when the button is clicked
-                  onClick={() => handleShowAvailableAppointments(specialist)}
-                >
-                  Se ledige avtaler {/*Displays a button to show available appointments for the specialist */}
-                </Button>
-              </td>
+        console.log(data);
+        console.log(result.data);
+      })
+      .catch((error) => {
+        alert(error);
+        console.log(error);
+      });
+  };
+
+  // This is the JSX code that renders the component.
+  // It contains a table of specialist users and a table of available appointments, and allows patients to book appointments.
+  return (
+    <>
+      <HeaderUser /> {/*Renders the 'HeaderAdmin' component */}
+      <div className="container my-5" style={{ paddingTop: '50px', minHeight: 'calc(100vh - 480px)' }} >
+        <h2 className="mb-3" style={{ marginTop: '50px' }}>Timebestilling</h2>
+        <Table bordered hover>
+          <thead>
+            <tr>
+              <th>Spesialist</th>
+              <th>Epostadresse</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
-      {availableAppointments !== null && selectedSpecialist !== null && ( // Conditionally renders a section to show available appointments if both availableAppointments and selectedSpecialist are not null
-        <>
-          <h2 className="mt-5">{`${selectedSpecialist.firstName} ${selectedSpecialist.lastName} sine ledige avtaler`}</h2>
-          <Table bordered hover>
-            <thead>
-              <tr>
-                <th>Avtaletidspunkt</th> {/*Displays the appointment date and time*/} 
-                <th>Romnummer</th> {/*Displays the room number for the appointment*/}
-                <th></th>
+          </thead>
+          <tbody>
+            {specialist.map((specialist) => ( // Maps through a list of specialists and renders a table row for each one
+              <tr key={specialist.userId}>
+                <td>{specialist.firstName} {specialist.middleName} {specialist.lastName}</td> {/* Displays the specialist's name */}
+                <td>{specialist.email}</td> {/* Displays the specialist's email address*/}
+                <td>
+                  <Button
+                    variant="primary"
+                    // Calls handleShowAvailableAppointments function when the button is clicked
+                    onClick={() => handleShowAvailableAppointments(specialist)}
+                  >
+                    Se ledige avtaler {/*Displays a button to show available appointments for the specialist */}
+                  </Button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {availableAppointments.map((appointment) => ( // Maps through a list of available appointments and renders a table row for each one
-                <tr key={appointment.appointmentId}>    
-                  <td>
-                    {new Date(appointment.startTime).toLocaleDateString("nb-NO", startOptions)} {" - "}
-                    {/*Displays the appointment start time and end time */}
-                    {"kl. " + new Date(appointment.endTime).toLocaleTimeString("nb-NO", endOptions)} 
-                  </td>
-                  <td>{appointment.roomId}</td> {/*Displays the room number for the appointment*/}
-                  <td>
-                    <Button
-                      variant="primary"
-                      // Calls handleBookAppointment function when the button is clicked
-                      onClick={() => handleBookAppointment(appointment)}
-                    >
-                      Bestill time {/*Displays a button to book the appointment*/}
-                    </Button>
-                  </td>
+            ))}
+          </tbody>
+        </Table>
+        {availableAppointments !== null && selectedSpecialist !== null && ( // Conditionally renders a section to show available appointments if both availableAppointments and selectedSpecialist are not null
+          <>
+            <h2 className="mt-5">{`${selectedSpecialist.firstName} ${selectedSpecialist.lastName} sine ledige avtaler`}</h2>
+            <Table bordered hover>
+              <thead>
+                <tr>
+                  <th>Avtaletidspunkt</th> {/*Displays the appointment date and time*/}
+                  <th>Romnummer</th> {/*Displays the room number for the appointment*/}
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-           {/* Renders a Modal component */}
-           <Modal show={showModal} onHide={handleCloseModal}>
-  <Modal.Header closeButton>
+              </thead>
+              <tbody>
+                {availableAppointments.map((appointment) => ( // Maps through a list of available appointments and renders a table row for each one
+                  <tr key={appointment.appointmentId}>
+                    <td>
+                      {new Date(appointment.startTime).toLocaleDateString("nb-NO", startOptions)} {" - "}
+                      {/*Displays the appointment start time and end time */}
+                      {"kl. " + new Date(appointment.endTime).toLocaleTimeString("nb-NO", endOptions)}
+                    </td>
+                    <td>{appointment.roomId}</td> {/*Displays the room number for the appointment*/}
+                    <td>
+                      <Button
+                        variant="primary"
+                        // Calls handleBookAppointment function when the button is clicked
+                        onClick={() => handleBookAppointment(appointment)}
+                      >
+                        Bestill time {/*Displays a button to book the appointment*/}
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+            {/* Renders a Modal component */}
+            <Modal show={showModal} onHide={handleCloseModal}>
+              <Modal.Header closeButton>
 
-          <Modal.Title>Bekreftelse på timebestilling</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>Du har time {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleDateString("nb-NO", startOptions)} - {selectedAppointment && new Date(selectedAppointment.endTime).toLocaleTimeString("nb-NO", endOptions)} hos {selectedSpecialist && selectedSpecialist.firstName} {selectedSpecialist && selectedSpecialist.middleName} {selectedSpecialist && selectedSpecialist.lastName}</p>
-          <p>{selectedAppointment && "Timebestillingen din er bekreftet. Takk!"}</p>
-        </Modal.Body>
-        <Modal.Footer>
-           <Button variant="primary" onClick={handleCloseModal}>
-            Lukk
-          </Button>
-        </Modal.Footer>
-      </Modal>
-        </>
-      )}
-    </div>
-  </>
-);
- }
+                <Modal.Title>Bekreftelse på timebestilling</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <p>Du har time {selectedAppointment && new Date(selectedAppointment.startTime).toLocaleDateString("nb-NO", startOptions)} - {selectedAppointment && new Date(selectedAppointment.endTime).toLocaleTimeString("nb-NO", endOptions)} hos {selectedSpecialist && selectedSpecialist.firstName} {selectedSpecialist && selectedSpecialist.middleName} {selectedSpecialist && selectedSpecialist.lastName}</p>
+                <p>{selectedAppointment && "Timebestillingen din er bekreftet. Takk!"}</p>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="primary" onClick={handleCloseModal}>
+                  Lukk
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </>
+        )}
+      </div>
+    </>
+  );
+}
 
-  // Exports the AdminBooking component as the default export
-  export default UserBooking;  
+// Exports the AdminBooking component as the default export
+export default UserBooking;  

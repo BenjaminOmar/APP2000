@@ -432,6 +432,7 @@ function AlterUser() {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+                {/* A modal that shows error messages */}
                 <Modal
                     show={showInfoModal}
                     onHide={() => setShowInfoModal(false)}

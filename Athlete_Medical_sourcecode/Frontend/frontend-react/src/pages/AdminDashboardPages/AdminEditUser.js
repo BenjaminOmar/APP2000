@@ -55,7 +55,8 @@ function AdminEditUser() {
       );
       setSearchResults(filteredResults);// Update the search results state variable with the filtered results
     } catch (error) {
-      alert(error);// Display an error message if there was a problem with the API request
+      setInfoMessage(error); // Set the error message from backend api
+      setShowInfoModal(true); // Show the info modal
     };
   }
 
