@@ -40,7 +40,7 @@ const MakeSchedule = () => {
     axios
       .all([
         // The first request gets all appointments from the API
-        axios.get("https://localhost:7209/api/appointment/getAll"),
+        axios.get("https://localhost:7209/api/appointment/getAll2"),
         // The second request gets all rooms from the API
         axios.get("https://localhost:7209/api/room/getAll")
       ])
@@ -139,9 +139,9 @@ const MakeSchedule = () => {
         setInfoMessage("timeplanen er lagret"); 
         setShowInfoModal(true); 
         // Clear the form input fields
-        setStartTime('');
-        setEndTime('');
-        setSelectedRoom('');
+        // setStartTime('');
+        // setEndTime('');
+        // setSelectedRoom('');
         return;
       })
       .catch((error) => {
