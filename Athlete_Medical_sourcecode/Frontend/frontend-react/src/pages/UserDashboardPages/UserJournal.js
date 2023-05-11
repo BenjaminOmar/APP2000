@@ -130,3 +130,19 @@ const UserJournal = () => {
 //The component is exported as a default export
 export default UserJournal;
 
+
+{showModal && selectedUser && (
+  <Modal show={showModal} onHide={handleCloseModal}>
+    <Modal.Header closeButton>
+      <Modal.Title>Journal</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      
+    </Modal.Body>
+    <Modal.Footer>
+      <Button variant="secondary" onClick={handleCloseModal}>
+        Lukk
+      </Button>
+    </Modal.Footer>
+  </Modal>
+)}

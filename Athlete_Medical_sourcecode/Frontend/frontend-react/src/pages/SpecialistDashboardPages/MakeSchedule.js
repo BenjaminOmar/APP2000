@@ -1,3 +1,12 @@
+// This code implements a React component called `MakeSchedule`. It handles the 
+// creation of schedules by allowing the user to select a start and end time, 
+// as well as an available room. The code fetches data from an API to check for 
+// existing appointments and available rooms. It performs validations to avoid 
+// time conflicts and incorrect input values. When the user submits the form, 
+// the schedule is created by making an HTTP POST request to the API. 
+// Any error messages are displayed in a modal to inform the user.
+
+
 // Importing React, useState, and useEffect from the 'react' package
 import React, { useState, useEffect } from "react";
 // Importing 'axios' package for making HTTP requests
@@ -34,25 +43,31 @@ const MakeSchedule = () => {
   // and a function 'setAppointments' to update its value  
   const [appointments, setAppointments] = useState([]);
 
-  // The 'useEffect' hook is called after the component has been mounted
-  useEffect(() => {
-    // Use 'axios.all' to make multiple HTTP requests simultaneously
-    axios
-      .all([
+// Function to fetch data from the API
+  const fetchData = async () => {
+    try {
+       // Make multiple HTTP requests simultaneously using 'axios.all'
+      const [appointmentsResponse, roomsResponse] = await axios.all([
         // The first request gets all appointments from the API
         axios.get("https://localhost:7209/api/appointment/getAll2"),
         // The second request gets all rooms from the API
         axios.get("https://localhost:7209/api/room/getAll")
-      ])
-      .then((response) => {
-        // After both requests have been completed, set the 'appointments' state variable 
-        // to the data from the first request
-        setAppointments(response[0].data);
-        // Set the 'rooms' state variable to the data from the second request
-        setRooms(response[1].data);
-      })
-  }, []);// The empty array means that the hook should only run once when the component mounts
+      ]);
+      // After both requests have been completed, update the state variables
+      setAppointments(appointmentsResponse.data);
+      setRooms(roomsResponse.data);
+    } catch (error) {
+      // Handle error if any request fails
+      setInfoMessage("Feil ved henting av data fra databasen", error);
+      setShowInfoModal(true);
+    }
+  }
 
+   // The 'useEffect' hook is called after the component has been mounted
+  useEffect(() => {
+    // Call the fetchData function when the component mounts
+    fetchData();
+  }, []);
 
   // This function updates the 'startTime' state variable when the user changes the start time
   const handleStartTimeChange = (event) => {
@@ -69,6 +84,8 @@ const MakeSchedule = () => {
 
   // Define a function to handle form submission
   const handleSubmit = (event) => {
+
+
     // Prevent the default form submission behavior
     event.preventDefault();
     // Clear any previous info messages
@@ -92,7 +109,7 @@ const MakeSchedule = () => {
       const appointmentRoomID = parseInt(appointment.roomId);
       const appointmentDataRoomID = parseInt(appointmentData.roomId);
       // Check if the selected room is already booked for the selected time
-      console.log(appointments); 
+      console.log(appointments);
       if (
         appointmentDataRoomID == appointmentRoomID &&
         ((appointmentDataStartTime.valueOf() >= appointmentStartTime.valueOf() &&
@@ -126,22 +143,24 @@ const MakeSchedule = () => {
       setShowInfoModal(true);
       return;
     }
-// Check that the start time is not in the past
+    // Check that the start time is not in the past
     if (new Date(appointmentData.startTime) < now) {
       setInfoMessage("Du kan ikke opprette som ligger tilbake i tid");
       setShowInfoModal(true);
       return;
     }
-// If all checks pass, make a POST request to create the appointment
+    // If all checks pass, make a POST request to create the appointment
     axios
       .post("https://localhost:7209/api/appointment/create", appointmentData)
       .then((response) => {
-        setInfoMessage("timeplanen er lagret"); 
-        setShowInfoModal(true); 
+        setInfoMessage("timeplanen er lagret", response);
+        setShowInfoModal(true);
         // Clear the form input fields
-        // setStartTime('');
-        // setEndTime('');
-        // setSelectedRoom('');
+        setStartTime('');
+        setEndTime('');
+        setSelectedRoom('');
+        // Call the fetchData function
+        fetchData();
         return;
       })
       .catch((error) => {
@@ -152,24 +171,24 @@ const MakeSchedule = () => {
   };
 
 
- // Render the component.
+  // Render the component.
   return (
     <>
-    {/* This imports and adds a header component at the top of the page */}
+      {/* This imports and adds a header component at the top of the page */}
       <HeaderSpec />
       {/* A container component with specified style properties */}
       <Container style={{ paddingTop: '50px', minHeight: 'calc(100vh - 390px)' }}>
-      {/* A row component with specified classes and styles */}
+        {/* A row component with specified classes and styles */}
         <Row className="justify-content-center mt-5">
-        {/* A column component with medium size of 6 and specified style properties */}
+          {/* A column component with medium size of 6 and specified style properties */}
           <Col md={6}>
-          {/* A heading element with specified text and styles */}
+            {/* A heading element with specified text and styles */}
             <h1 className="mb-5">Lag timeplan</h1>{/* This renders the title. */}
             {/* A form component with an onSubmit function specified */}
             <Form onSubmit={handleSubmit}>
-            {/* A form group component */}
+              {/* A form group component */}
               <Form.Group>
-              {/* A label element with specified text */}
+                {/* A label element with specified text */}
                 <Form.Label>Start tid:</Form.Label>
                 {/* A form control component with specified type, name, value, onChange and style properties */}
                 <Form.Control
@@ -182,7 +201,7 @@ const MakeSchedule = () => {
                 />
               </Form.Group>
               <Form.Group>
-                <Form.Label> Slutt tid:</Form.Label> 
+                <Form.Label> Slutt tid:</Form.Label>
                 <Form.Control
                   type="datetime-local"
                   name="endTime"
