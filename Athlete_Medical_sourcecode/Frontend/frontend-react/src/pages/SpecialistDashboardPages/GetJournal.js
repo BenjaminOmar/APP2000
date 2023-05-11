@@ -95,9 +95,6 @@ function GetJournal() {
       setShowInfoModal(true);
     }
   };
-
-
-
   // Defining a function 'toggleModal' that toggles the value of the 'modal' state variable
   const toggleModal = () => {
     console.log("Modal state before toggle:", modal);

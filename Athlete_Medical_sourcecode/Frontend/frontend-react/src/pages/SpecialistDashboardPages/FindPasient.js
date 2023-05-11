@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Pagination } from "react-bootstrap";
-import { Button, Form, Table, Modal } from "react-bootstrap";
+import { Button, Form, Table} from "react-bootstrap";
 import HeaderSpec from "../../components/SpecialistDashboard/HeaderSpec";
 
 
