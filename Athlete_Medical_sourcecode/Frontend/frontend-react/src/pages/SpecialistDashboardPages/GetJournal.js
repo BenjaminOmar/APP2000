@@ -110,7 +110,7 @@ function GetJournal() {
   };
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 275px)' }}>
+    <div style={{ minHeight: 'calc(100vh - 275px)', paddingBottom: "200px" }}>
       {/* Render the HeaderAdmin component */}
       <HeaderSpec />
       {/* Create a div with padding at the top and bottom and display a welcome message with the username */}
@@ -131,7 +131,7 @@ function GetJournal() {
       </Form.Group>
       {/* Create a Button component with a onClick function, margin on the left, width, and marginBottom */}
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button onClick={searchUsers} style={{ width: '15%', marginBottom: '30px' }}>Search</Button>
+        <Button onClick={searchUsers} style={{ width: '15%', marginBottom: '30px' }}>Søk</Button>
       </div>
 
       {searchResults.length > 0 && (

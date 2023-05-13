@@ -170,7 +170,7 @@ function AdminEditUser() {
 
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 275px)' }}>
+    <div style={{ minHeight: 'calc(100vh - 275px)', marginBottom: "180px" }}>
       {/* Render the HeaderAdmin component */}
       <HeaderAdmin />
       {/* Create a div with padding at the top and bottom and display a welcome message with the username */}

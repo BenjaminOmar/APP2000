@@ -173,11 +173,11 @@ const MakeSchedule = () => {
 
   // Render the component.
   return (
-    <div style={{ paddingTop: '50px', minHeight: 'calc(100vh - 390px)' }}>
+    <div >
       {/* This imports and adds a header component at the top of the page */}
       <HeaderSpec />
       {/* A container component with specified style properties */}
-      <Container style={{ paddingTop: '50px', minHeight: 'calc(100vh - 390px)' }}>
+      <Container style={{ paddingTop: '10px', paddingBottom: "80px", minHeight: 'calc(100vh - 390px)' }}>
         {/* A row component with specified classes and styles */}
         <Row className="justify-content-center mt-5">
           {/* A column component with medium size of 6 and specified style properties */}

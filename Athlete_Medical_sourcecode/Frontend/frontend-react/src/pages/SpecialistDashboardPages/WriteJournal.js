@@ -124,7 +124,7 @@ function WriteJournal() {
       {/* Render the HeaderSpec component */}
       <HeaderSpec />
       {/* Div element with styling for minHeight, display, flexDirection, and alignItems */}
-      <div style={{ minHeight: 'calc(100vh - 390px)', display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <div style={{ minHeight: 'calc(100vh - 390px)', paddingBottom: "200px", display: "flex", flexDirection: "column", alignItems: "center" }}>
         {/* Div element with styling for paddingTop and paddingBottom */}
         <div style={{ paddingTop: '50px', paddingBottom: '20px', }}>
           {/* Render an h2 element with the text "Søk pasient" */}

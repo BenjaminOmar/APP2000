@@ -39,7 +39,7 @@ Alert(error); // Display an alert if there is an error
 
 // Return the JSX to render the component
 return (
-    <div style={{ minHeight: 'calc(100vh - 350px)', marginBottom: '70px'}}>
+    <div style={{ minHeight: 'calc(100vh - 350px)', marginBottom: '200px'}}>
        <HeaderAdmin />
       {/* Create a div with padding at the top and bottom and display søk "etter avtale" */}
       <div style={{ paddingTop: '50px', paddingBottom: '30px', }}>

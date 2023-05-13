@@ -84,7 +84,7 @@ const FindAppointment = () => {
 			// Reset deleteConfirmation state
 			setDeleteConfirmation(null);
 			// Show success message
-			setInfoMessage("Avtalen er slettet!"); // kalle metoden her
+			setInfoMessage("Avtalen er avbestilt!"); // kalle metoden her
 			setShowInfoModal(true);
 			// Fetch booked appointments
 			fetchDataBooked(specID);
@@ -92,7 +92,7 @@ const FindAppointment = () => {
 			fetchDataAvailable(specID);
 		} catch (error) {
 			// Show error message if delete fails
-			setInfoMessage("Avtalen ble ikke slettet, prøv igjen!", error);
+			setInfoMessage("Avtalen ble ikke avbestilt, prøv igjen!", error);
 			setShowInfoModal(true);
 		}
 	};
@@ -111,12 +111,13 @@ const FindAppointment = () => {
 	return (
 		<>
 			<HeaderSpec />
-			<div style={{ minHeight: 'calc(100vh - 450px)', marginBottom: '70px', marginTop: '50px' }}>
+			<div style={{ minHeight: 'calc(100vh - 450px)', marginBottom: '70px', marginTop: '50px', paddingBottom: "100px" }}>
 				<h1
 					style={{
 						display: "flex",
 						justifyContent: "center",
 						alignItems: "center",
+						paddingBottom: "20px"
 					}}>
 					Oversikt over avtaler
 				</h1>
@@ -155,7 +156,7 @@ const FindAppointment = () => {
 										onClick={() =>
 											handleDeleteAppointment(appointment.appointmentId)
 										}>
-										Slett avtalen
+										Avbestill
 									</Button>
 								</td>
 							</tr>
@@ -177,7 +178,7 @@ const FindAppointment = () => {
 										onClick={() =>
 											handleDeleteAppointment(appointment.appointmentId)
 										}>
-										Slett avtalen
+										Avbestill
 									</Button>
 								</td>
 							</tr>
@@ -189,7 +190,7 @@ const FindAppointment = () => {
 				<Modal.Header closeButton>
 					<Modal.Title>Bekreftelse</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>Er du sikker på at du vil slette avtalen?</Modal.Body>
+				<Modal.Body>Er du sikker på at du vil avbestille avtalen?</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={cancelDeleteAppointment}>
 						Nei

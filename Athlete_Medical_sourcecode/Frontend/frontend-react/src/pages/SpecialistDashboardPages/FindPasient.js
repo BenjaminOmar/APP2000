@@ -47,7 +47,7 @@ function FindPasient() {
   }
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 275px)' }}>
+    <div style={{ minHeight: 'calc(100vh - 275px)', marginBottom: "100px" }}>
       {/* Render the HeaderAdmin component */}
       <HeaderSpec />
       {/* Create a div with padding at the top and bottom and display a welcome message with the username */}

@@ -117,8 +117,8 @@ const handlePatientIdChange = (value) => {
 return (
   <>
     <HeaderAdmin /> {/*Renders the 'HeaderAdmin' component */}
-    <div className="container my-5" style={{ paddingTop: '50px', minHeight: 'calc(100vh - 480px)' }}>
-      <h2 className="mb-3" >Timebestilling for pasienter</h2>
+    <div className="container my-5" style={{ minHeight: 'calc(100vh - 480px)', paddingBottom: "200px" }}>
+      <h2 style={{paddingBottom: "20px"}} className="mb-3" >Timebestilling for pasienter</h2>
       <Table bordered hover>
         <thead>
           <tr>
