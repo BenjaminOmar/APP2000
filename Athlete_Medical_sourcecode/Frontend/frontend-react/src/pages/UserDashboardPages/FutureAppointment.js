@@ -91,7 +91,7 @@ const FutureAppointment = () => {
     {/* renders the user profile header */}
       <HeaderUser /> 
       {/* Container component that wraps the appointment list */}
-      <Container style={{ minHeight: 'calc(100vh - 450px)', marginTop: '50px' }}>
+      <Container style={{ minHeight: 'calc(100vh - 450px)', marginTop: '50px', marginBottom: "200px" }}>
         {/* Heading for the appointment list */}
         <h2 className="mt-4">Dine Avtaler</h2>
         {/* If there are appointments in the filteredAppointments array
@@ -111,7 +111,7 @@ const FutureAppointment = () => {
               {/* delete button for the appointment */}
               <Col className="d-flex justify-content-end">
                 <Button variant="success" onClick={() => handleDeleteAppointment(appointment.appointmentId)}>
-                  Slett avtalen
+                  Avbestill
                 </Button>
               </Col>
             </Row>

@@ -112,8 +112,8 @@ function UserBooking() {
   return (
     <>
       <HeaderUser /> {/*Renders the 'HeaderAdmin' component */}
-      <div className="container my-5" style={{ paddingTop: '50px', minHeight: 'calc(100vh - 480px)' }} >
-        <h2 className="mb-3" style={{ marginTop: '50px' }}>Timebestilling</h2>
+      <div className="container my-5" style={{ paddingTop: '50px', minHeight: 'calc(100vh - 480px)', paddingBottom: "150px" }} >
+        <h2 className="mb-3" style={{ marginTop: '-50px', paddingBottom: "30px" }}>Timebestilling</h2>
         <Table bordered hover>
           <thead>
             <tr>

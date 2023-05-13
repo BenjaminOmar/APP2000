@@ -34,9 +34,9 @@ const staff = [
     name: 'Karoline Ernstsen',
     title: 'Fysikalsk lege',
      // Biography of second staff member
-    bio: `Karoline Ernstsen er en fysikalsk lege med flere års erfaring innenfor feltet. Hennes spesialområder 
+    bio: `Karoline Ernstsen er en fysikalsk lege med erfaring innenfor feltet. Hennes spesialområder 
     inkluderer rehabilitering av pasienter med ulike former for muskel- og skjelettplager, så vel som behandling
-    av idrettsrelaterte skader og arbeids lidelser. Karoline er kjent for å være grundig og nøyaktig i 
+    av arbeids lidelser. Karoline er kjent for å være grundig og nøyaktig i 
     sine vurderinger og for å ha en pasientfokusert tilnærming til behandling.
 
     Karoline har en imponerende utdanningsbakgrunn, med en bachelorgrad i fysioterapi og en doktorgrad i medisin
@@ -136,7 +136,7 @@ const SpecialistSection = () => {
                 }}>
         {staff.map((employee, index) => (
           // A Card component with the employee's picture, name, title, bio, and "Read More"/"Read Less" button
-          <div key={index} className="col-md-6">
+          <div key={index} className="col-md-6" style={{width: '38%'}}>
             <Card>
               <Card.Img top src={employee.picture} alt={employee.name} />
               <Card.Body>

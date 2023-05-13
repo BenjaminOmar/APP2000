@@ -43,7 +43,7 @@ const serviceArray = [
 
         description: `En Fysikalsk lege tilbyr en rekke utredninger og behandlinger for å hjelpe 
         pasienter med muskuloskeletale symptomer og plager. Utredningene inkluderer klinisk undersøkelse, 
-        røntgenundersøkelser av ledd og bein, ultralydundersøkelser av muskler, sener og leddbånd, 
+        røntgenundersøkelser av ledd og bein, sener og leddbånd, 
         MR-undersøkelser for å avdekke skader på ledd, bein og bløtvev, samt elektromyografi 
         og nevrografi for å undersøke muskel- og nerveskader. Når det gjelder behandlinger, tilbyr 
         Fysikalsk lege konservativ behandling av skader og plager, inkludert smertestillende medikamenter, 
@@ -123,7 +123,7 @@ const Services = () => {
             style={{ whiteSpace: 'pre-line', marginTop: '70px', marginBottom: '50px' }}>
                 <div className="row">
                     <div className="col-12 text-center" style={{ marginBottom: '20px' }}>
-                        <h1 id="behandlere">Våre tjenester</h1>
+                        <h1 style={{marginBottom: "-5px"}} id="behandlere">Våre tjenester</h1>
                     </div>
                 </div>
             </div>

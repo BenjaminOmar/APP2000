@@ -75,7 +75,8 @@ const UserJournal = () => {
 			{/* Rendering a Bootstrap Container component */}
 			<Container
 				className="my-3"
-				style={{ minHeight: "calc(100vh - 425px)", paddingTop: "50px" }}>
+				style={{ minHeight: "calc(100vh - 425px)", paddingTop: "50px", paddingBottom: "200px" }}>
+					<h2 style={{marginBottom: "40px", paddingTop: "-40px"}} className="mt-4">Dine Journal</h2>
 				{/* Rendering a message when there are no journals */}
 				{journals.length === 0 && <p>Du har ingen journaler</p>}
 				{/*  If there are journals in the array, render the following code */}
