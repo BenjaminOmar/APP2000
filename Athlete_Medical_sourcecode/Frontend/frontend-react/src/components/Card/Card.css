@@ -27,13 +27,13 @@
 }
 
 .card-front {
-	margin-top: -20dvh;
+	margin-top: -30dvh;
 }
 
 .card-back {
 	/* background-color: brown; */
 	transform: rotateY(180deg);
-	margin-top: 10px;
+	margin-top: -10dvh;
 }
 
 /* transition */

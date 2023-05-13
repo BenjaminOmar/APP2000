@@ -14,7 +14,7 @@ function Flip() {
 	return (
 		<>
 			<HeaderNormal></HeaderNormal>
-			<div style={{ minHeight: 'calc(100vh - 275px)' }} className="background">
+			<div style={{ minHeight: 'calc(100vh - 275px)', marginBottom: "-200px" }} className="background">
 				<div style={{marginTop: "-400px"}} className="flippable-card-container">
 					<CSSTransition in={showFront} timeout={300} classNames="flip">
 						<Card setShowFront={setShowFront} />
