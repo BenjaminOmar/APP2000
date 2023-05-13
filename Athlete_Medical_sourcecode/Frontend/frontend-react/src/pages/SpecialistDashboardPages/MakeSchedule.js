@@ -173,7 +173,7 @@ const MakeSchedule = () => {
 
   // Render the component.
   return (
-    <>
+    <div style={{ paddingTop: '50px', minHeight: 'calc(100vh - 390px)' }}>
       {/* This imports and adds a header component at the top of the page */}
       <HeaderSpec />
       {/* A container component with specified style properties */}
@@ -260,7 +260,7 @@ const MakeSchedule = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 };
 //The component is exported as a default export

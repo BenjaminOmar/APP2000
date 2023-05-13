@@ -41,71 +41,108 @@ function WriteJournal() {
 
   // Handle the search operation
   const handleSearch = async (event) => {
+    // Prevent the default form submission behavior
     event.preventDefault();
+    // Get the search query from the form input and convert it to lowercase
     const searchQuery = event.target.search.value.toLowerCase();
+    // Send a GET request to the USERS_API_URL and wait for the response
     const response = await axios.get(`${USERS_API_URL}`);
+    // Filter the response data to find users whose full name includes the search query
     const matchingUsers = response.data.filter((user) => {
+      // Construct the full name by combining the first name, middle name, and last name
       const fullName = `${user.firstName} ${user.middleName} ${user.lastName}`.toLowerCase();
+      // Check if the full name includes the search query
       return fullName.includes(searchQuery);
     });
+    // Set the search results state to the matching users
     setSearchResults(matchingUsers);
   };
 
-
+  // Handle the select patient operation
   const handleSelectPatient = (patient) => {
+    // Set the selected patient state to the provided patient object
     setSelectedPatient(patient);
-    setShowModal(true); // Set showModal to true when a patient is selected
+    // Set showModal state to true when a patient is selected
+    setShowModal(true);
+    // Clear the search results array
     setSearchResults([]);
   };
 
+  //Handle the poste note operation
   const handlePostNote = async (event) => {
     try {
+      // Prevent the default form submission behavior
       event.preventDefault();
+      // Create a new note object with the journalNote, heading, selectedPatient, and specID values
       const newNote = {
         journalnote1: journalNote,
         heading: heading,
         patient: selectedPatient.userId,
         specialist: specID,
       };
+      // Send a POST request to the API_URL with the newNote data
       await axios.post(`${API_URL}/`, newNote);
+      // Clear the journalNote state
       setJournalNote('');
+      // Clear the selectedPatient state
       setSelectedPatient(null);
+      // Call the handleNoteSaved function
       handleNoteSaved();
-
     } catch (error) {
+      // If an error occurs, set the infoMessage state to display an error message
       setInfoMessage("Noe gikk galt i lagringen av notatet, error")
+      // Set the showModal state to true to display the info modal
       setShowInfoModal("true");
     }
   };
 
+  // Handle the close modal operation
   const handleCloseModal = () => {
+    // Set the showModal state to false to close the modal
     setShowModal(false);
   };
 
+  //Handle the save note message
   const handleNoteSaved = () => {
+    // Set the showModal state to false to close the modal
     setShowModal(false);
+    // Set the showInfoModal state to true to display the info modal
     setShowInfoModal(true);
+    // Set the infoMessage state to display a success message
     setInfoMessage('Journalnotatet ble lagret');
   };
 
+  //Handle the close info modal operation
   const handleCloseInfoModal = () => {
+    // Set the showInfoModal state to false to close the info modal
     setShowInfoModal(false);
   };
 
+  //starting point of the returned code block
   return (
     <>
+      {/* Render the HeaderSpec component */}
       <HeaderSpec />
+      {/* Div element with styling for minHeight, display, flexDirection, and alignItems */}
       <div style={{ minHeight: 'calc(100vh - 390px)', display: "flex", flexDirection: "column", alignItems: "center" }}>
+        {/* Div element with styling for paddingTop and paddingBottom */}
         <div style={{ paddingTop: '50px', paddingBottom: '20px', }}>
+          {/* Render an h2 element with the text "Søk pasient" */}
           <h2> Søk pasient </h2>
         </div>
+        {/* Render a form element with the handleSearch function as the onSubmit event handler */}
         <Form onSubmit={handleSearch}>
+          {/* Create a form group with the controlId of "search" and a className of "mb-3" */}
           <Form.Group controlId="search" className="mb-3">
+            {/* Render a form control input with the type "text" and a placeholder text "Søk på navn" */}
             <Form.Control type="text" placeholder="Søk på navn" />
           </Form.Group>
+          {/* Render a submit button with the text "Søk" and styling for width and marginBottom */}
           <Button type="submit" style={{ width: '300px', marginBottom: '30px' }}>Søk</Button>
         </Form>
+        {/* Check if the length of searchResults is greater than 0 */}
         {searchResults.length > 0 && (
+          // Render a table element
           <Table
             //Style the table with striped rows, bordered cells and hover effects
             striped bordered hover
@@ -124,6 +161,7 @@ function WriteJournal() {
               </tr>
             </thead>
             <tbody>
+              {/* Iterate over each item in searchResults and map it to a table row */}
               {searchResults.map((result) => (
                 <tr key={result.userId}>
                   <td>{result.firstName}</td>
@@ -133,22 +171,31 @@ function WriteJournal() {
                   <td>{result.adress}</td>
                   <td>{result.phoneNumber}</td>
                   <td >
+                    {/* Button element attached with  an onClick event handler that calls handleSelectPatient function with the result parameter */}
                     <Button onClick={() => handleSelectPatient(result)} >Skriv journalnotat</Button>
                   </td>
                 </tr>
+                // Close the map function, indicating the end of the iteration over searchResults array
               ))}
             </tbody>
           </Table>
+          // Close the conditional rendering check for searchResults length
         )}
-
+        {/* A Modal component with the show prop set to the value of showModal state and onHide prop set to handleCloseModal function */}
         <Modal show={showModal} onHide={handleCloseModal}>
+          {/* Render the header section of the modal with a close button */}
           <Modal.Header closeButton>
+            {/* Render the title of the modal */}
             <Modal.Title>Skriv journalnotat</Modal.Title>
           </Modal.Header>
+          {/* Render the body section of the modal */}
           <Modal.Body>
+            {/* Render a form element with the handlePostNote function as the onSubmit event handler */}
             <Form onSubmit={handlePostNote}>
               <Form.Group controlId="heading">
                 <Form.Label>Skriv inn overskrift</Form.Label>
+                {/* Render an input field with the type "text", value bound to the heading state, and an onChange event handler 
+                to update the heading state */}
                 <Form.Control
                   type="text"
                   value={heading}
@@ -158,6 +205,8 @@ function WriteJournal() {
               </Form.Group>
               <Form.Group controlId="journalNote">
                 <Form.Label>Skriv journalnotat</Form.Label>
+                {/* Render a textarea field with the specified number of rows, value bound to the journalNote state, 
+                and an onChange event handler to update the journalNote state */}
                 <Form.Control
                   as="textarea"
                   rows={3}
@@ -167,17 +216,21 @@ function WriteJournal() {
                 />
               </Form.Group>
               <Modal.Footer>
+                {/* Render a secondary button with the text "Avbryt" and an onClick event handler that calls handleCloseModal function */}
                 <Button variant="secondary" onClick={handleCloseModal}>
                   Avbryt
                 </Button>
+                {/* Render a button with the text "Lagre" and a type of "submit" */}
                 <Button type="submit">Lagre</Button>
               </Modal.Footer>
             </Form>
           </Modal.Body>
         </Modal>
+        {/* Render a Modal component with the show prop set to the value of 
+        showInfoModal state and onHide prop set to handleCloseInfoModal function */}
         <Modal show={showInfoModal} onHide={handleCloseInfoModal}>
           <Modal.Header closeButton>
-            <Modal.Title>Success</Modal.Title>
+            <Modal.Title>Suksess</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <p>{infoMessage}</p>
@@ -190,7 +243,8 @@ function WriteJournal() {
         </Modal>
       </div>
     </>
+    // Close the return statement
   )
 }
-
+// Export the WriteJournal component as the default export
 export default WriteJournal;

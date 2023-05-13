@@ -34,7 +34,7 @@ function AdminSeeJournal() {
   }
 
   return (
-    <>
+    <div style={{ minHeight: 'calc(100vh - 275px)' }}>
        <HeaderAdmin />
       {/* Create a div with padding at the top and bottom and display a welcome message with the username */}
       <div style={{ paddingTop: '50px', paddingBottom: '30px', }}>
@@ -107,7 +107,7 @@ function AdminSeeJournal() {
                 </Modal.Footer>
               </Modal>
             )}
-    </>
+    </div>
   );
 
   

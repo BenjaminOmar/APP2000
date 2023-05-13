@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import HeaderSpec from "../../components/SpecialistDashboard/HeaderSpec";
-import { Table, Container, Row, Col, Button, Modal } from "react-bootstrap";
+import { Table, Button, Modal } from "react-bootstrap";
 
 const FindAppointment = () => {
 	const [bookedAppointments, setBookedAppointments] = useState([]);
@@ -47,7 +47,7 @@ const FindAppointment = () => {
 				console.log(error);
 			});
 	};
-
+	
 	const fetchDataBooked = async (specId) => {
 		axios
 			.get("https://localhost:7209/api/appointment/getAll")
@@ -111,7 +111,7 @@ const FindAppointment = () => {
 	return (
 		<>
 			<HeaderSpec />
-			<div style={{ minHeight: "50vh" }}>
+			<div style={{ minHeight: 'calc(100vh - 450px)', marginBottom: '70px', marginTop: '50px' }}>
 				<h1
 					style={{
 						display: "flex",
