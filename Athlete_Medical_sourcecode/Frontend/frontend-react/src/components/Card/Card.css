@@ -28,7 +28,7 @@
 }
 
 .card-front {
-	margin-top: -10dvh;
+	margin-top: -20dvh;
 }
 
 .card-back {
@@ -67,7 +67,7 @@
 
 .flip-button-front {
 	position: absolute;
-	margin-top: 237px;
+	margin-top: 278px;
 	margin-left: 110px;
 	width: 217px;
 }
