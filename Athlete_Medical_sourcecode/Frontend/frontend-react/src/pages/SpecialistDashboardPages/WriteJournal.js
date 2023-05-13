@@ -1,23 +1,45 @@
-import React, { useState } from 'react';
-import { Form, Button, Table, Modal } from 'react-bootstrap';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+// This code represents a React component called WriteJournal. It is responsible for rendering a 
+// form where a specialist can search for a patient and write journal notes for them.
+// When the specialist enters a search query and submits the form, the code performs a search 
+// operation and displays the matching users in a table. The specialist can select a patient from the table, 
+// which opens a modal where they can write a journal note with a heading and content. 
+// When the specialist saves the note, it sends a POST request to the API to store the note in the journal. 
+//If successful, it displays a success message in another modal.
 
+// Importing React, useState from the 'react' package
+import React, { useState } from 'react';
+// Importing some UI components from the 'react-bootstrap' package
+import { Form, Button, Table, Modal } from 'react-bootstrap';
+// Importing 'axios' package for making HTTP requests
+import axios from 'axios';
+// Importing 'js-cookie' package for handling cookies
+import Cookies from 'js-cookie';
+// Importing the 'HeaderSpec' component from a local file
 import HeaderSpec from '../../components/SpecialistDashboard/HeaderSpec';
 
-const API_URL = 'https://localhost:7209/api/journal/create';
-const USERS_API_URL = 'https://localhost:7209/api/user/getAll';
-
 function WriteJournal() {
+  // Define the API endpoints
+  const API_URL = 'https://localhost:7209/api/journal/create';
+  const USERS_API_URL = 'https://localhost:7209/api/user/getAll';
+  // Define state variables using the useState hook
+  // Stores the search results
   const [searchResults, setSearchResults] = useState([]);
+  // Stores the selected patient
   const [selectedPatient, setSelectedPatient] = useState(null);
+  // Stores the journal note content
   const [journalNote, setJournalNote] = useState('');
+  // Stores the heading of the journal note
   const [heading, setHeading] = useState('');
+  // Controls the visibility of the modal
   const [showModal, setShowModal] = useState(false);
+  // Controls the visibility of the info modal
   const [showInfoModal, setShowInfoModal] = useState(false);
+  // Stores the info message
   const [infoMessage, setInfoMessage] = useState('');
+  // Get the specialist ID from the cookies
   const specID = parseInt(Cookies.get('userId'), 10);
 
+  // Handle the search operation
   const handleSearch = async (event) => {
     event.preventDefault();
     const searchQuery = event.target.search.value.toLowerCase();
@@ -48,11 +70,11 @@ function WriteJournal() {
       await axios.post(`${API_URL}/`, newNote);
       setJournalNote('');
       setSelectedPatient(null);
-      handleNoteSaved(); 
+      handleNoteSaved();
 
     } catch (error) {
       setInfoMessage("Noe gikk galt i lagringen av notatet, error")
-      setShowInfoModal("true"); 
+      setShowInfoModal("true");
     }
   };
 
@@ -76,7 +98,7 @@ function WriteJournal() {
       <div style={{ minHeight: 'calc(100vh - 390px)', display: "flex", flexDirection: "column", alignItems: "center" }}>
         <div style={{ paddingTop: '50px', paddingBottom: '20px', }}>
           <h2> Søk pasient </h2>
-        </div>        
+        </div>
         <Form onSubmit={handleSearch}>
           <Form.Group controlId="search" className="mb-3">
             <Form.Control type="text" placeholder="Søk på navn" />
@@ -119,7 +141,7 @@ function WriteJournal() {
           </Table>
         )}
 
-<Modal show={showModal} onHide={handleCloseModal}>
+        <Modal show={showModal} onHide={handleCloseModal}>
           <Modal.Header closeButton>
             <Modal.Title>Skriv journalnotat</Modal.Title>
           </Modal.Header>
@@ -127,11 +149,11 @@ function WriteJournal() {
             <Form onSubmit={handlePostNote}>
               <Form.Group controlId="heading">
                 <Form.Label>Skriv inn overskrift</Form.Label>
-                <Form.Control 
-                type="text" 
-                value={heading} 
-                onChange={(event) => setHeading(event.target.value)} 
-                required                
+                <Form.Control
+                  type="text"
+                  value={heading}
+                  onChange={(event) => setHeading(event.target.value)}
+                  required
                 />
               </Form.Group>
               <Form.Group controlId="journalNote">
@@ -154,18 +176,18 @@ function WriteJournal() {
           </Modal.Body>
         </Modal>
         <Modal show={showInfoModal} onHide={handleCloseInfoModal}>
-  <Modal.Header closeButton>
-    <Modal.Title>Success</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <p>{infoMessage}</p>
-  </Modal.Body>
-  <Modal.Footer>
-    <Button variant="secondary" onClick={handleCloseInfoModal}>
-      Lukk
-    </Button>
-  </Modal.Footer>
-</Modal>
+          <Modal.Header closeButton>
+            <Modal.Title>Success</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>{infoMessage}</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseInfoModal}>
+              Lukk
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </>
   )
