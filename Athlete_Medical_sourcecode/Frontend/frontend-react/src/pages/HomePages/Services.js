@@ -19,17 +19,17 @@ import fysikalskLege from '../../images/fysikalskLege.png'
 const serviceArray = [
     {
         service: 'Ortoped',
-        description: `Ortopeder er spesialister som jobber med diagnostisering og behandling av skader 
-        og plager i muskel- og skjelettsystemet. Det finnes mange ulike typer skader og plager som 
+        description: `Ortopeder er spesialister som jobber med behandling av skader 
+        og plager i muskel. Det finnes mange ulike typer skader og plager som 
         kan oppstå i dette systemet, og utredning og behandling vil variere avhengig av pasientens 
         individuelle tilstand og symptomer. Ortopeden vil utføre en grundig klinisk undersøkelse av
-        muskuloskeletale symptomer og plager. I tillegg kan det være aktuelt med røntgenundersøkelse
+        muskuloskeletale symptomer og plager. I tillegg kan det være aktuelt med
         av ledd og bein, ultralydundersøkelse av muskler, sener og leddbånd og MR-undersøkelse for
         å avdekke skader på ledd, bein og bløtvev. Når det gjelder behandling, kan ortopeden tilby 
         konservativ behandling av skader og plager. Dette kan inkludere smertestillende 
         medikamenter, fysioterapi og rehabilitering. Injeksjoner med kortison eller 
         hyaluronsyre kan også brukes for å redusere betennelse og smerte. For mindre skader 
-        kan ortopeden tilby kirurgisk behandling, for         eksempel artroskopisk kirurgi for 
+        kan ortopeden tilby kirurgisk behandling, for eksempel artroskopisk kirurgi for 
         å reparere skader på leddbrusk eller sener. Bruddskader kan behandles med gipsing eller 
         immobilisering. Ortopeden kan også utføre preoperativ utredning og forberedelse for større 
         kirurgiske inngrep, som for eksempel proteseoperasjoner. I sum er ortopedene spesialister 
@@ -42,9 +42,9 @@ const serviceArray = [
         service: 'Fysikalsk Lege',
 
         description: `En Fysikalsk lege tilbyr en rekke utredninger og behandlinger for å hjelpe 
-        pasienter med muskuloskeletale symptomer og plager. Utredningene inkluderer klinisk undersøkelse, 
-        røntgenundersøkelser av ledd og bein, sener og leddbånd, 
-        MR-undersøkelser for å avdekke skader på ledd, bein og bløtvev, samt elektromyografi 
+        pasienter med muskuloskeletale symptomer og plager. inkluderer klinisk undersøkelse, 
+        sener og leddbånd, 
+        MR-undersøkelser for å avdekke skader på ledd, bein og bløtvev,
         og nevrografi for å undersøke muskel- og nerveskader. Når det gjelder behandlinger, tilbyr 
         Fysikalsk lege konservativ behandling av skader og plager, inkludert smertestillende medikamenter, 
         fysioterapi og rehabilitering. Pasientene kan også motta injeksjoner med kortison eller 
