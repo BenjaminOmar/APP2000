@@ -1,33 +1,32 @@
 ﻿<Properties StartupConfiguration="{BEA6208D-AD0B-4D33-BFBB-CD4D922F1B4E}|https">
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Context/App2000Context.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="AthleteMedicalBackendApi/Controllers/appointmentController.cs">
     <Files>
       <File FileName="AthleteMedicalBackendApi/Controllers/appointmentController.cs" Line="160" Column="39" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/journalController.cs" Line="66" Column="40" />
-      <File FileName="AthleteMedicalBackendApi/Controllers/userController.cs" Line="1" Column="1" />
-      <File FileName="AthleteMedicalBackendApi/Entities/Journalnote.cs" Line="23" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/journalController.cs" />
+      <File FileName="AthleteMedicalBackendApi/Controllers/userController.cs" Line="260" Column="79" />
+      <File FileName="AthleteMedicalBackendApi/Entities/Journalnote.cs" />
       <File FileName="AthleteMedicalBackendApi/Entities/Role.cs" />
       <File FileName="AthleteMedicalBackendApi/Entities/Room.cs" />
       <File FileName="AthleteMedicalBackendApi/Controllers/rolesController.cs" />
       <File FileName="AthleteMedicalBackendApi/Controllers/roomController.cs" />
       <File FileName="AthleteMedicalBackendApi/Entities/User.cs" />
       <File FileName="AthleteMedicalBackendApi/Entities/Appointment.cs" />
-      <File FileName="AthleteMedicalBackendApi/Context/App2000Context.cs" Line="102" Column="49" />
-      <File FileName="AthleteMedicalBackendApi/Entities/AppointmentGetAll.cs" Line="15" Column="31" />
-      <File FileName="AthleteMedicalBackendApi/Entities/AppointmentGetById.cs" Line="34" Column="1" />
-      <File FileName="AthleteMedicalBackendApi/Entities/JournalNoteGetAll.cs" Line="25" Column="1" />
+      <File FileName="AthleteMedicalBackendApi/Context/App2000Context.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/AppointmentGetAll.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/AppointmentGetById.cs" />
+      <File FileName="AthleteMedicalBackendApi/Entities/JournalNoteGetAll.cs" />
+      <File FileName="AthleteMedicalBackendApi/Program.cs" />
+      <File FileName="../../../../../../.microsoft/usersecrets/441bbebc-91eb-41a6-85a6-31cf76d086a7/secrets.json" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="AthleteMedicalBackendApi" expanded="True">
             <Node name="AthleteMedicalBackendApi" expanded="True">
-              <Node name="Context" expanded="True">
-                <Node name="App2000Context.cs" selected="True" />
+              <Node name="Context" expanded="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="appointmentController.cs" selected="True" />
               </Node>
-              <Node name="Controllers" expanded="True" />
               <Node name="Entities" expanded="True" />
             </Node>
           </Node>
@@ -35,8 +34,11 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.AthleteMedicalBackendApi PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
 </Properties>

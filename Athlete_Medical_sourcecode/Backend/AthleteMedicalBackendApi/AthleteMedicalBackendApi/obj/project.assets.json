@@ -3414,11 +3414,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj",
+      "projectUniqueName": "/Users/benjamin/Desktop/Github/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj",
       "projectName": "AthleteMedicalBackendApi",
-      "projectPath": "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj",
+      "projectPath": "/Users/benjamin/Desktop/Github/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/AthleteMedicalBackendApi.csproj",
       "packagesPath": "/Users/benjamin/.nuget/packages/",
-      "outputPath": "/Applications/XAMPP/xamppfiles/htdocs/PRG1100/guttaspørsmål/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/obj/",
+      "outputPath": "/Users/benjamin/Desktop/Github/APP2000/Athlete_Medical_sourcecode/Backend/AthleteMedicalBackendApi/AthleteMedicalBackendApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/benjamin/.nuget/NuGet/NuGet.Config"
